@@ -4,14 +4,15 @@ import EditScreenInfo from "../components/EditScreenInfo";
 import { Text, View } from "../components/Themed";
 import { RootTabScreenProps } from "../types";
 
-import { ProductCard } from "../src/features/products/components/porduct-card.component";
+import { ProductListScreen } from "../src/features/products/screens/products.screen";
+import React from "react";
 
 export default function TabOneScreen({
   navigation,
 }: RootTabScreenProps<"TabOne">) {
   return (
     <View style={styles.container}>
-      <ProductCard />
+      <ProductListScreen />
     </View>
   );
 }
