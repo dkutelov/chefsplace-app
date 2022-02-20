@@ -1,13 +1,24 @@
-import { View, Text } from "react-native";
 import React from "react";
+import { SafeAreaView, StatusBar } from "react-native";
+import { Searchbar } from "react-native-paper";
 import styled from "styled-components/native";
+
 import { ProductCard } from "../components/product-card.component";
 import { Product, AvailabilityStatus } from "../../../types/Product";
+
+const SafeArea = styled(SafeAreaView)`
+  flex: 1;
+  ${StatusBar.currentHeight && `margin-top: ${StatusBar.currentHeight}px`};
+`;
 
 const ProductList = styled.View`
   flex: 1;
   background-color: white;
-  padding: 18px};
+  padding: 18px;
+`;
+
+const Search = styled.View`
+  padding: ${(props: { theme: { space: any[] } }) => props.theme.space[3]};
 `;
 
 const product: Product = {
@@ -22,9 +33,24 @@ const product: Product = {
 };
 
 export const ProductListScreen = () => {
+  const [searchQuery, setSearchQuery] = React.useState<String>("");
+
+  const onChangeSearch = (query: String) => setSearchQuery(query);
+
   return (
-    <ProductList>
-      <ProductCard product={product} />
-    </ProductList>
+    <SafeArea>
+      <Search>
+        <Searchbar
+          placeholder="Search"
+          onChangeText={onChangeSearch}
+          editable
+          maxLength={40}
+          value={searchQuery}
+        />
+      </Search>
+      <ProductList>
+        <ProductCard product={product} />
+      </ProductList>
+    </SafeArea>
   );
 };
