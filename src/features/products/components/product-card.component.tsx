@@ -2,9 +2,11 @@ import React from "react";
 import { Card } from "react-native-paper";
 import styled from "styled-components";
 import { Product } from "../../../types/Product";
+import { Theme } from "../../../types/Theme";
 
 const ProductCardWrapper = styled(Card)`
-  background-color: red;
+  background-color: ${(props: { theme: Theme }) =>
+    props.theme.colors.bg.primary};
 `;
 
 interface Props {

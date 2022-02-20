@@ -5,6 +5,7 @@ import styled from "styled-components/native";
 
 import { ProductCard } from "../components/product-card.component";
 import { Product, AvailabilityStatus } from "../../../types/Product";
+import { Theme } from "../../../types/Theme";
 
 const SafeArea = styled(SafeAreaView)`
   flex: 1;
@@ -18,7 +19,7 @@ const ProductList = styled.View`
 `;
 
 const Search = styled.View`
-  padding: ${(props: { theme: { space: any[] } }) => props.theme.space[3]};
+  padding: ${(props: { theme: Theme }) => props.theme.space[3]};
 `;
 
 const product: Product = {
