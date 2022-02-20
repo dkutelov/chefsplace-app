@@ -1,5 +1,5 @@
 import styled from "styled-components/native";
-import { Theme } from "../../../../types/Theme";
+import { Theme } from "../../types/Theme";
 
 const defaultTextStyles = (theme: Theme) => `
   font-family: ${theme.fonts.body};
