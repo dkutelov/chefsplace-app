@@ -4,10 +4,10 @@ export enum AvailabilityStatus {
 }
 
 export interface Product {
-  name: String;
-  images: String[];
+  name: string;
+  images: string[];
   price: number;
   reducedPrice?: number;
-  shortDescription: String;
+  shortDescription: string;
   availabilityStatus: AvailabilityStatus;
 }
