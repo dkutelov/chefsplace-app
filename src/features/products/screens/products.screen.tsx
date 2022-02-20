@@ -14,12 +14,15 @@ const SafeArea = styled(SafeAreaView)`
 
 const ProductList = styled.View`
   flex: 1;
-  background-color: white;
-  padding: 18px;
+  background-color: ${(props: { theme: Theme }) =>
+    props.theme.colors.bg.secondary};
+  padding: ${(props: { theme: Theme }) => props.theme.space[2]};
 `;
 
 const Search = styled.View`
-  padding: ${(props: { theme: Theme }) => props.theme.space[3]};
+  padding: ${(props: { theme: Theme }) => props.theme.space[2]};
+  background-color: ${(props: { theme: Theme }) =>
+    props.theme.colors.bg.secondary};
 `;
 
 const product: Product = {
