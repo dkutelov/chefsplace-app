@@ -1,13 +1,13 @@
 import styled from "styled-components/native";
 import { Text } from "../../../components/typography/text.component";
 import { Card } from "react-native-paper";
-import { View } from "react-native";
 
 import { Theme } from "../../../types/Theme";
 
 export const ProductCardWrapper = styled(Card)`
   background-color: ${(props: { theme: Theme }) =>
     props.theme.colors.bg.primary};
+  margin-bottom: ${(props: { theme: Theme }) => props.theme.space[3]};
 `;
 
 export const ProductInfo = styled.View`
@@ -41,5 +41,5 @@ export const Price = styled(Text)`
 `;
 
 export const ShortDescription = styled(Text)`
-  margin-top: ${(props: { theme: Theme }) => props.theme.space[2]};
+  margin-top: ${(props: { theme: Theme }) => props.theme.space[3]};
 `;

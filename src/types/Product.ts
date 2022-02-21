@@ -4,6 +4,7 @@ export enum AvailabilityStatus {
 }
 
 export interface Product {
+  id: string;
   name: string;
   images: string[];
   price: number;

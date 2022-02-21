@@ -16,15 +16,16 @@ interface Props {
   product: Product;
 }
 
-export const ProductCard = ({ product }: Props) => {
+export const ProductCard = ({ item }: any) => {
   const {
+    id,
     name,
     images,
     price,
     reducedPrice,
     shortDescription,
     availabilityStatus,
-  } = product;
+  } = item;
   return (
     <ProductCardWrapper elevation={3}>
       <Title>{name}</Title>
