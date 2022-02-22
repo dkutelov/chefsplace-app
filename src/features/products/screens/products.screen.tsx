@@ -49,6 +49,7 @@ export const ProductListScreen = () => {
         data={products}
         renderItem={ProductCard}
         keyExtractor={(item: Product) => item.id}
+        showsVerticalScrollIndicator={false}
       />
     </SafeArea>
   );
