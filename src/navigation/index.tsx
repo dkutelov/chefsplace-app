@@ -1,34 +1,18 @@
-/**
- * If you are not familiar with React Navigation, refer to the "Fundamentals" guide:
- * https://reactnavigation.org/docs/getting-started
- *
- */
-import { FontAwesome } from "@expo/vector-icons";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import {
-  NavigationContainer,
-  DefaultTheme,
-  DarkTheme,
-} from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import * as React from "react";
-import { ColorSchemeName, Pressable } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
+
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import { colors } from "../infrastructure/theme/colors";
-
-// import Colors from "../constants/Colors";
-// import useColorScheme from "../hooks/useColorScheme";
-//import ModalScreen from "../screens/ModalScreen";
-//import NotFoundScreen from "../screens/NotFoundScreen";
-//import TabOneScreen from "../screens/TabOneScreen";
-import { HomeScreen } from "../features/home/screens/home.screen";
-import { ProductListScreen } from "../features/products/screens/products.screen";
-import {
-  RootStackParamList,
-  RootTabParamList,
-  RootTabScreenProps,
-} from "../types/Navigation";
+import { ProductListScreen } from "../features/products/screens";
+import { RootStackParamList, RootTabParamList } from "../types/Navigation";
 import LinkingConfiguration from "./LinkingConfiguration";
+import { CartScreen } from "../features/cart/screens";
+import { HomeScreen } from "../features/home/screens";
+import { ProfileScreen } from "../features/profile/screens";
+import { CategoriesScreen } from "../features/categories/screens";
 
 export default function Navigation() {
   return (
@@ -38,10 +22,6 @@ export default function Navigation() {
   );
 }
 
-/**
- * A root stack navigator is often used for displaying modals on top of all other content.
- * https://reactnavigation.org/docs/modal
- */
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function RootNavigator() {
@@ -64,61 +44,65 @@ function RootNavigator() {
   );
 }
 
-/**
- * A bottom tab navigator displays tab buttons on the bottom of the display to switch screens.
- * https://reactnavigation.org/docs/bottom-tab-navigator
- */
 const BottomTab = createBottomTabNavigator<RootTabParamList>();
 
 function BottomTabNavigator() {
   return (
     <BottomTab.Navigator
-      initialRouteName="TabOne"
+      initialRouteName="Home"
       screenOptions={{
-        tabBarActiveTintColor: colors.brand.primary,
+        tabBarActiveTintColor: colors.ui.primary,
       }}
     >
       <BottomTab.Screen
-        name="TabOne"
+        name="Home"
         component={HomeScreen}
-        options={({ navigation }: RootTabScreenProps<"TabOne">) => ({
+        options={() => ({
           title: "Начало",
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-          headerRight: () => (
-            <Pressable
-              onPress={() => navigation.navigate("Modal")}
-              style={({ pressed }) => ({
-                opacity: pressed ? 0.5 : 1,
-              })}
-            >
-              <FontAwesome
-                name="info-circle"
-                size={25}
-                color={colors.brand.primary}
-                style={{ marginRight: 15 }}
-              />
-            </Pressable>
+          tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
+        })}
+      />
+      <BottomTab.Screen
+        name="Categories"
+        component={CategoriesScreen}
+        options={() => ({
+          title: "Категории",
+          tabBarIcon: ({ color }) => (
+            <TabBarIcon name="md-book" color={color} />
           ),
         })}
       />
       <BottomTab.Screen
-        name="TabTwo"
+        name="Products"
         component={ProductListScreen}
         options={{
           title: "Продукти",
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          tabBarIcon: ({ color }) => <TabBarIcon name="search" color={color} />,
+        }}
+      />
+      <BottomTab.Screen
+        name="Cart"
+        component={CartScreen}
+        options={{
+          title: "Количка",
+          tabBarIcon: ({ color }) => <TabBarIcon name="cart" color={color} />,
+        }}
+      />
+      <BottomTab.Screen
+        name="Profile"
+        component={ProfileScreen}
+        options={{
+          title: "Профил",
+          tabBarIcon: ({ color }) => <TabBarIcon name="person" color={color} />,
         }}
       />
     </BottomTab.Navigator>
   );
 }
 
-/**
- * You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
- */
 function TabBarIcon(props: {
-  name: React.ComponentProps<typeof FontAwesome>["name"];
+  name: React.ComponentProps<typeof Ionicons>["name"];
   color: string;
 }) {
-  return <FontAwesome size={30} style={{ marginBottom: -3 }} {...props} />;
+  return <Ionicons size={25} style={{ marginBottom: -3 }} {...props} />;
 }

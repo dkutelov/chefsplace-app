@@ -9,14 +9,24 @@ const linking: LinkingOptions<RootStackParamList> = {
     screens: {
       Root: {
         screens: {
-          TabOne: {
+          Home: {
             screens: {
               TabOneScreen: "Начало",
             },
           },
-          TabTwo: {
+          Products: {
             screens: {
               TabTwoScreen: "Продукти",
+            },
+          },
+          Cart: {
+            screens: {
+              TabThreeScreen: "Количка",
+            },
+          },
+          Profile: {
+            screens: {
+              TabFourScreen: "Профил",
             },
           },
         },
