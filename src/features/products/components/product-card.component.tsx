@@ -1,6 +1,6 @@
 import React from "react";
-import { Text } from "react-native";
-import { Product } from "../../../types/Product";
+import { Ionicons } from "@expo/vector-icons";
+import { AvailabilityStatus, Product } from "../../../types/Product";
 import {
   ProductCardWrapper,
   ProductInfo,
@@ -9,8 +9,12 @@ import {
   Title,
   PriceWrapper,
   Price,
+  PriceWith,
   PriceDescriptior,
   ShortDescription,
+  Available,
+  BottomContent,
+  OOS,
 } from "./product-card.styles";
 
 interface Props {
@@ -29,7 +33,6 @@ export const ProductCard = ({ item }: any) => {
   } = item;
   return (
     <ProductCardWrapper elevation={3}>
-      <Title>{name}</Title>
       <ProductInfo>
         <ProductImage
           key={name}
@@ -37,6 +40,7 @@ export const ProductCard = ({ item }: any) => {
           resizeMode="contain"
         />
         <CardContent>
+          <Title>{name}</Title>
           <ShortDescription
             variant="caption"
             numberOfLines={3}
@@ -48,6 +52,18 @@ export const ProductCard = ({ item }: any) => {
             <Price>{price / 100}лв</Price>
             <PriceDescriptior>без ДДС</PriceDescriptior>
           </PriceWrapper>
+          <PriceWrapper>
+            <PriceWith>{Math.floor(price * 1.2) / 100}лв</PriceWith>
+            <PriceDescriptior>c ДДС</PriceDescriptior>
+          </PriceWrapper>
+          <BottomContent>
+            {availabilityStatus === AvailabilityStatus.OnStock ? (
+              <Available>Наличен</Available>
+            ) : (
+              <OOS>Ичерпан</OOS>
+            )}
+            <Ionicons name="cart" size={24} color="black" />
+          </BottomContent>
         </CardContent>
       </ProductInfo>
     </ProductCardWrapper>
