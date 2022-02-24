@@ -3,8 +3,7 @@ import { StatusBar } from "expo-status-bar";
 
 import { ThemeProvider } from "styled-components/native";
 import { theme } from "./src/infrastructure/theme";
-import { screenOptions } from "./src/components/utils/tab-icons";
-
+import { ProductsContextProvider } from "./src/services/products/products.context";
 import {
   useFonts as usePTSans,
   PTSans_400Regular,
@@ -29,7 +28,9 @@ export default function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Navigation />
+      <ProductsContextProvider>
+        <Navigation />
+      </ProductsContextProvider>
       <StatusBar style="auto" />
     </ThemeProvider>
   );

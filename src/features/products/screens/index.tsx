@@ -1,12 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { SafeAreaView, StatusBar, FlatList } from "react-native";
 import { Searchbar } from "react-native-paper";
 import styled from "styled-components/native";
 
 import { ProductCard } from "../components/product-card.component";
-import { Product, AvailabilityStatus } from "../../../types/Product";
+import { Product } from "../../../types/Product";
 import { Theme } from "../../../types/Theme";
-import { products } from "./demoData";
+import { ProductsContext } from "../../../services/products/products.context";
 
 const SafeArea = styled(SafeAreaView)`
   flex: 1;
@@ -31,7 +31,7 @@ const Search = styled.View`
 
 export const ProductListScreen = () => {
   const [searchQuery, setSearchQuery] = React.useState<String>("");
-
+  const { products, isLoading, error } = useContext(ProductsContext);
   const onChangeSearch = (query: String) => setSearchQuery(query);
 
   return (
