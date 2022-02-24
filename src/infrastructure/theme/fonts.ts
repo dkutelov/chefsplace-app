@@ -1,6 +1,8 @@
 export const fonts: { [key: string]: string } = {
   body: "Lato_400Regular",
+  bodyBold: "Lato_700Bold",
   heading: "PTSans_400Regular",
+  headingBold: "PTSans_700Bold",
   monospace: "Lato_400Regular",
 };
 

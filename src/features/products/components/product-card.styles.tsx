@@ -21,7 +21,7 @@ export const CardContent = styled.View`
 `;
 
 export const Title = styled(Text)`
-  font-family: ${(props: { theme: Theme }) => props.theme.fonts.heading};
+  font-family: ${(props: { theme: Theme }) => props.theme.fonts.headingBold};
   font-size: ${(props: { theme: Theme }) => props.theme.fontSizes.body};
   color: ${(props: { theme: Theme }) => props.theme.colors.ui.primary};
   padding-top: ${(props: { theme: Theme }) => props.theme.space[3]};
@@ -36,8 +36,20 @@ export const ProductImage = styled(Card.Cover)`
   flex: 0.4;
 `;
 
+export const PriceWrapper = styled.View`
+  flex-direction: row;
+  align-items: flex-end;
+`;
+
 export const Price = styled(Text)`
   margin-top: ${(props: { theme: Theme }) => props.theme.space[3]};
+  font-family: ${(props: { theme: Theme }) => props.theme.fonts.bodyBold};
+  font-size: ${(props: { theme: Theme }) => props.theme.fontSizes.title};
+`;
+
+export const PriceDescriptior = styled.Text`
+  margin-left: ${(props: { theme: Theme }) => props.theme.space[1]};
+  font-size: ${(props: { theme: Theme }) => props.theme.fontSizes.caption};
 `;
 
 export const ShortDescription = styled(Text)`

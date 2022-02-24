@@ -11,4 +11,11 @@ export interface Product {
   reducedPrice?: number;
   shortDescription: string;
   availabilityStatus: AvailabilityStatus;
+  onPromotion?: boolean;
+}
+
+export interface IProductsContext {
+  products: Product[];
+  isLoading: boolean;
+  error?: string;
 }

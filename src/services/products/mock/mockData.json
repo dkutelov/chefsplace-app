@@ -17,7 +17,8 @@
     ],
     "price": 1952,
     "shortDescription": "Knorr автентична азиатска серия от продукти, за директна употреба и приложения за ястиия на уок, дипове, месо, нудълс и други. Пикантен сос с чили и соя.",
-    "availabilityStatus": 0
+    "availabilityStatus": 0,
+    "onPromotion": true
   },
   {
     "id": "3",

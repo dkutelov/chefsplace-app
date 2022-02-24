@@ -7,12 +7,7 @@ import React, {
 import { Product } from "../../types/Product";
 
 import { productsRequest, productsTransform } from "./products.service";
-
-interface IProductsContext {
-  products: Product[];
-  isLoading: boolean;
-  error?: string;
-}
+import { IProductsContext } from "../../types/Product";
 
 const defaultState = {
   products: [],

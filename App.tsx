@@ -7,17 +7,24 @@ import { ProductsContextProvider } from "./src/services/products/products.contex
 import {
   useFonts as usePTSans,
   PTSans_400Regular,
+  PTSans_700Bold,
 } from "@expo-google-fonts/pt-sans";
-import { useFonts as useLato, Lato_400Regular } from "@expo-google-fonts/lato";
+import {
+  useFonts as useLato,
+  Lato_400Regular,
+  Lato_700Bold,
+} from "@expo-google-fonts/lato";
 import Navigation from "./src/navigation";
 
 export default function App() {
   const [ptsansLoaded] = usePTSans({
     PTSans_400Regular,
+    PTSans_700Bold,
   });
 
   const [latoLoaded] = useLato({
     Lato_400Regular,
+    Lato_700Bold,
   });
 
   if (!ptsansLoaded || !latoLoaded) {

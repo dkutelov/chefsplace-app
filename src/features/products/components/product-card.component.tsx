@@ -1,6 +1,5 @@
 import React from "react";
-import { Card } from "react-native-paper";
-
+import { Text } from "react-native";
 import { Product } from "../../../types/Product";
 import {
   ProductCardWrapper,
@@ -8,7 +7,9 @@ import {
   CardContent,
   ProductImage,
   Title,
+  PriceWrapper,
   Price,
+  PriceDescriptior,
   ShortDescription,
 } from "./product-card.styles";
 
@@ -38,12 +39,15 @@ export const ProductCard = ({ item }: any) => {
         <CardContent>
           <ShortDescription
             variant="caption"
-            numberOfLines={4}
+            numberOfLines={3}
             ellipsizeMode="tail"
           >
             {shortDescription}
           </ShortDescription>
-          <Price>{price / 100} лв без ДДС</Price>
+          <PriceWrapper>
+            <Price>{price / 100}лв</Price>
+            <PriceDescriptior>без ДДС</PriceDescriptior>
+          </PriceWrapper>
         </CardContent>
       </ProductInfo>
     </ProductCardWrapper>

@@ -8,7 +8,7 @@ export const productsTransform = (
     id: r.id,
     name: r.name,
     images: r.images || [],
-    price: r.number,
+    price: r.price,
     reducedPrice: r.reducedPrice,
     shortDescription: r.shortDescription,
     availabilityStatus:
