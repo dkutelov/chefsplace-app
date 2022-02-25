@@ -58,7 +58,7 @@ export const ProductCard = ({ item }: any) => {
             </Chip>
           ) : (
             <Chip color="#ff1919">
-              <ChipContent>Ичерпан</ChipContent>
+              <ChipContent>Изчерпан</ChipContent>
             </Chip>
           )}
           <PriceWrapper>

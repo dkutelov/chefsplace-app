@@ -6,13 +6,14 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import { colors } from "../infrastructure/theme/colors";
-import { ProductListScreen } from "../features/products/screens";
+import { ProductListScreen } from "../features/products/screens/products.screen";
 import { RootStackParamList, RootTabParamList } from "../types/Navigation";
 import LinkingConfiguration from "./LinkingConfiguration";
 import { CartScreen } from "../features/cart/screens";
 import { HomeScreen } from "../features/home/screens";
 import { ProfileScreen } from "../features/profile/screens";
 import { CategoriesScreen } from "../features/categories/screens";
+import { ProductDetailScreenWrapper } from "../features/product-detail/screens/product-detail.screen";
 
 export default function Navigation() {
   return (
@@ -49,14 +50,14 @@ const BottomTab = createBottomTabNavigator<RootTabParamList>();
 function BottomTabNavigator() {
   return (
     <BottomTab.Navigator
-      initialRouteName="Products"
+      initialRouteName="Home"
       screenOptions={{
         tabBarActiveTintColor: colors.ui.primary,
       }}
     >
       <BottomTab.Screen
         name="Home"
-        component={HomeScreen}
+        component={ProductDetailScreenWrapper}
         options={() => ({
           title: "Начало",
           tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,

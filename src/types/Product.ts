@@ -10,12 +10,19 @@ export interface Product {
   price: number;
   reducedPrice?: number;
   shortDescription: string;
+  description?: string;
   availabilityStatus: AvailabilityStatus;
   onPromotion?: boolean;
 }
 
 export interface IProductsContext {
   products: Product[];
+  isLoading: boolean;
+  error?: string;
+}
+
+export interface IProductContext {
+  product?: Product;
   isLoading: boolean;
   error?: string;
 }
