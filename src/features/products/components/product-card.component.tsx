@@ -4,6 +4,7 @@ import { AvailabilityStatus, Product } from "../../../types/Product";
 import {
   ProductCardWrapper,
   ProductInfo,
+  ProductInfoLeft,
   CardContent,
   ProductImage,
   Title,
@@ -12,9 +13,10 @@ import {
   PriceWith,
   PriceDescriptior,
   ShortDescription,
-  Available,
-  BottomContent,
-  OOS,
+  ChipContent,
+  PriceInnerWrapper,
+  RoundIcon,
+  Chip,
 } from "./product-card.styles";
 
 interface Props {
@@ -32,38 +34,46 @@ export const ProductCard = ({ item }: any) => {
     availabilityStatus,
   } = item;
   return (
-    <ProductCardWrapper elevation={3}>
+    <ProductCardWrapper>
+      <Title>{name}</Title>
       <ProductInfo>
-        <ProductImage
-          key={name}
-          source={{ uri: images[0] }}
-          resizeMode="contain"
-        />
+        <ProductInfoLeft>
+          <ProductImage
+            key={name}
+            source={{ uri: images[0] }}
+            resizeMode="contain"
+          />
+          {availabilityStatus === AvailabilityStatus.OnStock ? (
+            <Chip color="#9c9c9c">
+              <ChipContent>Наличен</ChipContent>
+            </Chip>
+          ) : (
+            <Chip color="#ff1919">
+              <ChipContent>Ичерпан</ChipContent>
+            </Chip>
+          )}
+        </ProductInfoLeft>
         <CardContent>
-          <Title>{name}</Title>
           <ShortDescription
             variant="caption"
-            numberOfLines={3}
+            numberOfLines={5}
             ellipsizeMode="tail"
           >
             {shortDescription}
           </ShortDescription>
           <PriceWrapper>
-            <Price>{price / 100}лв</Price>
-            <PriceDescriptior>без ДДС</PriceDescriptior>
+            <PriceInnerWrapper>
+              <Price>{price / 100}лв</Price>
+              <PriceDescriptior>без ДДС</PriceDescriptior>
+            </PriceInnerWrapper>
+            <PriceInnerWrapper>
+              <PriceWith>{Math.floor(price * 1.2) / 100}лв</PriceWith>
+              <PriceDescriptior>c ДДС</PriceDescriptior>
+            </PriceInnerWrapper>
           </PriceWrapper>
-          <PriceWrapper>
-            <PriceWith>{Math.floor(price * 1.2) / 100}лв</PriceWith>
-            <PriceDescriptior>c ДДС</PriceDescriptior>
-          </PriceWrapper>
-          <BottomContent>
-            {availabilityStatus === AvailabilityStatus.OnStock ? (
-              <Available>Наличен</Available>
-            ) : (
-              <OOS>Ичерпан</OOS>
-            )}
-            <Ionicons name="cart" size={24} color="black" />
-          </BottomContent>
+          <RoundIcon>
+            <Ionicons name="cart" size={28} color="white" />
+          </RoundIcon>
         </CardContent>
       </ProductInfo>
     </ProductCardWrapper>

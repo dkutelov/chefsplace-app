@@ -4,40 +4,48 @@ import { Card } from "react-native-paper";
 
 import { Theme } from "../../../types/Theme";
 
-export const ProductCardWrapper = styled(Card)`
+export const ProductCardWrapper = styled.View`
   background-color: ${(props: { theme: Theme }) =>
     props.theme.colors.bg.primary};
   margin-bottom: ${(props: { theme: Theme }) => props.theme.space[3]};
+  padding: ${(props: { theme: Theme }) => props.theme.space[3]};
+  border-radius: 20px;
+  flex-direction: column;
 `;
 
 export const ProductInfo = styled.View`
   flex-direction: row;
 `;
+export const ProductInfoLeft = styled.View`
+  flex-direction: column;
+  flex: 0.5;
+`;
 
 export const CardContent = styled.View`
-  padding-left: ${(props: { theme: Theme }) => props.theme.space[3]};
-  padding-right: ${(props: { theme: Theme }) => props.theme.space[3]};
-  flex: 0.6;
+  flex: 0.5;
+  flex-direction: column;
+  justify-content: space-between;
 `;
 
 export const Title = styled(Text)`
   font-family: ${(props: { theme: Theme }) => props.theme.fonts.headingBold};
-  font-size: ${(props: { theme: Theme }) => props.theme.fontSizes.body};
+  font-size: ${(props: { theme: Theme }) => props.theme.fontSizes.title};
   color: ${(props: { theme: Theme }) => props.theme.colors.ui.primary};
-  padding-top: ${(props: { theme: Theme }) => props.theme.space[3]};
+  margin-bottom: ${(props: { theme: Theme }) => props.theme.space[3]};
+  text-align: center;
+  line-height: 20px;
+  letter-spacing: -1px;
 `;
-//   text-align: center;
-// padding-left: ${(props: { theme: Theme }) => props.theme.space[4]};
-// padding-right: ${(props: { theme: Theme }) => props.theme.space[4]};
 
 export const ProductImage = styled(Card.Cover)`
-  padding: ${(props: { theme: Theme }) => props.theme.space[3]};
   background-color: ${(props: { theme: Theme }) =>
     props.theme.colors.bg.primary};
-  flex: 0.35;
+  border-bottom-left-radius: 20px;
 `;
 
-export const PriceWrapper = styled.View`
+export const PriceWrapper = styled.View``;
+
+export const PriceInnerWrapper = styled.View`
   flex-direction: row;
   align-items: baseline;
 `;
@@ -58,31 +66,33 @@ export const PriceDescriptior = styled.Text`
   font-size: ${(props: { theme: Theme }) => props.theme.fontSizes.caption};
 `;
 
-export const ShortDescription = styled(Text)`
-  margin-top: ${(props: { theme: Theme }) => props.theme.space[3]};
-  margin-bottom: ${(props: { theme: Theme }) => props.theme.space[3]};
-`;
+export const ShortDescription = styled(Text)``;
 
-export const BottomContent = styled.View`
+export const RoundIcon = styled.View`
+  align-self: flex-end;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  margin-top: ${(props: { theme: Theme }) => props.theme.space[3]};
-  margin-bottom: ${(props: { theme: Theme }) => props.theme.space[3]};
-`;
-
-export const Available = styled(Text)`
+  padding: ${(props: { theme: Theme }) => props.theme.space[2]};
+  border-radius: 22px;
   background-color: ${(props: { theme: Theme }) =>
     props.theme.colors.ui.primary};
-  color: white;
-  padding: ${(props: { theme: Theme }) => props.theme.space[1]};
-  font-size: ${(props: { theme: Theme }) => props.theme.fontSizes.button};
 `;
 
-export const OOS = styled(Text)`
-  background-color: ${(props: { theme: Theme }) =>
-    props.theme.colors.text.error};
+export const Chip = styled.View`
+  align-self: center;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: ${(props: { theme: Theme }) => props.theme.space[1]}
+    ${(props: { theme: Theme }) => props.theme.space[2]};
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: ${(props: { color: string }) => props.color};
+  margin-top: -${(props: { theme: Theme }) => props.theme.space[1]};
+`;
+
+export const ChipContent = styled(Text)`
   color: white;
-  padding: ${(props: { theme: Theme }) => props.theme.space[1]};
-  font-size: ${(props: { theme: Theme }) => props.theme.fontSizes.button};
+  font-size: ${(props: { theme: Theme }) => props.theme.fontSizes.caption};
 `;
