@@ -1,11 +1,11 @@
-import {
-  View,
-  Image,
-  FlatList,
-  StyleSheet,
-  useWindowDimensions,
-} from "react-native";
+import { View, Image, StyleSheet, useWindowDimensions } from "react-native";
 import React from "react";
+
+import {
+  ContainerView,
+  ImageFlatList,
+  DotsContainer,
+} from "./image-carousel.styles";
 
 export const ImageCarousel = ({ images }: { images: string[] }) => {
   const windowWidth = useWindowDimensions().width;
@@ -18,10 +18,10 @@ export const ImageCarousel = ({ images }: { images: string[] }) => {
   }, []);
 
   return (
-    <View style={styles.root}>
-      <FlatList
+    <ContainerView>
+      <ImageFlatList
         data={images}
-        renderItem={({ item }) => (
+        renderItem={({ item }: { item: string | undefined }) => (
           <Image
             source={{ uri: item }}
             style={[styles.image, { width: windowWidth - 40 }]}
@@ -38,44 +38,33 @@ export const ImageCarousel = ({ images }: { images: string[] }) => {
         }}
         onViewableItemsChanged={onFlatlistUpdate}
       />
-      <View style={styles.dots}>
+      <DotsContainer style={{ transform: [{ translateX: "-50%" }] }}>
         {images.map((_, index) => (
           <View
             key={`dot-${index}`}
             style={[
               styles.dot,
               {
-                backgroundColor: activeIndex === index ? "#c9c9c9" : "#ededed",
+                backgroundColor: activeIndex === index ? "#a9a9a9" : "#dddddd",
               },
             ]}
           />
         ))}
-      </View>
-    </View>
+      </DotsContainer>
+    </ContainerView>
   );
 };
 
 const styles = StyleSheet.create({
-  root: {
-    marginVertical: 10,
-  },
   image: {
     margin: 10,
-    height: 350,
+    height: 300,
     resizeMode: "contain",
   },
   dot: {
-    width: 10,
-    height: 10,
-    borderRadius: 25,
-    borderWidth: 1,
-    borderColor: "#c9c9c9",
-
+    width: 8,
+    height: 8,
+    borderRadius: 4,
     margin: 5,
-  },
-  dots: {
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
   },
 });
