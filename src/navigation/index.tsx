@@ -49,7 +49,7 @@ const BottomTab = createBottomTabNavigator<RootTabParamList>();
 function BottomTabNavigator() {
   return (
     <BottomTab.Navigator
-      initialRouteName="Home"
+      initialRouteName="Products"
       screenOptions={{
         tabBarActiveTintColor: colors.ui.primary,
       }}

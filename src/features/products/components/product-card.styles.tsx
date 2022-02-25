@@ -80,13 +80,13 @@ export const RoundIcon = styled.View`
 `;
 
 export const Chip = styled.View`
-  align-self: center;
+  align-self: flex-start;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   padding: ${(props: { theme: Theme }) => props.theme.space[1]}
     ${(props: { theme: Theme }) => props.theme.space[2]};
-  border-radius: 10px;
+  border-radius: 3px;
   overflow: hidden;
   background-color: ${(props: { color: string }) => props.color};
   margin-top: -${(props: { theme: Theme }) => props.theme.space[1]};

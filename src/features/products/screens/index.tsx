@@ -7,6 +7,8 @@ import { ProductCard } from "../components/product-card.component";
 import { Product } from "../../../types/Product";
 import { Theme } from "../../../types/Theme";
 import { ProductsContext } from "../../../services/products/products.context";
+import { LoadingIndicator } from "../../../components/loading/loading.component";
+import { colors } from "../../../infrastructure/theme/colors";
 
 const SafeArea = styled(SafeAreaView)`
   flex: 1;
@@ -36,6 +38,7 @@ export const ProductListScreen = () => {
 
   return (
     <SafeArea>
+      {isLoading && <LoadingIndicator size={32} color={colors.ui.primary} />}
       <Search>
         <Searchbar
           placeholder="Search"

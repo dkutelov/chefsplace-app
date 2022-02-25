@@ -43,6 +43,15 @@ export const ProductCard = ({ item }: any) => {
             source={{ uri: images[0] }}
             resizeMode="contain"
           />
+        </ProductInfoLeft>
+        <CardContent>
+          <ShortDescription
+            variant="caption"
+            numberOfLines={3}
+            ellipsizeMode="tail"
+          >
+            {shortDescription}
+          </ShortDescription>
           {availabilityStatus === AvailabilityStatus.OnStock ? (
             <Chip color="#9c9c9c">
               <ChipContent>Наличен</ChipContent>
@@ -52,15 +61,6 @@ export const ProductCard = ({ item }: any) => {
               <ChipContent>Ичерпан</ChipContent>
             </Chip>
           )}
-        </ProductInfoLeft>
-        <CardContent>
-          <ShortDescription
-            variant="caption"
-            numberOfLines={5}
-            ellipsizeMode="tail"
-          >
-            {shortDescription}
-          </ShortDescription>
           <PriceWrapper>
             <PriceInnerWrapper>
               <Price>{price / 100}лв</Price>
