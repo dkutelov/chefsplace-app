@@ -8,15 +8,20 @@ const Stack = createNativeStackNavigator();
 
 export const ProductStack = () => {
   return (
-    <Stack.Navigator
-      screenOptions={{
-        headerShown: false,
-      }}
-    >
-      <Stack.Screen name="ProductsScreen" component={ProductListScreen} />
+    <Stack.Navigator>
+      <Stack.Screen
+        name="ProductsScreen"
+        component={ProductListScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
       <Stack.Screen
         name="ProductDetails"
         component={ProductDetailScreenWrapper}
+        options={{
+          title: "Детайли",
+        }}
       />
     </Stack.Navigator>
   );

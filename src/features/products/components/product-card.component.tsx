@@ -1,7 +1,7 @@
 import React from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { AvailabilityStatus, Product } from "../../../types/Product";
-import { useNavigation } from "@react-navigation/native";
+
 import {
   ProductCardWrapper,
   ProductInfo,
@@ -24,7 +24,7 @@ interface Props {
   product: Product;
 }
 
-export const ProductCard = ({ item }: any) => {
+export const ProductCard = ({ item, navigation }: any) => {
   const {
     id,
     name,
@@ -34,8 +34,6 @@ export const ProductCard = ({ item }: any) => {
     shortDescription,
     availabilityStatus,
   } = item;
-
-  const navigation = useNavigation();
 
   const onProductCardPress = () => {
     navigation.navigate("ProductDetails", { id });

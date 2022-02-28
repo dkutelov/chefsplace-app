@@ -17,6 +17,7 @@ export const ProductCardWrapper = styled(Pressable)`
 export const ProductInfo = styled.View`
   flex-direction: row;
 `;
+
 export const ProductInfoLeft = styled.View`
   flex-direction: column;
   flex: 0.5;

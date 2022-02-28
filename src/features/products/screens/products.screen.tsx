@@ -7,7 +7,7 @@ import { ProductsContext } from "../../../services/products/products.context";
 import { LoadingIndicator } from "../../../components/loading/loading.component";
 import { colors } from "../../../infrastructure/theme/colors";
 
-export const ProductListScreen = () => {
+export const ProductListScreen = ({ navigation }) => {
   const [searchQuery, setSearchQuery] = React.useState<String>("");
   const { products, isLoading, error } = useContext(ProductsContext);
   const onChangeSearch = (query: String) => setSearchQuery(query);
@@ -26,7 +26,9 @@ export const ProductListScreen = () => {
       </Search>
       <ProductList
         data={products}
-        renderItem={ProductCard}
+        renderItem={(item) => (
+          <ProductCard item={item.item} navigation={navigation} />
+        )}
         showsVerticalScrollIndicator={false}
       />
     </SafeArea>
