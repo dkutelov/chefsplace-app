@@ -37,6 +37,7 @@ export const ImageCarousel = ({ images }: { images: string[] }) => {
           minimumViewTime: 100, // item should be on the screen min 300 ms
         }}
         onViewableItemsChanged={onFlatlistUpdate}
+        keyExtractor={(_, index) => index}
       />
       <DotsContainer style={{ transform: [{ translateX: "-50%" }] }}>
         {images.map((_, index) => (
