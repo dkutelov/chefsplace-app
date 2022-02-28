@@ -1,10 +1,11 @@
 import styled from "styled-components/native";
+import { Pressable } from "react-native";
 import { Text } from "../../../components/typography/text.component";
 import { Card } from "react-native-paper";
 
 import { Theme } from "../../../types/Theme";
 
-export const ProductCardWrapper = styled.View`
+export const ProductCardWrapper = styled(Pressable)`
   background-color: ${(props: { theme: Theme }) =>
     props.theme.colors.bg.primary};
   margin-bottom: ${(props: { theme: Theme }) => props.theme.space[3]};

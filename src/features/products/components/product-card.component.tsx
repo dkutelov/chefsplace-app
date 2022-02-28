@@ -1,6 +1,7 @@
 import React from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { AvailabilityStatus, Product } from "../../../types/Product";
+import { useNavigation } from "@react-navigation/native";
 import {
   ProductCardWrapper,
   ProductInfo,
@@ -33,8 +34,15 @@ export const ProductCard = ({ item }: any) => {
     shortDescription,
     availabilityStatus,
   } = item;
+
+  const navigation = useNavigation();
+
+  const onProductCardPress = () => {
+    navigation.navigate("ProductDetails", { id });
+  };
+
   return (
-    <ProductCardWrapper>
+    <ProductCardWrapper onPress={onProductCardPress}>
       <Title>{name}</Title>
       <ProductInfo>
         <ProductInfoLeft>

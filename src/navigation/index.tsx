@@ -14,6 +14,7 @@ import { HomeScreen } from "../features/home/screens";
 import { ProfileScreen } from "../features/profile/screens";
 import { CategoriesScreen } from "../features/categories/screens";
 import { ProductDetailScreenWrapper } from "../features/product-detail/screens/product-detail.screen";
+import { ProductStack } from "./ProductStack";
 
 export default function Navigation() {
   return (
@@ -75,7 +76,7 @@ function BottomTabNavigator() {
       />
       <BottomTab.Screen
         name="Products"
-        component={ProductListScreen}
+        component={ProductStack}
         options={{
           title: "Продукти",
           tabBarIcon: ({ color }) => <TabBarIcon name="search" color={color} />,
