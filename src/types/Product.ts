@@ -25,4 +25,5 @@ export interface IProductContext {
   product?: Product;
   isLoading: boolean;
   error?: string;
+  loadProduct: (productId: string) => void;
 }

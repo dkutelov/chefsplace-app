@@ -1,4 +1,4 @@
-import React, { useState, createContext, useEffect } from "react";
+import React, { useState, createContext } from "react";
 import { Product } from "../../types/Product";
 
 import { productRequest, productTransform } from "./product.service";
@@ -7,6 +7,7 @@ import { IProductContext } from "../../types/Product";
 const defaultState = {
   product: undefined,
   isLoading: false,
+  loadProduct: () => {},
 };
 
 export const ProductContext = createContext<IProductContext>(defaultState);
@@ -20,10 +21,10 @@ export const ProductContextProvider = ({
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(undefined);
 
-  const retrieveProduct = () => {
+  const retrieveProduct = (productId: string) => {
     setIsLoading(true);
     setTimeout(() => {
-      productRequest()
+      productRequest(productId)
         .then((data: { [key: string]: any }) => {
           return productTransform(data);
         })
@@ -38,16 +39,13 @@ export const ProductContextProvider = ({
     }, 2000);
   };
 
-  useEffect(() => {
-    retrieveProduct();
-  }, []);
-
   return (
     <ProductContext.Provider
       value={{
         product,
         isLoading,
         error,
+        loadProduct: retrieveProduct,
       }}
     >
       {children}

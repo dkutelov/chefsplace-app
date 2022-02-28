@@ -1,5 +1,5 @@
 import { AvailabilityStatus, Product } from "../../types/Product";
-import data from "./mock/mockData.json";
+import { getProductById } from "./mock/simulatedBackendResponse";
 
 export const productTransform = (productData: {
   [key: string]: any;
@@ -19,12 +19,13 @@ export const productTransform = (productData: {
   };
 };
 
-export const productRequest = () => {
+export const productRequest = (productId: string) => {
   return new Promise<{ [key: string]: any }>((resolve, reject) => {
-    const mock = data;
-    if (!mock) {
-      reject("not found");
-    }
-    resolve(mock);
+    getProductById(productId).then((product) => {
+      if (!product) {
+        reject("not found");
+      }
+      resolve(product);
+    });
   });
 };

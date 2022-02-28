@@ -1,5 +1,4 @@
-import React from "react";
-import { useContext } from "react";
+import React, { useEffect, useContext } from "react";
 
 import { ProductContextProvider } from "../../../services/product/product.context";
 import { ProductContext } from "../../../services/product/product.context";
@@ -8,12 +7,22 @@ import { ProductScrollView, Title } from "./product-detail.styles";
 import { SafeArea } from "../../../components/utils/safe-area.component";
 
 const ProductDetailScreen = () => {
-  const { product, isLoading, error } = useContext(ProductContext);
+  const { product, isLoading, error, loadProduct } = useContext(ProductContext);
+  const id = "2";
+
+  useEffect(() => {
+    loadProduct(id);
+  }, []);
+
   return (
     <SafeArea>
       <ProductScrollView>
-        <Title>{product?.name}</Title>
-        {product && <ImageCarousel images={product.images} />}
+        {product && (
+          <>
+            <Title>{product?.name}</Title>
+            <ImageCarousel images={product.images} />
+          </>
+        )}
       </ProductScrollView>
     </SafeArea>
   );
