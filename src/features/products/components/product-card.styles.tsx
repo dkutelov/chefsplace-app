@@ -18,21 +18,23 @@ export const ProductInfo = styled.View`
   flex-direction: row;
 `;
 
-export const ProductInfoLeft = styled.View`
+export const ProductImageWrapper = styled.View`
   flex-direction: column;
-  flex: 0.5;
+  flex: 0.55;
 `;
 
 export const CardContent = styled.View`
-  flex: 0.5;
+  flex: 0.45;
   flex-direction: column;
   justify-content: space-between;
+  padding: 0 ${(props: { theme: Theme }) => props.theme.space[3]};
 `;
 
 export const Title = styled(Text)`
   font-family: ${(props: { theme: Theme }) => props.theme.fonts.headingBold};
   font-size: ${(props: { theme: Theme }) => props.theme.fontSizes.title};
   color: ${(props: { theme: Theme }) => props.theme.colors.ui.primary};
+  margin-top: ${(props: { theme: Theme }) => props.theme.space[2]};
   margin-bottom: ${(props: { theme: Theme }) => props.theme.space[3]};
   text-align: center;
   line-height: 20px;

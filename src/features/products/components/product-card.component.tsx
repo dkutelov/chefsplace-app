@@ -5,7 +5,7 @@ import { AvailabilityStatus, Product } from "../../../types/Product";
 import {
   ProductCardWrapper,
   ProductInfo,
-  ProductInfoLeft,
+  ProductImageWrapper,
   CardContent,
   ProductImage,
   Title,
@@ -40,48 +40,43 @@ export const ProductCard = ({ item, navigation }: any) => {
   };
 
   return (
-    <ProductCardWrapper onPress={onProductCardPress}>
-      <Title>{name}</Title>
-      <ProductInfo>
-        <ProductInfoLeft>
-          <ProductImage
-            key={name}
-            source={{ uri: images[0] }}
-            resizeMode="contain"
-          />
-        </ProductInfoLeft>
-        <CardContent>
-          <ShortDescription
-            variant="caption"
-            numberOfLines={3}
-            ellipsizeMode="tail"
-          >
-            {shortDescription}
-          </ShortDescription>
-          {availabilityStatus === AvailabilityStatus.OnStock ? (
-            <Chip color="#9c9c9c">
-              <ChipContent>Наличен</ChipContent>
-            </Chip>
-          ) : (
-            <Chip color="#ff1919">
-              <ChipContent>Изчерпан</ChipContent>
-            </Chip>
-          )}
-          <PriceWrapper>
-            <PriceInnerWrapper>
-              <Price>{price / 100}лв</Price>
-              <PriceDescriptior>без ДДС</PriceDescriptior>
-            </PriceInnerWrapper>
-            <PriceInnerWrapper>
-              <PriceWith>{Math.floor(price * 1.2) / 100}лв</PriceWith>
-              <PriceDescriptior>c ДДС</PriceDescriptior>
-            </PriceInnerWrapper>
-          </PriceWrapper>
-          <RoundIcon>
-            <Ionicons name="cart" size={28} color="white" />
-          </RoundIcon>
-        </CardContent>
-      </ProductInfo>
-    </ProductCardWrapper>
+    <>
+      {availabilityStatus === AvailabilityStatus.OnStock && (
+        <ProductCardWrapper onPress={onProductCardPress}>
+          <Title>{name}</Title>
+          <ProductInfo>
+            <ProductImageWrapper>
+              <ProductImage
+                key={name}
+                source={{ uri: images[0] }}
+                resizeMode="contain"
+              />
+            </ProductImageWrapper>
+            <CardContent>
+              <ShortDescription
+                variant="caption"
+                numberOfLines={3}
+                ellipsizeMode="tail"
+              >
+                {shortDescription}
+              </ShortDescription>
+              <PriceWrapper>
+                <PriceInnerWrapper>
+                  <Price>{price / 100}лв</Price>
+                  <PriceDescriptior>без ДДС</PriceDescriptior>
+                </PriceInnerWrapper>
+                <PriceInnerWrapper>
+                  <PriceWith>{Math.floor(price * 1.2) / 100}лв</PriceWith>
+                  <PriceDescriptior>c ДДС</PriceDescriptior>
+                </PriceInnerWrapper>
+              </PriceWrapper>
+              <RoundIcon>
+                <Ionicons name="cart" size={28} color="white" />
+              </RoundIcon>
+            </CardContent>
+          </ProductInfo>
+        </ProductCardWrapper>
+      )}
+    </>
   );
 };

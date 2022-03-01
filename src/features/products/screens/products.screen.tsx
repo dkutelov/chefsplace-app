@@ -1,7 +1,5 @@
 import React, { useContext } from "react";
-
-import { Searchbar } from "react-native-paper";
-import { SafeArea, Search, ProductList } from "./product.styles";
+import { SafeArea, ProductList } from "./product.styles";
 import { ProductCard } from "../components/product-card.component";
 import { ProductsContext } from "../../../services/products/products.context";
 import { LoadingIndicator } from "../../../components/loading/loading.component";
@@ -14,14 +12,17 @@ export const ProductListScreen = ({ navigation }) => {
 
   return (
     <SafeArea>
-      {isLoading && <LoadingIndicator size={32} color={colors.ui.primary} />}
-      <ProductList
-        data={products}
-        renderItem={(item) => (
-          <ProductCard item={item.item} navigation={navigation} />
-        )}
-        showsVerticalScrollIndicator={false}
-      />
+      {isLoading ? (
+        <LoadingIndicator size={32} color={colors.ui.primary} />
+      ) : (
+        <ProductList
+          data={products}
+          renderItem={(item) => (
+            <ProductCard item={item.item} navigation={navigation} />
+          )}
+          showsVerticalScrollIndicator={false}
+        />
+      )}
     </SafeArea>
   );
 };
