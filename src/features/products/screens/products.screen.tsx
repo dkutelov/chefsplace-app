@@ -15,15 +15,6 @@ export const ProductListScreen = ({ navigation }) => {
   return (
     <SafeArea>
       {isLoading && <LoadingIndicator size={32} color={colors.ui.primary} />}
-      <Search>
-        <Searchbar
-          placeholder="Search"
-          onChangeText={onChangeSearch}
-          editable
-          maxLength={40}
-          value={searchQuery}
-        />
-      </Search>
       <ProductList
         data={products}
         renderItem={(item) => (
