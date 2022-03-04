@@ -9,9 +9,8 @@ export interface CartItem {
   quantity: number;
 }
 
-export interface IProductContext {
-  products: [CartItem];
+export interface ICartContext {
+  cartItems: CartItem[];
   isLoading: boolean;
   error?: string;
-  loadProduct: (productId: string) => void;
 }

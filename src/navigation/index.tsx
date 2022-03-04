@@ -8,7 +8,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { colors } from "../infrastructure/theme/colors";
 import { RootStackParamList, RootTabParamList } from "../types/Navigation";
 import LinkingConfiguration from "./LinkingConfiguration";
-import { CartScreen } from "../features/cart/screens";
+import { CartScreen } from "../features/cart/screens/cart.screen";
 import { HomeScreen } from "../features/home/screens";
 import { ProfileScreen } from "../features/profile/screens";
 import { CategoriesScreen } from "../features/categories/screens";
