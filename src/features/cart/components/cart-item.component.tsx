@@ -1,7 +1,8 @@
 import React from "react";
 import { Feather } from "@expo/vector-icons";
 import { CartItem } from "../../../types/Cart";
-import { Text } from "../../../components/typography/text.component";
+import { colors } from "../../../infrastructure/theme/colors";
+
 import {
   CartItemWrapper,
   TopContent,
@@ -14,9 +15,11 @@ import {
   Price,
   PriceWith,
   PriceInnerWrapper,
+  DeleteIcon,
 } from "./cart-item.styles";
 
 import { QuantitySelector } from "../../../components/quantity-selector/quantity-selector.component";
+
 interface Props {
   cartItem: CartItem;
 }
@@ -24,7 +27,13 @@ interface Props {
 export const CartItemCard = ({ cartItem }: Props) => {
   const { id, item, quantity } = cartItem;
   const [itemQuantity, setItemQuantity] = React.useState(quantity);
+  //TODO: Not enough quantity
+  //TODO: Update context on quantity change
+  //TODO: Remove item from cart
 
+  const removeItem = () => {
+    console.warn("remove");
+  };
   return (
     <CartItemWrapper>
       <TopContent>
@@ -34,7 +43,9 @@ export const CartItemCard = ({ cartItem }: Props) => {
           resizeMode="contain"
         />
         <Title>{item.name}</Title>
-        <Feather name="trash" size={16} color="black" />
+        <DeleteIcon onPress={removeItem}>
+          <Feather name="trash" size={14} color={colors.ui.secondary} />
+        </DeleteIcon>
       </TopContent>
       <CardContent>
         <QuantityWrapper>
