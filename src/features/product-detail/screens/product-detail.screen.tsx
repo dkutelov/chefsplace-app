@@ -47,7 +47,6 @@ const ProductDetailScreen = () => {
     if (hasNotEnoughStock()) {
       return;
     }
-
     console.warn("Add to cart");
   };
 

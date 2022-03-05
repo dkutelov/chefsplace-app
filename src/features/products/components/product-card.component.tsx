@@ -20,7 +20,7 @@ import {
 import { useNavigation } from "@react-navigation/native";
 
 interface Props {
-  product: Product;
+  item: Product;
 }
 
 export const ProductCard = ({ item }: Props) => {

@@ -1,18 +1,23 @@
 import React, { useContext } from "react";
-import { View, Text } from "react-native";
 
 import { SafeArea } from "../../../components/utils/safe-area.component";
 import { CartContext } from "../../../services/cart/cart.context";
+import { NoItemsInCart } from "./cart.styles";
+import { Caption } from "react-native-paper";
+import { CartItemCard } from "../components/cart-item.component";
 
 export const CartScreen = () => {
   const { cartItems, isLoading, error } = useContext(CartContext);
-  console.warn(cartItems);
 
   return (
     <SafeArea>
-      <View>
-        <Text>Your cart is empty! </Text>
-      </View>
+      {cartItems.length === 0 ? (
+        <NoItemsInCart>
+          <Caption>Нямате добавени продукти!</Caption>
+        </NoItemsInCart>
+      ) : (
+        <CartItemCard cartItem={cartItems[0]} />
+      )}
     </SafeArea>
   );
 };

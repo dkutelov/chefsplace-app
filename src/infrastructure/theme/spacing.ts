@@ -3,4 +3,12 @@ export const lineHeights: { [key: string]: string } = {
   copy: "20px",
 };
 
-export const space: string[] = ["0px", "4px", "8px", "16px", "32px", "64px"];
+export const space: string[] = [
+  "0px",
+  "4px",
+  "8px",
+  "16px",
+  "32px",
+  "64px",
+  "80px",
+];
