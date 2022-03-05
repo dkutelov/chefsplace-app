@@ -13,6 +13,7 @@ export interface Product {
   description?: string;
   availabilityStatus: AvailabilityStatus;
   onPromotion?: boolean;
+  maxQuantity: number;
 }
 
 export interface IProductsContext {

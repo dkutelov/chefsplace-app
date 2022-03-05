@@ -2,6 +2,7 @@ import styled from "styled-components/native";
 import { Text } from "react-native";
 import { ScrollView } from "react-native";
 import { Theme } from "../../../types/Theme";
+import { HelperText } from "react-native-paper";
 
 export const ProductScrollView = styled(ScrollView)`
   flex: 1;
@@ -66,4 +67,9 @@ export const RoundIcon = styled.View`
   border-radius: 28px;
   background-color: ${(props: { theme: Theme }) =>
     props.theme.colors.ui.primary};
+`;
+
+export const NotEnoughQuantityNotifivation = styled(HelperText)`
+  text-align: right;
+  margin-right: ${(props: { theme: Theme }) => props.theme.space[5]};
 `;

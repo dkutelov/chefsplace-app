@@ -14,6 +14,7 @@ import {
   Row,
   RoundIcon,
   ActionRow,
+  NotEnoughQuantityNotifivation,
 } from "./product-detail.styles";
 import { Ionicons } from "@expo/vector-icons";
 import { SafeArea } from "../../../components/utils/safe-area.component";
@@ -29,6 +30,22 @@ const ProductDetailScreen = () => {
   useEffect(() => {
     loadProduct(id);
   }, []);
+
+  const hasNotEnoughStock = () => {
+    if (!product) {
+      return false;
+    } else {
+      return quantity > product.maxQuantity;
+    }
+  };
+
+  const addProductToCart = () => {
+    if (hasNotEnoughStock()) {
+      return;
+    }
+
+    console.warn("Add to cart");
+  };
 
   return (
     <SafeArea>
@@ -46,9 +63,20 @@ const ProductDetailScreen = () => {
               </PriceInnerWrapper>
               <QuantitySelector quantity={quantity} setQuantity={setQuantity} />
               <RoundIcon>
-                <Ionicons name="cart" size={40} color="white" />
+                <Ionicons
+                  onPress={addProductToCart}
+                  name="cart"
+                  size={40}
+                  color="white"
+                />
               </RoundIcon>
             </ActionRow>
+            <NotEnoughQuantityNotifivation
+              type="error"
+              visible={hasNotEnoughStock()}
+            >
+              Недостатъчна наличност.
+            </NotEnoughQuantityNotifivation>
             <ShortDescription>{product.shortDescription}</ShortDescription>
             <Description>{product.description}</Description>
           </>

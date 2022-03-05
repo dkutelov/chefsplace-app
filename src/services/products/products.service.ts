@@ -15,6 +15,7 @@ export const productsTransform = (
       r.availabilityStatus === 0
         ? AvailabilityStatus.OutOfStock
         : AvailabilityStatus.OnStock,
+    maxQuantity: r.maxQuantity,
   }));
 };
 
