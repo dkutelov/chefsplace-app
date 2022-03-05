@@ -1,15 +1,13 @@
 import styled from "styled-components/native";
-import { Text } from "react-native";
 import { ScrollView } from "react-native";
 import { Theme } from "../../../types/Theme";
-import { HelperText } from "react-native-paper";
 
 export const ProductScrollView = styled(ScrollView)`
   flex: 1;
   padding-top: ${(props: { theme: Theme }) => props.theme.space[4]};
 `;
 
-export const Title = styled(Text)`
+export const Title = styled.Text`
   font-family: ${(props: { theme: Theme }) => props.theme.fonts.headingBold};
   font-size: ${(props: { theme: Theme }) => props.theme.fontSizes.title};
   color: ${(props: { theme: Theme }) => props.theme.colors.ui.primary};
@@ -19,7 +17,7 @@ export const Title = styled(Text)`
   letter-spacing: -1px;
 `;
 
-export const ShortDescription = styled(Text)`
+export const ShortDescription = styled.Text`
   margin: ${(props: { theme: Theme }) => props.theme.space[1]} 0;
   padding: ${(props: { theme: Theme }) => props.theme.space[3]};
 `;
@@ -39,7 +37,7 @@ export const ActionRow = styled.View`
   margin: 0 ${(props: { theme: Theme }) => props.theme.space[3]};
 `;
 
-export const Description = styled(Text)`
+export const Description = styled.Text`
   margin: ${(props: { theme: Theme }) => props.theme.space[1]} 0;
   padding: ${(props: { theme: Theme }) => props.theme.space[3]};
 `;
@@ -49,7 +47,7 @@ export const PriceInnerWrapper = styled.View`
   align-items: baseline;
 `;
 
-export const Price = styled(Text)`
+export const Price = styled.Text`
   font-family: ${(props: { theme: Theme }) => props.theme.fonts.bodyBold};
   font-size: ${(props: { theme: Theme }) => props.theme.fontSizes.title};
 `;
@@ -69,7 +67,8 @@ export const RoundIcon = styled.View`
     props.theme.colors.ui.primary};
 `;
 
-export const NotEnoughQuantityNotifivation = styled(HelperText)`
+export const NotEnoughQuantityNotifivation = styled.Text`
   text-align: right;
   margin-right: ${(props: { theme: Theme }) => props.theme.space[5]};
+  color: ${(props: { theme: Theme }) => props.theme.colors.ui.error};
 `;

@@ -14,29 +14,23 @@ import {
   PriceWith,
   PriceDescriptior,
   ShortDescription,
-  ChipContent,
   PriceInnerWrapper,
   RoundIcon,
-  Chip,
 } from "./product-card.styles";
+import { useNavigation } from "@react-navigation/native";
 
 interface Props {
   product: Product;
 }
 
-export const ProductCard = ({ item, navigation }: any) => {
-  const {
-    id,
-    name,
-    images,
-    price,
-    reducedPrice,
-    shortDescription,
-    availabilityStatus,
-  } = item;
+export const ProductCard = ({ item }: Props) => {
+  const { id, name, images, price, shortDescription, availabilityStatus } =
+    item;
+
+  const { navigate } = useNavigation();
 
   const onProductCardPress = () => {
-    navigation.navigate("ProductDetails", { id });
+    navigate("ProductDetails", { id });
   };
 
   return (

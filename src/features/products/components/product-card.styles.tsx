@@ -30,7 +30,7 @@ export const CardContent = styled.View`
   padding: 0 ${(props: { theme: Theme }) => props.theme.space[3]};
 `;
 
-export const Title = styled(Text)`
+export const Title = styled.Text`
   font-family: ${(props: { theme: Theme }) => props.theme.fonts.headingBold};
   font-size: ${(props: { theme: Theme }) => props.theme.fontSizes.title};
   color: ${(props: { theme: Theme }) => props.theme.colors.ui.primary};
@@ -54,12 +54,12 @@ export const PriceInnerWrapper = styled.View`
   align-items: baseline;
 `;
 
-export const Price = styled(Text)`
+export const Price = styled.Text`
   font-family: ${(props: { theme: Theme }) => props.theme.fonts.bodyBold};
   font-size: ${(props: { theme: Theme }) => props.theme.fontSizes.title};
 `;
 
-export const PriceWith = styled(Text)`
+export const PriceWith = styled.Text`
   font-family: ${(props: { theme: Theme }) => props.theme.fonts.bodyBold};
   font-size: ${(props: { theme: Theme }) => props.theme.fontSizes.body};
   margin-left: ${(props: { theme: Theme }) => props.theme.space[4]};
@@ -81,22 +81,4 @@ export const RoundIcon = styled.View`
   border-radius: 22px;
   background-color: ${(props: { theme: Theme }) =>
     props.theme.colors.ui.primary};
-`;
-
-export const Chip = styled.View`
-  align-self: flex-start;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  padding: ${(props: { theme: Theme }) => props.theme.space[1]}
-    ${(props: { theme: Theme }) => props.theme.space[2]};
-  border-radius: 3px;
-  overflow: hidden;
-  background-color: ${(props: { color: string }) => props.color};
-  margin-top: -${(props: { theme: Theme }) => props.theme.space[1]};
-`;
-
-export const ChipContent = styled(Text)`
-  color: white;
-  font-size: ${(props: { theme: Theme }) => props.theme.fontSizes.caption};
 `;

@@ -1,5 +1,4 @@
 import React, { useEffect, useContext, useState } from "react";
-
 import { ProductContextProvider } from "../../../services/product/product.context";
 import { ProductContext } from "../../../services/product/product.context";
 import { ImageCarousel } from "../components/image-carousel/image-carousel.component";
@@ -21,13 +20,18 @@ import { SafeArea } from "../../../components/utils/safe-area.component";
 import { LoadingIndicator } from "../../../components/loading/loading.component";
 import { colors } from "../../../infrastructure/theme/colors";
 import { QuantitySelector } from "../../../components/quantity-selector/quantity-selector.component";
+import { useRoute } from "@react-navigation/native";
 
 const ProductDetailScreen = () => {
   const { product, isLoading, error, loadProduct } = useContext(ProductContext);
   const [quantity, setQuantity] = useState(1);
-  const id = "2";
+  const { params } = useRoute();
 
   useEffect(() => {
+    const { id } = params;
+    //TODO: if no id redirect to products and show notification "Product does not exists"
+
+    //TODO: Handle error in product is not returned from servive
     loadProduct(id);
   }, []);
 
@@ -71,12 +75,11 @@ const ProductDetailScreen = () => {
                 />
               </RoundIcon>
             </ActionRow>
-            <NotEnoughQuantityNotifivation
-              type="error"
-              visible={hasNotEnoughStock()}
-            >
-              Недостатъчна наличност.
-            </NotEnoughQuantityNotifivation>
+            {hasNotEnoughStock() && (
+              <NotEnoughQuantityNotifivation>
+                Недостатъчна наличност.
+              </NotEnoughQuantityNotifivation>
+            )}
             <ShortDescription>{product.shortDescription}</ShortDescription>
             <Description>{product.description}</Description>
           </>
