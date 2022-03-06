@@ -72,7 +72,7 @@ export const PriceDescriptior = styled.Text`
 
 export const ShortDescription = styled(Text)``;
 
-export const RoundIcon = styled.View`
+export const RoundIcon = styled(Pressable)`
   align-self: flex-end;
   flex-direction: row;
   justify-content: center;

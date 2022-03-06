@@ -31,7 +31,7 @@ interface Props {
 
 export const CartItemCard = ({ cartItem }: Props) => {
   const { id, item, quantity } = cartItem;
-  console.log(item);
+
   const [itemQuantity, setItemQuantity] = useState(quantity);
   const { cartItems, isLoading, error, dispatch } = useContext(CartContext);
 

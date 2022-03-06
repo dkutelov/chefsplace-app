@@ -53,8 +53,6 @@ const ProductDetailScreen = () => {
     if (!product || hasNotEnoughStock() || product.availabilityStatus !== 1) {
       return;
     }
-
-    console.log(product);
     const { id, name, price } = product;
 
     dispatch({

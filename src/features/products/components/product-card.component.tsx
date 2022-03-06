@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Ionicons } from "@expo/vector-icons";
-import { AvailabilityStatus, Product } from "../../../types/Product";
+import { useNavigation } from "@react-navigation/native";
+import uuid from "react-native-uuid";
 
+import { AvailabilityStatus, Product } from "../../../types/Product";
+import { CartContext } from "../../../services/cart/cart.context";
+import { ADD_ITEM_TO_CART } from "../../../services/cart/cart.action-types";
 import {
   ProductCardWrapper,
   ProductInfo,
@@ -17,20 +21,52 @@ import {
   PriceInnerWrapper,
   RoundIcon,
 } from "./product-card.styles";
-import { useNavigation } from "@react-navigation/native";
+import { productRequest } from "../../../services/product/product.service";
 
 interface Props {
   item: Product;
 }
 
 export const ProductCard = ({ item }: Props) => {
-  const { id, name, images, price, shortDescription, availabilityStatus } =
-    item;
-
+  const {
+    id,
+    name,
+    images,
+    price,
+    shortDescription,
+    availabilityStatus,
+    maxQuantity,
+  } = item;
   const { navigate } = useNavigation();
+  const { dispatch } = useContext(CartContext);
 
   const onProductCardPress = () => {
     navigate("ProductDetails", { id });
+  };
+
+  const addToCart = () => {
+    if (maxQuantity && maxQuantity < 1) {
+      return;
+    }
+
+    if (availabilityStatus !== AvailabilityStatus.OnStock) {
+      return;
+    }
+
+    dispatch({
+      type: ADD_ITEM_TO_CART,
+      payload: {
+        id: uuid.v4(),
+        item: {
+          id,
+          name,
+          image: images[0],
+          price,
+          maxQuantity,
+        },
+        quantity: 1,
+      },
+    });
   };
 
   return (
@@ -64,7 +100,7 @@ export const ProductCard = ({ item }: Props) => {
                   <PriceDescriptior>c ДДС</PriceDescriptior>
                 </PriceInnerWrapper>
               </PriceWrapper>
-              <RoundIcon>
+              <RoundIcon onPress={addToCart}>
                 <Ionicons name="cart" size={28} color="white" />
               </RoundIcon>
             </CardContent>
