@@ -1,4 +1,3 @@
-import { View, Text, Pressable, StyleSheet } from "react-native";
 import React from "react";
 import { AntDesign } from "@expo/vector-icons";
 import { colors } from "../../infrastructure/theme/colors";
@@ -7,14 +6,18 @@ import { Root, ActionIcon, Quantity } from "./quantity-selector.styles";
 interface QuantitySelectorProps {
   quantity: number;
   setQuantity: (quantity: number) => void;
+  maxQuantity?: number;
 }
 
 export const QuantitySelector = (props: QuantitySelectorProps) => {
-  const { quantity, setQuantity } = props;
+  const { quantity, setQuantity, maxQuantity } = props;
   const onMinusPressed = () => {
     setQuantity(Math.max(1, quantity - 1));
   };
   const onPlusPressed = () => {
+    if (maxQuantity && quantity + 1 > maxQuantity) {
+      return;
+    }
     setQuantity(quantity + 1);
   };
   return (

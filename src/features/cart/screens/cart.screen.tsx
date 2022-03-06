@@ -8,6 +8,7 @@ import { CartItemCard } from "../components/cart-item.component";
 
 export const CartScreen = () => {
   const { cartItems, isLoading, error } = useContext(CartContext);
+  console.log("cartItems", cartItems);
 
   return (
     <SafeArea>

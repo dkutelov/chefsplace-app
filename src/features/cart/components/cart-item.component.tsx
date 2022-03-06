@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Feather } from "@expo/vector-icons";
 import { CartItem } from "../../../types/Cart";
 import { colors } from "../../../infrastructure/theme/colors";
@@ -19,6 +19,11 @@ import {
 } from "./cart-item.styles";
 
 import { QuantitySelector } from "../../../components/quantity-selector/quantity-selector.component";
+import { CartContext } from "../../../services/cart/cart.context";
+import {
+  REMOVE_ITEM_FROM_CART,
+  UPDATE_ITEM_QUANTITY,
+} from "../../../services/cart/cart.action-types";
 
 interface Props {
   cartItem: CartItem;
@@ -26,13 +31,32 @@ interface Props {
 
 export const CartItemCard = ({ cartItem }: Props) => {
   const { id, item, quantity } = cartItem;
-  const [itemQuantity, setItemQuantity] = React.useState(quantity);
+  const [itemQuantity, setItemQuantity] = useState(quantity);
+  const { cartItems, isLoading, error, dispatch } = useContext(CartContext);
+
   //TODO: Not enough quantity
   //TODO: Update context on quantity change
   //TODO: Remove item from cart
 
+  useEffect(() => {
+    const currentItemFromState = cartItems.find(
+      (x) => x.item.id === cartItem.item.id
+    );
+
+    if (currentItemFromState?.quantity === itemQuantity) {
+      return;
+    }
+    dispatch({
+      type: UPDATE_ITEM_QUANTITY,
+      payload: {
+        cartItem,
+        newQuantity: itemQuantity,
+      },
+    });
+  }, [itemQuantity]);
+
   const removeItem = () => {
-    console.warn("remove");
+    dispatch({ type: REMOVE_ITEM_FROM_CART, payload: { cartItem } });
   };
   return (
     <CartItemWrapper>
@@ -53,6 +77,7 @@ export const CartItemCard = ({ cartItem }: Props) => {
           <QuantitySelector
             quantity={itemQuantity}
             setQuantity={setItemQuantity}
+            maxQuantity={cartItem.item.maxQuantity}
           />
         </QuantityWrapper>
         <PriceWrapper>
