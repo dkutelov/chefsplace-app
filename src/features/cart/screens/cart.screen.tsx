@@ -5,11 +5,11 @@ import { CartContext } from "../../../services/cart/cart.context";
 import { NoItemsInCart } from "./cart.styles";
 import { Caption } from "react-native-paper";
 import { CartItemCard } from "../components/cart-item.component";
+import { CartItemList } from "./cart.styles";
+import { CartItem } from "../../../types/Cart";
 
 export const CartScreen = () => {
-  const { cartItems, isLoading, error } = useContext(CartContext);
-  console.log("cartItems", cartItems);
-
+  const { cartItems, isLoading, error, dispatch } = useContext(CartContext);
   return (
     <SafeArea>
       {cartItems.length === 0 ? (
@@ -17,7 +17,13 @@ export const CartScreen = () => {
           <Caption>Нямате добавени продукти!</Caption>
         </NoItemsInCart>
       ) : (
-        <CartItemCard cartItem={cartItems[0]} />
+        <CartItemList
+          data={cartItems}
+          renderItem={(item: { item: CartItem }) => (
+            <CartItemCard cartItem={item.item} />
+          )}
+          showsVerticalScrollIndicator={false}
+        />
       )}
     </SafeArea>
   );

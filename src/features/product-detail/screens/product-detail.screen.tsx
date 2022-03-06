@@ -1,4 +1,6 @@
 import React, { useEffect, useContext, useState } from "react";
+import uuid from "react-native-uuid";
+
 import { ProductContextProvider } from "../../../services/product/product.context";
 import { ProductContext } from "../../../services/product/product.context";
 import { ImageCarousel } from "../components/image-carousel/image-carousel.component";
@@ -21,11 +23,14 @@ import { LoadingIndicator } from "../../../components/loading/loading.component"
 import { colors } from "../../../infrastructure/theme/colors";
 import { QuantitySelector } from "../../../components/quantity-selector/quantity-selector.component";
 import { useRoute } from "@react-navigation/native";
+import { CartContext } from "../../../services/cart/cart.context";
+import { ADD_ITEM_TO_CART } from "../../../services/cart/cart.action-types";
 
 const ProductDetailScreen = () => {
   const { product, isLoading, error, loadProduct } = useContext(ProductContext);
   const [quantity, setQuantity] = useState(1);
   const { params } = useRoute();
+  const { cartItems, dispatch } = useContext(CartContext);
 
   useEffect(() => {
     const { id } = params;
@@ -44,10 +49,28 @@ const ProductDetailScreen = () => {
   };
 
   const addProductToCart = () => {
-    if (hasNotEnoughStock()) {
+    //TODO: Availability status not converted
+    if (!product || hasNotEnoughStock() || product.availabilityStatus !== 1) {
       return;
     }
-    console.warn("Add to cart");
+
+    console.log(product);
+    const { id, name, price } = product;
+
+    dispatch({
+      type: ADD_ITEM_TO_CART,
+      payload: {
+        id: uuid.v4(),
+        item: {
+          id,
+          name,
+          image: product.images[0],
+          price,
+          maxQuantity: product?.maxQuantity,
+        },
+        quantity,
+      },
+    });
   };
 
   return (
@@ -64,7 +87,11 @@ const ProductDetailScreen = () => {
                 <Price>{product.price / 100}лв</Price>
                 <PriceDescriptior>без ДДС</PriceDescriptior>
               </PriceInnerWrapper>
-              <QuantitySelector quantity={quantity} setQuantity={setQuantity} />
+              <QuantitySelector
+                quantity={quantity}
+                setQuantity={setQuantity}
+                maxQuantity={product.maxQuantity}
+              />
               <RoundIcon>
                 <Ionicons
                   onPress={addProductToCart}

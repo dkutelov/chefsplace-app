@@ -31,12 +31,12 @@ interface Props {
 
 export const CartItemCard = ({ cartItem }: Props) => {
   const { id, item, quantity } = cartItem;
+  console.log(item);
   const [itemQuantity, setItemQuantity] = useState(quantity);
   const { cartItems, isLoading, error, dispatch } = useContext(CartContext);
 
-  //TODO: Not enough quantity
-  //TODO: Update context on quantity change
-  //TODO: Remove item from cart
+  //TODO: Notification Max Quantity
+  //TODO: Add item to cart
 
   useEffect(() => {
     const currentItemFromState = cartItems.find(

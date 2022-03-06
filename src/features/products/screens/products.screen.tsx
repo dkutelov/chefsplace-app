@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 
-import { SafeArea, ProductList } from "./product.styles";
+import { SafeArea, ProductList } from "./products.styles";
 import { ProductCard } from "../components/product-card.component";
 import { ProductsContext } from "../../../services/products/products.context";
 import { LoadingIndicator } from "../../../components/loading/loading.component";
