@@ -13,4 +13,5 @@ export interface ICartContext {
   cartItems: CartItem[];
   isLoading: boolean;
   error?: string;
+  dispatch: React.Dispatch<any>;
 }

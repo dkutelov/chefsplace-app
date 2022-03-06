@@ -1,11 +1,19 @@
-import React, { useState, createContext, useEffect } from "react";
+import React, {
+  useState,
+  createContext,
+  useEffect,
+  useContext,
+  useReducer,
+} from "react";
 
 import { cartRequest, cartTransform } from "./cart.service";
 import { ICartContext, CartItem } from "../../types/Cart";
+import { cartReducer } from "./cart.reducer";
 
 const defaultState: ICartContext = {
   cartItems: [],
   isLoading: false,
+  dispatch: () => {},
 };
 
 export const CartContext = createContext<ICartContext>(defaultState);
@@ -15,9 +23,11 @@ export const CartContextProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
-  const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(undefined);
+
+  const initialCart = useContext(CartContext);
+  const [state, dispatch] = useReducer(cartReducer, initialCart);
 
   const retrieveCartItems = () => {
     setIsLoading(true);
@@ -28,7 +38,7 @@ export const CartContextProvider = ({
         })
         .then((results) => {
           setIsLoading(false);
-          setCartItems(results);
+          dispatch({ type: "SET_CART_ITEMS", payload: { cartItems: results } });
         })
         .catch((err) => {
           setIsLoading(false);
@@ -42,13 +52,7 @@ export const CartContextProvider = ({
   }, []);
 
   return (
-    <CartContext.Provider
-      value={{
-        cartItems,
-        isLoading,
-        error,
-      }}
-    >
+    <CartContext.Provider value={{ ...state, dispatch }}>
       {children}
     </CartContext.Provider>
   );
