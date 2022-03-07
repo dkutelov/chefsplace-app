@@ -21,7 +21,6 @@ import {
   PriceInnerWrapper,
   RoundIcon,
 } from "./product-card.styles";
-import { productRequest } from "../../../services/product/product.service";
 
 interface Props {
   item: Product;
