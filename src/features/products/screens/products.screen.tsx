@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 
 import { SafeArea, ProductList } from "./products.styles";
 import { ProductCard } from "../components/product-card.component";

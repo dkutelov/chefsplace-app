@@ -1,6 +1,14 @@
 import { IProductsContext } from "../../types/Product";
-import { SET_PRODUCTS } from "./products.action-tipes";
-import { setProducts } from "./products.reducer-functions";
+import {
+  SET_PRODUCTS,
+  FILTER_PRODUCTS_BY_KEYWORD,
+  RESET_FILTERED_PRODUCTS,
+} from "./products.action-types";
+import {
+  setProducts,
+  filterProductsBySearchTerm,
+  resetFilteredProducts,
+} from "./products.reducer-functions";
 
 interface IProps {
   type: string;
@@ -12,6 +20,10 @@ export const productsReducer = (state: IProductsContext, props: IProps) => {
   switch (type) {
     case SET_PRODUCTS:
       return setProducts(state, payload.products);
+    case FILTER_PRODUCTS_BY_KEYWORD:
+      return filterProductsBySearchTerm(state, payload.searchTerm);
+    case RESET_FILTERED_PRODUCTS:
+      return resetFilteredProducts(state);
     default:
       return state;
   }

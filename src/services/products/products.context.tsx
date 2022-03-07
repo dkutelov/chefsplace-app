@@ -7,7 +7,7 @@ import React, {
 } from "react";
 
 import { Product } from "../../types/Product";
-import { SET_PRODUCTS } from "./products.action-tipes";
+import { SET_PRODUCTS } from "./products.action-types";
 import { productsRequest, productsTransform } from "./products.service";
 import { IProductsContext } from "../../types/Product";
 import { productsReducer } from "./products.reducer";
