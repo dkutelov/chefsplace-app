@@ -9,7 +9,6 @@ import Search from "../features/products/components/search.component";
 const Stack = createNativeStackNavigator();
 
 export const ProductStack = () => {
-  //search function from context
   return (
     <Stack.Navigator>
       <Stack.Screen

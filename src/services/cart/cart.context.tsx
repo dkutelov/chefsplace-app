@@ -7,7 +7,7 @@ import React, {
 } from "react";
 
 import { cartRequest, cartTransform } from "./cart.service";
-import { ICartContext, CartItem } from "../../types/Cart";
+import { ICartContext } from "../../types/Cart";
 import { cartReducer } from "./cart.reducer";
 
 const defaultState: ICartContext = {

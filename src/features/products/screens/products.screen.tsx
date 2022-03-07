@@ -7,15 +7,18 @@ import { LoadingIndicator } from "../../../components/loading/loading.component"
 import { colors } from "../../../infrastructure/theme/colors";
 
 export const ProductListScreen = () => {
-  const { products, isLoading, error } = useContext(ProductsContext);
+  const { products, filteredProducts, isLoading, error } =
+    useContext(ProductsContext);
 
+  const renderProducts =
+    filteredProducts.length === 0 ? products : filteredProducts;
   return (
     <SafeArea>
       {isLoading ? (
         <LoadingIndicator size={32} color={colors.ui.primary} />
       ) : (
         <ProductList
-          data={products}
+          data={renderProducts}
           renderItem={(item) => <ProductCard item={item.item} />}
           showsVerticalScrollIndicator={false}
         />

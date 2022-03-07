@@ -1,7 +1,7 @@
 import React from "react";
 import { Searchbar } from "react-native-paper";
 
-import { HeaderContainer, SearchTextInput } from "./search.styles";
+import { HeaderContainer } from "./search.styles";
 
 const Search = () => {
   const [searchKeyword, setSearchKeyword] = React.useState<string>("");

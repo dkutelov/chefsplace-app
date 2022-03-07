@@ -2,16 +2,21 @@ import React, {
   useState,
   createContext,
   useEffect,
-  ReactChildren,
+  useContext,
+  useReducer,
 } from "react";
-import { Product } from "../../types/Product";
 
+import { Product } from "../../types/Product";
+import { SET_PRODUCTS } from "./products.action-tipes";
 import { productsRequest, productsTransform } from "./products.service";
 import { IProductsContext } from "../../types/Product";
+import { productsReducer } from "./products.reducer";
 
-const defaultState = {
+const defaultState: IProductsContext = {
   products: [],
+  filteredProducts: [],
   isLoading: false,
+  dispatch: () => {},
 };
 
 export const ProductsContext = createContext<IProductsContext>(defaultState);
@@ -25,6 +30,10 @@ export const ProductsContextProvider = ({
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(undefined);
 
+  const initialProducts = useContext(ProductsContext);
+  const [state, dispatch] = useReducer(productsReducer, initialProducts);
+  console.log("cart state", state);
+
   const retrieveProducts = () => {
     setIsLoading(true);
     setTimeout(() => {
@@ -34,7 +43,7 @@ export const ProductsContextProvider = ({
         })
         .then((results) => {
           setIsLoading(false);
-          setProducts(results);
+          dispatch({ type: SET_PRODUCTS, payload: { products: results } });
         })
         .catch((err) => {
           setIsLoading(false);
@@ -50,9 +59,8 @@ export const ProductsContextProvider = ({
   return (
     <ProductsContext.Provider
       value={{
-        products,
-        isLoading,
-        error,
+        ...state,
+        dispatch,
       }}
     >
       {children}
