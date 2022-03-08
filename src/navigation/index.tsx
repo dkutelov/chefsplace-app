@@ -11,7 +11,7 @@ import LinkingConfiguration from "./LinkingConfiguration";
 import { CartScreen } from "../features/cart/screens/cart.screen";
 import { HomeScreen } from "../features/home/screens";
 import { ProfileScreen } from "../features/profile/screens";
-import { CategoriesScreen } from "../features/categories/screens";
+import { CategoriesScreen } from "../features/categories/screens/categories.screen";
 import { ProductStack } from "./ProductStack";
 
 export default function Navigation() {
@@ -49,7 +49,7 @@ const BottomTab = createBottomTabNavigator<RootTabParamList>();
 function BottomTabNavigator() {
   return (
     <BottomTab.Navigator
-      initialRouteName="Products"
+      initialRouteName="Categories"
       screenOptions={{
         tabBarActiveTintColor: colors.ui.primary,
       }}
