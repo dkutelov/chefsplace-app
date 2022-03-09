@@ -19,6 +19,13 @@ export const DotsContainer = styled.View`
   justify-content: center;
   align-items: center;
   position: absolute;
+  left: 0;
+  right: 0;
   bottom: ${(props: { theme: Theme }) => props.theme.space[4]};
-  left: 50%;
+`;
+
+export const DotsInnerContainer = styled.View`
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 `;

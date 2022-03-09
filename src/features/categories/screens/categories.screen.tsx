@@ -4,6 +4,9 @@ import { Categories } from "./categories.styles";
 import { IProps } from "../components/category-list-item.component";
 import mock from "./mock.json";
 
+//TODO: Fetch Categories & Loading
+//TODO: Categories stack and display relevant products
+
 export const CategoriesScreen = () => {
   return (
     <SafeArea>

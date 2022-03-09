@@ -6,7 +6,7 @@ import { Theme } from "../../../types/Theme";
 export const CartItemWrapper = styled.View`
   background-color: ${(props: { theme: Theme }) =>
     props.theme.colors.bg.primary};
-  margin: ${(props: { theme: Theme }) => props.theme.space[2]};
+  margin-bottom: ${(props: { theme: Theme }) => props.theme.space[2]};
   padding: ${(props: { theme: Theme }) => props.theme.space[3]}
     ${(props: { theme: Theme }) => props.theme.space[2]};
   border-radius: 20px;

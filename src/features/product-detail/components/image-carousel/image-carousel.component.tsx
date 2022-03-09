@@ -5,6 +5,7 @@ import {
   ContainerView,
   ImageFlatList,
   DotsContainer,
+  DotsInnerContainer,
 } from "./image-carousel.styles";
 
 export const ImageCarousel = ({ images }: { images: string[] }) => {
@@ -39,18 +40,21 @@ export const ImageCarousel = ({ images }: { images: string[] }) => {
         onViewableItemsChanged={onFlatlistUpdate}
         keyExtractor={(_, index) => index}
       />
-      <DotsContainer style={{ transform: [{ translateX: "-50%" }] }}>
-        {images.map((_, index) => (
-          <View
-            key={`dot-${index}`}
-            style={[
-              styles.dot,
-              {
-                backgroundColor: activeIndex === index ? "#a9a9a9" : "#dddddd",
-              },
-            ]}
-          />
-        ))}
+      <DotsContainer>
+        <DotsInnerContainer>
+          {images.map((_, index) => (
+            <View
+              key={`dot-${index}`}
+              style={[
+                styles.dot,
+                {
+                  backgroundColor:
+                    activeIndex === index ? "#a9a9a9" : "#dddddd",
+                },
+              ]}
+            />
+          ))}
+        </DotsInnerContainer>
       </DotsContainer>
     </ContainerView>
   );
