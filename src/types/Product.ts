@@ -10,7 +10,9 @@ export interface Product {
   price: number;
   reducedPrice?: number;
   shortDescription: string;
-  description?: string;
+  description?: {
+    [key: string]: string | { [key: string]: string };
+  };
   availabilityStatus: AvailabilityStatus;
   onPromotion?: boolean;
   maxQuantity: number;

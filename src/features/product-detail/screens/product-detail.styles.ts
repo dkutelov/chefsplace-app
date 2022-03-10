@@ -72,3 +72,7 @@ export const NotEnoughQuantityNotifivation = styled.Text`
   margin-right: ${(props: { theme: Theme }) => props.theme.space[5]};
   color: ${(props: { theme: Theme }) => props.theme.colors.ui.error};
 `;
+
+export const DescriptionContent = styled.Text`
+  line-height: 20px;
+`;

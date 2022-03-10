@@ -1,5 +1,6 @@
 import React, { useEffect, useContext, useState } from "react";
 import uuid from "react-native-uuid";
+import { List } from "react-native-paper";
 
 import { ProductContextProvider } from "../../../services/product/product.context";
 import { ProductContext } from "../../../services/product/product.context";
@@ -16,6 +17,7 @@ import {
   RoundIcon,
   ActionRow,
   NotEnoughQuantityNotifivation,
+  DescriptionContent,
 } from "./product-detail.styles";
 import { Ionicons } from "@expo/vector-icons";
 import { SafeArea } from "../../../components/utils/safe-area.component";
@@ -31,13 +33,15 @@ const ProductDetailScreen = () => {
   const [quantity, setQuantity] = useState(1);
   const { params } = useRoute();
   const { cartItems, dispatch } = useContext(CartContext);
+  const [contentExpanded, setContentExpanded] = useState(false);
 
   useEffect(() => {
-    const { id } = params;
     //TODO: if no id redirect to products and show notification "Product does not exists"
 
     //TODO: Handle error in product is not returned from servive
-    loadProduct(id);
+    if (params && params.id) {
+      loadProduct(params.id);
+    }
   }, []);
 
   const hasNotEnoughStock = () => {
@@ -104,8 +108,22 @@ const ProductDetailScreen = () => {
                 Недостатъчна наличност.
               </NotEnoughQuantityNotifivation>
             )}
+
+            {product.description && product.description.ingredients && (
+              <List.Accordion
+                title="Съставки"
+                left={(props) => <List.Icon {...props} icon="bread-slice" />}
+                expanded={contentExpanded}
+                onPress={() => setContentExpanded(!contentExpanded)}
+              >
+                <DescriptionContent>
+                  {product.description?.ingredients}
+                </DescriptionContent>
+              </List.Accordion>
+            )}
+
             <ShortDescription>{product.shortDescription}</ShortDescription>
-            <Description>{product.description}</Description>
+            <Description>{product.description?.content}</Description>
           </>
         )}
       </ProductScrollView>
