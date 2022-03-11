@@ -31,6 +31,7 @@ const data = [
       ],
     },
     maxQuantity: 4,
+    categoryId: "1",
   },
   {
     id: "2",
@@ -65,6 +66,7 @@ const data = [
       ],
     },
     maxQuantity: 3,
+    categoryId: "1",
   },
   {
     id: "3",
@@ -99,6 +101,7 @@ const data = [
       ],
     },
     maxQuantity: 3,
+    categoryId: "1",
   },
   {
     id: "4",
@@ -133,6 +136,7 @@ const data = [
       ],
     },
     maxQuantity: 3,
+    categoryId: "2",
   },
   {
     id: "5",
@@ -167,6 +171,7 @@ const data = [
       ],
     },
     maxQuantity: 3,
+    categoryId: "2",
   },
 ];
 

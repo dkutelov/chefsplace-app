@@ -29,6 +29,7 @@ import {
 } from "./product-detail.styles";
 
 import { colors } from "../../../infrastructure/theme/colors";
+import { SimilarProducts } from "../components/similar-products/similar-products-list/similar-products-list.component";
 
 const ProductDetailScreen = () => {
   const { product, isLoading, error, loadProduct } = useContext(ProductContext);
@@ -36,10 +37,16 @@ const ProductDetailScreen = () => {
   const { params } = useRoute();
   const { cartItems, dispatch } = useContext(CartContext);
 
+  console.log(product);
+
   useEffect(() => {
     //TODO: if no id redirect to products and show notification "Product does not exists"
 
     //TODO: Handle error in product is not returned from servive
+
+    // Create Reducer - ???
+    // Load related products
+
     if (params && params.id) {
       loadProduct(params.id);
     }
@@ -118,6 +125,9 @@ const ProductDetailScreen = () => {
               {product.description && (
                 <DescriptionAccordion description={product.description} />
               )}
+            </Row>
+            <Row>
+              <SimilarProducts category="сос" />
             </Row>
           </>
         )}
