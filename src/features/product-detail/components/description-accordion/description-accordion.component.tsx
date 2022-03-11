@@ -6,6 +6,7 @@ import {
   DescriptionContent,
 } from "./description-accordion.styles";
 import { colors } from "../../../../infrastructure/theme/colors";
+import { NutritionValues } from "../nutrition-values-table/nutrition-values.component";
 
 interface IProps {
   description: {
@@ -13,7 +14,7 @@ interface IProps {
     ingredients?: string;
     advantages?: string;
     storage?: string;
-    nutritionValues?: { [key: string]: string }[];
+    nutritionValues?: { label: string; text: string }[];
   };
 }
 
@@ -62,6 +63,19 @@ export const DescriptionAccordion = ({ description }: IProps) => {
           onPress={() => setStorageExpanded(!storageExpanded)}
         >
           <DescriptionContent>{description?.storage}</DescriptionContent>
+        </List.Accordion>
+      )}
+      {description.nutritionValues && (
+        <List.Accordion
+          style={AccordionItemStyle}
+          theme={{ colors: { primary: colors.ui.primary } }}
+          title="Стойност за хранителни вещества"
+          titleNumberOfLines={2}
+          left={(props) => <List.Icon {...props} icon="food-variant" />}
+          expanded={nutritionValueExpanded}
+          onPress={() => setNutritionValueExpanded(!nutritionValueExpanded)}
+        >
+          <NutritionValues nutritionValues={description.nutritionValues} />
         </List.Accordion>
       )}
     </AccordionContainer>

@@ -23,8 +23,7 @@ const data = [
       storage:
         "Съхранявайте на сухо и хладно място. След отваряне да се съхранява в хладилник",
       nutritionValues: [
-        { label: "Име на продукта", text: "от 100" },
-        { label: "Енергия kj", text: "	2741 kj" },
+        { label: "Енергия kj", text: "2741 kj" },
         { label: "Енергия kcal", text: "666 kcal" },
         { label: "Белтъчини", text: "1 g" },
         { label: "Въглехидрати", text: "1.30 g" },
