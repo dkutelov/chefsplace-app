@@ -10,7 +10,7 @@ export const ContainerView = styled.View`
 export const ImageFlatList = styled(FlatList)`
   background-color: #ffffff;
   margin: ${(props: { theme: Theme }) => props.theme.space[3]};
-  border-radius: 20px;
+  border-radius: ${(props: { theme: Theme }) => props.theme.space[3]};
   padding-bottom: ${(props: { theme: Theme }) => props.theme.space[4]};
 `;
 

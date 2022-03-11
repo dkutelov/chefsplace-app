@@ -1,10 +1,19 @@
 import React, { useEffect, useContext, useState } from "react";
 import uuid from "react-native-uuid";
-import { List } from "react-native-paper";
+import { Ionicons } from "@expo/vector-icons";
+import { useRoute } from "@react-navigation/native";
 
 import { ProductContextProvider } from "../../../services/product/product.context";
 import { ProductContext } from "../../../services/product/product.context";
+import { CartContext } from "../../../services/cart/cart.context";
+import { ADD_ITEM_TO_CART } from "../../../services/cart/cart.action-types";
+
 import { ImageCarousel } from "../components/image-carousel/image-carousel.component";
+import { QuantitySelector } from "../../../components/quantity-selector/quantity-selector.component";
+import { DescriptionAccordion } from "../components/description-accordion/description-accordion.component";
+import { SafeArea } from "../../../components/utils/safe-area.component";
+import { LoadingIndicator } from "../../../components/loading/loading.component";
+
 import {
   ProductScrollView,
   Title,
@@ -17,23 +26,15 @@ import {
   RoundIcon,
   ActionRow,
   NotEnoughQuantityNotifivation,
-  DescriptionContent,
 } from "./product-detail.styles";
-import { Ionicons } from "@expo/vector-icons";
-import { SafeArea } from "../../../components/utils/safe-area.component";
-import { LoadingIndicator } from "../../../components/loading/loading.component";
+
 import { colors } from "../../../infrastructure/theme/colors";
-import { QuantitySelector } from "../../../components/quantity-selector/quantity-selector.component";
-import { useRoute } from "@react-navigation/native";
-import { CartContext } from "../../../services/cart/cart.context";
-import { ADD_ITEM_TO_CART } from "../../../services/cart/cart.action-types";
 
 const ProductDetailScreen = () => {
   const { product, isLoading, error, loadProduct } = useContext(ProductContext);
   const [quantity, setQuantity] = useState(1);
   const { params } = useRoute();
   const { cartItems, dispatch } = useContext(CartContext);
-  const [contentExpanded, setContentExpanded] = useState(false);
 
   useEffect(() => {
     //TODO: if no id redirect to products and show notification "Product does not exists"
@@ -83,47 +84,41 @@ const ProductDetailScreen = () => {
           <>
             <Title>{product?.name}</Title>
             <ImageCarousel images={product.images} />
-            <Row></Row>
-            <ActionRow>
-              <PriceInnerWrapper>
-                <Price>{product.price / 100}лв</Price>
-                <PriceDescriptior>без ДДС</PriceDescriptior>
-              </PriceInnerWrapper>
-              <QuantitySelector
-                quantity={quantity}
-                setQuantity={setQuantity}
-                maxQuantity={product.maxQuantity}
-              />
-              <RoundIcon>
-                <Ionicons
-                  onPress={addProductToCart}
-                  name="cart"
-                  size={40}
-                  color="white"
+            <Row>
+              <ActionRow>
+                <PriceInnerWrapper>
+                  <Price>{product.price / 100}лв</Price>
+                  <PriceDescriptior>без ДДС</PriceDescriptior>
+                </PriceInnerWrapper>
+                <QuantitySelector
+                  quantity={quantity}
+                  setQuantity={setQuantity}
+                  maxQuantity={product.maxQuantity}
                 />
-              </RoundIcon>
-            </ActionRow>
-            {hasNotEnoughStock() && (
-              <NotEnoughQuantityNotifivation>
-                Недостатъчна наличност.
-              </NotEnoughQuantityNotifivation>
-            )}
-
-            {product.description && product.description.ingredients && (
-              <List.Accordion
-                title="Съставки"
-                left={(props) => <List.Icon {...props} icon="bread-slice" />}
-                expanded={contentExpanded}
-                onPress={() => setContentExpanded(!contentExpanded)}
-              >
-                <DescriptionContent>
-                  {product.description?.ingredients}
-                </DescriptionContent>
-              </List.Accordion>
-            )}
-
-            <ShortDescription>{product.shortDescription}</ShortDescription>
+                <RoundIcon>
+                  <Ionicons
+                    onPress={addProductToCart}
+                    name="cart"
+                    size={40}
+                    color="white"
+                  />
+                </RoundIcon>
+              </ActionRow>
+              {hasNotEnoughStock() && (
+                <NotEnoughQuantityNotifivation>
+                  Недостатъчна наличност.
+                </NotEnoughQuantityNotifivation>
+              )}
+            </Row>
+            <Row>
+              <ShortDescription>{product.shortDescription}</ShortDescription>
+            </Row>
             <Description>{product.description?.content}</Description>
+            <Row>
+              {product.description && (
+                <DescriptionAccordion description={product.description} />
+              )}
+            </Row>
           </>
         )}
       </ProductScrollView>

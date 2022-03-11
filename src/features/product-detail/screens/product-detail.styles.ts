@@ -11,23 +11,18 @@ export const Title = styled.Text`
   font-family: ${(props: { theme: Theme }) => props.theme.fonts.heading};
   font-size: ${(props: { theme: Theme }) => props.theme.fontSizes.title};
   color: ${(props: { theme: Theme }) => props.theme.colors.ui.primary};
-  margin-bottom: ${(props: { theme: Theme }) => props.theme.space[3]};
+  margin-bottom: ${(props: { theme: Theme }) => props.theme.space[1]};
   text-align: center;
   line-height: 20px;
   letter-spacing: -1px;
 `;
 
 export const ShortDescription = styled.Text`
-  margin: ${(props: { theme: Theme }) => props.theme.space[1]} 0;
-  padding: ${(props: { theme: Theme }) => props.theme.space[3]};
+  padding: 0 ${(props: { theme: Theme }) => props.theme.space[3]};
 `;
 
 export const Row = styled.View`
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-start;
-  margin: 0 ${(props: { theme: Theme }) => props.theme.space[3]}
-    ${(props: { theme: Theme }) => props.theme.space[3]};
+  margin: ${(props: { theme: Theme }) => props.theme.space[3]} 0;
 `;
 
 export const ActionRow = styled.View`
@@ -38,8 +33,7 @@ export const ActionRow = styled.View`
 `;
 
 export const Description = styled.Text`
-  margin: ${(props: { theme: Theme }) => props.theme.space[1]} 0;
-  padding: ${(props: { theme: Theme }) => props.theme.space[3]};
+  padding: 0 ${(props: { theme: Theme }) => props.theme.space[3]};
 `;
 
 export const PriceInnerWrapper = styled.View`
@@ -71,8 +65,4 @@ export const NotEnoughQuantityNotifivation = styled.Text`
   text-align: right;
   margin-right: ${(props: { theme: Theme }) => props.theme.space[5]};
   color: ${(props: { theme: Theme }) => props.theme.colors.ui.error};
-`;
-
-export const DescriptionContent = styled.Text`
-  line-height: 20px;
 `;

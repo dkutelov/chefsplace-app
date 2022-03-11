@@ -16,6 +16,7 @@ export const colors: { [key: string]: { [key: string]: string } } = {
   bg: {
     primary: "#FFFFFF",
     secondary: "#f2f2f2",
+    tertiary: "#F6F6F6",
   },
   text: {
     primary: "#333333",
