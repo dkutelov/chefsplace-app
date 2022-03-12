@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import { Feather } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
 import { CartItem } from "../../../types/Cart";
 import { colors } from "../../../infrastructure/theme/colors";
 
@@ -7,15 +7,17 @@ import {
   CartItemWrapper,
   TopContent,
   CardContent,
+  Row,
   ProductImage,
   Title,
   Label,
-  QuantityWrapper,
   PriceWrapper,
   Price,
   PriceWith,
   PriceInnerWrapper,
   DeleteIcon,
+  AmountWrapper,
+  Amount,
 } from "./cart-item.styles";
 
 import { QuantitySelector } from "../../../components/quantity-selector/quantity-selector.component";
@@ -61,27 +63,19 @@ export const CartItemCard = ({ cartItem }: Props) => {
   return (
     <CartItemWrapper>
       <TopContent>
+        <Title>{item.name}</Title>
+        <DeleteIcon onPress={removeItem}>
+          <Ionicons name="close" size={20} color={colors.ui.secondary} />
+        </DeleteIcon>
+      </TopContent>
+
+      <Row>
         <ProductImage
           key={item.name}
           source={{ uri: item.image }}
           resizeMode="contain"
         />
-        <Title>{item.name}</Title>
-        <DeleteIcon onPress={removeItem}>
-          <Feather name="trash" size={14} color={colors.ui.secondary} />
-        </DeleteIcon>
-      </TopContent>
-      <CardContent>
-        <QuantityWrapper>
-          <Label>Количество</Label>
-          <QuantitySelector
-            quantity={itemQuantity}
-            setQuantity={setItemQuantity}
-            maxQuantity={cartItem.item.maxQuantity}
-          />
-        </QuantityWrapper>
         <PriceWrapper>
-          <Label>Цена</Label>
           <PriceInnerWrapper>
             <Price>{item.price / 100} лв</Price>
             <PriceWith>
@@ -89,16 +83,23 @@ export const CartItemCard = ({ cartItem }: Props) => {
             </PriceWith>
           </PriceInnerWrapper>
         </PriceWrapper>
-        <PriceWrapper>
-          <Label>Сума</Label>
-          <PriceInnerWrapper>
-            <Price>{(item.price * itemQuantity) / 100} лв</Price>
-            <PriceWith>
-              {Math.floor(item.price * itemQuantity * 1.2) / 100}лв (с ДДС)
-            </PriceWith>
-          </PriceInnerWrapper>
-        </PriceWrapper>
-      </CardContent>
+      </Row>
+      <Row>
+        <QuantitySelector
+          quantity={itemQuantity}
+          setQuantity={setItemQuantity}
+          maxQuantity={cartItem.item.maxQuantity}
+        />
+        <AmountWrapper>
+          <Amount>
+            Сума {((item.price * itemQuantity) / 100).toFixed(2)} лв
+          </Amount>
+          <PriceWith>
+            {(Math.floor(item.price * itemQuantity * 1.2) / 100).toFixed(2)}лв
+            (с ДДС)
+          </PriceWith>
+        </AmountWrapper>
+      </Row>
     </CartItemWrapper>
   );
 };

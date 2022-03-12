@@ -1,5 +1,5 @@
 import styled from "styled-components/native";
-import { ScrollView } from "react-native";
+import { ScrollView, TouchableOpacity } from "react-native";
 import { Theme } from "../../../types/Theme";
 
 export const ProductScrollView = styled(ScrollView)`
@@ -65,7 +65,7 @@ export const PriceWith = styled.Text`
   margin-top: ${(props: { theme: Theme }) => props.theme.space[1]};
 `;
 
-export const RoundIcon = styled.View`
+export const RoundIcon = styled(TouchableOpacity)`
   flex-direction: row;
   justify-content: center;
   align-items: center;
@@ -76,7 +76,7 @@ export const RoundIcon = styled.View`
 `;
 
 export const NotEnoughQuantityNotifivation = styled.Text`
-  text-align: right;
-  margin-right: ${(props: { theme: Theme }) => props.theme.space[5]};
+  text-align: left;
+  margin-left: ${(props: { theme: Theme }) => props.theme.space[3]};
   color: ${(props: { theme: Theme }) => props.theme.colors.ui.error};
 `;

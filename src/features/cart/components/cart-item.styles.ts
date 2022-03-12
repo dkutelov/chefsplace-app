@@ -7,14 +7,21 @@ export const CartItemWrapper = styled.View`
   background-color: ${(props: { theme: Theme }) =>
     props.theme.colors.bg.primary};
   margin-bottom: ${(props: { theme: Theme }) => props.theme.space[2]};
-  padding: ${(props: { theme: Theme }) => props.theme.space[3]}
-    ${(props: { theme: Theme }) => props.theme.space[2]};
+  padding: ${(props: { theme: Theme }) => props.theme.space[3]};
   border-radius: 20px;
 `;
 
 export const TopContent = styled.View`
   flex-direction: row;
   align-items: flex-start;
+  flex-wrap: nowrap;
+  margin-bottom: ${(props: { theme: Theme }) => props.theme.space[3]};
+`;
+
+export const Row = styled.View`
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
   flex-wrap: nowrap;
   margin-bottom: ${(props: { theme: Theme }) => props.theme.space[3]};
 `;
@@ -34,29 +41,19 @@ export const ProductImage = styled(Image)`
   height: ${(props: { theme: Theme }) => props.theme.space[6]};
   background-color: ${(props: { theme: Theme }) =>
     props.theme.colors.bg.primary};
-  border-bottom-left-radius: 20px;
 `;
 
 export const CardContent = styled.View`
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
   padding: 0 ${(props: { theme: Theme }) => props.theme.space[3]};
   height: 72px;
 `;
 
 export const Label = styled.Text`
-  font-family: ${(props: { theme: Theme }) => props.theme.fonts.body};
-  font-weight: ${(props: { theme: Theme }) => props.theme.fontWeights.regular};
+  font-family: ${(props: { theme: Theme }) => props.theme.fonts.bodyBold};
   color: ${(props: { theme: Theme }) => props.theme.colors.text.primary};
-  flex-wrap: wrap;
-  margin-top: 0px;
-  margin-bottom: ${(props: { theme: Theme }) => props.theme.space[2]};
-`;
-
-export const QuantityWrapper = styled.View`
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
+  margin-bottom: ${(props: { theme: Theme }) => props.theme.space[1]};
 `;
 
 export const PriceWrapper = styled.View`
@@ -65,28 +62,37 @@ export const PriceWrapper = styled.View`
   justify-content: flex-start;
 `;
 
+export const AmountWrapper = styled.View`
+  flex-direction: column;
+  align-items: flex-end;
+`;
+
 export const PriceInnerWrapper = styled.View`
   flex-direction: column;
   align-items: flex-end;
 `;
 
-export const DeleteIcon = styled.Pressable`
-  align-self: flex-end;
+export const DeleteIcon = styled.TouchableOpacity`
   justify-content: center;
   align-items: flex-end;
-  border-color: ${(props: { theme: Theme }) => props.theme.colors.ui.secondary};
-  border-width: 1px;
   padding: ${(props: { theme: Theme }) => props.theme.space[2]};
   border-radius: 18px;
   margin-bottom: ${(props: { theme: Theme }) => props.theme.space[1]};
 `;
 
 export const Price = styled.Text`
-  font-family: ${(props: { theme: Theme }) => props.theme.fonts.body};
-  font-size: ${(props: { theme: Theme }) => props.theme.fontSizes.body};
+  font-family: ${(props: { theme: Theme }) => props.theme.fonts.bodyBold};
+  font-size: ${(props: { theme: Theme }) => props.theme.fontSizes.title};
 `;
 
 export const PriceWith = styled.Text`
   font-family: ${(props: { theme: Theme }) => props.theme.fonts.body};
   font-size: ${(props: { theme: Theme }) => props.theme.fontSizes.caption};
+`;
+
+export const Amount = styled.Text`
+  font-family: ${(props: { theme: Theme }) => props.theme.fonts.bodyBold};
+  color: ${(props: { theme: Theme }) => props.theme.colors.text.primary};
+  font-size: ${(props: { theme: Theme }) => props.theme.fontSizes.body};
+  margin-bottom: ${(props: { theme: Theme }) => props.theme.space[1]};
 `;

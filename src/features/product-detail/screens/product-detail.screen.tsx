@@ -56,13 +56,13 @@ const ProductDetailScreen = () => {
     if (!product) {
       return false;
     } else {
-      return quantity > product.maxQuantity;
+      return quantity === product.maxQuantity;
     }
   };
-
+  console.log(hasNotEnoughStock());
   const addProductToCart = () => {
     //TODO: Availability status not converted
-    if (!product || hasNotEnoughStock() || product.availabilityStatus !== 1) {
+    if (!product || product.availabilityStatus !== 1) {
       return;
     }
     const { id, name, price } = product;
@@ -118,7 +118,7 @@ const ProductDetailScreen = () => {
               </ActionRow>
               {hasNotEnoughStock() && (
                 <NotEnoughQuantityNotifivation>
-                  Недостатъчна наличност.
+                  Максимално количество {product.maxQuantity}.
                 </NotEnoughQuantityNotifivation>
               )}
             </Row>

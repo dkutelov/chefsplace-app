@@ -10,5 +10,5 @@ export const space: string[] = [
   "16px",
   "32px",
   "64px",
-  "80px",
+  "96px",
 ];
