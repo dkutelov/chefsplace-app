@@ -1,4 +1,4 @@
-import { FlatList } from "react-native";
+import { FlatList, ScrollView } from "react-native";
 import styled from "styled-components/native";
 import { Theme } from "../../../types/Theme";
 
@@ -13,7 +13,6 @@ export const CartItemList = styled(FlatList).attrs({
     padding: 16,
   },
 })`
-  flex: 1;
   background-color: ${(props: { theme: Theme }) =>
     props.theme.colors.bg.secondary};
 `;

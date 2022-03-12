@@ -11,6 +11,13 @@ import { CartSummary } from "../components/cart-summary/cart-summary.component";
 
 export const CartScreen = () => {
   const { cartItems, isLoading, error, dispatch } = useContext(CartContext);
+  const cartAmount = (): number => {
+    return cartItems.reduce(
+      (prevValue, product: CartItem) =>
+        (prevValue += product.quantity * product.item.price),
+      0
+    );
+  };
   return (
     <SafeArea>
       {cartItems.length === 0 ? (
@@ -18,16 +25,14 @@ export const CartScreen = () => {
           <Caption>Нямате добавени продукти!</Caption>
         </NoItemsInCart>
       ) : (
-        <>
-          <CartItemList
-            data={cartItems}
-            renderItem={(item: { item: CartItem }) => (
-              <CartItemCard cartItem={item.item} />
-            )}
-            showsVerticalScrollIndicator={false}
-          />
-          <CartSummary />
-        </>
+        <CartItemList
+          data={cartItems}
+          renderItem={(item: { item: CartItem }) => (
+            <CartItemCard cartItem={item.item} />
+          )}
+          showsVerticalScrollIndicator={false}
+          ListFooterComponent={() => <CartSummary amount={cartAmount()} />}
+        />
       )}
     </SafeArea>
   );

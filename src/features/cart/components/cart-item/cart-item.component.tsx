@@ -75,9 +75,9 @@ export const CartItemCard = ({ cartItem }: Props) => {
         />
         <PriceWrapper>
           <PriceInnerWrapper>
-            <Price>{item.price / 100} лв</Price>
+            <Price>{item.price / 100} лв.</Price>
             <PriceWith>
-              {Math.floor(item.price * 1.2) / 100}лв (с ДДС)
+              {Math.floor(item.price * 1.2) / 100} лв. (с ДДС)
             </PriceWith>
           </PriceInnerWrapper>
         </PriceWrapper>
@@ -90,10 +90,10 @@ export const CartItemCard = ({ cartItem }: Props) => {
         />
         <AmountWrapper>
           <Amount>
-            Сума {((item.price * itemQuantity) / 100).toFixed(2)} лв
+            Сума {((item.price * itemQuantity) / 100).toFixed(2)} лв.
           </Amount>
           <PriceWith>
-            {(Math.floor(item.price * itemQuantity * 1.2) / 100).toFixed(2)}лв
+            {(Math.floor(item.price * itemQuantity * 1.2) / 100).toFixed(2)} лв.
             (с ДДС)
           </PriceWith>
         </AmountWrapper>

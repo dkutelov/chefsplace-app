@@ -91,12 +91,12 @@ export const ProductCard = ({ item }: Props) => {
               </ShortDescription>
               <PriceWrapper>
                 <PriceInnerWrapper>
-                  <Price>{(price / 100).toFixed(2)}лв</Price>
+                  <Price>{(price / 100).toFixed(2)} лв.</Price>
                   <PriceDescriptior>без ДДС</PriceDescriptior>
                 </PriceInnerWrapper>
                 <PriceInnerWrapper>
                   <PriceWith>
-                    {(Math.floor(price * 1.2) / 100).toFixed(2)}лв
+                    {(Math.floor(price * 1.2) / 100).toFixed(2)} лв.
                   </PriceWith>
                   <PriceDescriptior>c ДДС</PriceDescriptior>
                 </PriceInnerWrapper>
