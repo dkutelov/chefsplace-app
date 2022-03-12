@@ -1,7 +1,7 @@
 import styled from "styled-components/native";
-import { Image, Pressable } from "react-native";
+import { Image } from "react-native";
 
-import { Theme } from "../../../types/Theme";
+import { Theme } from "../../../../types/Theme";
 
 export const CartItemWrapper = styled.View`
   background-color: ${(props: { theme: Theme }) =>
@@ -41,19 +41,6 @@ export const ProductImage = styled(Image)`
   height: ${(props: { theme: Theme }) => props.theme.space[6]};
   background-color: ${(props: { theme: Theme }) =>
     props.theme.colors.bg.primary};
-`;
-
-export const CardContent = styled.View`
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 0 ${(props: { theme: Theme }) => props.theme.space[3]};
-  height: 72px;
-`;
-
-export const Label = styled.Text`
-  font-family: ${(props: { theme: Theme }) => props.theme.fonts.bodyBold};
-  color: ${(props: { theme: Theme }) => props.theme.colors.text.primary};
-  margin-bottom: ${(props: { theme: Theme }) => props.theme.space[1]};
 `;
 
 export const PriceWrapper = styled.View`

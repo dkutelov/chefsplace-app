@@ -1,16 +1,14 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Ionicons } from "@expo/vector-icons";
-import { CartItem } from "../../../types/Cart";
-import { colors } from "../../../infrastructure/theme/colors";
+import { CartItem } from "../../../../types/Cart";
+import { colors } from "../../../../infrastructure/theme/colors";
 
 import {
   CartItemWrapper,
   TopContent,
-  CardContent,
   Row,
   ProductImage,
   Title,
-  Label,
   PriceWrapper,
   Price,
   PriceWith,
@@ -20,12 +18,12 @@ import {
   Amount,
 } from "./cart-item.styles";
 
-import { QuantitySelector } from "../../../components/quantity-selector/quantity-selector.component";
-import { CartContext } from "../../../services/cart/cart.context";
+import { QuantitySelector } from "../../../../components/quantity-selector/quantity-selector.component";
+import { CartContext } from "../../../../services/cart/cart.context";
 import {
   REMOVE_ITEM_FROM_CART,
   UPDATE_ITEM_QUANTITY,
-} from "../../../services/cart/cart.action-types";
+} from "../../../../services/cart/cart.action-types";
 
 interface Props {
   cartItem: CartItem;
