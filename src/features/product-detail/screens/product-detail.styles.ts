@@ -22,7 +22,7 @@ export const ShortDescription = styled.Text`
 `;
 
 export const Row = styled.View`
-  margin: ${(props: { theme: Theme }) => props.theme.space[3]} 0;
+  margin-bottom: ${(props: { theme: Theme }) => props.theme.space[3]};
 `;
 
 export const ActionRow = styled.View`
@@ -30,6 +30,13 @@ export const ActionRow = styled.View`
   justify-content: space-between;
   align-items: center;
   margin: 0 ${(props: { theme: Theme }) => props.theme.space[3]};
+`;
+
+export const PriceRow = styled.View`
+  flex-direction: column;
+  align-items: flex-end;
+  margin: 0 ${(props: { theme: Theme }) => props.theme.space[3]}
+    ${(props: { theme: Theme }) => props.theme.space[3]};
 `;
 
 export const Description = styled.Text`
@@ -43,12 +50,19 @@ export const PriceInnerWrapper = styled.View`
 
 export const Price = styled.Text`
   font-family: ${(props: { theme: Theme }) => props.theme.fonts.bodyBold};
-  font-size: ${(props: { theme: Theme }) => props.theme.fontSizes.title};
+  font-size: ${(props: { theme: Theme }) => props.theme.fontSizes.h4};
 `;
 
 export const PriceDescriptior = styled.Text`
   margin-left: ${(props: { theme: Theme }) => props.theme.space[2]};
   font-size: ${(props: { theme: Theme }) => props.theme.fontSizes.caption};
+`;
+
+export const PriceWith = styled.Text`
+  font-family: ${(props: { theme: Theme }) => props.theme.fonts.body};
+  font-size: ${(props: { theme: Theme }) => props.theme.fontSizes.caption};
+  margin-left: ${(props: { theme: Theme }) => props.theme.space[2]};
+  margin-top: ${(props: { theme: Theme }) => props.theme.space[1]};
 `;
 
 export const RoundIcon = styled.View`

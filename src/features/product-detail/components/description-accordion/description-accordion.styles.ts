@@ -2,7 +2,7 @@ import styled from "styled-components/native";
 import { Theme } from "../../../../types/Theme";
 
 export const AccordionContainer = styled.View`
-  margin: 0 ${(props: { theme: Theme }) => props.theme.space[3]};
+  margin: 0 ${(props: { theme: Theme }) => props.theme.space[2]};
   border-radius: ${(props: { theme: Theme }) => props.theme.space[3]};
 `;
 

@@ -19,9 +19,11 @@ import {
   Title,
   ShortDescription,
   Description,
+  PriceRow,
   PriceInnerWrapper,
   PriceDescriptior,
   Price,
+  PriceWith,
   Row,
   RoundIcon,
   ActionRow,
@@ -36,8 +38,6 @@ const ProductDetailScreen = () => {
   const [quantity, setQuantity] = useState(1);
   const { params } = useRoute();
   const { cartItems, dispatch } = useContext(CartContext);
-
-  console.log(product);
 
   useEffect(() => {
     //TODO: if no id redirect to products and show notification "Product does not exists"
@@ -92,11 +92,16 @@ const ProductDetailScreen = () => {
             <Title>{product?.name}</Title>
             <ImageCarousel images={product.images} />
             <Row>
-              <ActionRow>
+              <PriceRow>
                 <PriceInnerWrapper>
-                  <Price>{product.price / 100}лв</Price>
+                  <Price>{(product.price / 100).toFixed(2)}лв</Price>
                   <PriceDescriptior>без ДДС</PriceDescriptior>
                 </PriceInnerWrapper>
+                <PriceWith>
+                  {Math.floor(product.price * 1.2) / 100}лв с ДДС
+                </PriceWith>
+              </PriceRow>
+              <ActionRow>
                 <QuantitySelector
                   quantity={quantity}
                   setQuantity={setQuantity}
@@ -120,7 +125,9 @@ const ProductDetailScreen = () => {
             <Row>
               <ShortDescription>{product.shortDescription}</ShortDescription>
             </Row>
-            <Description>{product.description?.content}</Description>
+            <Row>
+              <Description>{product.description?.content}</Description>
+            </Row>
             <Row>
               {product.description && (
                 <DescriptionAccordion description={product.description} />

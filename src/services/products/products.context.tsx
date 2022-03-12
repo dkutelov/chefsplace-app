@@ -32,7 +32,6 @@ export const ProductsContextProvider = ({
 
   const initialProducts = useContext(ProductsContext);
   const [state, dispatch] = useReducer(productsReducer, initialProducts);
-  console.log("cart state", state);
 
   const retrieveProducts = () => {
     setIsLoading(true);

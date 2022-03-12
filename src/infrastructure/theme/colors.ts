@@ -21,6 +21,7 @@ export const colors: { [key: string]: { [key: string]: string } } = {
   text: {
     primary: "#333333",
     secondary: "#4b9301", //green
+    subtleGray: "#8f8f8f",
     disabled: "#9C9C9C",
     inverse: "#FFFFFF",
     error: "#ff3a48",

@@ -28,7 +28,6 @@ export const CartContextProvider = ({
 
   const initialCart = useContext(CartContext);
   const [state, dispatch] = useReducer(cartReducer, initialCart);
-  console.log("cart state", state);
 
   const retrieveCartItems = () => {
     setIsLoading(true);

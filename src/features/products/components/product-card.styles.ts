@@ -1,11 +1,11 @@
 import styled from "styled-components/native";
-import { Pressable } from "react-native";
+import { TouchableOpacity } from "react-native";
 import { Text } from "../../../components/typography/text.component";
 import { Card } from "react-native-paper";
 
 import { Theme } from "../../../types/Theme";
 
-export const ProductCardWrapper = styled(Pressable)`
+export const ProductCardWrapper = styled(TouchableOpacity)`
   background-color: ${(props: { theme: Theme }) =>
     props.theme.colors.bg.primary};
   margin-bottom: ${(props: { theme: Theme }) => props.theme.space[3]};
@@ -47,32 +47,37 @@ export const ProductImage = styled(Card.Cover)`
   border-bottom-left-radius: 20px;
 `;
 
-export const PriceWrapper = styled.View``;
+export const PriceWrapper = styled.View`
+  flex: 1;
+  justify-content: center;
+`;
 
 export const PriceInnerWrapper = styled.View`
-  flex-direction: row;
-  align-items: baseline;
+  flex-direction: column;
+  align-items: flex-end;
 `;
 
 export const Price = styled.Text`
   font-family: ${(props: { theme: Theme }) => props.theme.fonts.bodyBold};
-  font-size: ${(props: { theme: Theme }) => props.theme.fontSizes.title};
+  font-size: ${(props: { theme: Theme }) => props.theme.fontSizes.h5};
 `;
 
 export const PriceWith = styled.Text`
   font-family: ${(props: { theme: Theme }) => props.theme.fonts.bodyBold};
-  font-size: ${(props: { theme: Theme }) => props.theme.fontSizes.body};
-  margin-left: ${(props: { theme: Theme }) => props.theme.space[4]};
+  font-size: ${(props: { theme: Theme }) => props.theme.fontSizes.button};
+  margin-left: ${(props: { theme: Theme }) => props.theme.space[2]};
+  margin-top: ${(props: { theme: Theme }) => props.theme.space[1]};
 `;
 
 export const PriceDescriptior = styled.Text`
   margin-left: ${(props: { theme: Theme }) => props.theme.space[2]};
+  color: ${(props: { theme: Theme }) => props.theme.colors.text.subtleGray};
   font-size: ${(props: { theme: Theme }) => props.theme.fontSizes.caption};
 `;
 
 export const ShortDescription = styled(Text)``;
 
-export const RoundIcon = styled(Pressable)`
+export const RoundIcon = styled(TouchableOpacity)`
   align-self: flex-end;
   flex-direction: row;
   justify-content: center;
