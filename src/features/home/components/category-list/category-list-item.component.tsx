@@ -1,6 +1,6 @@
 import React from "react";
 import { Entypo } from "@expo/vector-icons";
-import { colors } from "../../../infrastructure/theme/colors";
+import { colors } from "../../../../infrastructure/theme/colors";
 import {
   CategoryCard,
   CategoryTitle,
