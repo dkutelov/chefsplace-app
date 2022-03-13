@@ -6,6 +6,7 @@ export const HeroBanner = styled.View`
   padding: ${(props: { theme: Theme }) => props.theme.space[2]};
   border-radius: ${(props: { theme: Theme }) => props.theme.space[2]};
   width: 100%;
+  margin-bottom: ${(props: { theme: Theme }) => props.theme.space[3]};
 `;
 
 export const HeroBannerImage = styled.Image`
@@ -14,6 +15,8 @@ export const HeroBannerImage = styled.Image`
   height: 350px;
 `;
 
-export const Categories = styled(FlatList)`
-  padding: ${(props: { theme: Theme }) => props.theme.space[2]};
+export const Categories = styled.View`
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
 `;
