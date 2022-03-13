@@ -5,6 +5,8 @@ import { ProductDetailScreenWrapper } from "../features/product-detail/screens/p
 import { HomeScreen } from "../features/home/screens/home.screen";
 import { Image, SafeAreaView } from "react-native";
 import { K } from "../infrastructure/constants";
+import { ProductListScreen } from "../features/products/screens/products.screen";
+import Search from "../features/products/components/search.component";
 
 const Stack = createNativeStackNavigator();
 
@@ -31,6 +33,13 @@ export const HomeStack = () => {
               />
             </SafeAreaView>
           ),
+        }}
+      />
+      <Stack.Screen
+        name="ProductsScreen"
+        component={ProductListScreen}
+        options={{
+          title: "Категория",
         }}
       />
       <Stack.Screen

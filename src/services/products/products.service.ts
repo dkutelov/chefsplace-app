@@ -16,6 +16,7 @@ export const productsTransform = (
         ? AvailabilityStatus.OutOfStock
         : AvailabilityStatus.OnStock,
     maxQuantity: r.maxQuantity,
+    categoryId: r.categoryId,
   }));
 };
 

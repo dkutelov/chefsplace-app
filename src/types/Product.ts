@@ -16,6 +16,7 @@ export interface Product {
   availabilityStatus: AvailabilityStatus;
   onPromotion?: boolean;
   maxQuantity: number;
+  categoryId: string;
 }
 
 export interface IProductsContext {

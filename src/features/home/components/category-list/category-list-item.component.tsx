@@ -1,6 +1,6 @@
 import React from "react";
-import { Entypo } from "@expo/vector-icons";
-import { colors } from "../../../../infrastructure/theme/colors";
+import { useNavigation } from "@react-navigation/native";
+
 import { CategoryCard, CategoryTitle } from "./category-list-item.styles";
 
 export interface IProps {
@@ -11,8 +11,10 @@ export interface IProps {
 }
 
 const CategoryListItem = ({ item: { id, name } }: IProps) => {
+  const { navigate } = useNavigation();
+
   const onCategoryPress = () => {
-    console.warn("hi");
+    navigate("ProductsScreen", { id });
   };
 
   return (

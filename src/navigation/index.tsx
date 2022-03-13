@@ -65,7 +65,7 @@ function BottomTabNavigator() {
         })}
       />
       <BottomTab.Screen
-        name="Products"
+        name="Продукти"
         component={ProductStack}
         options={{
           headerShown: false,
