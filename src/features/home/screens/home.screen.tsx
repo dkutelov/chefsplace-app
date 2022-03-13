@@ -2,7 +2,6 @@ import { View, Text, ScrollView } from "react-native";
 import { SafeArea } from "../../../components/utils/safe-area.component";
 import CategoryListItem from "../../home/components/category-list/category-list-item.component";
 
-import { IProps } from "../../home/components/category-list/category-list-item.component";
 import mock from "./mock.json";
 
 import { HeroBanner, HeroBannerImage, Categories } from "./home.styles";
@@ -28,7 +27,6 @@ export const HomeScreen = () => {
           </Categories>
         </Row>
         <View>
-          <Text>Категории</Text>
           <Text>Нови Продукти</Text>
           <Text>Контакти</Text>
         </View>

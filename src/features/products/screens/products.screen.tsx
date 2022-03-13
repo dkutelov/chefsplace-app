@@ -1,34 +1,47 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useRoute } from "@react-navigation/native";
+
 import { SafeArea, ProductList } from "./products.styles";
 import { ProductCard } from "../components/product-card.component";
 import { ProductsContext } from "../../../services/products/products.context";
 import { LoadingIndicator } from "../../../components/loading/loading.component";
 import { colors } from "../../../infrastructure/theme/colors";
-import {
-  FILTER_PRODUCTS_BY_CATEGORY,
-  RESET_FILTERED_PRODUCTS,
-} from "../../../services/products/products.action-types";
+import { Product } from "../../../types/Product";
 
 export const ProductListScreen = () => {
-  const { filteredProducts, isLoading, error, dispatch } =
+  const { products, isLoading, searchTerm, error, dispatch } =
     useContext(ProductsContext);
+  const [renderProducts, setRenderProducts] = useState(products);
+  const [filteredProducts, setSetFilteredProducts] = useState<Product[]>([]);
   const { params } = useRoute();
+
+  //TODO: No Products to show
+  //TODO: Custom back icon
+  //TODO: Category name
+  // Horizontal Scroll Category Menu
+
+  useEffect(() => {
+    if (searchTerm !== "") {
+      setSetFilteredProducts(
+        renderProducts.filter(
+          (p) =>
+            p.name.toLowerCase().includes(searchTerm!) ||
+            p.shortDescription.toLowerCase().includes(searchTerm!)
+        )
+      );
+    } else {
+      setSetFilteredProducts([]);
+    }
+  }, [searchTerm]);
 
   useEffect(() => {
     if (params) {
-      dispatch({
-        type: FILTER_PRODUCTS_BY_CATEGORY,
-        payload: {
-          categoryId: params.id,
-        },
-      });
-    } else {
-      dispatch({
-        type: RESET_FILTERED_PRODUCTS,
-      });
+      const categoryProducts: Product[] = renderProducts.filter(
+        (p: Product) => p.categoryId === params.id
+      );
+      setSetFilteredProducts(categoryProducts);
     }
-  }, []);
+  }, [params?.id, renderProducts]);
 
   return (
     <SafeArea>
@@ -36,7 +49,9 @@ export const ProductListScreen = () => {
         <LoadingIndicator size={32} color={colors.ui.primary} />
       ) : (
         <ProductList
-          data={filteredProducts}
+          data={
+            filteredProducts.length === 0 ? renderProducts : filteredProducts
+          }
           renderItem={(item) => <ProductCard item={item.item} />}
           showsVerticalScrollIndicator={false}
         />

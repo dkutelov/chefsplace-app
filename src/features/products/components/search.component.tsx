@@ -4,8 +4,8 @@ import { Searchbar } from "react-native-paper";
 import { HeaderContainer } from "./search.styles";
 import { ProductsContext } from "../../../services/products/products.context";
 import {
-  FILTER_PRODUCTS_BY_KEYWORD,
-  RESET_FILTERED_PRODUCTS,
+  RESET_SEARCH_TERM,
+  SET_SEARCH_TERM,
 } from "../../../services/products/products.action-types";
 
 const Search = () => {
@@ -15,7 +15,7 @@ const Search = () => {
 
   const clearSearchResults = () => {
     dispatch({
-      type: RESET_FILTERED_PRODUCTS,
+      type: RESET_SEARCH_TERM,
     });
   };
 
@@ -25,7 +25,7 @@ const Search = () => {
     }
 
     dispatch({
-      type: FILTER_PRODUCTS_BY_KEYWORD,
+      type: SET_SEARCH_TERM,
       payload: { searchTerm: searchKeyword.toLowerCase() },
     });
   };

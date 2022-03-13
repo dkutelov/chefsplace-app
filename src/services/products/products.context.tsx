@@ -15,6 +15,7 @@ import { productsReducer } from "./products.reducer";
 const defaultState: IProductsContext = {
   products: [],
   filteredProducts: [],
+  searchTerm: "",
   isLoading: false,
   dispatch: () => {},
 };

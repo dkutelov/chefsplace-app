@@ -22,6 +22,7 @@ export interface Product {
 export interface IProductsContext {
   products: Product[];
   filteredProducts: Product[];
+  searchTerm?: string;
   isLoading: boolean;
   error?: string;
   dispatch: React.Dispatch<any>;

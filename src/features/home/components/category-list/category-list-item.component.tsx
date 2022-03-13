@@ -17,6 +17,7 @@ const CategoryListItem = ({ item: { id, name } }: IProps) => {
     navigate("ProductsScreen", { id });
   };
 
+  //TODO: Category Image
   return (
     <CategoryCard onPress={onCategoryPress}>
       <CategoryTitle>{name}</CategoryTitle>
