@@ -9,10 +9,11 @@ import { colors } from "../infrastructure/theme/colors";
 import { RootStackParamList, RootTabParamList } from "../types/Navigation";
 import LinkingConfiguration from "./LinkingConfiguration";
 import { CartScreen } from "../features/cart/screens/cart.screen";
-import { HomeScreen } from "../features/home/screens";
 import { ProfileScreen } from "../features/profile/screens";
 import { CategoriesScreen } from "../features/categories/screens/categories.screen";
 import { ProductStack } from "./ProductStack";
+import { HomeStack } from "./HomeStack";
+import { WishlistScreen } from "../features/wishlist/screen/wishlist.screen";
 
 export default function Navigation() {
   return (
@@ -56,20 +57,11 @@ function BottomTabNavigator() {
     >
       <BottomTab.Screen
         name="Home"
-        component={HomeScreen}
+        component={HomeStack}
         options={() => ({
           title: "Начало",
           tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
-        })}
-      />
-      <BottomTab.Screen
-        name="Categories"
-        component={CategoriesScreen}
-        options={() => ({
-          title: "Категории",
-          tabBarIcon: ({ color }) => (
-            <TabBarIcon name="md-book" color={color} />
-          ),
+          headerShown: false,
         })}
       />
       <BottomTab.Screen
@@ -79,6 +71,14 @@ function BottomTabNavigator() {
           headerShown: false,
           tabBarIcon: ({ color }) => <TabBarIcon name="search" color={color} />,
         }}
+      />
+      <BottomTab.Screen
+        name="Wishlist"
+        component={WishlistScreen}
+        options={() => ({
+          title: "Желани",
+          tabBarIcon: ({ color }) => <TabBarIcon name="heart" color={color} />,
+        })}
       />
       <BottomTab.Screen
         name="Cart"
