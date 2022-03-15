@@ -8,7 +8,7 @@ export const SafeArea = styled(SafeAreaView)`
 
 export const ProductList = styled(FlatList).attrs({
   contentContainerStyle: {
-    padding: 16,
+    padding: 8,
   },
 })`
   flex: 1;

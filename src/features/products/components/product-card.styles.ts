@@ -8,9 +8,9 @@ import { Theme } from "../../../types/Theme";
 export const ProductCardWrapper = styled(TouchableOpacity)`
   background-color: ${(props: { theme: Theme }) =>
     props.theme.colors.bg.primary};
-  margin-bottom: ${(props: { theme: Theme }) => props.theme.space[3]};
+  margin-bottom: ${(props: { theme: Theme }) => props.theme.space[2]};
   padding: ${(props: { theme: Theme }) => props.theme.space[3]};
-  border-radius: 20px;
+  border-radius: ${(props: { theme: Theme }) => props.theme.space[2]};
   flex-direction: column;
 `;
 

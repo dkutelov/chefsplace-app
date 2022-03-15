@@ -8,7 +8,7 @@ export const colors: { [key: string]: { [key: string]: string } } = {
     primary: "#4b9301",
     secondary: "#757575",
     tertiary: "#F1F1F1",
-    quaternary: "#FFFFFF",
+    quaternary: "#d1d1d1",
     disabled: "#DEDEDE",
     error: "#D0421B",
     success: "#138000",
@@ -17,6 +17,7 @@ export const colors: { [key: string]: { [key: string]: string } } = {
     primary: "#FFFFFF",
     secondary: "#f2f2f2",
     tertiary: "#F6F6F6",
+    gray: "#ebebeb",
   },
   text: {
     primary: "#333333",

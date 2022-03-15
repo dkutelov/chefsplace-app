@@ -7,18 +7,14 @@ import {
   CategoryImage,
   CategoryTitleContainer,
 } from "./category-list-item.styles";
-import { Category } from "../../../../types/Category";
+import { Category } from "../../../../../types/Category";
 
 export interface IProps {
   item: Category;
 }
 
 const CategoryListItem = ({ item: { id, name, imageUrl } }: IProps) => {
-  const { navigate } = useNavigation();
-
-  const onCategoryPress = () => {
-    navigate("ProductsScreen", { id });
-  };
+  const onCategoryPress = () => {};
 
   return (
     <CategoryCard onPress={onCategoryPress}>

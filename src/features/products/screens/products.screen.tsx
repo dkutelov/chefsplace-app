@@ -7,6 +7,7 @@ import { ProductsContext } from "../../../services/products/products.context";
 import { LoadingIndicator } from "../../../components/loading/loading.component";
 import { colors } from "../../../infrastructure/theme/colors";
 import { Product } from "../../../types/Product";
+import { CategoryMenu } from "../components/category-menu/category-list/category-list.component";
 
 export const ProductListScreen = () => {
   const { products, isLoading, searchTerm, error, dispatch } =
@@ -48,13 +49,16 @@ export const ProductListScreen = () => {
       {isLoading ? (
         <LoadingIndicator size={32} color={colors.ui.primary} />
       ) : (
-        <ProductList
-          data={
-            filteredProducts.length === 0 ? renderProducts : filteredProducts
-          }
-          renderItem={(item) => <ProductCard item={item.item} />}
-          showsVerticalScrollIndicator={false}
-        />
+        <>
+          <CategoryMenu />
+          <ProductList
+            data={
+              filteredProducts.length === 0 ? renderProducts : filteredProducts
+            }
+            renderItem={(item) => <ProductCard item={item.item} />}
+            showsVerticalScrollIndicator={false}
+          />
+        </>
       )}
     </SafeArea>
   );
