@@ -1,22 +1,32 @@
 [
   {
     "id": "1",
-    "name": "Сосове"
+    "name": "Бульони",
+    "imageUrl": "https://res.cloudinary.com/dariku/image/upload/v1647330626/chefsplace/category/knorr-teleshki-zheliran-bulon-0800-kg.jpg"
   },
   {
     "id": "2",
-    "name": "Течни, пастообразни и грил подправки за овкусяване"
+    "name": "Сосове",
+    "imageUrl": "https://res.cloudinary.com/dariku/image/upload/v1647330626/chefsplace/category/bearnez-sos-1-kg.jpg"
   },
   {
     "id": "3",
-    "name": "Knorr Азиатска Серия"
+    "name": "Супи",
+    "imageUrl": "https://res.cloudinary.com/dariku/image/upload/v1647330626/chefsplace/category/krem-supa-zelenchukova-165-kg.jpg"
   },
   {
     "id": "4",
-    "name": "Течни, пастообразни и грил подправки за овкусяване"
+    "name": "Knorr Азиатска Серия",
+    "imageUrl": "https://res.cloudinary.com/dariku/image/upload/v1647330626/chefsplace/category/knorr-teriyaki-sos-1-l.jpg"
   },
   {
     "id": "5",
-    "name": "Сосове"
+    "name": "Течни, пастообразни и грил подправки",
+    "imageUrl": "https://res.cloudinary.com/dariku/image/upload/v1647330626/chefsplace/category/bocilekovo-pesto-0340-kg.jpg"
+  },
+  {
+    "id": "6",
+    "name": "Hellmann's майонеза и кетчуп",
+    "imageUrl": "https://res.cloudinary.com/dariku/image/upload/v1647330626/chefsplace/category/hellmanns-majoneza-850ml.jpg"
   }
 ]

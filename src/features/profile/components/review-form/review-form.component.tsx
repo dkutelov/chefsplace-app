@@ -32,7 +32,7 @@ export const ReviewForm = () => {
             <Button
               title="Submit"
               color="maroon"
-              onPress={props.handleSubmit}
+              onPress={() => props.handleSubmit()}
             />
           </View>
         )}
