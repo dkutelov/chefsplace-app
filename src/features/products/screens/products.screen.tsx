@@ -36,9 +36,11 @@ export const ProductListScreen = () => {
   }, [searchTerm]);
 
   const filterProducts = (categoryId: string) => {
+    setSetFilteredProducts([]);
     const categoryProducts: Product[] = renderProducts.filter(
       (p: Product) => p.categoryId === categoryId
     );
+    console.log(categoryProducts);
     setSetFilteredProducts(categoryProducts);
   };
 
@@ -57,7 +59,7 @@ export const ProductListScreen = () => {
         <LoadingIndicator size={32} color={colors.ui.primary} />
       ) : (
         <>
-          <CategoryMenu />
+          <CategoryMenu filterProducts={filterProducts} />
           <ProductList
             data={
               filteredProducts.length === 0 ? renderProducts : filteredProducts
