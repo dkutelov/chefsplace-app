@@ -7,10 +7,13 @@ import {
   CategoryFlatList,
   CategoryTitleContainer,
   CategoryTitle,
+  ClearLabel,
+  ClearContainer,
 } from "./category-list.styles";
 import mock from "../../../screens/mock.json";
 import { Category } from "../../../../../types/Category";
 import CategoryListItem from "../category-list-item/category-list-item.component";
+import { colors } from "../../../../../infrastructure/theme/colors";
 
 interface IProps {
   filterProducts: (categoryId: string) => void;
@@ -65,6 +68,12 @@ export const CategoryMenu = ({ filterProducts }: IProps) => {
             }}
             keyExtractor={(_, index) => index}
           />
+          {activeCategoryId !== "" && (
+            <ClearContainer onPress={() => {}}>
+              <Ionicons name="close" size={16} color={colors.ui.orange} />
+              <ClearLabel>изчисти селекцията</ClearLabel>
+            </ClearContainer>
+          )}
         </ContainerView>
       )}
     </>

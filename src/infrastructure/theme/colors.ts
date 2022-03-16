@@ -9,6 +9,7 @@ export const colors: { [key: string]: { [key: string]: string } } = {
     secondary: "#757575",
     tertiary: "#F1F1F1",
     quaternary: "#d1d1d1",
+    orange: "#DD6031",
     disabled: "#DEDEDE",
     error: "#D0421B",
     success: "#138000",

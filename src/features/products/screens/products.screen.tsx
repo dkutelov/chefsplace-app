@@ -19,7 +19,6 @@ export const ProductListScreen = () => {
   //TODO: No Products to show
   //TODO: Custom back icon
   //TODO: Category name
-  // Horizontal Scroll Category Menu
 
   useEffect(() => {
     if (searchTerm !== "") {
@@ -40,7 +39,6 @@ export const ProductListScreen = () => {
     const categoryProducts: Product[] = renderProducts.filter(
       (p: Product) => p.categoryId === categoryId
     );
-    console.log(categoryProducts);
     setSetFilteredProducts(categoryProducts);
   };
 

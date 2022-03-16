@@ -33,7 +33,8 @@ export const CategoryImageContainer = styled.View`
   align-items: center;
   margin-bottom: ${(props: { theme: Theme }) => props.theme.space[1]};
   border-radius: ${(props: { theme: Theme }) => props.theme.space[2]};
-  border-width: 1px;
+  border-width: ${(props: { borderColor: string }) =>
+    props.borderColor === "#4b9301" ? "2px" : "1px"};
   border-color: ${(props: { borderColor: string }) => props.borderColor};
 `;
 
