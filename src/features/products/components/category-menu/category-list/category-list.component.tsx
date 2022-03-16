@@ -1,5 +1,5 @@
-import React from "react";
-import { useWindowDimensions } from "react-native";
+import React, { useState, useCallback } from "react";
+import { useWindowDimensions, TouchableWithoutFeedback } from "react-native";
 
 import { ContainerView, CategoryFlatList } from "./category-list.styles";
 import mock from "../../../screens/mock.json";
@@ -7,20 +7,25 @@ import { Category } from "../../../../../types/Category";
 import CategoryListItem from "../category-list-item/category-list-item.component";
 
 export const CategoryMenu = () => {
+  const [activeCategoryId, setActiveCategoryId] = useState("");
   const windowWidth = useWindowDimensions().width;
   const categories = mock;
 
-  const onFlatlistUpdate = React.useCallback(({ viewableItems }) => {
-    if (viewableItems.length > 0) {
-      console.log(viewableItems[0].index || 0);
-    }
+  const onCategoryPress = useCallback((id: string) => {
+    setActiveCategoryId(id);
   }, []);
 
   return (
     <ContainerView>
       <CategoryFlatList
         data={categories}
-        renderItem={({ item }: Category) => <CategoryListItem item={item} />}
+        renderItem={({ item }: Category) => (
+          <CategoryListItem
+            item={item}
+            borderColor={item.id === activeCategoryId ? "#4b9301" : `#8f8f8f`}
+            onCategoryPress={onCategoryPress}
+          />
+        )}
         horizontal
         showsHorizontalScrollIndicator={false}
         snapToInterval={windowWidth - 8}
@@ -30,7 +35,6 @@ export const CategoryMenu = () => {
           viewAreaCoveragePercentThreshold: 50,
           minimumViewTime: 100,
         }}
-        onViewableItemsChanged={onFlatlistUpdate}
         keyExtractor={(_, index) => index}
       />
     </ContainerView>

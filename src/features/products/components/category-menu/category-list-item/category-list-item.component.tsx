@@ -1,24 +1,30 @@
 import React from "react";
-import { useNavigation } from "@react-navigation/native";
 
 import {
   CategoryCard,
   CategoryTitle,
   CategoryImage,
   CategoryTitleContainer,
+  CategoryImageContainer,
 } from "./category-list-item.styles";
 import { Category } from "../../../../../types/Category";
 
 export interface IProps {
   item: Category;
+  borderColor: string;
+  onCategoryPress: (id: string) => {};
 }
 
-const CategoryListItem = ({ item: { id, name, imageUrl } }: IProps) => {
-  const onCategoryPress = () => {};
-
+const CategoryListItem = ({
+  item: { id, name, imageUrl },
+  borderColor,
+  onCategoryPress,
+}: IProps) => {
   return (
-    <CategoryCard onPress={onCategoryPress}>
-      <CategoryImage source={{ uri: imageUrl }} />
+    <CategoryCard onPress={() => onCategoryPress(id)}>
+      <CategoryImageContainer borderColor={borderColor}>
+        <CategoryImage source={{ uri: imageUrl }} />
+      </CategoryImageContainer>
       <CategoryTitleContainer>
         <CategoryTitle>{name}</CategoryTitle>
       </CategoryTitleContainer>

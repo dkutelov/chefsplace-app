@@ -1,21 +1,18 @@
 import styled from "styled-components/native";
-import { TouchableOpacity } from "react-native";
+import { Pressable } from "react-native";
 import { Theme } from "../../../../../types/Theme";
 
-export const CategoryCard = styled(TouchableOpacity)`
-  width: 130px;
-  margin: ${(props: { theme: Theme }) => props.theme.space[1]};
-  margin-left: ${(props: { theme: Theme }) => props.theme.space[2]};
-  margin-right: 0;
+export const CategoryCard = styled(Pressable)`
+  width: 70px;
+  margin: ${(props: { theme: Theme }) => props.theme.space[1]} 0;
   padding: 0 ${(props: { theme: Theme }) => props.theme.space[2]};
   justify-content: space-between;
   align-items: center;
-  background-color: white;
-  border-radius: ${(props: { theme: Theme }) => props.theme.space[1]};
 `;
 
 export const CategoryTitleContainer = styled.View`
-  height: 35px;
+  height: 50px;
+  width: 60px;
   justify-content: flex-start;
   align-items: center;
   margin-bottom: ${(props: { theme: Theme }) => props.theme.space[1]};
@@ -28,10 +25,20 @@ export const CategoryTitle = styled.Text`
   text-align: center;
 `;
 
-export const CategoryImage = styled.Image`
-  margin-top: ${(props: { theme: Theme }) => props.theme.space[2]};
+export const CategoryImageContainer = styled.View`
+  background-color: white;
+  height: 60px;
+  width: 60px;
+  justify-content: center;
+  align-items: center;
   margin-bottom: ${(props: { theme: Theme }) => props.theme.space[1]};
-  height: 30px;
+  border-radius: ${(props: { theme: Theme }) => props.theme.space[2]};
+  border-width: 1px;
+  border-color: ${(props: { borderColor: string }) => props.borderColor};
+`;
+
+export const CategoryImage = styled.Image`
+  height: 50px;
   width: 100%;
   resize-mode: contain;
 `;

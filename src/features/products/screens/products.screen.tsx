@@ -35,6 +35,13 @@ export const ProductListScreen = () => {
     }
   }, [searchTerm]);
 
+  const filterProducts = (categoryId: string) => {
+    const categoryProducts: Product[] = renderProducts.filter(
+      (p: Product) => p.categoryId === categoryId
+    );
+    setSetFilteredProducts(categoryProducts);
+  };
+
   useEffect(() => {
     if (params) {
       const categoryProducts: Product[] = renderProducts.filter(
