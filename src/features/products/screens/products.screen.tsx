@@ -19,6 +19,7 @@ export const ProductListScreen = () => {
   //TODO: No Products to show
   //TODO: Custom back icon
   //TODO: Category name
+  //TODO: Clear category selection on close and on clear text press
 
   useEffect(() => {
     if (searchTerm !== "") {

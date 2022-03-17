@@ -39,9 +39,13 @@ export const CategoryMenu = ({ filterProducts }: IProps) => {
       <CategoryTitleContainer onPress={toggleCetegoryMenu}>
         <CategoryTitle>Филтър по Категория</CategoryTitle>
         {showCategories ? (
-          <Ionicons name="caret-up" size={20} color="black" />
+          <Ionicons name="caret-up" size={20} color={colors.monochromes.onyx} />
         ) : (
-          <Ionicons name="caret-down" size={20} color="black" />
+          <Ionicons
+            name="caret-down"
+            size={20}
+            color={colors.monochromes.ony}
+          />
         )}
       </CategoryTitleContainer>
       {showCategories && (
@@ -52,7 +56,9 @@ export const CategoryMenu = ({ filterProducts }: IProps) => {
               <CategoryListItem
                 item={item}
                 borderColor={
-                  item.id === activeCategoryId ? "#4b9301" : `#8f8f8f`
+                  item.id === activeCategoryId
+                    ? colors.ui.primary
+                    : colors.monochromes.onyx
                 }
                 onCategoryPress={onCategoryPress}
               />

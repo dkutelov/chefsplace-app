@@ -21,7 +21,7 @@ export const CategoryTitleContainer = styled.View`
 export const CategoryTitle = styled.Text`
   font-family: ${(props: { theme: Theme }) => props.theme.fonts.heading};
   font-size: ${(props: { theme: Theme }) => props.theme.fontSizes.caption};
-  color: ${(props: { theme: Theme }) => props.theme.colors.text.darkGray};
+  color: ${(props: { theme: Theme }) => props.theme.colors.monochromes.onyx};
   text-align: center;
 `;
 

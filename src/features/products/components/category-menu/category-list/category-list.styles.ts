@@ -6,7 +6,10 @@ import { Theme } from "../../../../../types/Theme";
 export const ContainerView = styled.View`
   margin: ${(props: { theme: Theme }) => props.theme.space[1]} 0;
   padding: ${(props: { theme: Theme }) => props.theme.space[1]} 0;
-  background-color: ${(props: { theme: Theme }) => props.theme.colors.bg.gray};
+  background-color: #fff;
+  border-top-width: 3px;
+  border-bottom-width: 3px;
+  border-color: white;
 `;
 
 export const CategoryTitleContainer = styled(Pressable)`
@@ -18,6 +21,7 @@ export const CategoryTitleContainer = styled(Pressable)`
 
 export const CategoryTitle = styled.Text`
   margin-right: ${(props: { theme: Theme }) => props.theme.space[2]};
+  color: ${(props: { theme: Theme }) => props.theme.colors.monochromes.onyx};
 `;
 
 export const ClearContainer = styled(Pressable)`

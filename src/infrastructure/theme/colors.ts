@@ -20,6 +20,9 @@ export const colors: { [key: string]: { [key: string]: string } } = {
     tertiary: "#F6F6F6",
     gray: "#ebebeb",
   },
+  monochromes: {
+    onyx: "#393E41",
+  },
   text: {
     primary: "#333333",
     secondary: "#4b9301", //green
