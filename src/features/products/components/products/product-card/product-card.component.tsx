@@ -17,10 +17,12 @@ import {
   Price,
   PriceWith,
   PriceDescriptior,
-  ShortDescription,
+  CTARow,
   PriceInnerWrapper,
   RoundIcon,
+  WishlistIcon,
 } from "./product-card.styles";
+import { colors } from "../../../../../infrastructure/theme/colors";
 
 interface Props {
   item: Product;
@@ -82,13 +84,6 @@ export const ProductCard = ({ item }: Props) => {
               />
             </ProductImageWrapper>
             <CardContent>
-              <ShortDescription
-                variant="caption"
-                numberOfLines={3}
-                ellipsizeMode="tail"
-              >
-                {shortDescription}
-              </ShortDescription>
               <PriceWrapper>
                 <PriceInnerWrapper>
                   <Price>{(price / 100).toFixed(2)} лв.</Price>
@@ -101,11 +96,20 @@ export const ProductCard = ({ item }: Props) => {
                   <PriceDescriptior>c ДДС</PriceDescriptior>
                 </PriceInnerWrapper>
               </PriceWrapper>
-              <RoundIcon onPress={addToCart}>
-                <Ionicons name="cart" size={28} color="white" />
-              </RoundIcon>
             </CardContent>
           </ProductInfo>
+          <CTARow>
+            <WishlistIcon onPress={() => {}}>
+              <Ionicons
+                name="heart-outline"
+                size={34}
+                color={colors.ui.primary}
+              />
+            </WishlistIcon>
+            <RoundIcon onPress={addToCart}>
+              <Ionicons name="cart" size={28} color="white" />
+            </RoundIcon>
+          </CTARow>
         </ProductCardWrapper>
       )}
     </>

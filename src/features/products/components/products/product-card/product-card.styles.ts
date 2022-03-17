@@ -20,31 +20,29 @@ export const ProductInfo = styled.View`
 
 export const ProductImageWrapper = styled.View`
   flex-direction: column;
-  flex: 0.55;
+  flex: 0.5;
 `;
 
 export const CardContent = styled.View`
-  flex: 0.45;
+  flex: 0.5;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   padding: 0 ${(props: { theme: Theme }) => props.theme.space[3]};
 `;
 
 export const Title = styled.Text`
-  font-family: ${(props: { theme: Theme }) => props.theme.fonts.heading};
-  font-size: ${(props: { theme: Theme }) => props.theme.fontSizes.title};
+  font-family: ${(props: { theme: Theme }) => props.theme.fonts.headingBold};
+  font-size: ${(props: { theme: Theme }) => props.theme.fontSizes.subtitle};
+  text-transform: capitalize;
   color: ${(props: { theme: Theme }) => props.theme.colors.ui.primary};
   margin-top: ${(props: { theme: Theme }) => props.theme.space[2]};
-  margin-bottom: ${(props: { theme: Theme }) => props.theme.space[3]};
+  margin-bottom: ${(props: { theme: Theme }) => props.theme.space[1]};
   text-align: center;
   line-height: 20px;
-  letter-spacing: -1px;
 `;
 
-export const ProductImage = styled(Card.Cover)`
-  background-color: ${(props: { theme: Theme }) =>
-    props.theme.colors.bg.primary};
-  border-bottom-left-radius: 20px;
+export const ProductImage = styled.Image`
+  height: 155px;
 `;
 
 export const PriceWrapper = styled.View`
@@ -75,15 +73,20 @@ export const PriceDescriptior = styled.Text`
   font-size: ${(props: { theme: Theme }) => props.theme.fontSizes.caption};
 `;
 
-export const ShortDescription = styled(Text)``;
+export const CTARow = styled.View`
+  margin: 0 ${(props: { theme: Theme }) => props.theme.space[2]};
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+`;
 
 export const RoundIcon = styled(TouchableOpacity)`
-  align-self: flex-end;
   flex-direction: row;
   justify-content: center;
-  align-items: center;
   padding: ${(props: { theme: Theme }) => props.theme.space[2]};
-  border-radius: 22px;
+  border-radius: 26px;
   background-color: ${(props: { theme: Theme }) =>
     props.theme.colors.ui.primary};
 `;
+
+export const WishlistIcon = styled(TouchableOpacity)``;
