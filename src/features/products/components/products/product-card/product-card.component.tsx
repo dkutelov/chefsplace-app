@@ -3,9 +3,9 @@ import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import uuid from "react-native-uuid";
 
-import { AvailabilityStatus, Product } from "../../../types/Product";
-import { CartContext } from "../../../services/cart/cart.context";
-import { ADD_ITEM_TO_CART } from "../../../services/cart/cart.action-types";
+import { AvailabilityStatus, Product } from "../../../../../types/Product";
+import { CartContext } from "../../../../../services/cart/cart.context";
+import { ADD_ITEM_TO_CART } from "../../../../../services/cart/cart.action-types";
 import {
   ProductCardWrapper,
   ProductInfo,

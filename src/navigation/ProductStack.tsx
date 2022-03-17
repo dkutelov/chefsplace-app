@@ -4,7 +4,7 @@ import { SafeAreaView } from "react-native";
 
 import { ProductListScreen } from "../features/products/screens/products.screen";
 import { ProductDetailScreenWrapper } from "../features/product-detail/screens/product-detail.screen";
-import Search from "../features/products/components/search.component";
+import Search from "../features/products/components/search/search.component";
 
 const Stack = createNativeStackNavigator();
 

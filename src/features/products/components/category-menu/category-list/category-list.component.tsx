@@ -17,9 +17,13 @@ import { colors } from "../../../../../infrastructure/theme/colors";
 
 interface IProps {
   filterProducts: (categoryId: string) => void;
+  clearCategoryFilter: () => void;
 }
 
-export const CategoryMenu = ({ filterProducts }: IProps) => {
+export const CategoryMenu = ({
+  filterProducts,
+  clearCategoryFilter,
+}: IProps) => {
   const [showCategories, setShowCategories] = useState(false);
   const [activeCategoryId, setActiveCategoryId] = useState("");
   const windowWidth = useWindowDimensions().width;
@@ -31,7 +35,16 @@ export const CategoryMenu = ({ filterProducts }: IProps) => {
   }, []);
 
   const toggleCetegoryMenu = () => {
+    if (showCategories) {
+      setActiveCategoryId("");
+      clearCategoryFilter();
+    }
     setShowCategories((prevState) => !prevState);
+  };
+
+  const clearSelection = () => {
+    clearCategoryFilter();
+    setActiveCategoryId("");
   };
 
   return (
@@ -75,7 +88,7 @@ export const CategoryMenu = ({ filterProducts }: IProps) => {
             keyExtractor={(_, index) => index}
           />
           {activeCategoryId !== "" && (
-            <ClearContainer onPress={() => {}}>
+            <ClearContainer onPress={clearSelection}>
               <Ionicons name="close" size={16} color={colors.ui.orange} />
               <ClearLabel>изчисти селекцията</ClearLabel>
             </ClearContainer>

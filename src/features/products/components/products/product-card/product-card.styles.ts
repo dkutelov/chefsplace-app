@@ -1,9 +1,9 @@
 import styled from "styled-components/native";
 import { TouchableOpacity } from "react-native";
-import { Text } from "../../../components/typography/text.component";
+import { Text } from "../../../../../components/typography/text.component";
 import { Card } from "react-native-paper";
 
-import { Theme } from "../../../types/Theme";
+import { Theme } from "../../../../../types/Theme";
 
 export const ProductCardWrapper = styled(TouchableOpacity)`
   background-color: ${(props: { theme: Theme }) =>

@@ -59,7 +59,7 @@ const ProductDetailScreen = () => {
       return quantity === product.maxQuantity;
     }
   };
-  console.log(hasNotEnoughStock());
+
   const addProductToCart = () => {
     //TODO: Availability status not converted
     if (!product || product.availabilityStatus !== 1) {
