@@ -17,6 +17,7 @@ import {
   Lato_700Bold,
 } from "@expo-google-fonts/lato";
 import Navigation from "./src/navigation";
+import { WishlistContextProvider } from "./src/services/wishlist/wishlist.context";
 
 export default function App() {
   const [ptsansLoaded] = usePTSans({
@@ -39,7 +40,9 @@ export default function App() {
     <ThemeProvider theme={theme}>
       <ProductsContextProvider>
         <CartContextProvider>
-          <Navigation />
+          <WishlistContextProvider>
+            <Navigation />
+          </WishlistContextProvider>
         </CartContextProvider>
       </ProductsContextProvider>
       <StatusBar style="auto" />
