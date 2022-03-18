@@ -28,17 +28,26 @@ import {
   RoundIcon,
   ActionRow,
   NotEnoughQuantityNotifivation,
+  WishlistAndPriceRow,
 } from "./product-detail.styles";
 
 import { colors } from "../../../infrastructure/theme/colors";
 import { SimilarProducts } from "../components/similar-products/similar-products-list/similar-products-list.component";
+import { WishlistIcon } from "../../../components/wishlist-icon/wishlist-icon.component";
+import { WishlistContext } from "../../../services/wishlist/wishlist.context";
+import {
+  ADD_ITEM_TO_WISHLIST,
+  REMOVE_ITEM_FROM_WISHLIST,
+} from "../../../services/wishlist/wishlist.action-types";
 
 const ProductDetailScreen = () => {
   const { product, isLoading, error, loadProduct } = useContext(ProductContext);
   const [quantity, setQuantity] = useState(1);
   const { params } = useRoute();
   const { cartItems, dispatch } = useContext(CartContext);
-
+  const { wishlistItemIds, dispatch: wishlistDispatch } =
+    useContext(WishlistContext);
+  const [isWishlisted, setIsWishlisted] = useState<boolean>(false);
   useEffect(() => {
     //TODO: if no id redirect to products and show notification "Product does not exists"
 
@@ -49,6 +58,7 @@ const ProductDetailScreen = () => {
 
     if (params && params.id) {
       loadProduct(params.id);
+      setIsWishlisted(wishlistItemIds.includes(params.id));
     }
   }, []);
 
@@ -83,6 +93,29 @@ const ProductDetailScreen = () => {
     });
   };
 
+  const toggleWishlisted = () => {
+    if (product) {
+      if (isWishlisted) {
+        setIsWishlisted(false);
+        wishlistDispatch({
+          type: REMOVE_ITEM_FROM_WISHLIST,
+          payload: {
+            productId: product.id,
+          },
+        });
+        setIsWishlisted(false);
+      } else {
+        wishlistDispatch({
+          type: ADD_ITEM_TO_WISHLIST,
+          payload: {
+            productId: product.id,
+          },
+        });
+        setIsWishlisted(true);
+      }
+    }
+  };
+
   return (
     <SafeArea>
       <ProductScrollView>
@@ -92,15 +125,21 @@ const ProductDetailScreen = () => {
             <Title>{product?.name}</Title>
             <ImageCarousel images={product.images} />
             <Row>
-              <PriceRow>
-                <PriceInnerWrapper>
-                  <Price>{(product.price / 100).toFixed(2)}лв</Price>
-                  <PriceDescriptior>без ДДС</PriceDescriptior>
-                </PriceInnerWrapper>
-                <PriceWith>
-                  {Math.floor(product.price * 1.2) / 100}лв с ДДС
-                </PriceWith>
-              </PriceRow>
+              <WishlistAndPriceRow>
+                <WishlistIcon
+                  isWishlisted={isWishlisted}
+                  toggleWishlisted={toggleWishlisted}
+                />
+                <PriceRow>
+                  <PriceInnerWrapper>
+                    <Price>{(product.price / 100).toFixed(2)}лв</Price>
+                    <PriceDescriptior>без ДДС</PriceDescriptior>
+                  </PriceInnerWrapper>
+                  <PriceWith>
+                    {Math.floor(product.price * 1.2) / 100}лв с ДДС
+                  </PriceWith>
+                </PriceRow>
+              </WishlistAndPriceRow>
               <ActionRow>
                 <QuantitySelector
                   quantity={quantity}

@@ -1,7 +1,5 @@
 import styled from "styled-components/native";
 import { TouchableOpacity } from "react-native";
-import { Text } from "../../../../../components/typography/text.component";
-import { Card } from "react-native-paper";
 
 import { Theme } from "../../../../../types/Theme";
 
@@ -88,5 +86,3 @@ export const RoundIcon = styled(TouchableOpacity)`
   background-color: ${(props: { theme: Theme }) =>
     props.theme.colors.ui.primary};
 `;
-
-export const WishlistIcon = styled(TouchableOpacity)``;

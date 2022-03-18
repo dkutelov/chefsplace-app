@@ -32,6 +32,11 @@ export const ActionRow = styled.View`
   margin: 0 ${(props: { theme: Theme }) => props.theme.space[3]};
 `;
 
+export const WishlistAndPriceRow = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+`;
+
 export const PriceRow = styled.View`
   flex-direction: column;
   align-items: flex-end;

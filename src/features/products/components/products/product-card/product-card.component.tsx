@@ -25,9 +25,8 @@ import {
   CTARow,
   PriceInnerWrapper,
   RoundIcon,
-  WishlistIcon,
 } from "./product-card.styles";
-import { colors } from "../../../../../infrastructure/theme/colors";
+import { WishlistIcon } from "../../../../../components/wishlist-icon/wishlist-icon.component";
 
 interface Props {
   item: Product;
@@ -39,7 +38,7 @@ export const ProductCard = ({ item }: Props) => {
   const { dispatch: contextDispatch } = useContext(CartContext);
   const { wishlistItemIds, dispatch: wishlistDispatch } =
     useContext(WishlistContext);
-  const [isWishlisted, setIsWishlisted] = useState(
+  const [isWishlisted, setIsWishlisted] = useState<boolean>(
     wishlistItemIds.includes(id)
   );
 
@@ -72,7 +71,7 @@ export const ProductCard = ({ item }: Props) => {
     });
   };
 
-  const addProductToWishlist = () => {
+  const toggleWishlisted = () => {
     if (isWishlisted) {
       setIsWishlisted(false);
       wishlistDispatch({
@@ -122,19 +121,10 @@ export const ProductCard = ({ item }: Props) => {
             </CardContent>
           </ProductInfo>
           <CTARow>
-            {isWishlisted ? (
-              <WishlistIcon onPress={addProductToWishlist}>
-                <Ionicons name="heart" size={34} color={colors.ui.primary} />
-              </WishlistIcon>
-            ) : (
-              <WishlistIcon onPress={addProductToWishlist}>
-                <Ionicons
-                  name="heart-outline"
-                  size={34}
-                  color={colors.ui.primary}
-                />
-              </WishlistIcon>
-            )}
+            <WishlistIcon
+              isWishlisted={isWishlisted}
+              toggleWishlisted={toggleWishlisted}
+            />
             <RoundIcon onPress={addToCart}>
               <Ionicons name="cart" size={28} color="white" />
             </RoundIcon>
