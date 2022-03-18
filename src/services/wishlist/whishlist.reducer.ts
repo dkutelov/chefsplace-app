@@ -5,7 +5,11 @@ import {
   REMOVE_ITEM_FROM_WISHLIST,
 } from "./wishlist.action-types";
 
-import { setWishlistItemIds } from "./wishlist.reducer-funcitons";
+import {
+  setWishlistItemIds,
+  addItemToWishlist,
+  removeItemFromWishlist,
+} from "./wishlist.reducer-funcitons";
 
 interface IProps {
   type: string;
@@ -17,9 +21,14 @@ export const wishlistReducer = (
   props: IProps
 ) => {
   const { type, payload } = props;
+  console.log(wishlistState);
   switch (type) {
     case SET_WISHLIST_ITEMS:
       return setWishlistItemIds(wishlistState, payload.wishlistItemIds);
+    case ADD_ITEM_TO_WISHLIST:
+      return addItemToWishlist(wishlistState, payload.productId);
+    case REMOVE_ITEM_FROM_WISHLIST:
+      return removeItemFromWishlist(wishlistState, payload.productId);
     default:
       return wishlistState;
   }

@@ -5,7 +5,12 @@ import uuid from "react-native-uuid";
 
 import { AvailabilityStatus, Product } from "../../../../../types/Product";
 import { CartContext } from "../../../../../services/cart/cart.context";
+import { WishlistContext } from "../../../../../services/wishlist/wishlist.context";
 import { ADD_ITEM_TO_CART } from "../../../../../services/cart/cart.action-types";
+import {
+  ADD_ITEM_TO_WISHLIST,
+  REMOVE_ITEM_FROM_WISHLIST,
+} from "../../../../../services/wishlist/wishlist.action-types";
 import {
   ProductCardWrapper,
   ProductInfo,
@@ -29,17 +34,11 @@ interface Props {
 }
 
 export const ProductCard = ({ item }: Props) => {
-  const {
-    id,
-    name,
-    images,
-    price,
-    shortDescription,
-    availabilityStatus,
-    maxQuantity,
-  } = item;
+  const { id, name, images, price, availabilityStatus, maxQuantity } = item;
   const { navigate } = useNavigation();
-  const { dispatch } = useContext(CartContext);
+  const { dispatch: contextDispatch } = useContext(CartContext);
+  const { wishlistItemIds, dispatch: wishlistDispatch } =
+    useContext(WishlistContext);
 
   const onProductCardPress = () => {
     navigate("ProductDetails", { id });
@@ -54,7 +53,7 @@ export const ProductCard = ({ item }: Props) => {
       return;
     }
 
-    dispatch({
+    contextDispatch({
       type: ADD_ITEM_TO_CART,
       payload: {
         id: uuid.v4(),
@@ -68,6 +67,25 @@ export const ProductCard = ({ item }: Props) => {
         quantity: 1,
       },
     });
+  };
+
+  const addProductToWishlist = () => {
+    const isWhishlisted = wishlistItemIds.includes(id);
+    if (isWhishlisted) {
+      wishlistDispatch({
+        type: REMOVE_ITEM_FROM_WISHLIST,
+        payload: {
+          productId: id,
+        },
+      });
+    } else {
+      wishlistDispatch({
+        type: ADD_ITEM_TO_WISHLIST,
+        payload: {
+          productId: id,
+        },
+      });
+    }
   };
 
   return (
@@ -99,7 +117,7 @@ export const ProductCard = ({ item }: Props) => {
             </CardContent>
           </ProductInfo>
           <CTARow>
-            <WishlistIcon onPress={() => {}}>
+            <WishlistIcon onPress={addProductToWishlist}>
               <Ionicons
                 name="heart-outline"
                 size={34}
