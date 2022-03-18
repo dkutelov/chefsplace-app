@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import uuid from "react-native-uuid";
@@ -39,6 +39,9 @@ export const ProductCard = ({ item }: Props) => {
   const { dispatch: contextDispatch } = useContext(CartContext);
   const { wishlistItemIds, dispatch: wishlistDispatch } =
     useContext(WishlistContext);
+  const [isWishlisted, setIsWishlisted] = useState(
+    wishlistItemIds.includes(id)
+  );
 
   const onProductCardPress = () => {
     navigate("ProductDetails", { id });
@@ -70,14 +73,15 @@ export const ProductCard = ({ item }: Props) => {
   };
 
   const addProductToWishlist = () => {
-    const isWhishlisted = wishlistItemIds.includes(id);
-    if (isWhishlisted) {
+    if (isWishlisted) {
+      setIsWishlisted(false);
       wishlistDispatch({
         type: REMOVE_ITEM_FROM_WISHLIST,
         payload: {
           productId: id,
         },
       });
+      setIsWishlisted(false);
     } else {
       wishlistDispatch({
         type: ADD_ITEM_TO_WISHLIST,
@@ -85,6 +89,7 @@ export const ProductCard = ({ item }: Props) => {
           productId: id,
         },
       });
+      setIsWishlisted(true);
     }
   };
 
@@ -117,13 +122,19 @@ export const ProductCard = ({ item }: Props) => {
             </CardContent>
           </ProductInfo>
           <CTARow>
-            <WishlistIcon onPress={addProductToWishlist}>
-              <Ionicons
-                name="heart-outline"
-                size={34}
-                color={colors.ui.primary}
-              />
-            </WishlistIcon>
+            {isWishlisted ? (
+              <WishlistIcon onPress={addProductToWishlist}>
+                <Ionicons name="heart" size={34} color={colors.ui.primary} />
+              </WishlistIcon>
+            ) : (
+              <WishlistIcon onPress={addProductToWishlist}>
+                <Ionicons
+                  name="heart-outline"
+                  size={34}
+                  color={colors.ui.primary}
+                />
+              </WishlistIcon>
+            )}
             <RoundIcon onPress={addToCart}>
               <Ionicons name="cart" size={28} color="white" />
             </RoundIcon>
