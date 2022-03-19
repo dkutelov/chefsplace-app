@@ -1,4 +1,5 @@
 import { CartItem, ICartContext } from "../../types/Cart";
+import { Product } from "../../types/Product";
 
 export const updateCartItems = (
   cartState: ICartContext,
@@ -7,6 +8,31 @@ export const updateCartItems = (
   ...cartState,
   cartItems,
 });
+
+export const updateCartItemsOnLoad = (
+  cartState: ICartContext,
+  products: Product[]
+): ICartContext => {
+  const initialCartItems = cartState.cartItems;
+
+  //Remove currently non available products
+  let updatedCartItems: CartItem[] = initialCartItems.filter((i) =>
+    products.find((p) => p.id === i.id)
+  );
+
+  //Update max quantity
+  updatedCartItems.forEach((item: CartItem) => {
+    const product = products.find((p) => p.id === item.id);
+    if (product) {
+      item.maxQuantity = product.maxQuantity;
+    }
+  });
+
+  return {
+    ...cartState,
+    cartItems: updatedCartItems,
+  };
+};
 
 export const updateCartItemQuantity = (
   cartState: ICartContext,
@@ -44,10 +70,10 @@ export const addItemToCart = (
 
 export const removeItemFromCart = (
   cartState: ICartContext,
-  cartItem: CartItem
+  cartItemId: string
 ): ICartContext => {
   const updatedCartItems = cartState.cartItems.filter(
-    (x) => x.id !== cartItem.id
+    (x) => x.id !== cartItemId
   );
   return updateCartItems(cartState, updatedCartItems);
 };

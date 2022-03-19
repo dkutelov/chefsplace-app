@@ -65,6 +65,7 @@ export const DeleteIcon = styled.TouchableOpacity`
   padding: ${(props: { theme: Theme }) => props.theme.space[2]};
   border-radius: 18px;
   margin-bottom: ${(props: { theme: Theme }) => props.theme.space[1]};
+  margin-top: -8px;
 `;
 
 export const Price = styled.Text`

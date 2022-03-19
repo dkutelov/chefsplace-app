@@ -58,7 +58,7 @@ export const CartItemCard = ({ cartItem }: Props) => {
   }, [quantity]);
 
   const removeItem = () => {
-    dispatch({ type: REMOVE_ITEM_FROM_CART, payload: { cartItem } });
+    dispatch({ type: REMOVE_ITEM_FROM_CART, payload: { cartItemId: id } });
   };
 
   return (

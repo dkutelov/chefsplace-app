@@ -10,7 +10,7 @@ export const cartTransform = (
     price: cartItem.price,
     image: cartItem.image,
     quantity: cartItem.quantity,
-    maxQuantity: cartItem.maxQuantity,
+    maxQuantity: 1,
   }));
 };
 

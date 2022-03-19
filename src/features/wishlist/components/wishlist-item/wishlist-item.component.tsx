@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { colors } from "../../../../infrastructure/theme/colors";
 
@@ -11,15 +11,14 @@ import {
   PriceWrapper,
   Price,
   PriceWith,
-  PriceInnerWrapper,
   DeleteIcon,
 } from "./wishlist-item.styles";
 
-import { CartContext } from "../../../../services/cart/cart.context";
-import { REMOVE_ITEM_FROM_CART } from "../../../../services/cart/cart.action-types";
+import { WishlistContext } from "../../../../services/wishlist/wishlist.context";
 
 import { WishlistItem } from "../../../../types/Wishlist";
 import { AddToCart } from "../../../../components/add-to-cart-icon/add-to-cart.component";
+import { REMOVE_ITEM_FROM_WISHLIST } from "../../../../services/wishlist/wishlist.action-types";
 
 interface Props {
   wishlistItem: WishlistItem;
@@ -30,12 +29,10 @@ export const WishlistItemCard = ({ wishlistItem }: Props) => {
   //TODO: Add Add to card - create component?
   //TODO: Disable add to cart if not available
 
-  const { dispatch } = useContext(CartContext);
-
-  //   }, [itemQuantity]);
+  const { dispatch } = useContext(WishlistContext);
 
   const removeItem = () => {
-    dispatch({ type: REMOVE_ITEM_FROM_CART, payload: { cartItemId: id } });
+    dispatch({ type: REMOVE_ITEM_FROM_WISHLIST, payload: { productId: id } });
   };
 
   return (

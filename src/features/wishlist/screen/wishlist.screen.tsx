@@ -16,7 +16,7 @@ export const WishlistScreen = () => {
     <SafeArea>
       {wishlistItems.length === 0 ? (
         <NoItemsInWishlist>
-          <Caption>Нямате добавени продукти!</Caption>
+          <Caption>Нямате желани продукти!</Caption>
         </NoItemsInWishlist>
       ) : (
         <WishlistItemList

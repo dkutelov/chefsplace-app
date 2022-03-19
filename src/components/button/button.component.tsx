@@ -4,15 +4,22 @@ import { theme } from "../../infrastructure/theme";
 
 interface IProps {
   text: string;
+  disabled: boolean;
   onButtonPress: () => void;
   containerStyles?: {
     [key: string]: any;
   };
 }
 
-export const Button = ({ text, onButtonPress, containerStyles }: IProps) => {
+export const Button = ({
+  text,
+  disabled,
+  onButtonPress,
+  containerStyles,
+}: IProps) => {
   return (
     <TouchableOpacity
+      disabled={disabled}
       onPress={onButtonPress}
       style={[styles.root, containerStyles]}
     >

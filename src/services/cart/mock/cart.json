@@ -4,7 +4,13 @@
     "name": "SUNSHINE CHILI ПИКАНТЕН СОС С ЧИЛИ И ЧЕСЪН 1 Л",
     "image": "http://chefsplace.bg/261-tm_thickbox_default/sunshine-chili-pikanten-sos-s-chili-i-chesn-1-l.jpg",
     "price": 1952,
-    "maxQuantity": 5,
     "quantity": 2
+  },
+  {
+    "id": "14",
+    "name": "14 SUNSHINE CHILI ПИКАНТЕН СОС С ЧИЛИ И ЧЕСЪН 1 Л",
+    "image": "http://chefsplace.bg/261-tm_thickbox_default/sunshine-chili-pikanten-sos-s-chili-i-chesn-1-l.jpg",
+    "price": 1952,
+    "quantity": 5
   }
 ]

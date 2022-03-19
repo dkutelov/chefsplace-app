@@ -31,19 +31,16 @@ export const CartContextProvider = ({
 
   const retrieveCartItems = () => {
     setIsLoading(true);
-    setTimeout(() => {
-      cartRequest()
-        .then((data: { [key: string]: any }[]) => {
-          return cartTransform(data);
-        })
-        .then((results) => {
-          setIsLoading(false);
-          dispatch({ type: "SET_CART_ITEMS", payload: { cartItems: results } });
-        })
-        .catch((err) => {
-          setIsLoading(false);
-          setError(err);
-        });
+    setTimeout(async () => {
+      try {
+        const data: { [key: string]: any }[] = await cartRequest();
+        const results = cartTransform(data);
+        setIsLoading(false);
+        dispatch({ type: "SET_CART_ITEMS", payload: { cartItems: results } });
+      } catch (err) {
+        setIsLoading(false);
+        setError(err);
+      }
     }, 500);
   };
 

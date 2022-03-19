@@ -27,18 +27,23 @@ export const CartSummary = ({ amount }: { amount: number }) => {
         <Value>5.00 лв.</Value>
       </Row>
       <Row>
-        <Label>Сума без ДДС</Label>
-        <Value>{(amount / 100 + 5).toFixed(2)} лв.</Value>
+        <Label style={{ fontWeight: "bold" }}>Сума без ДДС</Label>
+        <Value style={{ fontWeight: "bold" }}>
+          {(amount / 100 + 5).toFixed(2)} лв.
+        </Value>
       </Row>
       <Row>
         <Label>ДДС</Label>
         <Value>{((amount / 100 + 5) * 0.2).toFixed(2)} лв.</Value>
       </Row>
       <Row>
-        <Label>Сума с ДДС</Label>
-        <Value>{((amount / 100 + 5) * 1.2).toFixed(2)} лв.</Value>
+        <Label style={{ fontWeight: "bold" }}>Сума с ДДС</Label>
+        <Value style={{ fontWeight: "bold" }}>
+          {((amount / 100 + 5) * 1.2).toFixed(2)} лв.
+        </Value>
       </Row>
       <Button
+        disabled={false}
         text="Към Поръчване"
         onButtonPress={onCheckout}
         containerStyles={{ marginBottom: 0 }}
