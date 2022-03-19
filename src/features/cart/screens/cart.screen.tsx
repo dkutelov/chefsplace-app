@@ -11,6 +11,7 @@ import { CartSummary } from "../components/cart-summary/cart-summary.component";
 
 export const CartScreen = () => {
   const { cartItems, isLoading, error, dispatch } = useContext(CartContext);
+  //TODO: Remove unavailanle product from cartItems!!!
   const cartAmount = (): number => {
     return cartItems.reduce(
       (prevValue, product: CartItem) =>

@@ -49,11 +49,6 @@ export const PriceWrapper = styled.View`
   justify-content: flex-start;
 `;
 
-export const AmountWrapper = styled.View`
-  flex-direction: column;
-  align-items: flex-end;
-`;
-
 export const PriceInnerWrapper = styled.View`
   flex-direction: column;
   align-items: flex-end;
@@ -75,11 +70,4 @@ export const Price = styled.Text`
 export const PriceWith = styled.Text`
   font-family: ${(props: { theme: Theme }) => props.theme.fonts.body};
   font-size: ${(props: { theme: Theme }) => props.theme.fontSizes.caption};
-`;
-
-export const Amount = styled.Text`
-  font-family: ${(props: { theme: Theme }) => props.theme.fonts.bodyBold};
-  color: ${(props: { theme: Theme }) => props.theme.colors.text.primary};
-  font-size: ${(props: { theme: Theme }) => props.theme.fontSizes.body};
-  margin-bottom: ${(props: { theme: Theme }) => props.theme.space[1]};
 `;
