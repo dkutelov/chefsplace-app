@@ -15,6 +15,7 @@ export const CartSummary = ({ amount }: { amount: number }) => {
   const onCheckout = () => {
     console.log("checkout", cartItems);
   };
+
   return (
     <CartSummaryWrapper>
       <Title>Общо</Title>
@@ -43,7 +44,7 @@ export const CartSummary = ({ amount }: { amount: number }) => {
         </Value>
       </Row>
       <Button
-        disabled={false}
+        disabled={true}
         text="Към Поръчване"
         onButtonPress={onCheckout}
         containerStyles={{ marginBottom: 0 }}

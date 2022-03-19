@@ -16,6 +16,7 @@ import {
   DeleteIcon,
   AmountWrapper,
   Amount,
+  NotEnoughQuantityNotification,
 } from "./cart-item.styles";
 
 import { QuantitySelector } from "../../../../components/quantity-selector/quantity-selector.component";
@@ -30,7 +31,7 @@ interface Props {
 }
 
 export const CartItemCard = ({ cartItem }: Props) => {
-  const { id, name, price, image, quantity } = cartItem;
+  const { id, name, price, image, quantity, maxQuantity } = cartItem;
   const [itemQuantity, setItemQuantity] = useState(quantity);
   const { cartItems, dispatch } = useContext(CartContext);
 
@@ -92,6 +93,11 @@ export const CartItemCard = ({ cartItem }: Props) => {
             ДДС)
           </PriceWith>
         </AmountWrapper>
+        {itemQuantity >= maxQuantity && (
+          <NotEnoughQuantityNotification>
+            Максимално количество {maxQuantity}.
+          </NotEnoughQuantityNotification>
+        )}
       </Row>
     </CartItemWrapper>
   );

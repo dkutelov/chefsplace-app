@@ -84,3 +84,11 @@ export const Amount = styled.Text`
   font-size: ${(props: { theme: Theme }) => props.theme.fontSizes.body};
   margin-bottom: ${(props: { theme: Theme }) => props.theme.space[1]};
 `;
+
+export const NotEnoughQuantityNotification = styled.Text`
+  text-align: left;
+  color: ${(props: { theme: Theme }) => props.theme.colors.ui.error};
+  position: absolute;
+  bottom: -22px;
+  left: 0;
+`;

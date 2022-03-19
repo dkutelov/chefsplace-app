@@ -15,9 +15,6 @@ export const CartScreen = () => {
   const { cartItems, isLoading, error, dispatch } = useContext(CartContext);
   const { products } = useContext(ProductsContext);
 
-  //TODO: Remove unavailable product from cartItems!!!
-  //TODO: Set max quantity
-
   useEffect(() => {
     dispatch({
       type: UPDATE_CART_ITEMS_ON_LOAD,
@@ -32,8 +29,6 @@ export const CartScreen = () => {
       0
     );
   };
-
-  console.log("list", cartItems);
 
   return (
     <SafeArea>

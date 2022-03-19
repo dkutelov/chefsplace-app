@@ -12,5 +12,13 @@
     "image": "http://chefsplace.bg/261-tm_thickbox_default/sunshine-chili-pikanten-sos-s-chili-i-chesn-1-l.jpg",
     "price": 1952,
     "quantity": 5
+  },
+  {
+    "id": "5",
+    "name": "ПАСТА ОТ СКАРИДИ 0.340 КГ",
+    "image": "https://res.cloudinary.com/dariku/image/upload/v1646151139/majoneza-decorative-28-kg.jpg",
+    "price": 1796,
+    "shortDescription": "Паста от скариди е концентриран продукт подходящ както за студена така и за топла кухня. В комбинация със сосове за риби, миди и паста, така и за салатни дресинги с морски деликатеси. Перфектният начин да подчертаете аромата на скариди във вашата чиния.",
+    "quantity": 1
   }
 ]
