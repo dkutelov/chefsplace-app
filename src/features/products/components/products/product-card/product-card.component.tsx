@@ -1,12 +1,9 @@
 import React, { useState, useContext, useCallback } from "react";
-import { Ionicons } from "@expo/vector-icons";
 import { useNavigation, useFocusEffect } from "@react-navigation/native";
-import uuid from "react-native-uuid";
 
 import { AvailabilityStatus, Product } from "../../../../../types/Product";
 import { CartContext } from "../../../../../services/cart/cart.context";
 import { WishlistContext } from "../../../../../services/wishlist/wishlist.context";
-import { ADD_ITEM_TO_CART } from "../../../../../services/cart/cart.action-types";
 import {
   ADD_ITEM_TO_WISHLIST,
   REMOVE_ITEM_FROM_WISHLIST,
@@ -24,9 +21,9 @@ import {
   PriceDescriptior,
   CTARow,
   PriceInnerWrapper,
-  RoundIcon,
 } from "./product-card.styles";
 import { WishlistIcon } from "../../../../../components/wishlist-icon/wishlist-icon.component";
+import { AddToCart } from "../../../../../components/add-to-cart-icon/add-to-cart.component";
 
 interface Props {
   item: Product;
@@ -60,31 +57,6 @@ export const ProductCard = ({ item }: Props) => {
 
   const onProductCardPress = () => {
     navigate("ProductDetails", { id });
-  };
-
-  const addToCart = () => {
-    if (maxQuantity && maxQuantity < 1) {
-      return;
-    }
-
-    if (availabilityStatus !== AvailabilityStatus.OnStock) {
-      return;
-    }
-
-    contextDispatch({
-      type: ADD_ITEM_TO_CART,
-      payload: {
-        id: uuid.v4(),
-        item: {
-          id,
-          name,
-          image: images[0],
-          price,
-          maxQuantity,
-        },
-        quantity: 1,
-      },
-    });
   };
 
   const toggleWishlisted = () => {
@@ -142,9 +114,17 @@ export const ProductCard = ({ item }: Props) => {
               isWishlisted={isWishlisted}
               toggleWishlisted={toggleWishlisted}
             />
-            <RoundIcon onPress={addToCart}>
-              <Ionicons name="cart" size={28} color="white" />
-            </RoundIcon>
+            <AddToCart
+              cartItem={{
+                id,
+                name,
+                image: images[0],
+                price,
+                maxQuantity,
+                quantity: 1,
+              }}
+              size={28}
+            />
           </CTARow>
         </ProductCardWrapper>
       )}

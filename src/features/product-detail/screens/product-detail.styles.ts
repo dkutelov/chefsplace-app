@@ -71,16 +71,6 @@ export const PriceWith = styled.Text`
   margin-top: ${(props: { theme: Theme }) => props.theme.space[0]};
 `;
 
-export const RoundIcon = styled(TouchableOpacity)`
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  padding: ${(props: { theme: Theme }) => props.theme.space[2]};
-  border-radius: 28px;
-  background-color: ${(props: { theme: Theme }) =>
-    props.theme.colors.ui.primary};
-`;
-
 export const NotEnoughQuantityNotifivation = styled.Text`
   text-align: left;
   color: ${(props: { theme: Theme }) => props.theme.colors.ui.error};

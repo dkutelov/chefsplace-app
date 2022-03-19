@@ -30,22 +30,20 @@ interface Props {
 }
 
 export const CartItemCard = ({ cartItem }: Props) => {
-  const { id, item, quantity } = cartItem;
-
+  const { id, name, price, image, quantity } = cartItem;
   const [itemQuantity, setItemQuantity] = useState(quantity);
-  const { cartItems, isLoading, error, dispatch } = useContext(CartContext);
+  const { cartItems, dispatch } = useContext(CartContext);
 
   //TODO: Notification Max Quantity
   //TODO: Add item to cart
 
   useEffect(() => {
-    const currentItemFromState = cartItems.find(
-      (x) => x.item.id === cartItem.item.id
-    );
+    const currentItemFromState = cartItems.find((x) => x.id === cartItem.id);
 
     if (currentItemFromState?.quantity === itemQuantity) {
       return;
     }
+
     dispatch({
       type: UPDATE_ITEM_QUANTITY,
       payload: {
@@ -55,30 +53,29 @@ export const CartItemCard = ({ cartItem }: Props) => {
     });
   }, [itemQuantity]);
 
+  useEffect(() => {
+    setItemQuantity(quantity);
+  }, [quantity]);
+
   const removeItem = () => {
     dispatch({ type: REMOVE_ITEM_FROM_CART, payload: { cartItem } });
   };
+
   return (
     <CartItemWrapper>
       <TopContent>
-        <Title>{item.name}</Title>
+        <Title>{name}</Title>
         <DeleteIcon onPress={removeItem}>
           <Ionicons name="close" size={20} color={colors.ui.secondary} />
         </DeleteIcon>
       </TopContent>
 
       <Row>
-        <ProductImage
-          key={item.name}
-          source={{ uri: item.image }}
-          resizeMode="contain"
-        />
+        <ProductImage key={name} source={{ uri: image }} resizeMode="contain" />
         <PriceWrapper>
           <PriceInnerWrapper>
-            <Price>{item.price / 100} лв.</Price>
-            <PriceWith>
-              {Math.floor(item.price * 1.2) / 100} лв. (с ДДС)
-            </PriceWith>
+            <Price>{price / 100} лв.</Price>
+            <PriceWith>{Math.floor(price * 1.2) / 100} лв. (с ДДС)</PriceWith>
           </PriceInnerWrapper>
         </PriceWrapper>
       </Row>
@@ -86,15 +83,13 @@ export const CartItemCard = ({ cartItem }: Props) => {
         <QuantitySelector
           quantity={itemQuantity}
           setQuantity={setItemQuantity}
-          maxQuantity={cartItem.item.maxQuantity}
+          maxQuantity={cartItem.maxQuantity}
         />
         <AmountWrapper>
-          <Amount>
-            Сума {((item.price * itemQuantity) / 100).toFixed(2)} лв.
-          </Amount>
+          <Amount>Сума {((price * itemQuantity) / 100).toFixed(2)} лв.</Amount>
           <PriceWith>
-            {(Math.floor(item.price * itemQuantity * 1.2) / 100).toFixed(2)} лв.
-            (с ДДС)
+            {(Math.floor(price * itemQuantity * 1.2) / 100).toFixed(2)} лв. (с
+            ДДС)
           </PriceWith>
         </AmountWrapper>
       </Row>

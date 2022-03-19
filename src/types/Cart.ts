@@ -1,12 +1,9 @@
 export interface CartItem {
   id: string;
-  item: {
-    id: string;
-    name: string;
-    image: string;
-    price: number;
-    maxQuantity: number;
-  };
+  name: string;
+  image: string;
+  price: number;
+  maxQuantity: number;
   quantity: number;
 }
 

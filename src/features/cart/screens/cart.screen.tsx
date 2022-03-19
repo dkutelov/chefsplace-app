@@ -11,14 +11,17 @@ import { CartSummary } from "../components/cart-summary/cart-summary.component";
 
 export const CartScreen = () => {
   const { cartItems, isLoading, error, dispatch } = useContext(CartContext);
-  //TODO: Remove unavailanle product from cartItems!!!
+  //TODO: Remove unavailable product from cartItems!!!
   const cartAmount = (): number => {
     return cartItems.reduce(
       (prevValue, product: CartItem) =>
-        (prevValue += product.quantity * product.item.price),
+        (prevValue += product.quantity * product.price),
       0
     );
   };
+
+  console.log("list", cartItems);
+
   return (
     <SafeArea>
       {cartItems.length === 0 ? (

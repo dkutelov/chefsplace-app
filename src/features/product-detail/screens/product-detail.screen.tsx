@@ -1,12 +1,9 @@
 import React, { useEffect, useContext, useState } from "react";
-import uuid from "react-native-uuid";
-import { Ionicons } from "@expo/vector-icons";
 import { useRoute } from "@react-navigation/native";
 
 import { ProductContextProvider } from "../../../services/product/product.context";
 import { ProductContext } from "../../../services/product/product.context";
 import { CartContext } from "../../../services/cart/cart.context";
-import { ADD_ITEM_TO_CART } from "../../../services/cart/cart.action-types";
 
 import { ImageCarousel } from "../components/image-carousel/image-carousel.component";
 import { QuantitySelector } from "../../../components/quantity-selector/quantity-selector.component";
@@ -25,7 +22,6 @@ import {
   Price,
   PriceWith,
   Row,
-  RoundIcon,
   ActionRow,
   NotEnoughQuantityNotifivation,
   WishlistAndPriceRow,
@@ -39,6 +35,7 @@ import {
   ADD_ITEM_TO_WISHLIST,
   REMOVE_ITEM_FROM_WISHLIST,
 } from "../../../services/wishlist/wishlist.action-types";
+import { AddToCart } from "../../../components/add-to-cart-icon/add-to-cart.component";
 
 const ProductDetailScreen = () => {
   const { product, isLoading, error, loadProduct } = useContext(ProductContext);
@@ -48,6 +45,7 @@ const ProductDetailScreen = () => {
   const { wishlistItems, dispatch: wishlistDispatch } =
     useContext(WishlistContext);
   const [isWishlisted, setIsWishlisted] = useState<boolean>(false);
+
   useEffect(() => {
     //TODO: if no id redirect to products and show notification "Product does not exists"
 
@@ -68,29 +66,6 @@ const ProductDetailScreen = () => {
     } else {
       return quantity === product.maxQuantity;
     }
-  };
-
-  const addProductToCart = () => {
-    //TODO: Availability status not converted
-    if (!product || product.availabilityStatus !== 1) {
-      return;
-    }
-    const { id, name, price } = product;
-
-    dispatch({
-      type: ADD_ITEM_TO_CART,
-      payload: {
-        id: uuid.v4(),
-        item: {
-          id,
-          name,
-          image: product.images[0],
-          price,
-          maxQuantity: product?.maxQuantity,
-        },
-        quantity,
-      },
-    });
   };
 
   const toggleWishlisted = () => {
@@ -128,7 +103,7 @@ const ProductDetailScreen = () => {
         {isLoading && <LoadingIndicator size={32} color={colors.ui.primary} />}
         {product && (
           <>
-            <Title>{product?.name}</Title>
+            <Title>{product.name}</Title>
             <ImageCarousel images={product.images} />
 
             <WishlistAndPriceRow>
@@ -152,14 +127,17 @@ const ProductDetailScreen = () => {
                 setQuantity={setQuantity}
                 maxQuantity={product.maxQuantity}
               />
-              <RoundIcon>
-                <Ionicons
-                  onPress={addProductToCart}
-                  name="cart"
-                  size={40}
-                  color="white"
-                />
-              </RoundIcon>
+              <AddToCart
+                cartItem={{
+                  id: product.id,
+                  name: product.name,
+                  image: product.images[0],
+                  price: product.price,
+                  maxQuantity: product.maxQuantity,
+                  quantity,
+                }}
+                size={36}
+              />
               {hasNotEnoughStock() && (
                 <NotEnoughQuantityNotifivation>
                   Максимално количество {product.maxQuantity}.

@@ -15,7 +15,7 @@ export const TopContent = styled.View`
   flex-direction: row;
   align-items: flex-start;
   flex-wrap: nowrap;
-  margin-bottom: ${(props: { theme: Theme }) => props.theme.space[3]};
+  margin-bottom: ${(props: { theme: Theme }) => props.theme.space[1]};
 `;
 
 export const Row = styled.View`
@@ -23,7 +23,6 @@ export const Row = styled.View`
   align-items: center;
   justify-content: space-between;
   flex-wrap: nowrap;
-  margin-bottom: ${(props: { theme: Theme }) => props.theme.space[3]};
 `;
 
 export const Title = styled.Text`
@@ -45,13 +44,8 @@ export const ProductImage = styled(Image)`
 
 export const PriceWrapper = styled.View`
   flex-direction: column;
-  align-items: flex-end;
+  align-items: flex-start;
   justify-content: flex-start;
-`;
-
-export const PriceInnerWrapper = styled.View`
-  flex-direction: column;
-  align-items: flex-end;
 `;
 
 export const DeleteIcon = styled.TouchableOpacity`
@@ -59,7 +53,7 @@ export const DeleteIcon = styled.TouchableOpacity`
   align-items: flex-end;
   padding: ${(props: { theme: Theme }) => props.theme.space[2]};
   border-radius: 18px;
-  margin-bottom: ${(props: { theme: Theme }) => props.theme.space[1]};
+  margin-top: -8px;
 `;
 
 export const Price = styled.Text`

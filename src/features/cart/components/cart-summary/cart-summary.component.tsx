@@ -1,6 +1,6 @@
-import React from "react";
-import { Text } from "react-native";
+import React, { useContext } from "react";
 import { Button } from "../../../../components/button/button.component";
+import { CartContext } from "../../../../services/cart/cart.context";
 import {
   CartSummaryWrapper,
   Label,
@@ -10,6 +10,11 @@ import {
 } from "./cart-summary.styles";
 
 export const CartSummary = ({ amount }: { amount: number }) => {
+  const { cartItems, dispatch } = useContext(CartContext);
+
+  const onCheckout = () => {
+    console.log("checkout", cartItems);
+  };
   return (
     <CartSummaryWrapper>
       <Title>Общо</Title>
@@ -35,7 +40,7 @@ export const CartSummary = ({ amount }: { amount: number }) => {
       </Row>
       <Button
         text="Към Поръчване"
-        onButtonPress={() => {}}
+        onButtonPress={onCheckout}
         containerStyles={{ marginBottom: 0 }}
       />
     </CartSummaryWrapper>

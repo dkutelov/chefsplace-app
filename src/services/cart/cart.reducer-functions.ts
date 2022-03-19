@@ -14,10 +14,10 @@ export const updateCartItemQuantity = (
   newQuantity: number
 ): ICartContext => {
   const updatedCartItems = cartState.cartItems.map((x) => {
-    if (x.item.id === cartItem.item.id) {
+    if (x.id === cartItem.id) {
       x.quantity = newQuantity;
-      if (x.item.maxQuantity && x.quantity > x.item.maxQuantity) {
-        x.quantity = x.item.maxQuantity;
+      if (x.maxQuantity && x.quantity > x.maxQuantity) {
+        x.quantity = x.maxQuantity;
       }
     }
     return x;
@@ -31,12 +31,14 @@ export const addItemToCart = (
   cartItem: CartItem
 ): ICartContext => {
   const items = cartState.cartItems;
-  const itemExists = items.find((x) => x.item.id === cartItem.item.id);
+  const itemExists = items.find((x) => x.id === cartItem.id);
 
   if (!itemExists) {
     const updatedCartItems = [...cartState.cartItems, cartItem];
     return updateCartItems(cartState, updatedCartItems);
   }
+
+  cartItem.quantity += itemExists.quantity;
   return updateCartItemQuantity(cartState, cartItem, cartItem.quantity);
 };
 
@@ -45,7 +47,7 @@ export const removeItemFromCart = (
   cartItem: CartItem
 ): ICartContext => {
   const updatedCartItems = cartState.cartItems.filter(
-    (x) => x.item.id !== cartItem.item.id
+    (x) => x.id !== cartItem.id
   );
   return updateCartItems(cartState, updatedCartItems);
 };

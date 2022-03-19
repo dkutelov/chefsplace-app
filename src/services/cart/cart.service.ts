@@ -6,8 +6,11 @@ export const cartTransform = (
 ): CartItem[] => {
   return cartData.map<CartItem>((cartItem: any) => ({
     id: cartItem.id,
-    item: cartItem.item,
+    name: cartItem.name,
+    price: cartItem.price,
+    image: cartItem.image,
     quantity: cartItem.quantity,
+    maxQuantity: cartItem.maxQuantity,
   }));
 };
 

@@ -77,12 +77,3 @@ export const CTARow = styled.View`
   justify-content: space-between;
   align-items: center;
 `;
-
-export const RoundIcon = styled(TouchableOpacity)`
-  flex-direction: row;
-  justify-content: center;
-  padding: ${(props: { theme: Theme }) => props.theme.space[2]};
-  border-radius: 26px;
-  background-color: ${(props: { theme: Theme }) =>
-    props.theme.colors.ui.primary};
-`;
