@@ -1,5 +1,15 @@
+import { boolean } from "yup";
+
+export interface WishlistItem {
+  id: string;
+  name: string;
+  image: string;
+  price: number;
+  available: boolean;
+}
+
 export interface IWishlistContext {
-  wishlistItemIds: string[];
+  wishlistItems: WishlistItem[];
   isLoading: boolean;
   error?: string;
   dispatch: React.Dispatch<any>;

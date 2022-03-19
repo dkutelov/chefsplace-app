@@ -1,32 +1,31 @@
-import { IWishlistContext } from "../../types/Wishlist";
+import { IWishlistContext, WishlistItem } from "../../types/Wishlist";
 
-export const setWishlistItemIds = (
+export const setWishlistItems = (
   wishlistState: IWishlistContext,
-  wishlistItemIds: string[]
+  wishlistItems: WishlistItem[]
 ): IWishlistContext => ({
   ...wishlistState,
-  wishlistItemIds,
+  wishlistItems,
 });
 
 export const addItemToWishlist = (
   wishlistState: IWishlistContext,
-  productId: string
+  wishlistItem: WishlistItem
 ): IWishlistContext => {
-  const wishlistItemIds = [...wishlistState.wishlistItemIds, productId];
   return {
     ...wishlistState,
-    wishlistItemIds,
+    wishlistItems: [...wishlistState.wishlistItems, wishlistItem],
   };
 };
 export const removeItemFromWishlist = (
   wishlistState: IWishlistContext,
   productId: string
 ): IWishlistContext => {
-  const wishlistItemIds = wishlistState.wishlistItemIds.filter(
-    (x) => x !== productId
+  const wishlistItems = wishlistState.wishlistItems.filter(
+    (x) => x.id !== productId
   );
   return {
     ...wishlistState,
-    wishlistItemIds,
+    wishlistItems,
   };
 };

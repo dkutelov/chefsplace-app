@@ -36,16 +36,26 @@ export const ProductCard = ({ item }: Props) => {
   const { id, name, images, price, availabilityStatus, maxQuantity } = item;
   const { navigate } = useNavigation();
   const { dispatch: contextDispatch } = useContext(CartContext);
-  const { wishlistItemIds, dispatch: wishlistDispatch } =
+  const { wishlistItems, dispatch: wishlistDispatch } =
     useContext(WishlistContext);
-  const [isWishlisted, setIsWishlisted] = useState<boolean>(
-    wishlistItemIds.includes(id)
-  );
+
+  const getWishlistedStatus = (): boolean => {
+    if (wishlistItems.length) {
+      const isInWishlist = wishlistItems.find((x) => x.id === id);
+      if (isInWishlist) {
+        return true;
+      }
+    }
+    return false;
+  };
+
+  const [isWishlisted, setIsWishlisted] =
+    useState<boolean>(getWishlistedStatus);
 
   useFocusEffect(
     useCallback(() => {
-      setIsWishlisted(wishlistItemIds.includes(id));
-    }, [wishlistItemIds])
+      setIsWishlisted(getWishlistedStatus);
+    }, [wishlistItems])
   );
 
   const onProductCardPress = () => {
@@ -88,10 +98,11 @@ export const ProductCard = ({ item }: Props) => {
       });
       setIsWishlisted(false);
     } else {
+      const wishlistItem = { id, name, image: images[0], price };
       wishlistDispatch({
         type: ADD_ITEM_TO_WISHLIST,
         payload: {
-          productId: id,
+          wishlistItem,
         },
       });
       setIsWishlisted(true);

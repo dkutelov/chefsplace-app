@@ -45,7 +45,7 @@ const ProductDetailScreen = () => {
   const [quantity, setQuantity] = useState(1);
   const { params } = useRoute();
   const { cartItems, dispatch } = useContext(CartContext);
-  const { wishlistItemIds, dispatch: wishlistDispatch } =
+  const { wishlistItems, dispatch: wishlistDispatch } =
     useContext(WishlistContext);
   const [isWishlisted, setIsWishlisted] = useState<boolean>(false);
   useEffect(() => {
@@ -58,7 +58,7 @@ const ProductDetailScreen = () => {
 
     if (params && params.id) {
       loadProduct(params.id);
-      setIsWishlisted(wishlistItemIds.includes(params.id));
+      setIsWishlisted(!!wishlistItems.find((x) => x.id === params.id));
     }
   }, []);
 
@@ -105,10 +105,16 @@ const ProductDetailScreen = () => {
         });
         setIsWishlisted(false);
       } else {
+        const wishlistItem = {
+          id: product.id,
+          name: product.name,
+          image: product.images[0],
+          price: product.price,
+        };
         wishlistDispatch({
           type: ADD_ITEM_TO_WISHLIST,
           payload: {
-            productId: product.id,
+            wishlistItem,
           },
         });
         setIsWishlisted(true);

@@ -6,7 +6,7 @@ import {
 } from "./wishlist.action-types";
 
 import {
-  setWishlistItemIds,
+  setWishlistItems,
   addItemToWishlist,
   removeItemFromWishlist,
 } from "./wishlist.reducer-funcitons";
@@ -24,9 +24,9 @@ export const wishlistReducer = (
   console.log(wishlistState);
   switch (type) {
     case SET_WISHLIST_ITEMS:
-      return setWishlistItemIds(wishlistState, payload.wishlistItemIds);
+      return setWishlistItems(wishlistState, payload.wishlistItems);
     case ADD_ITEM_TO_WISHLIST:
-      return addItemToWishlist(wishlistState, payload.productId);
+      return addItemToWishlist(wishlistState, payload.wishlistItem);
     case REMOVE_ITEM_FROM_WISHLIST:
       return removeItemFromWishlist(wishlistState, payload.productId);
     default:

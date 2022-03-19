@@ -6,12 +6,12 @@ import React, {
   useReducer,
 } from "react";
 
-import { wishlistRequest } from "./wishlist.service";
-import { IWishlistContext } from "../../types/Wishlist";
+import { wishlistRequest, wishlistTransform } from "./wishlist.service";
+import { IWishlistContext, WishlistItem } from "../../types/Wishlist";
 import { wishlistReducer } from "./whishlist.reducer";
 
 const defaultState: IWishlistContext = {
-  wishlistItemIds: [],
+  wishlistItems: [],
   isLoading: false,
   dispatch: () => {},
 };
@@ -33,11 +33,14 @@ export const WishlistContextProvider = ({
     setIsLoading(true);
     setTimeout(() => {
       wishlistRequest()
-        .then((results: string[]) => {
+        .then((data: { [key: string]: any }[]) => {
+          return wishlistTransform(data);
+        })
+        .then((results: WishlistItem[]) => {
           setIsLoading(false);
           dispatch({
             type: "SET_WISHLIST_ITEMS",
-            payload: { wishlistItemIds: results },
+            payload: { wishlistItems: results },
           });
         })
         .catch((err) => {
