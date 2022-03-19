@@ -1,6 +1,6 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useCallback } from "react";
 import { Ionicons } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useFocusEffect } from "@react-navigation/native";
 import uuid from "react-native-uuid";
 
 import { AvailabilityStatus, Product } from "../../../../../types/Product";
@@ -40,6 +40,12 @@ export const ProductCard = ({ item }: Props) => {
     useContext(WishlistContext);
   const [isWishlisted, setIsWishlisted] = useState<boolean>(
     wishlistItemIds.includes(id)
+  );
+
+  useFocusEffect(
+    useCallback(() => {
+      setIsWishlisted(wishlistItemIds.includes(id));
+    }, [wishlistItemIds])
   );
 
   const onProductCardPress = () => {

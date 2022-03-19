@@ -4,7 +4,7 @@ import { FlatList } from "react-native";
 import { Theme } from "../../../../types/Theme";
 
 export const ContainerView = styled.View`
-  margin-bottom: ${(props: { theme: Theme }) => props.theme.space[2]};
+  margin-bottom: ${(props: { theme: Theme }) => props.theme.space[0]};
 `;
 
 export const ImageFlatList = styled(FlatList)`

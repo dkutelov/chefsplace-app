@@ -124,43 +124,42 @@ const ProductDetailScreen = () => {
           <>
             <Title>{product?.name}</Title>
             <ImageCarousel images={product.images} />
-            <Row>
-              <WishlistAndPriceRow>
-                <WishlistIcon
-                  isWishlisted={isWishlisted}
-                  toggleWishlisted={toggleWishlisted}
+
+            <WishlistAndPriceRow>
+              <WishlistIcon
+                isWishlisted={isWishlisted}
+                toggleWishlisted={toggleWishlisted}
+              />
+              <PriceRow>
+                <PriceInnerWrapper>
+                  <Price>{(product.price / 100).toFixed(2)}лв</Price>
+                  <PriceDescriptior>без ДДС</PriceDescriptior>
+                </PriceInnerWrapper>
+                <PriceWith>
+                  {Math.floor(product.price * 1.2) / 100}лв с ДДС
+                </PriceWith>
+              </PriceRow>
+            </WishlistAndPriceRow>
+            <ActionRow>
+              <QuantitySelector
+                quantity={quantity}
+                setQuantity={setQuantity}
+                maxQuantity={product.maxQuantity}
+              />
+              <RoundIcon>
+                <Ionicons
+                  onPress={addProductToCart}
+                  name="cart"
+                  size={40}
+                  color="white"
                 />
-                <PriceRow>
-                  <PriceInnerWrapper>
-                    <Price>{(product.price / 100).toFixed(2)}лв</Price>
-                    <PriceDescriptior>без ДДС</PriceDescriptior>
-                  </PriceInnerWrapper>
-                  <PriceWith>
-                    {Math.floor(product.price * 1.2) / 100}лв с ДДС
-                  </PriceWith>
-                </PriceRow>
-              </WishlistAndPriceRow>
-              <ActionRow>
-                <QuantitySelector
-                  quantity={quantity}
-                  setQuantity={setQuantity}
-                  maxQuantity={product.maxQuantity}
-                />
-                <RoundIcon>
-                  <Ionicons
-                    onPress={addProductToCart}
-                    name="cart"
-                    size={40}
-                    color="white"
-                  />
-                </RoundIcon>
-              </ActionRow>
+              </RoundIcon>
               {hasNotEnoughStock() && (
                 <NotEnoughQuantityNotifivation>
                   Максимално количество {product.maxQuantity}.
                 </NotEnoughQuantityNotifivation>
               )}
-            </Row>
+            </ActionRow>
             <Row>
               <ShortDescription>{product.shortDescription}</ShortDescription>
             </Row>

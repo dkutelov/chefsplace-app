@@ -72,7 +72,7 @@ export const PriceDescriptior = styled.Text`
 `;
 
 export const CTARow = styled.View`
-  margin: 0 ${(props: { theme: Theme }) => props.theme.space[2]};
+  margin: 0;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;

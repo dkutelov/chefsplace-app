@@ -6,7 +6,6 @@ interface IProps {
 }
 
 export const SimilarProducts = ({ category }: IProps) => {
-  console.log(category);
   return (
     <View>
       <Text>Similar Products</Text>
