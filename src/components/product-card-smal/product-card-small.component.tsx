@@ -1,5 +1,7 @@
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
+import { Dimensions } from "react-native";
+
 import { AddToCart } from "../../components/add-to-cart-icon/add-to-cart.component";
 
 import { AvailabilityStatus, Product } from "../../types/Product";
@@ -12,8 +14,6 @@ import {
   Title,
   Price,
 } from "./product-card-small.styles";
-
-import { Dimensions } from "react-native";
 
 const cardWidth = (Dimensions.get("window").width - 24) / 2;
 

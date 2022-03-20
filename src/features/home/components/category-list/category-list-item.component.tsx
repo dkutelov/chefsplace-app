@@ -1,6 +1,9 @@
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
 
+import { Dimensions } from "react-native";
+const cardWidth = (Dimensions.get("window").width - 20) / 2;
+
 import {
   CategoryCard,
   CategoryTitle,
@@ -21,7 +24,7 @@ const CategoryListItem = ({ item: { id, name, imageUrl } }: IProps) => {
   };
 
   return (
-    <CategoryCard onPress={onCategoryPress}>
+    <CategoryCard onPress={onCategoryPress} width={cardWidth}>
       <CategoryImage source={{ uri: imageUrl }} />
       <CategoryTitleContainer>
         <CategoryTitle>{name}</CategoryTitle>

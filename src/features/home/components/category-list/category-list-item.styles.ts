@@ -3,7 +3,7 @@ import { TouchableOpacity } from "react-native";
 import { Theme } from "../../../../types/Theme";
 
 export const CategoryCard = styled(TouchableOpacity)`
-  flex-basis: 49.5%;
+  flex-basis: ${({ width }: { width: number }) => width}px;
   margin-bottom: ${(props: { theme: Theme }) => props.theme.space[1]};
   padding: 0 ${(props: { theme: Theme }) => props.theme.space[2]};
   justify-content: space-between;
