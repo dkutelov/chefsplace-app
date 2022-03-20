@@ -39,23 +39,26 @@ export const ImageCarousel = ({ images }: { images: string[] }) => {
         }}
         onViewableItemsChanged={onFlatlistUpdate}
         keyExtractor={(_, index) => index}
+        oneImageOnly={images.length === 1}
       />
-      <DotsContainer>
-        <DotsInnerContainer>
-          {images.map((_, index) => (
-            <View
-              key={`dot-${index}`}
-              style={[
-                styles.dot,
-                {
-                  backgroundColor:
-                    activeIndex === index ? "#a9a9a9" : "#dddddd",
-                },
-              ]}
-            />
-          ))}
-        </DotsInnerContainer>
-      </DotsContainer>
+      {images.length > 1 && (
+        <DotsContainer>
+          <DotsInnerContainer>
+            {images.map((_, index) => (
+              <View
+                key={`dot-${index}`}
+                style={[
+                  styles.dot,
+                  {
+                    backgroundColor:
+                      activeIndex === index ? "#a9a9a9" : "#dddddd",
+                  },
+                ]}
+              />
+            ))}
+          </DotsInnerContainer>
+        </DotsContainer>
+      )}
     </ContainerView>
   );
 };

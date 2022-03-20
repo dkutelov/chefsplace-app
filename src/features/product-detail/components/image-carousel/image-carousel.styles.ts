@@ -9,9 +9,15 @@ export const ContainerView = styled.View`
 
 export const ImageFlatList = styled(FlatList)`
   background-color: #ffffff;
-  margin: ${(props: { theme: Theme }) => props.theme.space[3]};
-  border-radius: ${(props: { theme: Theme }) => props.theme.space[3]};
-  padding-bottom: ${(props: { theme: Theme }) => props.theme.space[4]};
+  margin: ${(props: { theme: Theme }) => props.theme.space[2]};
+  border-radius: ${(props: { theme: Theme }) => props.theme.space[2]};
+  padding-bottom: ${({
+    theme,
+    oneImageOnly,
+  }: {
+    theme: Theme;
+    oneImageOnly: boolean;
+  }) => (oneImageOnly ? 0 : theme.space[3])};
 `;
 
 export const DotsContainer = styled.View`
@@ -21,7 +27,7 @@ export const DotsContainer = styled.View`
   position: absolute;
   left: 0;
   right: 0;
-  bottom: ${(props: { theme: Theme }) => props.theme.space[4]};
+  bottom: ${(props: { theme: Theme }) => props.theme.space[3]};
 `;
 
 export const DotsInnerContainer = styled.View`

@@ -1,5 +1,6 @@
-import React, { useState, useContext, useCallback } from "react";
-import { useNavigation, useFocusEffect } from "@react-navigation/native";
+import React from "react";
+import { useNavigation } from "@react-navigation/native";
+import { AddToCart } from "../../components/add-to-cart-icon/add-to-cart.component";
 
 import { AvailabilityStatus, Product } from "../../types/Product";
 import { CartContext } from "../../services/cart/cart.context";
@@ -12,7 +13,9 @@ import {
   Price,
 } from "./product-card-small.styles";
 
-import { AddToCart } from "../../components/add-to-cart-icon/add-to-cart.component";
+import { Dimensions } from "react-native";
+
+const cardWidth = (Dimensions.get("window").width - 24) / 2;
 
 interface Props {
   item: Product;
@@ -27,7 +30,7 @@ export const ProductCardSmall = ({ item }: Props) => {
   };
 
   return (
-    <ProductCardWrapper onPress={onProductCardPress}>
+    <ProductCardWrapper onPress={onProductCardPress} width={cardWidth}>
       <ProductImage
         key={name}
         source={{ uri: images[0] }}

@@ -4,7 +4,7 @@ import { TouchableOpacity } from "react-native";
 import { Theme } from "../../types/Theme";
 
 export const ProductCardWrapper = styled(TouchableOpacity)`
-  width: 49%;
+  flex-basis: ${({ width }: { width: number }) => width}px;
   background-color: ${(props: { theme: Theme }) =>
     props.theme.colors.bg.primary};
   margin-bottom: ${(props: { theme: Theme }) => props.theme.space[2]};

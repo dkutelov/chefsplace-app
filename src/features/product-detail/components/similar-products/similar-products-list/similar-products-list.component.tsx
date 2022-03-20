@@ -1,4 +1,3 @@
-import { View, Text } from "react-native";
 import React, { useContext, useEffect, useState } from "react";
 
 import { ProductsContext } from "../../../../../services/products/products.context";
@@ -44,7 +43,7 @@ export const SimilarProducts = ({ categoryId }: IProps) => {
       <Title>Подобни Продукти</Title>
       <SimilarProductsContainer>
         {similarProducts.map((product) => (
-          <ProductCardSmall item={product} />
+          <ProductCardSmall item={product} key={product.id} />
         ))}
       </SimilarProductsContainer>
     </Container>
