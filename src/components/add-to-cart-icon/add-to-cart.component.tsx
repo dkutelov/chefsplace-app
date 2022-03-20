@@ -12,7 +12,7 @@ interface IProps {
   disabled: boolean;
 }
 
-export const AddToCart = ({ cartItem, size }: IProps) => {
+export const AddToCart = ({ cartItem, size, disabled = false }: IProps) => {
   const { id, name, image, price, quantity, maxQuantity } = cartItem;
   const { dispatch: contextDispatch } = useContext(CartContext);
 
@@ -30,7 +30,11 @@ export const AddToCart = ({ cartItem, size }: IProps) => {
     });
   };
   return (
-    <AddToCardContainer onPress={addToCart} size={size || 28}>
+    <AddToCardContainer
+      disabled={disabled}
+      onPress={addToCart}
+      size={size || 28}
+    >
       <Ionicons name="cart" size={size} color="white" />
     </AddToCardContainer>
   );

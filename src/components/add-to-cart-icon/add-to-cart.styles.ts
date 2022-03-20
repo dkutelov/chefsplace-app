@@ -10,7 +10,12 @@ export const AddToCardContainer = styled(TouchableOpacity)`
   justify-content: center;
   align-items: center;
   border-radius: ${(props) => props.size + 16}px;
-  background-color: ${(props: { theme: Theme }) =>
-    props.theme.colors.ui.primary};
+  background-color: ${({
+    theme,
+    disabled,
+  }: {
+    theme: Theme;
+    disabled: boolean;
+  }) => (disabled ? theme.colors.ui.disabled : theme.colors.ui.primary)};
 `;
 //8px -> 16px
