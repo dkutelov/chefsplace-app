@@ -29,29 +29,26 @@ export const ActionRow = styled.View`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+`;
+
+export const CTARow = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
   margin: 0 ${(props: { theme: Theme }) => props.theme.space[3]}
     ${(props: { theme: Theme }) => props.theme.space[3]};
 `;
 
-export const WishlistAndPriceRow = styled.View`
+export const PriceRow = styled.View`
   flex-direction: row;
   justify-content: space-between;
-  margin-left: ${(props: { theme: Theme }) => props.theme.space[3]};
-`;
-
-export const PriceRow = styled.View`
-  flex-direction: column;
-  align-items: flex-end;
-  margin: 0 ${(props: { theme: Theme }) => props.theme.space[3]} 22px;
+  align-items: baseline;
+  margin: 0 ${(props: { theme: Theme }) => props.theme.space[3]}
+    ${(props: { theme: Theme }) => props.theme.space[3]};
 `;
 
 export const Description = styled.Text`
   padding: 0 ${(props: { theme: Theme }) => props.theme.space[3]};
-`;
-
-export const PriceInnerWrapper = styled.View`
-  flex-direction: row;
-  align-items: baseline;
 `;
 
 export const Price = styled.Text`
@@ -59,16 +56,9 @@ export const Price = styled.Text`
   font-size: ${(props: { theme: Theme }) => props.theme.fontSizes.h4};
 `;
 
-export const PriceDescriptior = styled.Text`
-  margin-left: ${(props: { theme: Theme }) => props.theme.space[2]};
-  font-size: ${(props: { theme: Theme }) => props.theme.fontSizes.caption};
-`;
-
 export const PriceWith = styled.Text`
   font-family: ${(props: { theme: Theme }) => props.theme.fonts.body};
-  font-size: ${(props: { theme: Theme }) => props.theme.fontSizes.caption};
-  margin-left: ${(props: { theme: Theme }) => props.theme.space[2]};
-  margin-top: ${(props: { theme: Theme }) => props.theme.space[0]};
+  font-size: ${(props: { theme: Theme }) => props.theme.fontSizes.title};
 `;
 
 export const NotEnoughQuantityNotifivation = styled.Text`

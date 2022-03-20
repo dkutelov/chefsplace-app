@@ -31,15 +31,14 @@ import {
   ShortDescription,
   Description,
   PriceRow,
-  PriceInnerWrapper,
-  PriceDescriptior,
   Price,
   PriceWith,
   Row,
   ActionRow,
   NotEnoughQuantityNotifivation,
-  WishlistAndPriceRow,
+  CTARow,
 } from "./product-detail.styles";
+import { Spacer } from "../../../components/spacer/spacer.component";
 
 const ProductDetailScreen = () => {
   const { product, isLoading, error, loadProduct } = useContext(ProductContext);
@@ -109,45 +108,43 @@ const ProductDetailScreen = () => {
           <>
             <Title>{product.name}</Title>
             <ImageCarousel images={product.images} />
-
-            <WishlistAndPriceRow>
+            <PriceRow>
+              <Price>{(product.price / 100).toFixed(2)} лв. </Price>
+              <PriceWith>
+                {Math.floor(product.price * 1.2) / 100} лв. с ДДС
+              </PriceWith>
+            </PriceRow>
+            <CTARow>
               <WishlistIcon
                 isWishlisted={isWishlisted}
                 toggleWishlisted={toggleWishlisted}
               />
-              <PriceRow>
-                <PriceInnerWrapper>
-                  <Price>{(product.price / 100).toFixed(2)}лв</Price>
-                  <PriceDescriptior>без ДДС</PriceDescriptior>
-                </PriceInnerWrapper>
-                <PriceWith>
-                  {Math.floor(product.price * 1.2) / 100}лв с ДДС
-                </PriceWith>
-              </PriceRow>
-            </WishlistAndPriceRow>
-            <ActionRow>
-              <QuantitySelector
-                quantity={quantity}
-                setQuantity={setQuantity}
-                maxQuantity={product.maxQuantity}
-              />
-              <AddToCart
-                cartItem={{
-                  id: product.id,
-                  name: product.name,
-                  image: product.images[0],
-                  price: product.price,
-                  maxQuantity: product.maxQuantity,
-                  quantity,
-                }}
-                size={36}
-              />
+              <ActionRow>
+                <Spacer position="right" size="large">
+                  <QuantitySelector
+                    quantity={quantity}
+                    setQuantity={setQuantity}
+                    maxQuantity={product.maxQuantity}
+                  />
+                </Spacer>
+                <AddToCart
+                  cartItem={{
+                    id: product.id,
+                    name: product.name,
+                    image: product.images[0],
+                    price: product.price,
+                    maxQuantity: product.maxQuantity,
+                    quantity,
+                  }}
+                  size={45}
+                />
+              </ActionRow>
               {hasNotEnoughStock() && (
                 <NotEnoughQuantityNotifivation>
                   Максимално количество {product.maxQuantity}.
                 </NotEnoughQuantityNotifivation>
               )}
-            </ActionRow>
+            </CTARow>
             <Row>
               <ShortDescription>{product.shortDescription}</ShortDescription>
             </Row>
