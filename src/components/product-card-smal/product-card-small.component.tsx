@@ -26,6 +26,8 @@ export const ProductCardSmall = ({ item }: Props) => {
   const { navigate } = useNavigation();
 
   const onProductCardPress = () => {
+    console.log("hi");
+
     navigate("ProductDetails", { id });
   };
 

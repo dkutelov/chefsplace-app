@@ -10,10 +10,10 @@ import { RootStackParamList, RootTabParamList } from "../types/Navigation";
 import LinkingConfiguration from "./LinkingConfiguration";
 import { CartScreen } from "../features/cart/screens/cart.screen";
 import { ProfileScreen } from "../features/profile/screens";
-import { CategoriesScreen } from "../features/categories/screens/categories.screen";
 import { ProductStack } from "./ProductStack";
 import { HomeStack } from "./HomeStack";
 import { WishlistScreen } from "../features/wishlist/screen/wishlist.screen";
+import { WishlistStack } from "./WishlistStack";
 
 export default function Navigation() {
   return (
@@ -72,9 +72,9 @@ function BottomTabNavigator() {
           tabBarIcon: ({ color }) => <TabBarIcon name="search" color={color} />,
         }}
       />
-      <BottomTab.Screen //TODO: Wishlist Stack to show product details
+      <BottomTab.Screen
         name="Wishlist"
-        component={WishlistScreen}
+        component={WishlistStack}
         options={() => ({
           title: "Желани",
           tabBarIcon: ({ color }) => <TabBarIcon name="heart" color={color} />,

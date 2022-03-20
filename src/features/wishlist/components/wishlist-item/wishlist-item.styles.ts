@@ -1,9 +1,9 @@
 import styled from "styled-components/native";
-import { Image } from "react-native";
+import { Image, TouchableOpacity } from "react-native";
 
 import { Theme } from "../../../../types/Theme";
 
-export const CartItemWrapper = styled.View`
+export const CartItemWrapper = styled(TouchableOpacity)`
   background-color: ${(props: { theme: Theme }) =>
     props.theme.colors.bg.primary};
   margin-bottom: ${(props: { theme: Theme }) => props.theme.space[2]};

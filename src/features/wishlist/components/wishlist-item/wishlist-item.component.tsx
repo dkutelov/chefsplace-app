@@ -1,4 +1,6 @@
 import React, { useContext } from "react";
+import { useNavigation } from "@react-navigation/native";
+
 import { Ionicons } from "@expo/vector-icons";
 import { colors } from "../../../../infrastructure/theme/colors";
 
@@ -31,13 +33,22 @@ export const WishlistItemCard = ({ wishlistItem }: Props) => {
   //TODO: Disable add to cart if not available
 
   const { dispatch } = useContext(WishlistContext);
+  const { navigate } = useNavigation();
 
   const removeItem = () => {
     dispatch({ type: REMOVE_ITEM_FROM_WISHLIST, payload: { productId: id } });
   };
 
+  const onWishlistItemPress = () => {
+    if (!available) {
+      return;
+    }
+
+    navigate("ProductDetails", { id });
+  };
+
   return (
-    <CartItemWrapper>
+    <CartItemWrapper onPress={onWishlistItemPress}>
       <TopContent>
         <Title>{name}</Title>
         <DeleteIcon onPress={removeItem}>
