@@ -12,6 +12,7 @@ import {
   Price,
   PriceWith,
   DeleteIcon,
+  NotAvailable,
 } from "./wishlist-item.styles";
 
 import { WishlistContext } from "../../../../services/wishlist/wishlist.context";
@@ -25,7 +26,7 @@ interface Props {
 }
 
 export const WishlistItemCard = ({ wishlistItem }: Props) => {
-  const { id, name, image, price } = wishlistItem;
+  const { id, name, image, price, available } = wishlistItem;
   //TODO: Add Add to card - create component?
   //TODO: Disable add to cart if not available
 
@@ -53,10 +54,14 @@ export const WishlistItemCard = ({ wishlistItem }: Props) => {
           </PriceWith>
         </PriceWrapper>
         <AddToCart
+          disabled={!available}
           cartItem={{ id, name, image, price, quantity: 1 }}
           size={28}
         />
       </Row>
+      {!available && (
+        <NotAvailable>Продуктът в момента не е наличен!</NotAvailable>
+      )}
     </CartItemWrapper>
   );
 };

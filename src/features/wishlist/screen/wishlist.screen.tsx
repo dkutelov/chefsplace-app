@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 
 import { SafeArea } from "../../../components/utils/safe-area.component";
 import { WishlistContext } from "../../../services/wishlist/wishlist.context";
@@ -6,11 +6,20 @@ import { NoItemsInWishlist, WishlistItemList } from "./wishlist.styles";
 import { Caption } from "react-native-paper";
 import { WishlistItemCard } from "../components/wishlist-item/wishlist-item.component";
 import { WishlistItem } from "../../../types/Wishlist";
+import { ProductsContext } from "../../../services/products/products.context";
+import { UPDATE_WISHLIST_ITEMS_AVAILABILITY } from "../../../services/wishlist/wishlist.action-types";
 
 export const WishlistScreen = () => {
   const { wishlistItems, isLoading, error, dispatch } =
     useContext(WishlistContext);
-  //TODO: check if products are available and update data to card
+  const { products } = useContext(ProductsContext);
+
+  useEffect(() => {
+    dispatch({
+      type: UPDATE_WISHLIST_ITEMS_AVAILABILITY,
+      payload: { products },
+    });
+  }, [products]);
 
   return (
     <SafeArea>

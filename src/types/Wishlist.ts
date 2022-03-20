@@ -1,5 +1,3 @@
-import { boolean } from "yup";
-
 export interface WishlistItem {
   id: string;
   name: string;

@@ -8,7 +8,7 @@ export const CartItemWrapper = styled.View`
     props.theme.colors.bg.primary};
   margin-bottom: ${(props: { theme: Theme }) => props.theme.space[2]};
   padding: ${(props: { theme: Theme }) => props.theme.space[3]};
-  border-radius: 20px;
+  border-radius: ${(props: { theme: Theme }) => props.theme.space[2]}; ;
 `;
 
 export const TopContent = styled.View`
@@ -90,5 +90,5 @@ export const NotEnoughQuantityNotification = styled.Text`
   color: ${(props: { theme: Theme }) => props.theme.colors.ui.error};
   position: absolute;
   bottom: -22px;
-  left: 0;
+  right: 0;
 `;

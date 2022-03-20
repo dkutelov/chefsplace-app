@@ -4,10 +4,12 @@ import { AddToCardContainer } from "./add-to-cart.styles";
 import { CartItem } from "../../types/Cart";
 import { ADD_ITEM_TO_CART } from "../../services/cart/cart.action-types";
 import { CartContext } from "../../services/cart/cart.context";
+import { boolean } from "yup";
 
 interface IProps {
   cartItem: CartItem;
   size?: number;
+  disabled: boolean;
 }
 
 export const AddToCart = ({ cartItem, size }: IProps) => {

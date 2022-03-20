@@ -73,19 +73,6 @@ export const CartItemCard = ({ cartItem }: Props) => {
 
       <Row>
         <ProductImage key={name} source={{ uri: image }} resizeMode="contain" />
-        <PriceWrapper>
-          <PriceInnerWrapper>
-            <Price>{price / 100} лв.</Price>
-            <PriceWith>{Math.floor(price * 1.2) / 100} лв. (с ДДС)</PriceWith>
-          </PriceInnerWrapper>
-        </PriceWrapper>
-      </Row>
-      <Row>
-        <QuantitySelector
-          quantity={itemQuantity}
-          setQuantity={setItemQuantity}
-          maxQuantity={cartItem.maxQuantity}
-        />
         <AmountWrapper>
           <Amount>Сума {((price * itemQuantity) / 100).toFixed(2)} лв.</Amount>
           <PriceWith>
@@ -93,6 +80,20 @@ export const CartItemCard = ({ cartItem }: Props) => {
             ДДС)
           </PriceWith>
         </AmountWrapper>
+      </Row>
+      <Row>
+        <PriceWrapper>
+          <PriceInnerWrapper>
+            <Price>{price / 100} лв.</Price>
+            <PriceWith>{Math.floor(price * 1.2) / 100} лв. (с ДДС)</PriceWith>
+          </PriceInnerWrapper>
+        </PriceWrapper>
+
+        <QuantitySelector
+          quantity={itemQuantity}
+          setQuantity={setItemQuantity}
+          maxQuantity={cartItem.maxQuantity}
+        />
         {itemQuantity >= maxQuantity && (
           <NotEnoughQuantityNotification>
             Максимално количество {maxQuantity}.

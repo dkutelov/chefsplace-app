@@ -3,12 +3,14 @@ import {
   SET_WISHLIST_ITEMS,
   ADD_ITEM_TO_WISHLIST,
   REMOVE_ITEM_FROM_WISHLIST,
+  UPDATE_WISHLIST_ITEMS_AVAILABILITY,
 } from "./wishlist.action-types";
 
 import {
   setWishlistItems,
   addItemToWishlist,
   removeItemFromWishlist,
+  updateWishlistItemsAvalability,
 } from "./wishlist.reducer-funcitons";
 
 interface IProps {
@@ -29,6 +31,8 @@ export const wishlistReducer = (
       return addItemToWishlist(wishlistState, payload.wishlistItem);
     case REMOVE_ITEM_FROM_WISHLIST:
       return removeItemFromWishlist(wishlistState, payload.productId);
+    case UPDATE_WISHLIST_ITEMS_AVAILABILITY:
+      return updateWishlistItemsAvalability(wishlistState, payload.products);
     default:
       return wishlistState;
   }

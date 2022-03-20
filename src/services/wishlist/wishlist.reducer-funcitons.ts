@@ -1,3 +1,4 @@
+import { Product } from "../../types/Product";
 import { IWishlistContext, WishlistItem } from "../../types/Wishlist";
 
 export const setWishlistItems = (
@@ -27,5 +28,29 @@ export const removeItemFromWishlist = (
   return {
     ...wishlistState,
     wishlistItems,
+  };
+};
+
+export const updateWishlistItemsAvalability = (
+  wishlistState: IWishlistContext,
+  products: Product[]
+): IWishlistContext => {
+  const wishlistItems = wishlistState.wishlistItems;
+
+  const updatedWishlistItems = wishlistState.wishlistItems.map(
+    (item: WishlistItem) => {
+      const product = products.find((p) => p.id === item.id);
+      if (!product) {
+        item.available = false;
+      }
+
+      return item;
+    }
+  );
+
+  console.log({ updatedWishlistItems });
+  return {
+    ...wishlistState,
+    wishlistItems: updatedWishlistItems,
   };
 };

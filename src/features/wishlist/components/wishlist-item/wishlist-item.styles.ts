@@ -8,7 +8,7 @@ export const CartItemWrapper = styled.View`
     props.theme.colors.bg.primary};
   margin-bottom: ${(props: { theme: Theme }) => props.theme.space[2]};
   padding: ${(props: { theme: Theme }) => props.theme.space[3]};
-  border-radius: 20px;
+  border-radius: ${(props: { theme: Theme }) => props.theme.space[2]};
 `;
 
 export const TopContent = styled.View`
@@ -62,6 +62,15 @@ export const Price = styled.Text`
 `;
 
 export const PriceWith = styled.Text`
+  font-family: ${(props: { theme: Theme }) => props.theme.fonts.body};
+  font-size: ${(props: { theme: Theme }) => props.theme.fontSizes.caption};
+`;
+
+export const NotAvailable = styled.Text`
+  position: absolute;
+  right: ${(props: { theme: Theme }) => props.theme.space[3]};
+  bottom: ${(props: { theme: Theme }) => props.theme.space[3]};
+  color: ${(props: { theme: Theme }) => props.theme.colors.ui.error};
   font-family: ${(props: { theme: Theme }) => props.theme.fonts.body};
   font-size: ${(props: { theme: Theme }) => props.theme.fontSizes.caption};
 `;
