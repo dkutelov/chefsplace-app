@@ -1,15 +1,21 @@
 import React, { useContext, useEffect } from "react";
-
-import { SafeArea } from "../../../components/utils/safe-area.component";
-import { CartContext } from "../../../services/cart/cart.context";
-import { NoItemsInCart } from "./cart.styles";
 import { Caption } from "react-native-paper";
-import { CartItemCard } from "../components/cart-item/cart-item.component";
-import { CartItemList } from "./cart.styles";
+
+// Types
 import { CartItem } from "../../../types/Cart";
-import { CartSummary } from "../components/cart-summary/cart-summary.component";
+
+// Context
+import { CartContext } from "../../../services/cart/cart.context";
 import { ProductsContext } from "../../../services/products/products.context";
 import { UPDATE_CART_ITEMS_ON_LOAD } from "../../../services/cart/cart.action-types";
+
+// Components
+import { SafeArea } from "../../../components/utils/safe-area.component";
+import { CartItemCard } from "../components/cart-item/cart-item.component";
+import { CartSummary } from "../components/cart-summary/cart-summary.component";
+
+// Styles
+import { CartItemList, NoItemsInCart } from "./cart.styles";
 
 export const CartScreen = () => {
   const { cartItems, isLoading, error, dispatch } = useContext(CartContext);

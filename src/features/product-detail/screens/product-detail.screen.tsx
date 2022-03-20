@@ -1,16 +1,30 @@
 import React, { useEffect, useContext, useState } from "react";
 import { useRoute } from "@react-navigation/native";
 
+// Types & Constants
+import { colors } from "../../../infrastructure/theme/colors";
+
+// Context
 import { ProductContextProvider } from "../../../services/product/product.context";
 import { ProductContext } from "../../../services/product/product.context";
 import { CartContext } from "../../../services/cart/cart.context";
+import { WishlistContext } from "../../../services/wishlist/wishlist.context";
+import {
+  ADD_ITEM_TO_WISHLIST,
+  REMOVE_ITEM_FROM_WISHLIST,
+} from "../../../services/wishlist/wishlist.action-types";
 
+// Components
+import { SafeArea } from "../../../components/utils/safe-area.component";
+import { LoadingIndicator } from "../../../components/loading/loading.component";
 import { ImageCarousel } from "../components/image-carousel/image-carousel.component";
 import { QuantitySelector } from "../../../components/quantity-selector/quantity-selector.component";
 import { DescriptionAccordion } from "../components/description-accordion/description-accordion.component";
-import { SafeArea } from "../../../components/utils/safe-area.component";
-import { LoadingIndicator } from "../../../components/loading/loading.component";
+import { SimilarProducts } from "../components/similar-products/similar-products-list/similar-products-list.component";
+import { WishlistIcon } from "../../../components/wishlist-icon/wishlist-icon.component";
+import { AddToCart } from "../../../components/add-to-cart-icon/add-to-cart.component";
 
+// Styles
 import {
   ProductScrollView,
   Title,
@@ -26,16 +40,6 @@ import {
   NotEnoughQuantityNotifivation,
   WishlistAndPriceRow,
 } from "./product-detail.styles";
-
-import { colors } from "../../../infrastructure/theme/colors";
-import { SimilarProducts } from "../components/similar-products/similar-products-list/similar-products-list.component";
-import { WishlistIcon } from "../../../components/wishlist-icon/wishlist-icon.component";
-import { WishlistContext } from "../../../services/wishlist/wishlist.context";
-import {
-  ADD_ITEM_TO_WISHLIST,
-  REMOVE_ITEM_FROM_WISHLIST,
-} from "../../../services/wishlist/wishlist.action-types";
-import { AddToCart } from "../../../components/add-to-cart-icon/add-to-cart.component";
 
 const ProductDetailScreen = () => {
   const { product, isLoading, error, loadProduct } = useContext(ProductContext);
@@ -156,7 +160,7 @@ const ProductDetailScreen = () => {
               )}
             </Row>
             <Row>
-              <SimilarProducts category="сос" />
+              <SimilarProducts categoryId={product.categoryId} />
             </Row>
           </>
         )}

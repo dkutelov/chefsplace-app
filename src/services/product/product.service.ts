@@ -17,6 +17,7 @@ export const productTransform = (productData: {
         ? AvailabilityStatus.OutOfStock
         : AvailabilityStatus.OnStock,
     maxQuantity: productData.maxQuantity,
+    categoryId: productData.categoryId,
   };
 };
 

@@ -1,13 +1,20 @@
 import React, { useContext, useEffect } from "react";
-
-import { SafeArea } from "../../../components/utils/safe-area.component";
-import { WishlistContext } from "../../../services/wishlist/wishlist.context";
-import { NoItemsInWishlist, WishlistItemList } from "./wishlist.styles";
 import { Caption } from "react-native-paper";
-import { WishlistItemCard } from "../components/wishlist-item/wishlist-item.component";
+
+// Types
 import { WishlistItem } from "../../../types/Wishlist";
+
+// Context
+import { WishlistContext } from "../../../services/wishlist/wishlist.context";
 import { ProductsContext } from "../../../services/products/products.context";
 import { UPDATE_WISHLIST_ITEMS_AVAILABILITY } from "../../../services/wishlist/wishlist.action-types";
+
+// Components
+import { SafeArea } from "../../../components/utils/safe-area.component";
+import { WishlistItemCard } from "../components/wishlist-item/wishlist-item.component";
+
+// Styles
+import { NoItemsInWishlist, WishlistItemList } from "./wishlist.styles";
 
 export const WishlistScreen = () => {
   const { wishlistItems, isLoading, error, dispatch } =

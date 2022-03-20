@@ -72,7 +72,7 @@ function BottomTabNavigator() {
           tabBarIcon: ({ color }) => <TabBarIcon name="search" color={color} />,
         }}
       />
-      <BottomTab.Screen
+      <BottomTab.Screen //TODO: Wishlist Stack to show product details
         name="Wishlist"
         component={WishlistScreen}
         options={() => ({
@@ -80,7 +80,7 @@ function BottomTabNavigator() {
           tabBarIcon: ({ color }) => <TabBarIcon name="heart" color={color} />,
         })}
       />
-      <BottomTab.Screen
+      <BottomTab.Screen //TODO: Cart Stack to show product details
         name="Cart"
         component={CartScreen}
         options={{

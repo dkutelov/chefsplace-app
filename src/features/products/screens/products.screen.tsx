@@ -1,13 +1,20 @@
 import React, { useContext, useEffect, useState, useRef } from "react";
 import { useRoute } from "@react-navigation/native";
 
-import { SafeArea } from "./products.styles";
-import { ProductsContext } from "../../../services/products/products.context";
-import { LoadingIndicator } from "../../../components/loading/loading.component";
-import { colors } from "../../../infrastructure/theme/colors";
+// Types & Constants
 import { Product } from "../../../types/Product";
+import { colors } from "../../../infrastructure/theme/colors";
+
+// Context
+import { ProductsContext } from "../../../services/products/products.context";
+
+// Components
 import { CategoryMenu } from "../components/category-menu/category-list/category-list.component";
 import { ProductList } from "../components/products/product-list/product-list.component";
+import { LoadingIndicator } from "../../../components/loading/loading.component";
+
+// Styles
+import { SafeArea } from "./products.styles";
 
 export const ProductListScreen = () => {
   const { products, isLoading, searchTerm, error, dispatch } =

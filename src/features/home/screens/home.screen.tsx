@@ -1,12 +1,15 @@
 import { View, Text, ScrollView } from "react-native";
 import { SafeArea } from "../../../components/utils/safe-area.component";
-import CategoryListItem from "../../home/components/category-list/category-list-item.component";
 
 import mock from "./mock.json";
-
-import { HeroBanner, HeroBannerImage, Categories } from "./home.styles";
 import { K } from "../../../infrastructure/constants/";
+
+// Components
 import { Row } from "../../../components/row/row.component";
+import CategoryListItem from "../../home/components/category-list/category-list-item.component";
+
+// Styles
+import { HeroBanner, HeroBannerImage, Categories } from "./home.styles";
 
 export const HomeScreen = () => {
   const categories = mock;
