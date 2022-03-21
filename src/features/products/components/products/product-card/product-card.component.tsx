@@ -68,7 +68,13 @@ export const ProductCard = ({ item }: Props) => {
       });
       setIsWishlisted(false);
     } else {
-      const wishlistItem = { id, name, image: images[0], price };
+      const wishlistItem = {
+        id,
+        name,
+        image: images[0],
+        price,
+        available: true,
+      };
       wishlistDispatch({
         type: ADD_ITEM_TO_WISHLIST,
         payload: {

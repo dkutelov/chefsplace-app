@@ -8,7 +8,6 @@ export interface WishlistItem {
 
 export interface IWishlistContext {
   wishlistItems: WishlistItem[];
-  isLoading: boolean;
   error?: string;
   dispatch: React.Dispatch<any>;
 }

@@ -92,6 +92,7 @@ const ProductDetailScreen = () => {
           name: product.name,
           image: product.images[0],
           price: product.price,
+          available: true,
         };
         wishlistDispatch({
           type: ADD_ITEM_TO_WISHLIST,

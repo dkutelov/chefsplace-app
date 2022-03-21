@@ -5,14 +5,14 @@ import React, {
   useContext,
   useReducer,
 } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
-import { wishlistRequest, wishlistTransform } from "./wishlist.service";
+import { wishlistTransform } from "./wishlist.service";
 import { IWishlistContext, WishlistItem } from "../../types/Wishlist";
 import { wishlistReducer } from "./whishlist.reducer";
 
 const defaultState: IWishlistContext = {
   wishlistItems: [],
-  isLoading: false,
   dispatch: () => {},
 };
 
@@ -23,36 +23,45 @@ export const WishlistContextProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
-  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(undefined);
-
   const initialWishlist = useContext(WishlistContext);
   const [state, dispatch] = useReducer(wishlistReducer, initialWishlist);
 
-  const retrieveWishlistItems = () => {
-    setIsLoading(true);
-    setTimeout(() => {
-      wishlistRequest()
-        .then((data: { [key: string]: any }[]) => {
-          return wishlistTransform(data);
-        })
-        .then((results: WishlistItem[]) => {
-          setIsLoading(false);
-          dispatch({
-            type: "SET_WISHLIST_ITEMS",
-            payload: { wishlistItems: results },
-          });
-        })
-        .catch((err) => {
-          setIsLoading(false);
-          setError(err);
+  const saveFavourites = async (value: WishlistItem[]) => {
+    try {
+      const jsonValue = JSON.stringify(value);
+      await AsyncStorage.setItem("@favourites", jsonValue);
+    } catch (e) {
+      console.log("error storing", e);
+    }
+  };
+
+  const loadFavourites = async () => {
+    try {
+      const rawWishlistData = await AsyncStorage.getItem("@favourites");
+
+      if (rawWishlistData !== null) {
+        const wishlistItemsWithoutAvailability = JSON.parse(rawWishlistData);
+        const wishlistItems = wishlistTransform(
+          wishlistItemsWithoutAvailability
+        );
+        dispatch({
+          type: "SET_WISHLIST_ITEMS",
+          payload: { wishlistItems },
         });
-    }, 500);
+      }
+    } catch (e) {
+      console.log("error loading", e);
+    }
   };
 
   useEffect(() => {
-    retrieveWishlistItems();
+    loadFavourites();
   }, []);
+
+  useEffect(() => {
+    saveFavourites(state.wishlistItems);
+  }, [state.wishlistItems]);
 
   return (
     <WishlistContext.Provider value={{ ...state, dispatch }}>

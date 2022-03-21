@@ -4,7 +4,7 @@ import { Dimensions } from "react-native";
 
 import { AddToCart } from "../../components/add-to-cart-icon/add-to-cart.component";
 
-import { AvailabilityStatus, Product } from "../../types/Product";
+import { Product } from "../../types/Product";
 
 import {
   ProductCardWrapper,

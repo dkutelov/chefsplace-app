@@ -1,5 +1,4 @@
 import { WishlistItem } from "../../types/Wishlist";
-import data from "./mock/wishlist.json";
 
 export const wishlistTransform = (
   results: { [key: string]: any }[]
@@ -11,14 +10,4 @@ export const wishlistTransform = (
     price: r.price,
     available: true,
   }));
-};
-
-export const wishlistRequest = () => {
-  return new Promise<{ [key: string]: any }[]>((resolve, reject) => {
-    const mock = data;
-    if (!mock) {
-      reject("not found");
-    }
-    resolve(mock);
-  });
 };
