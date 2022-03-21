@@ -25,7 +25,7 @@ export const ProductCardSmall = ({ item }: Props) => {
   const { navigate } = useNavigation();
 
   const onProductCardPress = () => {
-    navigate("SimilarProductDetails", { id });
+    navigate("SimilarProductDetails", { id, similarProducts: true });
   };
 
   return (

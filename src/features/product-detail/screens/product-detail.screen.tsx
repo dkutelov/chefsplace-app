@@ -160,9 +160,11 @@ const ProductDetailScreen = () => {
                 <DescriptionAccordion description={product.description} />
               )}
             </Row>
-            <Row>
-              <SimilarProducts categoryId={product.categoryId} />
-            </Row>
+            {!params.similarProducts && (
+              <Row>
+                <SimilarProducts categoryId={product.categoryId} />
+              </Row>
+            )}
           </>
         )}
       </ProductScrollView>
