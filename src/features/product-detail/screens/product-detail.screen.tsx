@@ -1,5 +1,6 @@
-import React, { useEffect, useContext, useState } from "react";
+import React, { useEffect, useContext, useState, useCallback } from "react";
 import { useRoute } from "@react-navigation/native";
+import { useFocusEffect } from "@react-navigation/native";
 
 // Types & Constants
 import { colors } from "../../../infrastructure/theme/colors";
@@ -7,7 +8,6 @@ import { colors } from "../../../infrastructure/theme/colors";
 // Context
 import { ProductContextProvider } from "../../../services/product/product.context";
 import { ProductContext } from "../../../services/product/product.context";
-import { CartContext } from "../../../services/cart/cart.context";
 import { WishlistContext } from "../../../services/wishlist/wishlist.context";
 import {
   ADD_ITEM_TO_WISHLIST,
@@ -44,7 +44,6 @@ const ProductDetailScreen = () => {
   const { product, isLoading, error, loadProduct } = useContext(ProductContext);
   const [quantity, setQuantity] = useState(1);
   const { params } = useRoute();
-  const { cartItems, dispatch } = useContext(CartContext);
   const { wishlistItems, dispatch: wishlistDispatch } =
     useContext(WishlistContext);
   const [isWishlisted, setIsWishlisted] = useState<boolean>(false);
@@ -54,14 +53,19 @@ const ProductDetailScreen = () => {
 
     //TODO: Handle error in product is not returned from servive
 
-    // Create Reducer - ???
-    // Load related products
+    // Create Reducer?
 
     if (params && params.id) {
       loadProduct(params.id);
       setIsWishlisted(!!wishlistItems.find((x) => x.id === params.id));
     }
   }, []);
+
+  useFocusEffect(
+    useCallback(() => {
+      setQuantity(1);
+    }, [])
+  );
 
   const hasNotEnoughStock = () => {
     if (!product) {

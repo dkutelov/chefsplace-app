@@ -8,12 +8,11 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { colors } from "../infrastructure/theme/colors";
 import { RootStackParamList, RootTabParamList } from "../types/Navigation";
 import LinkingConfiguration from "./LinkingConfiguration";
-import { CartScreen } from "../features/cart/screens/cart.screen";
 import { ProfileScreen } from "../features/profile/screens";
 import { ProductStack } from "./ProductStack";
 import { HomeStack } from "./HomeStack";
-import { WishlistScreen } from "../features/wishlist/screen/wishlist.screen";
 import { WishlistStack } from "./WishlistStack";
+import { CartStack } from "./CartStack";
 
 export default function Navigation() {
   return (
@@ -80,9 +79,9 @@ function BottomTabNavigator() {
           tabBarIcon: ({ color }) => <TabBarIcon name="heart" color={color} />,
         })}
       />
-      <BottomTab.Screen //TODO: Cart Stack to show product details
+      <BottomTab.Screen
         name="Cart"
-        component={CartScreen}
+        component={CartStack}
         options={{
           title: "Количка",
           tabBarIcon: ({ color }) => <TabBarIcon name="cart" color={color} />,

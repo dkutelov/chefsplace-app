@@ -2,7 +2,6 @@ import React, { useState, useContext, useCallback } from "react";
 import { useNavigation, useFocusEffect } from "@react-navigation/native";
 
 import { AvailabilityStatus, Product } from "../../../../../types/Product";
-import { CartContext } from "../../../../../services/cart/cart.context";
 import { WishlistContext } from "../../../../../services/wishlist/wishlist.context";
 import {
   ADD_ITEM_TO_WISHLIST,
@@ -32,7 +31,6 @@ interface Props {
 export const ProductCard = ({ item }: Props) => {
   const { id, name, images, price, availabilityStatus, maxQuantity } = item;
   const { navigate } = useNavigation();
-  const { dispatch: contextDispatch } = useContext(CartContext);
   const { wishlistItems, dispatch: wishlistDispatch } =
     useContext(WishlistContext);
 

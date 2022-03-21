@@ -5,7 +5,6 @@ import { Dimensions } from "react-native";
 import { AddToCart } from "../../components/add-to-cart-icon/add-to-cart.component";
 
 import { AvailabilityStatus, Product } from "../../types/Product";
-import { CartContext } from "../../services/cart/cart.context";
 
 import {
   ProductCardWrapper,
@@ -26,9 +25,7 @@ export const ProductCardSmall = ({ item }: Props) => {
   const { navigate } = useNavigation();
 
   const onProductCardPress = () => {
-    console.log("hi");
-
-    navigate("ProductDetails", { id });
+    navigate("SimilarProductDetails", { id });
   };
 
   return (

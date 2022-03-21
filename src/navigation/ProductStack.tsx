@@ -30,6 +30,13 @@ export const ProductStack = () => {
           title: "Детайли",
         }}
       />
+      <Stack.Screen
+        name="SimilarProductDetails"
+        component={ProductDetailScreenWrapper}
+        options={{
+          title: "Детайли",
+        }}
+      />
     </Stack.Navigator>
   );
 };

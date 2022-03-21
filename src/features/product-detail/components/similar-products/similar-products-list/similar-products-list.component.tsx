@@ -20,7 +20,6 @@ export const SimilarProducts = ({ categoryId }: IProps) => {
 
   useEffect(() => {
     let similarProducts: Product[] = [];
-    console.log(categoryId);
 
     if (products.length) {
       for (let index = 0; index < products.length; index++) {
@@ -34,7 +33,6 @@ export const SimilarProducts = ({ categoryId }: IProps) => {
       }
 
       setSimilarProducts(similarProducts);
-      console.log({ similarProducts });
     }
   }, [products]);
 

@@ -1,4 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
+import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
 import { CartItem } from "../../../../types/Cart";
 import { colors } from "../../../../infrastructure/theme/colors";
@@ -32,6 +33,7 @@ interface Props {
 
 export const CartItemCard = ({ cartItem }: Props) => {
   const { id, name, price, image, quantity, maxQuantity } = cartItem;
+  const { navigate } = useNavigation();
   const [itemQuantity, setItemQuantity] = useState(quantity);
   const { cartItems, dispatch } = useContext(CartContext);
 
@@ -62,8 +64,12 @@ export const CartItemCard = ({ cartItem }: Props) => {
     dispatch({ type: REMOVE_ITEM_FROM_CART, payload: { cartItemId: id } });
   };
 
+  const onCartItemPress = () => {
+    navigate("ProductDetails", { id });
+  };
+
   return (
-    <CartItemWrapper>
+    <CartItemWrapper onPress={onCartItemPress}>
       <TopContent>
         <Title>{name}</Title>
         <DeleteIcon onPress={removeItem}>

@@ -1,17 +1,17 @@
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import { WishlistScreen } from "../features/wishlist/screen/wishlist.screen";
+import { CartScreen } from "../features/cart/screens/cart.screen";
 import { ProductDetailScreenWrapper } from "../features/product-detail/screens/product-detail.screen";
 
 const Stack = createNativeStackNavigator();
 
-export const WishlistStack = () => {
+export const CartStack = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen
         name="WishlistScreen"
-        component={WishlistScreen}
+        component={CartScreen}
         options={{ headerShown: false }}
       />
       <Stack.Group screenOptions={{ presentation: "modal" }}>
