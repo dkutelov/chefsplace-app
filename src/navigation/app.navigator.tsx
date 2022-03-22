@@ -8,11 +8,10 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { colors } from "../infrastructure/theme/colors";
 import { RootStackParamList, RootTabParamList } from "../types/Navigation";
 import { ProfileScreen } from "../features/profile/screens";
-import { ProductStack } from "./ProductStack";
-
+import { ProductStack } from "./product.navigator";
 import { CartStack } from "./CartStack";
-import { WishlistScreen } from "../features/wishlist/screen/wishlist.screen";
 import { HomeScreen } from "../features/home/screens/home.screen";
+import { WishlistStack } from "./wishlist.navigator";
 
 export default function Navigation() {
   return (
@@ -75,7 +74,7 @@ function BottomTabNavigator() {
       />
       <BottomTab.Screen
         name="Wishlist"
-        component={WishlistScreen}
+        component={WishlistStack}
         options={() => ({
           title: "Желани",
           tabBarIcon: ({ color }) => <TabBarIcon name="heart" color={color} />,

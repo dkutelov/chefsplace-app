@@ -1,10 +1,13 @@
 import React from "react";
+import { Platform } from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-
+import { colors } from "../infrastructure/theme/colors";
+import { fontSizes, fonts } from "../infrastructure/theme/fonts";
 import { WishlistScreen } from "../features/wishlist/screen/wishlist.screen";
 import { ProductDetailScreenWrapper } from "../features/product-detail/screens/product-detail.screen";
 
 const Stack = createNativeStackNavigator();
+const isAndroid = Platform.OS === "android";
 
 export const WishlistStack = () => {
   return (
@@ -16,18 +19,24 @@ export const WishlistStack = () => {
       />
       <Stack.Group screenOptions={{ presentation: "modal" }}>
         <Stack.Screen
-          name="ProductDetails"
+          name="ProductDetail"
           component={ProductDetailScreenWrapper}
-          options={{
-            title: "Детайли",
-          }}
+          options={({ route }) => ({
+            title: route.params.name,
+            headerStyle: {
+              backgroundColor: colors.bg.secondary,
+            },
+            headerTintColor: colors.ui.primary,
+            headerTitleStyle: {
+              fontFamily: fonts.heading,
+              fontSize: isAndroid ? 16 : fontSizes.body,
+            },
+          })}
         />
         <Stack.Screen
           name="SimilarProductDetails"
           component={ProductDetailScreenWrapper}
-          options={{
-            title: "Детайли",
-          }}
+          options={({ route }) => ({ title: route.params.name })}
         />
       </Stack.Group>
     </Stack.Navigator>

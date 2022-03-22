@@ -6,7 +6,6 @@ import React, {
   useReducer,
 } from "react";
 
-import { Product } from "../../types/Product";
 import { SET_PRODUCTS } from "./products.action-types";
 import { productsRequest, productsTransform } from "./products.service";
 import { IProductsContext } from "../../types/Product";
@@ -27,7 +26,6 @@ export const ProductsContextProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
-  const [products, setProducts] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(undefined);
 

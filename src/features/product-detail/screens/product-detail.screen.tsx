@@ -56,6 +56,8 @@ const ProductDetailScreen = () => {
     // Create Reducer?
 
     if (params && params.id) {
+      console.log(params);
+
       loadProduct(params.id);
       setIsWishlisted(!!wishlistItems.find((x) => x.id === params.id));
     }
@@ -111,7 +113,7 @@ const ProductDetailScreen = () => {
         {isLoading && <LoadingIndicator size={32} color={colors.ui.primary} />}
         {product && (
           <>
-            <Title>{product.name}</Title>
+            {params.hasTitle && <Title>{product.name}</Title>}
             <ImageCarousel images={product.images} />
             <PriceRow>
               <Price>{(product.price / 100).toFixed(2)} лв. </Price>

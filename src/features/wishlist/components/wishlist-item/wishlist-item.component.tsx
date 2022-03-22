@@ -44,7 +44,7 @@ export const WishlistItemCard = ({ wishlistItem }: Props) => {
       return;
     }
 
-    navigate("ProductDetails", { id });
+    navigate("ProductDetail", { id, name });
   };
 
   return (

@@ -54,7 +54,7 @@ export const ProductCard = ({ item }: Props) => {
   );
 
   const onProductCardPress = () => {
-    navigate("ProductDetails", { id });
+    navigate("ProductDetails", { id, hasTitle: true });
   };
 
   const toggleWishlisted = () => {

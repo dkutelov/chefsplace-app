@@ -35,13 +35,9 @@ const data = [
   },
   {
     id: "2",
-    name: "2 SUNSHINE CHILI ПИКАНТЕН СОС С ЧИЛИ И ЧЕСЪН 1 Л",
+    name: "SAMBAL MANIS ПИКАНТЕН СОС С ЧИЛИ И СОЯ 1 Л",
     images: [
-      "http://chefsplace.bg/261-tm_thickbox_default/sunshine-chili-pikanten-sos-s-chili-i-chesn-1-l.jpg",
       "http://chefsplace.bg/262-tm_thickbox_default/sambal-manis-pikanten-sos-s-chili-i-soya-1-l.jpg",
-      "http://chefsplace.bg/263-tm_thickbox_default/pang-gang-pikanten-sos-s-chili-i-domati-1-l.jpg",
-      "http://chefsplace.bg/216-tm_thickbox_default/aziatsko-pesto-0340-kg.jpg",
-      "http://chefsplace.bg/217-tm_thickbox_default/pasta-ot-skaridi-0340-kg.jpg",
     ],
     price: 2952,
     shortDescription:
@@ -70,13 +66,9 @@ const data = [
   },
   {
     id: "3",
-    name: "2 SUNSHINE CHILI ПИКАНТЕН СОС С ЧИЛИ И ЧЕСЪН 1 Л",
+    name: "PANG GANG ПИКАНТЕН СОС С ЧИЛИ И ДОМАТИ 1Л",
     images: [
-      "http://chefsplace.bg/261-tm_thickbox_default/sunshine-chili-pikanten-sos-s-chili-i-chesn-1-l.jpg",
-      "http://chefsplace.bg/262-tm_thickbox_default/sambal-manis-pikanten-sos-s-chili-i-soya-1-l.jpg",
       "http://chefsplace.bg/263-tm_thickbox_default/pang-gang-pikanten-sos-s-chili-i-domati-1-l.jpg",
-      "http://chefsplace.bg/216-tm_thickbox_default/aziatsko-pesto-0340-kg.jpg",
-      "http://chefsplace.bg/217-tm_thickbox_default/pasta-ot-skaridi-0340-kg.jpg",
     ],
     price: 2952,
     shortDescription:
@@ -105,13 +97,9 @@ const data = [
   },
   {
     id: "4",
-    name: "2 SUNSHINE CHILI ПИКАНТЕН СОС С ЧИЛИ И ЧЕСЪН 1 Л",
+    name: "АЗИАТСКО ПЕСТО 0.340 КГ",
     images: [
-      "http://chefsplace.bg/261-tm_thickbox_default/sunshine-chili-pikanten-sos-s-chili-i-chesn-1-l.jpg",
-      "http://chefsplace.bg/262-tm_thickbox_default/sambal-manis-pikanten-sos-s-chili-i-soya-1-l.jpg",
-      "http://chefsplace.bg/263-tm_thickbox_default/pang-gang-pikanten-sos-s-chili-i-domati-1-l.jpg",
       "http://chefsplace.bg/216-tm_thickbox_default/aziatsko-pesto-0340-kg.jpg",
-      "http://chefsplace.bg/217-tm_thickbox_default/pasta-ot-skaridi-0340-kg.jpg",
     ],
     price: 2952,
     shortDescription:
@@ -140,9 +128,9 @@ const data = [
   },
   {
     id: "5",
-    name: "2 SUNSHINE CHILI ПИКАНТЕН СОС С ЧИЛИ И ЧЕСЪН 1 Л",
+    name: "ПАСТА ОТ СКАРИДИ 0.340 КГ",
     images: [
-      "http://chefsplace.bg/261-tm_thickbox_default/sunshine-chili-pikanten-sos-s-chili-i-chesn-1-l.jpg",
+      "https://res.cloudinary.com/dariku/image/upload/v1646151139/majoneza-decorative-28-kg.jpg",
     ],
     price: 2952,
     shortDescription:
