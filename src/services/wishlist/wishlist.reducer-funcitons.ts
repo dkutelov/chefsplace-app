@@ -48,7 +48,6 @@ export const updateWishlistItemsAvalability = (
     }
   );
 
-  console.log({ updatedWishlistItems });
   return {
     ...wishlistState,
     wishlistItems: updatedWishlistItems,

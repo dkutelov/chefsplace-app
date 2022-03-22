@@ -20,7 +20,7 @@ const CategoryListItem = ({ item: { id, name, imageUrl } }: IProps) => {
   const { navigate } = useNavigation();
 
   const onCategoryPress = () => {
-    navigate("ProductsScreen", { id });
+    navigate("Products", { screen: "ProductsScreen", params: { id } });
   };
 
   return (

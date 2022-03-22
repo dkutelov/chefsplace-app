@@ -3,7 +3,7 @@ import { Theme } from "../../types/Theme";
 
 export const RowWrapper = styled.View`
   margin: 0 ${(props: { theme: Theme }) => props.theme.space[2]}
-    ${(props: { theme: Theme }) => props.theme.space[2]};
+    ${(props: { theme: Theme }) => props.theme.space[3]};
 `;
 
 export const Title = styled.Text`

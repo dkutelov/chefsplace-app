@@ -8,7 +8,7 @@ import {
   Title,
   SimilarProductsContainer,
 } from "./similar-products.styles";
-import { ProductCardSmall } from "../../../../../components/product-card-smal/product-card-small.component";
+import { ProductCardSmall } from "../../../../../components/product-card-small/product-card-small.component";
 
 interface IProps {
   categoryId: string;
@@ -39,9 +39,16 @@ export const SimilarProducts = ({ categoryId }: IProps) => {
   return (
     <Container>
       <Title>Подобни Продукти</Title>
-      <SimilarProductsContainer>
+      <SimilarProductsContainer
+        horizontal
+        showsHorizontalScrollIndicator={false}
+      >
         {similarProducts.map((product) => (
-          <ProductCardSmall item={product} key={product.id} />
+          <ProductCardSmall
+            item={product}
+            key={product.id}
+            isSimilarProduct={true}
+          />
         ))}
       </SimilarProductsContainer>
     </Container>

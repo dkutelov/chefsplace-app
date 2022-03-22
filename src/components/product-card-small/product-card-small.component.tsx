@@ -2,8 +2,7 @@ import React from "react";
 import { useNavigation } from "@react-navigation/native";
 import { Dimensions } from "react-native";
 
-import { AddToCart } from "../../components/add-to-cart-icon/add-to-cart.component";
-
+import { AddToCart } from "../add-to-cart-icon/add-to-cart.component";
 import { Product } from "../../types/Product";
 
 import {
@@ -14,18 +13,23 @@ import {
   Price,
 } from "./product-card-small.styles";
 
-const cardWidth = (Dimensions.get("window").width - 24) / 2;
+const cardWidth = Dimensions.get("window").width / 1.8;
 
 interface Props {
   item: Product;
+  isSimilarProduct: boolean;
 }
 
-export const ProductCardSmall = ({ item }: Props) => {
+export const ProductCardSmall = ({ item, isSimilarProduct }: Props) => {
   const { id, name, images, price, maxQuantity } = item;
   const { navigate } = useNavigation();
 
   const onProductCardPress = () => {
-    navigate("SimilarProductDetails", { id, similarProducts: true });
+    if (isSimilarProduct) {
+      navigate("SimilarProductDetails", { id, similarProducts: true });
+    } else {
+      navigate("Products", { screen: "ProductDetails", params: { id } });
+    }
   };
 
   return (

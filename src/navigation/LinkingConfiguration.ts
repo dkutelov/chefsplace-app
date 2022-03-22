@@ -19,14 +19,19 @@ const linking: LinkingOptions<RootStackParamList> = {
               TabTwoScreen: "Продукти",
             },
           },
+          Wishlist: {
+            screens: {
+              TabThreeScreen: "Желани",
+            },
+          },
           Cart: {
             screens: {
-              TabThreeScreen: "Количка",
+              TabFourScreen: "Количка",
             },
           },
           Profile: {
             screens: {
-              TabFourScreen: "Профил",
+              TabFiveScreen: "Профил",
             },
           },
         },

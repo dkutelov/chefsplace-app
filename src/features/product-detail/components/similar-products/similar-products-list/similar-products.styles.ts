@@ -1,3 +1,4 @@
+import { ScrollView } from "react-native";
 import styled from "styled-components/native";
 import { Theme } from "../../../../../types/Theme";
 
@@ -14,8 +15,4 @@ export const Title = styled.Text`
   margin-bottom: ${(props: { theme: Theme }) => props.theme.space[3]};
 `;
 
-export const SimilarProductsContainer = styled.View`
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-between;
-`;
+export const SimilarProductsContainer = styled(ScrollView)``;

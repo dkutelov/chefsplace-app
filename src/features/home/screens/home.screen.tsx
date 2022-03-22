@@ -1,4 +1,4 @@
-import { View, Text, ScrollView } from "react-native";
+import { ScrollView } from "react-native";
 import { SafeArea } from "../../../components/utils/safe-area.component";
 
 import mock from "./mock.json";
@@ -10,9 +10,15 @@ import CategoryListItem from "../../home/components/category-list/category-list-
 
 // Styles
 import { HeroBanner, HeroBannerImage, Categories } from "./home.styles";
+import { ProductCardSmall } from "../../../components/product-card-small/product-card-small.component";
+import { useContext } from "react";
+import { ProductsContext } from "../../../services/products/products.context";
 
 export const HomeScreen = () => {
   const categories = mock;
+  const { products } = useContext(ProductsContext);
+
+  const newProducts = products.slice(-4);
   return (
     <SafeArea>
       <ScrollView>
@@ -29,10 +35,17 @@ export const HomeScreen = () => {
               categories.map((c) => <CategoryListItem key={c.id} item={c} />)}
           </Categories>
         </Row>
-        <View>
-          <Text>Нови Продукти</Text>
-          <Text>Контакти</Text>
-        </View>
+        <Row title="Нови Продукти">
+          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+            {newProducts.map((product) => (
+              <ProductCardSmall
+                item={product}
+                key={product.id}
+                isSimilarProduct={false}
+              />
+            ))}
+          </ScrollView>
+        </Row>
       </ScrollView>
     </SafeArea>
   );

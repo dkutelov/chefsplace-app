@@ -7,17 +7,18 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import { colors } from "../infrastructure/theme/colors";
 import { RootStackParamList, RootTabParamList } from "../types/Navigation";
-import LinkingConfiguration from "./LinkingConfiguration";
 import { ProfileScreen } from "../features/profile/screens";
 import { ProductStack } from "./ProductStack";
-import { HomeStack } from "./HomeStack";
-import { WishlistStack } from "./WishlistStack";
+
 import { CartStack } from "./CartStack";
+import { WishlistScreen } from "../features/wishlist/screen/wishlist.screen";
+import { HomeScreen } from "../features/home/screens/home.screen";
 
 export default function Navigation() {
   return (
-    <NavigationContainer linking={LinkingConfiguration}>
-      <RootNavigator />
+    <NavigationContainer>
+      {/* <RootNavigator /> */}
+      <BottomTabNavigator />
     </NavigationContainer>
   );
 }
@@ -56,7 +57,7 @@ function BottomTabNavigator() {
     >
       <BottomTab.Screen
         name="Home"
-        component={HomeStack}
+        component={HomeScreen}
         options={() => ({
           title: "Начало",
           tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
@@ -64,16 +65,17 @@ function BottomTabNavigator() {
         })}
       />
       <BottomTab.Screen
-        name="Продукти"
+        name="Products"
         component={ProductStack}
         options={{
+          title: "Продукти",
           headerShown: false,
           tabBarIcon: ({ color }) => <TabBarIcon name="search" color={color} />,
         }}
       />
       <BottomTab.Screen
         name="Wishlist"
-        component={WishlistStack}
+        component={WishlistScreen}
         options={() => ({
           title: "Желани",
           tabBarIcon: ({ color }) => <TabBarIcon name="heart" color={color} />,

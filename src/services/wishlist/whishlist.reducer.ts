@@ -23,7 +23,7 @@ export const wishlistReducer = (
   props: IProps
 ) => {
   const { type, payload } = props;
-  console.log(wishlistState);
+
   switch (type) {
     case SET_WISHLIST_ITEMS:
       return setWishlistItems(wishlistState, payload.wishlistItems);

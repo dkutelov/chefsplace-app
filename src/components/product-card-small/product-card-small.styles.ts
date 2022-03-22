@@ -4,10 +4,11 @@ import { TouchableOpacity } from "react-native";
 import { Theme } from "../../types/Theme";
 
 export const ProductCardWrapper = styled(TouchableOpacity)`
-  flex-basis: ${({ width }: { width: number }) => width}px;
+  width: ${({ width }: { width: number }) => width}px;
   background-color: ${(props: { theme: Theme }) =>
     props.theme.colors.bg.primary};
   margin-bottom: ${(props: { theme: Theme }) => props.theme.space[2]};
+  margin-right: ${(props: { theme: Theme }) => props.theme.space[1]};
   padding: ${(props: { theme: Theme }) => props.theme.space[3]};
   border-radius: ${(props: { theme: Theme }) => props.theme.space[2]};
   flex-direction: column;
@@ -31,7 +32,7 @@ export const Title = styled.Text`
 `;
 
 export const ProductImage = styled.Image`
-  height: 113px;
+  height: 130px;
   margin-bottom: ${(props: { theme: Theme }) => props.theme.space[2]};
 `;
 
