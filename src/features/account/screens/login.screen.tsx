@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { ActivityIndicator, Colors } from "react-native-paper";
+import { ActivityIndicator } from "react-native-paper";
 
 import {
   AccountBackground,
@@ -13,6 +13,7 @@ import {
 import { Text } from "../../../components/typography/text.component";
 import { Spacer } from "../../../components/spacer/spacer.component";
 import { AuthenticationContext } from "../../../services/authentication/authentication.context";
+import { colors } from "../../../infrastructure/theme/colors";
 
 export const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
@@ -48,25 +49,30 @@ export const LoginScreen = ({ navigation }) => {
             <Text variant="error">{error}</Text>
           </ErrorContainer>
         )}
-        <Spacer size="large">
+        <Spacer size="xl">
           {!isLoading ? (
             <AuthButton
               icon="lock-open-outline"
               mode="contained"
               onPress={() => onLogin(email, password)}
             >
-              Login
+              Вход
             </AuthButton>
           ) : (
-            <ActivityIndicator animating={true} color={Colors.blue300} />
+            <ActivityIndicator animating={true} color={colors.ui.primary} />
           )}
         </Spacer>
+        <Spacer size="xl" position="top">
+          <Text variant="caption">
+            Ако още нямате профил, направете регистрация тук.
+          </Text>
+        </Spacer>
+        <Spacer size="large" position="top">
+          <AuthButton icon="door" mode="contained" onPress={() => {}}>
+            Регистрация
+          </AuthButton>
+        </Spacer>
       </AccountContainer>
-      <Spacer size="large" position="top">
-        <AuthButton mode="contained" onPress={() => navigation.goBack()}>
-          Back
-        </AuthButton>
-      </Spacer>
     </AccountBackground>
   );
 };
