@@ -26,7 +26,13 @@ const SpacerView = styled.View`
   ${({ variant }) => variant};
 `;
 
-export const Spacer = ({ position, size, children }) => {
+interface IProps {
+  position: string;
+  size: string;
+  children: React.ReactNode;
+}
+
+export const Spacer = ({ position, size, children }: IProps) => {
   const theme = useTheme();
   const variant = getVariant(position, size, theme);
   return <SpacerView variant={variant}>{children}</SpacerView>;

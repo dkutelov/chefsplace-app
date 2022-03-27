@@ -7,11 +7,12 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import { colors } from "../infrastructure/theme/colors";
 import { RootStackParamList, RootTabParamList } from "../types/Navigation";
-import { ProfileScreen } from "../features/profile/screens";
+import { ProfileScreen } from "../features/profile/screens/profile.screen";
 import { ProductStack } from "./product.navigator";
 import { CartStack } from "./CartStack";
 import { HomeScreen } from "../features/home/screens/home.screen";
 import { WishlistStack } from "./wishlist.navigator";
+import { AuthenticationContext } from "../services/authentication/authentication.context";
 
 export default function Navigation() {
   return (
@@ -47,6 +48,7 @@ function RootNavigator() {
 const BottomTab = createBottomTabNavigator<RootTabParamList>();
 
 function BottomTabNavigator() {
+  const { isAuthenticated } = React.useContext(AuthenticationContext);
   return (
     <BottomTab.Navigator
       initialRouteName="Home"
@@ -92,6 +94,7 @@ function BottomTabNavigator() {
         name="Profile"
         component={ProfileScreen}
         options={{
+          headerShown: isAuthenticated,
           title: "Профил",
           tabBarIcon: ({ color }) => <TabBarIcon name="person" color={color} />,
         }}
