@@ -7,8 +7,11 @@ export interface IUserContext {
   user: User | null;
   isLoading: boolean;
   error?: string | null;
-  dispatch: React.Dispatch<any>;
-  onLogin: () => void;
-  onRegister: () => void;
+  onLogin: (email: string, password: string) => void;
+  onRegister: (
+    email: string,
+    password: string,
+    repeatedPassword: string
+  ) => void;
   onLogout: () => void;
 }

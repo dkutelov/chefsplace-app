@@ -16,7 +16,6 @@ const defaultState: IUserContext = {
   onLogin: () => {},
   onRegister: () => {},
   onLogout: () => {},
-  dispatch: () => {},
 };
 
 export const AuthenticationContext = createContext<IUserContext>(defaultState);
@@ -82,6 +81,7 @@ export const AuthenticationContextProvider = ({
   return (
     <AuthenticationContext.Provider
       value={{
+        isAuthenticated: !!user,
         user,
         isLoading,
         error,
