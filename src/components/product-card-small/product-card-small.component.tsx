@@ -26,7 +26,7 @@ export const ProductCardSmall = ({ item, isSimilarProduct }: Props) => {
 
   const onProductCardPress = () => {
     if (isSimilarProduct) {
-      navigate("SimilarProductDetails", { id, similarProducts: true });
+      navigate("SimilarProductDetails", { id, similarProducts: true, name });
     } else {
       navigate("Products", { screen: "ProductDetails", params: { id } });
     }

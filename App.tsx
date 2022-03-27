@@ -24,6 +24,7 @@ import {
   Lato_400Regular,
   Lato_700Bold,
 } from "@expo-google-fonts/lato";
+import { AuthenticationContextProvider } from "./src/services/authentication/authentication.context";
 
 export default function App() {
   const [ptsansLoaded] = usePTSans({
@@ -42,13 +43,15 @@ export default function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <ProductsContextProvider>
-        <CartContextProvider>
-          <WishlistContextProvider>
-            <Navigation />
-          </WishlistContextProvider>
-        </CartContextProvider>
-      </ProductsContextProvider>
+      <AuthenticationContextProvider>
+        <ProductsContextProvider>
+          <CartContextProvider>
+            <WishlistContextProvider>
+              <Navigation />
+            </WishlistContextProvider>
+          </CartContextProvider>
+        </ProductsContextProvider>
+      </AuthenticationContextProvider>
       <StatusBar style="auto" />
     </ThemeProvider>
   );

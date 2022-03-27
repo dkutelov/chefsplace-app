@@ -39,7 +39,11 @@ export const ProductStack = () => {
         name="SimilarProductDetails"
         component={ProductDetailScreenWrapper}
         options={{
-          title: "Детайли",
+          title: "Информация За Продукта",
+          headerTitleStyle: {
+            fontFamily: fonts.body,
+            fontSize: isAndroid ? 16 : fontSizes.body,
+          },
         }}
       />
     </Stack.Navigator>

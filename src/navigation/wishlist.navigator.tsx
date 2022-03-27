@@ -9,6 +9,18 @@ import { ProductDetailScreenWrapper } from "../features/product-detail/screens/p
 const Stack = createNativeStackNavigator();
 const isAndroid = Platform.OS === "android";
 
+const CustomHeading = ({ route }) => ({
+  title: route.params.name,
+  headerStyle: {
+    backgroundColor: colors.bg.secondary,
+  },
+  headerTintColor: colors.ui.primary,
+  headerTitleStyle: {
+    fontFamily: fonts.heading,
+    fontSize: isAndroid ? 16 : fontSizes.body,
+  },
+});
+
 export const WishlistStack = () => {
   return (
     <Stack.Navigator>
@@ -21,22 +33,12 @@ export const WishlistStack = () => {
         <Stack.Screen
           name="ProductDetail"
           component={ProductDetailScreenWrapper}
-          options={({ route }) => ({
-            title: route.params.name,
-            headerStyle: {
-              backgroundColor: colors.bg.secondary,
-            },
-            headerTintColor: colors.ui.primary,
-            headerTitleStyle: {
-              fontFamily: fonts.heading,
-              fontSize: isAndroid ? 16 : fontSizes.body,
-            },
-          })}
+          options={CustomHeading}
         />
         <Stack.Screen
           name="SimilarProductDetails"
           component={ProductDetailScreenWrapper}
-          options={({ route }) => ({ title: route.params.name })}
+          options={CustomHeading}
         />
       </Stack.Group>
     </Stack.Navigator>

@@ -30,8 +30,6 @@ export const ProductContextProvider = ({
         })
         .then((results) => {
           setIsLoading(false);
-          console.log(results);
-
           setProduct(results);
         })
         .catch((err) => {

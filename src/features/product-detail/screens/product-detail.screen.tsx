@@ -56,8 +56,6 @@ const ProductDetailScreen = () => {
     // Create Reducer?
 
     if (params && params.id) {
-      console.log(params);
-
       loadProduct(params.id);
       setIsWishlisted(!!wishlistItems.find((x) => x.id === params.id));
     }
