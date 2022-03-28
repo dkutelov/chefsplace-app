@@ -13,6 +13,8 @@ import { CartStack } from "./CartStack";
 import { HomeScreen } from "../features/home/screens/home.screen";
 import { WishlistStack } from "./wishlist.navigator";
 import { AuthenticationContext } from "../services/authentication/authentication.context";
+import { SafeAreaView, Image } from "react-native";
+import { K } from "../infrastructure/constants";
 
 export default function Navigation() {
   return (
@@ -62,7 +64,20 @@ function BottomTabNavigator() {
         options={() => ({
           title: "Начало",
           tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
-          headerShown: false,
+          header: () => (
+            <SafeAreaView>
+              <Image
+                source={require("../../assets/images/logo.png")}
+                style={{
+                  height: 60,
+                  width: 134,
+                  resizeMode: "contain",
+                  alignSelf: "center",
+                  marginBottom: 8,
+                }}
+              />
+            </SafeAreaView>
+          ),
         })}
       />
       <BottomTab.Screen
