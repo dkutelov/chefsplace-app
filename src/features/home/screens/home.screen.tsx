@@ -27,6 +27,7 @@ export const HomeScreen = () => {
             source={{
               uri: K.homeHeroImageUrl,
             }}
+            style={{ aspectRatio: 1 }}
           />
         </HeroBanner>
         <Row title="Категории">
