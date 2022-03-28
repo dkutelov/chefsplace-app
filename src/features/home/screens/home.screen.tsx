@@ -1,5 +1,6 @@
 import { ScrollView } from "react-native";
 import { SafeArea } from "../../../components/utils/safe-area.component";
+import { Dimensions } from "react-native";
 
 import mock from "./mock.json";
 import { K } from "../../../infrastructure/constants/";
@@ -9,11 +10,19 @@ import { Row } from "../../../components/row/row.component";
 import CategoryListItem from "../../home/components/category-list/category-list-item.component";
 
 // Styles
-import { HeroBanner, HeroBannerImage, Categories } from "./home.styles";
+import {
+  HeroBanner,
+  HeroBannerImage,
+  Categories,
+  SecondaryBanner,
+  SecondaryBannerImage,
+} from "./home.styles";
 import { ProductCardSmall } from "../../../components/product-card-small/product-card-small.component";
 import { useContext } from "react";
 import { ProductsContext } from "../../../services/products/products.context";
 
+const win = Dimensions.get("window");
+const width = win.width - 16;
 export const HomeScreen = () => {
   const categories = mock;
   const { products } = useContext(ProductsContext);
@@ -27,7 +36,7 @@ export const HomeScreen = () => {
             source={{
               uri: K.homeHeroImageUrl,
             }}
-            style={{ aspectRatio: 1 }}
+            style={{ width, height: 549 * (win.width / 597) }}
           />
         </HeroBanner>
         <Row title="Категории">
@@ -36,6 +45,14 @@ export const HomeScreen = () => {
               categories.map((c) => <CategoryListItem key={c.id} item={c} />)}
           </Categories>
         </Row>
+        <SecondaryBanner>
+          <SecondaryBannerImage
+            source={{
+              uri: K.secondaryHomeImageUrl,
+            }}
+            style={{ width, height: 162 * (win.width / 1275) }}
+          />
+        </SecondaryBanner>
         <Row title="Нови Продукти">
           <ScrollView horizontal showsHorizontalScrollIndicator={false}>
             {newProducts.map((product) => (

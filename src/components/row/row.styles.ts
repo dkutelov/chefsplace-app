@@ -8,6 +8,6 @@ export const RowWrapper = styled.View`
 
 export const Title = styled.Text`
   color: ${(props: { theme: Theme }) => props.theme.colors.ui.primary};
-  margin-bottom: ${(props: { theme: Theme }) => props.theme.space[2]};
+  margin-bottom: ${(props: { theme: Theme }) => props.theme.space[3]};
   font-size: ${(props: { theme: Theme }) => props.theme.fontSizes.h5};
 `;
