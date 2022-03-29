@@ -9,6 +9,7 @@ import { fonts, fontSizes } from "../infrastructure/theme/fonts";
 
 const Stack = createNativeStackNavigator();
 const isAndroid = Platform.OS === "android";
+
 export const ProductStack = () => {
   return (
     <Stack.Navigator>
