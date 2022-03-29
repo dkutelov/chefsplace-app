@@ -15,6 +15,7 @@ import { WishlistStack } from "./wishlist.navigator";
 import { AuthenticationContext } from "../services/authentication/authentication.context";
 import { SafeAreaView, Image } from "react-native";
 import { K } from "../infrastructure/constants";
+import { AccountNavigator } from "./account.navigator";
 
 export default function Navigation() {
   return (
@@ -107,7 +108,7 @@ function BottomTabNavigator() {
       />
       <BottomTab.Screen
         name="Profile"
-        component={ProfileScreen}
+        component={AccountNavigator}
         options={{
           headerShown: isAuthenticated,
           title: "Профил",

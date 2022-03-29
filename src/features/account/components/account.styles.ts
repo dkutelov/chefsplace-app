@@ -31,6 +31,14 @@ export const AuthButton = styled(Button).attrs({
   padding: ${(props) => props.theme.space[2]};
 `;
 
+export const SecondaryAuthButton = styled(Button).attrs({
+  color: colors.ui.orange,
+})`
+  padding: ${(props) => props.theme.space[2]};
+  border-color: ${(props) => props.theme.colors.ui.orange};
+  border-width: 1px;
+`;
+
 export const AuthInput = styled(TextInput).attrs({
   activeUnderlineColor: colors.ui.primary,
 })`

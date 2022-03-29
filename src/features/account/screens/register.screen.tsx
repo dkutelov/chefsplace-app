@@ -1,13 +1,11 @@
 import React, { useState, useContext } from "react";
 import { ActivityIndicator } from "react-native-paper";
-import { useNavigation } from "@react-navigation/native";
 
 import {
   AccountBackground,
   AccountCover,
   AccountContainer,
   AuthButton,
-  SecondaryAuthButton,
   AuthInput,
   Title,
   ErrorContainer,
@@ -17,17 +15,17 @@ import { Spacer } from "../../../components/spacer/spacer.component";
 import { AuthenticationContext } from "../../../services/authentication/authentication.context";
 import { colors } from "../../../infrastructure/theme/colors";
 
-export const LoginScreen = () => {
-  const { navigate } = useNavigation();
+export const RegisterScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const { onLogin, error, isLoading } = useContext(AuthenticationContext);
   return (
     <AccountBackground>
       <AccountCover />
       <AccountContainer>
         <Spacer size="large" position="bottom">
-          <Title>Вход</Title>
+          <Title>Регистрация</Title>
         </Spacer>
         <AuthInput
           label="Имейл"
@@ -47,6 +45,16 @@ export const LoginScreen = () => {
             onChangeText={(p) => setPassword(p)}
           />
         </Spacer>
+        <Spacer size="large">
+          <AuthInput
+            label="Потвърди Парола"
+            value={confirmPassword}
+            textContentType="password"
+            secureTextEntry
+            autoCapitalize="none"
+            onChangeText={(p) => setConfirmPassword(p)}
+          />
+        </Spacer>
         {error && (
           <ErrorContainer size="large">
             <Text variant="error">{error}</Text>
@@ -59,25 +67,11 @@ export const LoginScreen = () => {
               mode="contained"
               onPress={() => onLogin(email, password)}
             >
-              Вход
+              Регистрация
             </AuthButton>
           ) : (
             <ActivityIndicator animating={true} color={colors.ui.primary} />
           )}
-        </Spacer>
-        <Spacer size="xl" position="top">
-          <Text variant="caption" style={{ textAlign: "center" }}>
-            Ако нямате профил, направете регистрация тук.
-          </Text>
-        </Spacer>
-        <Spacer size="large" position="top">
-          <SecondaryAuthButton
-            icon="door"
-            mode="outlined"
-            onPress={() => navigate("Register")}
-          >
-            Регистрация
-          </SecondaryAuthButton>
         </Spacer>
       </AccountContainer>
     </AccountBackground>

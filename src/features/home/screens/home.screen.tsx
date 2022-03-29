@@ -47,13 +47,22 @@ export const HomeScreen = () => {
         </Row>
         <SecondaryBanner>
           <SecondaryBannerImage
-            source={{
-              uri: K.secondaryHomeImageUrl,
-            }}
+            source={require("../../../../assets/images/ufs-banner.png")}
             style={{ width, height: 162 * (win.width / 1275) }}
           />
         </SecondaryBanner>
         <Row title="Нови Продукти">
+          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+            {newProducts.map((product) => (
+              <ProductCardSmall
+                item={product}
+                key={product.id}
+                isSimilarProduct={false}
+              />
+            ))}
+          </ScrollView>
+        </Row>
+        <Row title="Популярни Продукти">
           <ScrollView horizontal showsHorizontalScrollIndicator={false}>
             {newProducts.map((product) => (
               <ProductCardSmall

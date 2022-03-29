@@ -1,5 +1,4 @@
 import { useContext } from "react";
-import { Text } from "react-native";
 import { SafeArea } from "../../../components/utils/safe-area.component";
 import { AuthenticationContext } from "../../../services/authentication/authentication.context";
 import { LoginScreen } from "../../account/screens/login.screen";
