@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { List } from "react-native-paper";
+import { MenuItem } from "../../../../components/menu-item/menu-item.component";
 import { colors } from "../../../../infrastructure/theme/colors";
 
 import { AuthenticationContext } from "../../../../services/authentication/authentication.context";
@@ -9,56 +10,53 @@ export const ProfileMenu = () => {
   return (
     <>
       <List.Section>
-        <List.Item
-          style={{
-            padding: 12,
-            backgroundColor: "white",
-            borderBottomWidth: "1px",
-            borderBottomColor: colors.bg.gray,
-          }}
-          title="Адреси за Доставка"
-          left={(props) => (
-            <List.Icon
-              {...props}
-              color={colors.ui.primary}
-              icon="truck-delivery-outline"
-            />
-          )}
-          right={(props) => (
-            <List.Icon
-              {...props}
-              color={colors.ui.secondary}
-              icon="menu-right"
-            />
-          )}
-          onPress={() => {}}
+        <MenuItem
+          title="Моите Поръчки"
+          iconName="reload"
+          onPressHandler={() => {}}
         />
-        <List.Item
-          style={{ padding: 12, backgroundColor: "white" }}
-          title="Адреси за Фактуриране"
-          left={(props) => (
-            <List.Icon
-              {...props}
-              color={colors.ui.primary}
-              icon="pencil-box-outline"
-            />
-          )}
-          right={(props) => (
-            <List.Icon
-              {...props}
-              color={colors.ui.secondary}
-              icon="menu-right"
-            />
-          )}
-          onPress={() => {}}
+        <MenuItem
+          title="Поръчай Отново"
+          iconName="repeat"
+          onPressHandler={() => {}}
         />
       </List.Section>
       <List.Section>
-        <List.Item
-          style={{ padding: 16, backgroundColor: "white" }}
+        <MenuItem
+          title="Редактиране Профил"
+          iconName="pencil-box-outline"
+          onPressHandler={() => {}}
+        />
+        <MenuItem
+          title="Адреси за Доставка"
+          iconName="truck-delivery-outline"
+          onPressHandler={() => {}}
+        />
+        <MenuItem
+          title="Данни за Фактура"
+          iconName="file-document-outline"
+          onPressHandler={() => {}}
+        />
+      </List.Section>
+      <List.Section>
+        <MenuItem
+          title="Общи Условия"
+          iconName="alert-box-outline"
+          onPressHandler={() => {}}
+        />
+        <MenuItem
+          title="Свръжи се с Нас"
+          iconName="contacts-outline"
+          onPressHandler={() => {}}
+        />
+      </List.Section>
+      <List.Section>
+        <MenuItem
           title="Изход"
-          left={(props) => <List.Icon {...props} color="red" icon="door" />}
-          onPress={onLogout}
+          iconName="door"
+          onPressHandler={onLogout}
+          rightIcon={false}
+          iconColor={colors.ui.error}
         />
       </List.Section>
     </>
