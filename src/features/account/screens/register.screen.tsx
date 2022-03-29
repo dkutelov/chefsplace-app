@@ -1,11 +1,13 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { ActivityIndicator } from "react-native-paper";
+import { useNavigation } from "@react-navigation/native";
 
 import {
   AccountBackground,
   AccountCover,
   AccountContainer,
   AuthButton,
+  SecondaryAuthButton,
   AuthInput,
   Title,
   ErrorContainer,
@@ -15,11 +17,25 @@ import { Spacer } from "../../../components/spacer/spacer.component";
 import { AuthenticationContext } from "../../../services/authentication/authentication.context";
 import { colors } from "../../../infrastructure/theme/colors";
 
-export const RegisterScreen = ({ navigation }) => {
+export const RegisterScreen = () => {
+  const navigation = useNavigation();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const { onLogin, error, isLoading } = useContext(AuthenticationContext);
+  const [repeatedPassword, setRepeatedPassword] = useState("");
+  const { onRegister, isAuthenticated, error, isLoading } = useContext(
+    AuthenticationContext
+  );
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigation.goBack();
+    }
+  }, [isAuthenticated]);
+
+  const onRegisterPress = () => {
+    onRegister(email, password, repeatedPassword);
+  };
+
   return (
     <AccountBackground>
       <AccountCover />
@@ -48,11 +64,11 @@ export const RegisterScreen = ({ navigation }) => {
         <Spacer size="large">
           <AuthInput
             label="Потвърди Парола"
-            value={confirmPassword}
+            value={repeatedPassword}
             textContentType="password"
             secureTextEntry
             autoCapitalize="none"
-            onChangeText={(p) => setConfirmPassword(p)}
+            onChangeText={(p) => setRepeatedPassword(p)}
           />
         </Spacer>
         {error && (
@@ -65,7 +81,7 @@ export const RegisterScreen = ({ navigation }) => {
             <AuthButton
               icon="lock-open-outline"
               mode="contained"
-              onPress={() => onLogin(email, password)}
+              onPress={onRegisterPress}
             >
               Регистрация
             </AuthButton>
@@ -74,6 +90,16 @@ export const RegisterScreen = ({ navigation }) => {
           )}
         </Spacer>
       </AccountContainer>
+      <Spacer size="xl">
+        <SecondaryAuthButton
+          icon="arrow-left-bold"
+          mode="contained"
+          labelStyle={{ color: colors.bg.primary }}
+          onPress={() => navigation.goBack()}
+        >
+          Обратно
+        </SecondaryAuthButton>
+      </Spacer>
     </AccountBackground>
   );
 };

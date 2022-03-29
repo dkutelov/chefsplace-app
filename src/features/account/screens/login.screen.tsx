@@ -22,6 +22,7 @@ export const LoginScreen = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { onLogin, error, isLoading } = useContext(AuthenticationContext);
+
   return (
     <AccountBackground>
       <AccountCover />
@@ -65,21 +66,26 @@ export const LoginScreen = () => {
             <ActivityIndicator animating={true} color={colors.ui.primary} />
           )}
         </Spacer>
-        <Spacer size="xl" position="top">
-          <Text variant="caption" style={{ textAlign: "center" }}>
-            Ако нямате профил, направете регистрация тук.
-          </Text>
-        </Spacer>
-        <Spacer size="large" position="top">
-          <SecondaryAuthButton
-            icon="door"
-            mode="outlined"
-            onPress={() => navigate("Register")}
-          >
-            Регистрация
-          </SecondaryAuthButton>
-        </Spacer>
       </AccountContainer>
+      <Spacer size="xl" position="top">
+        <Text
+          variant="caption"
+          style={{ textAlign: "center" }}
+          style={{ color: colors.bg.primary }}
+        >
+          Ако нямате профил, направете регистрация тук.
+        </Text>
+      </Spacer>
+      <Spacer size="large" position="top">
+        <SecondaryAuthButton
+          icon="door"
+          mode="contained"
+          labelStyle={{ color: colors.bg.primary }}
+          onPress={() => navigate("Register")}
+        >
+          Регистрация
+        </SecondaryAuthButton>
+      </Spacer>
     </AccountBackground>
   );
 };

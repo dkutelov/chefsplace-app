@@ -20,6 +20,13 @@ const defaultState: IUserContext = {
 
 export const AuthenticationContext = createContext<IUserContext>(defaultState);
 
+//TODO: Clear errors on screen leave or tab change
+//TODO: Translate firebase errors, move to constants
+const translatedError: { [key: string]: string } = {
+  "FirebaseError: Firebase: Error (auth/email-already-in-use).":
+    "Имейлът вече съществува. Пробвайте с друг имейл.",
+};
+
 export const AuthenticationContextProvider = ({
   children,
 }: {
@@ -41,6 +48,7 @@ export const AuthenticationContextProvider = ({
       .then((u) => {
         setUser(u);
         setIsLoading(false);
+        setError(null);
       })
       .catch((e) => {
         setIsLoading(false);
@@ -55,7 +63,7 @@ export const AuthenticationContextProvider = ({
     repeatedPassword: string
   ) => {
     if (password !== repeatedPassword) {
-      setError("Error: Passwords do not match!");
+      setError("Паролите не съвпадат!");
       return;
     }
 
@@ -64,17 +72,20 @@ export const AuthenticationContextProvider = ({
       .then((u) => {
         setUser(u);
         setIsLoading(false);
+        setError(null);
       })
       .catch((e) => {
         setIsLoading(false);
         console.log(e);
-        setError(e.toString());
+        const errorText = e.toString();
+        setError(translatedError[errorText]);
       });
   };
 
   const onLogout = () => {
     logoutRequest().then(() => {
       setUser(null);
+      setError(null);
     });
   };
 
