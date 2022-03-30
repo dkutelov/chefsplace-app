@@ -1,5 +1,7 @@
 import React, { useContext } from "react";
 import { List } from "react-native-paper";
+import { useNavigation } from "@react-navigation/native";
+
 import { MenuItem } from "../../../../components/menu-item/menu-item.component";
 import { colors } from "../../../../infrastructure/theme/colors";
 
@@ -7,6 +9,7 @@ import { AuthenticationContext } from "../../../../services/authentication/authe
 
 export const ProfileMenu = () => {
   const { onLogout } = useContext(AuthenticationContext);
+  const { navigate } = useNavigation();
   return (
     <>
       <List.Section>
@@ -30,7 +33,11 @@ export const ProfileMenu = () => {
         <MenuItem
           title="Адреси за Доставка"
           iconName="truck-delivery-outline"
-          onPressHandler={() => {}}
+          onPressHandler={() => {
+            console.log("hi");
+
+            navigate("NewDeliveryAddress");
+          }}
         />
         <MenuItem
           title="Данни за Фактура"

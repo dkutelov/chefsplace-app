@@ -112,8 +112,7 @@ function BottomTabNavigator() {
         name="Profile"
         component={AccountNavigator}
         options={{
-          headerShown: isAuthenticated,
-          title: "Профил",
+          headerShown: false,
           tabBarIcon: ({ color }) => <TabBarIcon name="person" color={color} />,
         }}
       />

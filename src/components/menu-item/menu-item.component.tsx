@@ -29,7 +29,7 @@ export const MenuItem = ({
           <List.Icon {...props} color={colors.ui.secondary} icon="menu-right" />
         ) : null
       }
-      onPress={() => {}}
+      onPress={onPressHandler}
     />
   );
 };
