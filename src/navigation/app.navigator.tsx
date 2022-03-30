@@ -16,6 +16,7 @@ import { AuthenticationContext } from "../services/authentication/authentication
 import { SafeAreaView, Image } from "react-native";
 import { K } from "../infrastructure/constants";
 import { AccountNavigator } from "./account.navigator";
+import { Badge } from "react-native-paper";
 
 export default function Navigation() {
   return (
@@ -27,6 +28,17 @@ export default function Navigation() {
 }
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
+
+const TabIconWithBadge = ({ iconName, count }) => {
+  return (
+    <>
+      <TabBarIcon name={iconName} color={colors.ui.primary} />
+      <Badge visible={true} style={{ position: "absolute" }}>
+        {count}
+      </Badge>
+    </>
+  );
+};
 
 function RootNavigator() {
   return (
@@ -103,7 +115,9 @@ function BottomTabNavigator() {
         component={CartStack}
         options={{
           title: "Количка",
-          tabBarIcon: ({ color }) => <TabBarIcon name="cart" color={color} />,
+          tabBarIcon: ({ color }) => (
+            <TabIconWithBadge iconName="cart" count={5} />
+          ),
         }}
       />
       <BottomTab.Screen
@@ -118,6 +132,15 @@ function BottomTabNavigator() {
     </BottomTab.Navigator>
   );
 }
+
+// <BottomTab.Screen
+//   name="Cart"
+//   component={CartStack}
+//   options={{
+//     title: "Количка",
+//     tabBarIcon: ({ color }) => <TabBarIcon name="cart" color={color} />,
+//   }}
+// />;
 
 function TabBarIcon(props: {
   name: React.ComponentProps<typeof Ionicons>["name"];
