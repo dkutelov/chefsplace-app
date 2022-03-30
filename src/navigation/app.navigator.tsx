@@ -1,22 +1,25 @@
 import * as React from "react";
-import { Ionicons } from "@expo/vector-icons";
+import { SafeAreaView, Image } from "react-native";
 
+// Navigation
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import { colors } from "../infrastructure/theme/colors";
-import { RootStackParamList, RootTabParamList } from "../types/Navigation";
-import { ProfileScreen } from "../features/profile/screens/profile.screen";
+// Tab Icons
+import { TabBarIcon } from "./components/tabbar-icons/tabbar-icon.component";
+
+// Screens, stack navigators
+import { AccountNavigator } from "./account.navigator";
 import { ProductStack } from "./product.navigator";
 import { CartStack } from "./CartStack";
 import { HomeScreen } from "../features/home/screens/home.screen";
 import { WishlistStack } from "./wishlist.navigator";
+
+// Context
 import { AuthenticationContext } from "../services/authentication/authentication.context";
-import { SafeAreaView, Image } from "react-native";
-import { K } from "../infrastructure/constants";
-import { AccountNavigator } from "./account.navigator";
-import { Badge } from "react-native-paper";
+
+import { colors } from "../infrastructure/theme/colors";
+import { RootStackParamList, RootTabParamList } from "../types/Navigation";
 
 export default function Navigation() {
   return (
@@ -26,19 +29,6 @@ export default function Navigation() {
     </NavigationContainer>
   );
 }
-
-const Stack = createNativeStackNavigator<RootStackParamList>();
-
-const TabIconWithBadge = ({ iconName, count }) => {
-  return (
-    <>
-      <TabBarIcon name={iconName} color={colors.ui.primary} />
-      <Badge visible={true} style={{ position: "absolute" }}>
-        {count}
-      </Badge>
-    </>
-  );
-};
 
 function RootNavigator() {
   return (
@@ -115,9 +105,7 @@ function BottomTabNavigator() {
         component={CartStack}
         options={{
           title: "Количка",
-          tabBarIcon: ({ color }) => (
-            <TabIconWithBadge iconName="cart" count={5} />
-          ),
+          tabBarIcon: ({ color }) => <TabBarIcon name="cart" color={color} />,
         }}
       />
       <BottomTab.Screen
@@ -141,10 +129,3 @@ function BottomTabNavigator() {
 //     tabBarIcon: ({ color }) => <TabBarIcon name="cart" color={color} />,
 //   }}
 // />;
-
-function TabBarIcon(props: {
-  name: React.ComponentProps<typeof Ionicons>["name"];
-  color: string;
-}) {
-  return <Ionicons size={25} style={{ marginBottom: -3 }} {...props} />;
-}
