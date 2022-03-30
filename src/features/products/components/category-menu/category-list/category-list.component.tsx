@@ -7,8 +7,6 @@ import {
   CategoryFlatList,
   CategoryTitleContainer,
   CategoryTitle,
-  ClearLabel,
-  ClearContainer,
 } from "./category-list.styles";
 import mock from "../../../screens/mock.json";
 import { Category } from "../../../../../types/Category";
@@ -25,14 +23,22 @@ export const CategoryMenu = ({
   clearCategoryFilter,
 }: IProps) => {
   const [showCategories, setShowCategories] = useState(false);
-  const [activeCategoryId, setActiveCategoryId] = useState("");
+  const [activeCategoryId, setActiveCategoryId] = useState<string>("");
   const windowWidth = useWindowDimensions().width;
   const categories = mock;
 
-  const onCategoryPress = useCallback((id: string) => {
-    setActiveCategoryId(id);
-    filterProducts(id);
-  }, []);
+  const onCategoryPress = useCallback(
+    (id: string) => {
+      if (id == activeCategoryId) {
+        clearCategoryFilter();
+        setActiveCategoryId("");
+      } else {
+        setActiveCategoryId(id);
+        filterProducts(id);
+      }
+    },
+    [activeCategoryId]
+  );
 
   const toggleCetegoryMenu = () => {
     if (showCategories) {
@@ -40,11 +46,6 @@ export const CategoryMenu = ({
       clearCategoryFilter();
     }
     setShowCategories((prevState) => !prevState);
-  };
-
-  const clearSelection = () => {
-    clearCategoryFilter();
-    setActiveCategoryId("");
   };
 
   return (
@@ -87,12 +88,6 @@ export const CategoryMenu = ({
             }}
             keyExtractor={(_, index) => index}
           />
-          {activeCategoryId !== "" && (
-            <ClearContainer onPress={clearSelection}>
-              <Ionicons name="close" size={16} color={colors.ui.orange} />
-              <ClearLabel>изчисти селекцията</ClearLabel>
-            </ClearContainer>
-          )}
         </ContainerView>
       )}
     </>

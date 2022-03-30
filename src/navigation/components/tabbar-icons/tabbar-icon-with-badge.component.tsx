@@ -22,14 +22,3 @@ export const TabIconWithBadge = (props: IProps) => {
     </>
   );
 };
-
-// const TabIconWithBadge = ({ iconName, count }) => {
-//   return (
-//     <>
-//       <TabBarIcon name={iconName} color={colors.ui.primary} />
-//       <Badge visible={true} style={{ position: "absolute" }}>
-//         {count}
-//       </Badge>
-//     </>
-//   );
-// };

@@ -10,10 +10,10 @@ import { TabBarIcon } from "./components/tabbar-icons/tabbar-icon.component";
 import { TabIconWithBadge } from "./components/tabbar-icons/tabbar-icon-with-badge.component";
 
 // Screens, stack navigators
+import { HomeScreen } from "../features/home/screens/home.screen";
 import { AccountNavigator } from "./account.navigator";
 import { ProductStack } from "./product.navigator";
-import { CartStack } from "./CartStack";
-import { HomeScreen } from "../features/home/screens/home.screen";
+import { CartStack } from "./cart.navigator";
 import { WishlistStack } from "./wishlist.navigator";
 
 // Context
@@ -22,8 +22,7 @@ import { CartContext } from "../services/cart/cart.context";
 import { WishlistContext } from "../services/wishlist/wishlist.context";
 
 import { colors } from "../infrastructure/theme/colors";
-import { RootStackParamList, RootTabParamList } from "../types/Navigation";
-import { CartItem } from "../types/Cart";
+import { RootTabParamList } from "../types/Navigation";
 
 export default function Navigation() {
   return (

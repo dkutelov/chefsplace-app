@@ -15,7 +15,6 @@ export const CategoryTitleContainer = styled.View`
   width: 60px;
   justify-content: flex-start;
   align-items: center;
-  margin-bottom: ${(props: { theme: Theme }) => props.theme.space[1]};
 `;
 
 export const CategoryTitle = styled.Text`
