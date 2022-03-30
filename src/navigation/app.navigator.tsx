@@ -7,6 +7,7 @@ import { NavigationContainer } from "@react-navigation/native";
 
 // Tab Icons
 import { TabBarIcon } from "./components/tabbar-icons/tabbar-icon.component";
+import { TabIconWithBadge } from "./components/tabbar-icons/tabbar-icon-with-badge.component";
 
 // Screens, stack navigators
 import { AccountNavigator } from "./account.navigator";
@@ -17,36 +18,18 @@ import { WishlistStack } from "./wishlist.navigator";
 
 // Context
 import { AuthenticationContext } from "../services/authentication/authentication.context";
+import { CartContext } from "../services/cart/cart.context";
+import { WishlistContext } from "../services/wishlist/wishlist.context";
 
 import { colors } from "../infrastructure/theme/colors";
 import { RootStackParamList, RootTabParamList } from "../types/Navigation";
+import { CartItem } from "../types/Cart";
 
 export default function Navigation() {
   return (
     <NavigationContainer>
-      {/* <RootNavigator /> */}
       <BottomTabNavigator />
     </NavigationContainer>
-  );
-}
-
-function RootNavigator() {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen
-        name="Root"
-        component={BottomTabNavigator}
-        options={{ headerShown: false }}
-      />
-      {/* <Stack.Screen
-        name="NotFound"
-        component={NotFoundScreen}
-        options={{ title: "Oops!" }}
-      />
-      <Stack.Group screenOptions={{ presentation: "modal" }}>
-        <Stack.Screen name="Modal" component={ModalScreen} />
-      </Stack.Group> */}
-    </Stack.Navigator>
   );
 }
 
@@ -54,6 +37,9 @@ const BottomTab = createBottomTabNavigator<RootTabParamList>();
 
 function BottomTabNavigator() {
   const { isAuthenticated } = React.useContext(AuthenticationContext);
+  const { cartItems } = React.useContext(CartContext);
+  const { wishlistItems } = React.useContext(WishlistContext);
+
   return (
     <BottomTab.Navigator
       initialRouteName="Home"
@@ -97,7 +83,13 @@ function BottomTabNavigator() {
         component={WishlistStack}
         options={() => ({
           title: "Желани",
-          tabBarIcon: ({ color }) => <TabBarIcon name="heart" color={color} />,
+          tabBarIcon: ({ color }) => (
+            <TabIconWithBadge
+              name="heart"
+              color={color}
+              count={wishlistItems.length}
+            />
+          ),
         })}
       />
       <BottomTab.Screen
@@ -105,7 +97,16 @@ function BottomTabNavigator() {
         component={CartStack}
         options={{
           title: "Количка",
-          tabBarIcon: ({ color }) => <TabBarIcon name="cart" color={color} />,
+          tabBarIcon: ({ color }) => (
+            <TabIconWithBadge
+              name="cart"
+              color={color}
+              count={cartItems.reduce<number>(
+                (prev, curr) => prev + curr.quantity,
+                0
+              )}
+            />
+          ),
         }}
       />
       <BottomTab.Screen
@@ -120,12 +121,3 @@ function BottomTabNavigator() {
     </BottomTab.Navigator>
   );
 }
-
-// <BottomTab.Screen
-//   name="Cart"
-//   component={CartStack}
-//   options={{
-//     title: "Количка",
-//     tabBarIcon: ({ color }) => <TabBarIcon name="cart" color={color} />,
-//   }}
-// />;
