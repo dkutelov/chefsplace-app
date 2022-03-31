@@ -35,7 +35,6 @@ export default function Navigation() {
 const BottomTab = createBottomTabNavigator<RootTabParamList>();
 
 function BottomTabNavigator() {
-  const { isAuthenticated } = React.useContext(AuthenticationContext);
   const { cartItems } = React.useContext(CartContext);
   const { wishlistItems } = React.useContext(WishlistContext);
 
