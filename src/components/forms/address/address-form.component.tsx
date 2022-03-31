@@ -1,22 +1,34 @@
 import { View, Text, TextInput, StyleSheet, Button } from "react-native";
 import React from "react";
 import { Formik } from "formik";
+import { InputField, FieldsContainer } from "./address-form.styles";
+
+//   label="Имейл"
+//           value={email}
+//           textContentType="emailAddress"
+//           keyboardType="email-address"
+//           autoCapitalize="none"
+// onChangeText = {(u) => setEmail(u)}
 
 export const AddressForm = () => {
   return (
     <View>
       <Formik
-        initialValues={{ title: "", body: "", rating: "" }}
+        initialValues={{ city: "", body: "", rating: "" }}
         onSubmit={(values) => {
           console.log(values);
         }}
       >
         {(props) => (
-          <View>
-            <TextInput
-              placeholder="Review product"
-              onChangeText={props.handleChange("title")}
-              value={props.values.title}
+          <FieldsContainer>
+            <InputField
+              label="Град"
+              onChangeText={props.handleChange("city")}
+              textContentType="addressCity"
+              keyboardType="default"
+              autoCapitalize="words"
+              value={props.values.city}
+              style={{ paddingHorizontal: 0 }}
             />
             <TextInput
               multiline
@@ -34,7 +46,7 @@ export const AddressForm = () => {
               color="maroon"
               onPress={() => props.handleSubmit()}
             />
-          </View>
+          </FieldsContainer>
         )}
       </Formik>
     </View>

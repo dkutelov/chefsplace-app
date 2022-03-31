@@ -50,6 +50,7 @@ export const RegisterScreen = () => {
           keyboardType="email-address"
           autoCapitalize="none"
           onChangeText={(u) => setEmail(u)}
+          style={{ paddingHorizontal: 0 }}
         />
         <Spacer size="large">
           <AuthInput
@@ -59,6 +60,7 @@ export const RegisterScreen = () => {
             secureTextEntry
             autoCapitalize="none"
             onChangeText={(p) => setPassword(p)}
+            style={{ paddingHorizontal: 0 }}
           />
         </Spacer>
         <Spacer size="large">
@@ -69,6 +71,7 @@ export const RegisterScreen = () => {
             secureTextEntry
             autoCapitalize="none"
             onChangeText={(p) => setRepeatedPassword(p)}
+            style={{ paddingHorizontal: 0 }}
           />
         </Spacer>
         {error && (

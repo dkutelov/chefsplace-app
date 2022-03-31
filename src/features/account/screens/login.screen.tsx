@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { ActivityIndicator } from "react-native-paper";
+import { ActivityIndicator, TextInput } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
 
 import {
@@ -16,6 +16,8 @@ import { Text } from "../../../components/typography/text.component";
 import { Spacer } from "../../../components/spacer/spacer.component";
 import { AuthenticationContext } from "../../../services/authentication/authentication.context";
 import { colors } from "../../../infrastructure/theme/colors";
+
+//TODO: Show password https://callstack.github.io/react-native-paper/text-input-icon.html
 
 export const LoginScreen = () => {
   const { navigate } = useNavigation();
@@ -37,6 +39,7 @@ export const LoginScreen = () => {
           keyboardType="email-address"
           autoCapitalize="none"
           onChangeText={(u) => setEmail(u)}
+          style={{ paddingHorizontal: 0 }}
         />
         <Spacer size="large">
           <AuthInput
@@ -46,6 +49,8 @@ export const LoginScreen = () => {
             secureTextEntry
             autoCapitalize="none"
             onChangeText={(p) => setPassword(p)}
+            right={<TextInput.Icon name="eye" />}
+            style={{ paddingHorizontal: 0 }}
           />
         </Spacer>
         {error && (
