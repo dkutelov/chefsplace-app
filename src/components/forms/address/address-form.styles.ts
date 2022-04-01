@@ -6,6 +6,8 @@ import { Theme } from "../../../types/Theme";
 
 export const FieldsContainer = styled.View`
   padding: ${(props: { theme: Theme }) => props.theme.space[4]};
+  background-color: ${(props: { theme: Theme }) =>
+    props.theme.colors.bg.primary};
 `;
 
 export const InputField = styled(TextInput).attrs({
@@ -13,4 +15,8 @@ export const InputField = styled(TextInput).attrs({
 })`
   width: 100%;
   background-color: transparent;
+`;
+
+export const HorizontalRow = styled.View`
+  flex-direction: row;
 `;
