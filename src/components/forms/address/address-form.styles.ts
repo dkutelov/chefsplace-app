@@ -1,4 +1,4 @@
-import { Button, TextInput } from "react-native-paper";
+import { TextInput } from "react-native-paper";
 import styled from "styled-components/native";
 
 import { colors } from "../../../infrastructure/theme/colors";
