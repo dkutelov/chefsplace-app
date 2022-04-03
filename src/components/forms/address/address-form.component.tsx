@@ -1,4 +1,4 @@
-import { ScrollView } from "react-native";
+import { KeyboardAvoidingView, Platform, ScrollView } from "react-native";
 import React from "react";
 import { Formik } from "formik";
 import {
@@ -7,8 +7,8 @@ import {
   HorizontalRow,
 } from "./address-form.styles";
 import { Button } from "../../button/button.component";
-import { Spacer } from "../../spacer/spacer.component";
 import Checkbox from "../checkbox/checkbox-component";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 export const AddressForm = () => {
   const defaultValues = {
@@ -31,7 +31,13 @@ export const AddressForm = () => {
   };
 
   return (
-    <ScrollView>
+    <KeyboardAwareScrollView
+      showsVerticalScrollIndicator={false}
+      style={{ flex: 1 }}
+      contentContainerStyle={{
+        flexGrow: 1,
+      }}
+    >
       <Formik
         initialValues={defaultValues}
         onSubmit={(values) => {
@@ -203,16 +209,14 @@ export const AddressForm = () => {
                 setFieldValue("isDefault", !values.isDefault)
               }
             />
-            <Spacer position="top" size="large">
-              <Button
-                text="Запиши"
-                disabled={false}
-                onButtonPress={() => handleSubmit()}
-              />
-            </Spacer>
+            <Button
+              text="Запиши"
+              disabled={false}
+              onButtonPress={() => handleSubmit()}
+            />
           </FieldsContainer>
         )}
       </Formik>
-    </ScrollView>
+    </KeyboardAwareScrollView>
   );
 };
