@@ -1,37 +1,3 @@
-export interface DeliveryAddress {
-  addressName: string;
-  firstName: string;
-  lastName: string;
-  phoneNumber: string;
-  company?: string;
-  note?: string;
-  address: Address;
-  isDefault: boolean;
-}
-
-export interface InvoiceAddress {
-  addressName: string;
-  companyName: string;
-  eik: string;
-  vatNumber?: string;
-  mol: string;
-  address: Address;
-  note?: string;
-  isDefault: boolean;
-}
-
-export interface Address {
-  postCode?: string;
-  city: string;
-  area?: string;
-  street?: string;
-  number?: string;
-  block?: string;
-  entrance?: string;
-  floor?: string;
-  apartment?: "16";
-}
-
 export interface User {
   [key: string]: any;
 }

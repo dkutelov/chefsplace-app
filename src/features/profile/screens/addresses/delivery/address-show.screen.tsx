@@ -3,10 +3,10 @@ import { useNavigation } from "@react-navigation/native";
 
 import { SafeArea } from "@components/utils/safe-area.component";
 import { Button } from "@components/button/button.component";
-import { ViewField } from "../components/view-field/view-field.component";
-import { AddressContainer, HorizontalRow } from "./profile.styles";
+import { ViewField } from "../../../components/view-field/view-field.component";
+import { AddressContainer, HorizontalRow } from "../../profile.styles";
 
-export const ShowAddressScreen = () => {
+export const DeliveryAddressShowScreen = () => {
   const { goBack } = useNavigation();
 
   return (

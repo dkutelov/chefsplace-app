@@ -19,6 +19,7 @@ export const IconsContainer = styled.View`
 
 export const IconContainer = styled.TouchableOpacity`
   margin-left: ${(props: { theme: Theme }) => props.theme.space[2]};
+  padding: ${(props: { theme: Theme }) => props.theme.space[1]};
 `;
 
 export const Title = styled.Text`

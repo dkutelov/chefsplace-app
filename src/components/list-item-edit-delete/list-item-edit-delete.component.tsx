@@ -33,14 +33,14 @@ export const ListItemEditDelete = ({
         <IconContainer onPress={onEditPress}>
           <MaterialCommunityIcons
             name="square-edit-outline"
-            size={28}
-            color={colors.monochromes.onix}
+            size={24}
+            color={colors.monochromes.onyx}
           />
         </IconContainer>
         <IconContainer onPress={onDeletePress}>
           <MaterialCommunityIcons
             name="delete"
-            size={28}
+            size={24}
             color={colors.ui.error}
           />
         </IconContainer>

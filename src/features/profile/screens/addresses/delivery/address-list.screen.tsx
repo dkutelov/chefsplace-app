@@ -2,10 +2,10 @@ import React from "react";
 import { useNavigation } from "@react-navigation/native";
 
 import { SafeArea } from "@components/utils/safe-area.component";
-import { AddressList } from "../components/address-list/address-list.component";
+import { AddressList } from "../../../components/address-list/address-list.component";
 import { Button } from "@components/button/button.component";
 
-export const AddressListScreen = () => {
+export const DeliveryAddressListScreen = () => {
   const { navigate } = useNavigation();
   const openNewAdressScreen = () => {
     navigate("NewDeliveryAddress");
