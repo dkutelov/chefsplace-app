@@ -15,6 +15,8 @@ module.exports = function (api) {
             "@components/*": "./src/components/*",
             "@features": "./src/features",
             "@features/*": "./src/features/*",
+            "@types": "./src/types",
+            "@types/*": "./src/types/*",
           },
         },
       ],

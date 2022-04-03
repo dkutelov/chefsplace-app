@@ -8,10 +8,10 @@ import {
 import { Button } from "../../button/button.component";
 import Checkbox from "../checkbox/checkbox-component";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import { Address } from "../../../types/User";
+import { DeliveryAddress } from "@types/User";
 
 export const AddressForm = () => {
-  let defaultValues: Address = {
+  let defaultValues = {
     addressName: "Адрес 1",
     firstName: "Дарий",
     lastName: "Кутелов",

@@ -10,11 +10,16 @@ export const AddressListScreen = () => {
   const openNewAdressScreen = () => {
     navigate("NewDeliveryAddress");
   };
+
   return (
     <>
       <SafeArea>
         <AddressList />
-        <Button text="Добави Нов Адрес" onButtonPress={openNewAdressScreen} />
+        <Button
+          text="Добави Нов Адрес"
+          onButtonPress={openNewAdressScreen}
+          containerStyles={{ marginLeft: 16, marginRight: 16 }}
+        />
       </SafeArea>
     </>
   );

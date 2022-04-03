@@ -1,6 +1,6 @@
 import { useContext } from "react";
-import { SafeArea } from "../../../components/utils/safe-area.component";
-import { AuthenticationContext } from "../../../services/authentication/authentication.context";
+import { SafeArea } from "@components/utils/safe-area.component";
+import { AuthenticationContext } from "@services/authentication/authentication.context";
 import { LoginScreen } from "../../account/screens/login.screen";
 import { ProfileMenu } from "../components/profile-menu/profile-menu.component";
 import { AuthForm } from "../components/register-form/auth-form.component";
