@@ -1,4 +1,3 @@
-import { KeyboardAvoidingView, Platform, ScrollView } from "react-native";
 import React from "react";
 import { Formik } from "formik";
 import {
@@ -9,9 +8,10 @@ import {
 import { Button } from "../../button/button.component";
 import Checkbox from "../checkbox/checkbox-component";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { Address } from "../../../types/User";
 
 export const AddressForm = () => {
-  const defaultValues = {
+  let defaultValues: Address = {
     addressName: "Адрес 1",
     firstName: "Дарий",
     lastName: "Кутелов",
@@ -41,6 +41,9 @@ export const AddressForm = () => {
       <Formik
         initialValues={defaultValues}
         onSubmit={(values) => {
+          //TODO: validation
+
+          //TODO: transform to DeliveryAddress type
           console.log(values);
         }}
       >

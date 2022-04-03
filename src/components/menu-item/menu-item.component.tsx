@@ -5,7 +5,7 @@ import { ListItem } from "./menu-item.styles";
 
 interface IProps {
   title: string;
-  iconName: string;
+  iconName?: string;
   onPressHandler: () => void;
   rightIcon?: boolean;
   iconColor?: string;
@@ -21,9 +21,11 @@ export const MenuItem = ({
   return (
     <ListItem
       title={title}
-      left={(props) => (
-        <List.Icon {...props} color={iconColor} icon={iconName} />
-      )}
+      left={(props) =>
+        iconName ? (
+          <List.Icon {...props} color={iconColor} icon={iconName} />
+        ) : null
+      }
       right={(props) =>
         rightIcon ? (
           <List.Icon {...props} color={colors.ui.secondary} icon="menu-right" />

@@ -4,7 +4,7 @@ import { theme } from "../../infrastructure/theme";
 
 interface IProps {
   text: string;
-  disabled: boolean;
+  disabled?: boolean;
   onButtonPress: () => void;
   containerStyles?: {
     [key: string]: any;

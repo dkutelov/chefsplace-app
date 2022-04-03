@@ -36,7 +36,7 @@ export const ProfileMenu = () => {
           onPressHandler={() => {
             console.log("hi");
 
-            navigate("NewDeliveryAddress");
+            navigate("DeliveryAddressList");
           }}
         />
         <MenuItem

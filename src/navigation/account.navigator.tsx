@@ -1,11 +1,12 @@
 import React from "react";
 
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { AuthenticationContext } from "../services/authentication/authentication.context";
+import { AuthenticationContext } from "@services/authentication/authentication.context";
 
-import { RegisterScreen } from "../features/account/screens/register.screen";
-import { ProfileScreen } from "../features/profile/screens/profile.screen";
-import { AddressScreen } from "../features/profile/screens/address.screen";
+import { RegisterScreen } from "@features/account/screens/register.screen";
+import { ProfileScreen } from "@features/profile/screens/profile.screen";
+import { AddressScreen } from "@features/profile/screens/address.screen";
+import { AddressListScreen } from "@features/profile/screens/address-list.screen";
 
 const Stack = createNativeStackNavigator();
 
@@ -22,6 +23,11 @@ export const AccountNavigator = () => {
         }}
       />
       <Stack.Screen name="Register" component={RegisterScreen} />
+      <Stack.Screen
+        name="DeliveryAddressList"
+        component={AddressListScreen}
+        options={{ title: "Адреси За Доставка" }}
+      />
       <Stack.Screen
         name="NewDeliveryAddress"
         component={AddressScreen}
