@@ -16,12 +16,16 @@ export const AddressList = () => {
         <ListItemEditDelete
           title="Мой адрес 1"
           itemId="1"
-          onPressHandler={() => {}}
+          onPressHandler={() => {
+            navigate("ViewAddress");
+          }}
         />
         <ListItemEditDelete
           title="Мой адрес 2"
           itemId="2"
-          onPressHandler={() => {}}
+          onPressHandler={() => {
+            navigate("ViewAddress");
+          }}
         />
       </List.Section>
     </>

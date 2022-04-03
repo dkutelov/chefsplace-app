@@ -22,6 +22,9 @@ export const colors: { [key: string]: { [key: string]: string } } = {
   },
   monochromes: {
     onyx: "#393E41",
+    darkerGray: "#605D53",
+    darkGray: "#8f8f8f",
+    veryLightGray: "#ebebeb",
   },
   text: {
     primary: "#333333",

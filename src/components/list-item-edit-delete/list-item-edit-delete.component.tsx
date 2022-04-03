@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigation } from "@react-navigation/native";
 
 import { colors } from "@infrastructure/theme/colors";
 import {
@@ -20,7 +21,10 @@ export const ListItemEditDelete = ({
   itemId,
   onPressHandler,
 }: IProps) => {
-  const onEditPress = () => {};
+  const { navigate } = useNavigation();
+  const onEditPress = () => {
+    navigate("NewDeliveryAddress");
+  };
   const onDeletePress = () => {};
   return (
     <ListItem onPress={onPressHandler}>

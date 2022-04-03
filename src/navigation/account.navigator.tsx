@@ -7,6 +7,7 @@ import { RegisterScreen } from "@features/account/screens/register.screen";
 import { ProfileScreen } from "@features/profile/screens/profile.screen";
 import { AddressScreen } from "@features/profile/screens/address.screen";
 import { AddressListScreen } from "@features/profile/screens/address-list.screen";
+import { ShowAddressScreen } from "@features/profile/screens/address-show.screen";
 
 const Stack = createNativeStackNavigator();
 
@@ -27,6 +28,11 @@ export const AccountNavigator = () => {
         name="DeliveryAddressList"
         component={AddressListScreen}
         options={{ title: "Адреси За Доставка" }}
+      />
+      <Stack.Screen
+        name="ViewAddress"
+        component={ShowAddressScreen}
+        options={{ presentation: "modal", headerShown: false }}
       />
       <Stack.Screen
         name="NewDeliveryAddress"

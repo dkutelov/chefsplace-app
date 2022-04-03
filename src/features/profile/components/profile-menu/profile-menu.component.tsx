@@ -34,8 +34,6 @@ export const ProfileMenu = () => {
           title="Адреси за Доставка"
           iconName="truck-delivery-outline"
           onPressHandler={() => {
-            console.log("hi");
-
             navigate("DeliveryAddressList");
           }}
         />
