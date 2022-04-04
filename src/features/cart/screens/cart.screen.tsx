@@ -7,6 +7,7 @@ import { CartItem } from "@types/Cart";
 
 // Context
 import {
+  AuthenticationContext,
   CartContext,
   ProductsContext,
   UPDATE_CART_ITEMS_ON_LOAD,
@@ -23,13 +24,18 @@ import { CartItemList, NoItemsInCart } from "./cart.styles";
 
 export const CartScreen = () => {
   const { cartItems, isLoading, error, dispatch } = useContext(CartContext);
+  const { isAuthenticated } = useContext(AuthenticationContext);
   const { products } = useContext(ProductsContext);
 
   const { navigate } = useNavigation();
 
   const onCheckout = () => {
     console.log("😁");
-    navigate("CheckoutTypeSelect");
+    if (isAuthenticated) {
+      navigate("AuthCheckout");
+    } else {
+      navigate("CheckoutTypeSelect");
+    }
   };
 
   useEffect(() => {

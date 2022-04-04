@@ -4,6 +4,8 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { CartScreen } from "../features/cart/screens/cart.screen";
 import { ProductDetailScreenWrapper } from "../features/product-detail/screens/product-detail.screen";
 import { CheckoutTypeSelect } from "@features/checkout/screen/checkout-type-select.screen";
+import { AuthCheckout } from "@features/checkout/screen/auth-checkout.screen";
+import { GuestCheckout } from "@features/checkout/screen/guest-checkout.screen";
 
 const Stack = createNativeStackNavigator();
 
@@ -36,7 +38,21 @@ export const CartStack = () => {
           name="CheckoutTypeSelect"
           component={CheckoutTypeSelect}
           options={{
-            title: "Детайли",
+            title: "Чекаут избор",
+          }}
+        />
+        <Stack.Screen
+          name="GuestCheckout"
+          component={GuestCheckout}
+          options={{
+            title: "Поръчване Като Гост",
+          }}
+        />
+        <Stack.Screen
+          name="AuthCheckout"
+          component={AuthCheckout}
+          options={{
+            title: "Поръчване",
           }}
         />
       </Stack.Group>
