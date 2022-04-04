@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { Caption } from "react-native-paper";
+import { useNavigation } from "@react-navigation/native";
 
 // Types
 import { CartItem } from "../../../types/Cart";
@@ -13,6 +14,7 @@ import { UPDATE_CART_ITEMS_ON_LOAD } from "../../../services/cart/cart.action-ty
 import { SafeArea } from "../../../components/utils/safe-area.component";
 import { CartItemCard } from "../components/cart-item/cart-item.component";
 import { CartSummary } from "../components/cart-summary/cart-summary.component";
+import { Button } from "@components/button/button.component";
 
 // Styles
 import { CartItemList, NoItemsInCart } from "./cart.styles";
@@ -20,6 +22,13 @@ import { CartItemList, NoItemsInCart } from "./cart.styles";
 export const CartScreen = () => {
   const { cartItems, isLoading, error, dispatch } = useContext(CartContext);
   const { products } = useContext(ProductsContext);
+
+  const { navigate } = useNavigation();
+
+  const onCheckout = () => {
+    console.log("😁");
+    navigate("CheckoutTypeSelect");
+  };
 
   useEffect(() => {
     dispatch({
@@ -43,14 +52,22 @@ export const CartScreen = () => {
           <Caption>Нямате продукти в количката!</Caption>
         </NoItemsInCart>
       ) : (
-        <CartItemList
-          data={cartItems}
-          renderItem={(item: { item: CartItem }) => (
-            <CartItemCard cartItem={item.item} />
-          )}
-          showsVerticalScrollIndicator={false}
-          ListFooterComponent={() => <CartSummary amount={cartAmount()} />}
-        />
+        <>
+          <CartItemList
+            data={cartItems}
+            renderItem={(item: { item: CartItem }) => (
+              <CartItemCard cartItem={item.item} />
+            )}
+            showsVerticalScrollIndicator={false}
+            ListFooterComponent={() => <CartSummary amount={cartAmount()} />}
+          />
+          <Button
+            disabled={cartItems.length === 0}
+            text="Към Поръчване"
+            onButtonPress={onCheckout}
+            containerStyles={{ marginBottom: 0 }}
+          />
+        </>
       )}
     </SafeArea>
   );

@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Button } from "../../../../components/button/button.component";
+
 import { CartContext } from "../../../../services/cart/cart.context";
 import {
   CartSummaryWrapper,
@@ -11,10 +11,6 @@ import {
 
 export const CartSummary = ({ amount }: { amount: number }) => {
   const { cartItems, dispatch } = useContext(CartContext);
-
-  const onCheckout = () => {
-    console.log("checkout", cartItems);
-  };
 
   return (
     <CartSummaryWrapper>
@@ -43,12 +39,6 @@ export const CartSummary = ({ amount }: { amount: number }) => {
           {((amount / 100 + 5) * 1.2).toFixed(2)} лв.
         </Value>
       </Row>
-      <Button
-        disabled={true}
-        text="Към Поръчване"
-        onButtonPress={onCheckout}
-        containerStyles={{ marginBottom: 0 }}
-      />
     </CartSummaryWrapper>
   );
 };

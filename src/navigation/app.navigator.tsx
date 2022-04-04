@@ -23,6 +23,7 @@ import { WishlistContext } from "../services/wishlist/wishlist.context";
 
 import { colors } from "../infrastructure/theme/colors";
 import { RootTabParamList } from "../types/Navigation";
+import { CheckoutNavigator } from "./checkout.navigator";
 
 export default function Navigation() {
   return (
