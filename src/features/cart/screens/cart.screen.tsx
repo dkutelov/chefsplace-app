@@ -73,7 +73,7 @@ export const CartScreen = () => {
             disabled={cartItems.length === 0}
             text="Към Поръчване"
             onButtonPress={onCheckout}
-            containerStyles={{ marginBottom: 0 }}
+            containerStyles={{ margin: 8 }}
           />
         </>
       )}
