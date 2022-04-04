@@ -3,18 +3,20 @@ import { Caption } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
 
 // Types
-import { CartItem } from "../../../types/Cart";
+import { CartItem } from "@types/Cart";
 
 // Context
-import { CartContext } from "../../../services/cart/cart.context";
-import { ProductsContext } from "../../../services/products/products.context";
-import { UPDATE_CART_ITEMS_ON_LOAD } from "../../../services/cart/cart.action-types";
+import {
+  CartContext,
+  ProductsContext,
+  UPDATE_CART_ITEMS_ON_LOAD,
+} from "@services";
 
 // Components
-import { SafeArea } from "../../../components/utils/safe-area.component";
+import { SafeArea } from "@components/utils/safe-area.component";
+import { Button } from "@components/button/button.component";
 import { CartItemCard } from "../components/cart-item/cart-item.component";
 import { CartSummary } from "../components/cart-summary/cart-summary.component";
-import { Button } from "@components/button/button.component";
 
 // Styles
 import { CartItemList, NoItemsInCart } from "./cart.styles";
