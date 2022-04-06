@@ -38,7 +38,7 @@ export const CartStack = () => {
           name="CheckoutTypeSelect"
           component={CheckoutTypeSelect}
           options={{
-            title: "Чекаут избор",
+            headerShown: false,
           }}
         />
         <Stack.Screen
@@ -49,7 +49,7 @@ export const CartStack = () => {
           }}
         />
         <Stack.Screen
-          name="AuthCheckout"
+          name="ç"
           component={AuthCheckout}
           options={{
             title: "Поръчване",

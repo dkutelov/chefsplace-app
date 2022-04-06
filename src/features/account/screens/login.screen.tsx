@@ -18,6 +18,7 @@ import { AuthenticationContext } from "@services";
 import { colors } from "@infrastructure/theme/colors";
 
 //TODO: Show password https://callstack.github.io/react-native-paper/text-input-icon.html
+//TODO: Use login form component
 
 export const LoginScreen = () => {
   const { navigate } = useNavigation();

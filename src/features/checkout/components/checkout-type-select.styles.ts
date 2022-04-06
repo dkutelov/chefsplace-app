@@ -1,24 +1,18 @@
 import styled from "styled-components/native";
 import { Button, TextInput } from "react-native-paper";
-import { Text } from "../../../components/typography/text.component";
-import { Theme } from "../../../types/Theme";
-import { colors } from "../../../infrastructure/theme/colors";
+import { Text } from "@components/typography/text.component";
+import { Theme } from "@types/Theme";
+import { colors } from "@infrastructure/theme/colors";
 
 export const TypeSelectBackground = styled.View`
   flex: 1;
 `;
 
-export const AccountCover = styled.View`
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(255, 255, 255, 0.3);
-`;
-
-export const AccountContainer = styled.View`
+export const ContentContainer = styled.View`
   background-color: rgba(255, 255, 255, 0.7);
   padding: ${(props: { theme: Theme }) => props.theme.space[4]};
-  margin-top: ${(props: { theme: Theme }) => props.theme.space[2]};
+  margin: ${(props: { theme: Theme }) => props.theme.space[2]};
+  border-radius: ${(props: { theme: Theme }) => props.theme.space[2]};
 `;
 
 export const AuthButton = styled(Button).attrs({
