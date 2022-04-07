@@ -1,5 +1,5 @@
 import * as React from "react";
-import { SafeAreaView, Image } from "react-native";
+import { SafeAreaView, Image, Platform } from "react-native";
 
 // Navigation
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -17,13 +17,11 @@ import { CartStack } from "./cart.navigator";
 import { WishlistStack } from "./wishlist.navigator";
 
 // Context
-import { AuthenticationContext } from "../services/authentication/authentication.context";
 import { CartContext } from "../services/cart/cart.context";
 import { WishlistContext } from "../services/wishlist/wishlist.context";
 
 import { colors } from "../infrastructure/theme/colors";
 import { RootTabParamList } from "../types/Navigation";
-import { CheckoutNavigator } from "./checkout.navigator";
 
 export default function Navigation() {
   return (
@@ -61,7 +59,7 @@ function BottomTabNavigator() {
                   width: 134,
                   resizeMode: "contain",
                   alignSelf: "center",
-                  marginBottom: 8,
+                  marginTop: Platform.OS === "ios" ? 0 : 32,
                 }}
               />
             </SafeAreaView>
@@ -95,7 +93,7 @@ function BottomTabNavigator() {
         name="Cart"
         component={CartStack}
         options={{
-          title: "Количка",
+          headerShown: false,
           tabBarIcon: ({ color }) => (
             <TabIconWithBadge
               name="cart"

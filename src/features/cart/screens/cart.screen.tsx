@@ -20,7 +20,12 @@ import { CartItemCard } from "../components/cart-item/cart-item.component";
 import { CartSummary } from "../components/cart-summary/cart-summary.component";
 
 // Styles
-import { CartItemList, NoItemsInCart } from "./cart.styles";
+import {
+  CartItemList,
+  NoItemsInCart,
+  CartContainer,
+  Title,
+} from "./cart.styles";
 
 export const CartScreen = () => {
   const { cartItems, isLoading, error, dispatch } = useContext(CartContext);
@@ -55,28 +60,31 @@ export const CartScreen = () => {
 
   return (
     <SafeArea>
-      {cartItems.length === 0 ? (
-        <NoItemsInCart>
-          <Caption>Нямате продукти в количката!</Caption>
-        </NoItemsInCart>
-      ) : (
-        <>
-          <CartItemList
-            data={cartItems}
-            renderItem={(item: { item: CartItem }) => (
-              <CartItemCard cartItem={item.item} />
-            )}
-            showsVerticalScrollIndicator={false}
-            ListFooterComponent={() => <CartSummary amount={cartAmount()} />}
-          />
-          <Button
-            disabled={cartItems.length === 0}
-            text="Към Поръчване"
-            onButtonPress={onCheckout}
-            containerStyles={{ margin: 8 }}
-          />
-        </>
-      )}
+      <CartContainer>
+        <Title>Количка</Title>
+        {cartItems.length === 0 ? (
+          <NoItemsInCart>
+            <Caption>Нямате продукти в количката!</Caption>
+          </NoItemsInCart>
+        ) : (
+          <>
+            <CartItemList
+              data={cartItems}
+              renderItem={(item: { item: CartItem }) => (
+                <CartItemCard cartItem={item.item} />
+              )}
+              showsVerticalScrollIndicator={false}
+              ListFooterComponent={() => <CartSummary amount={cartAmount()} />}
+            />
+            <Button
+              disabled={cartItems.length === 0}
+              text="Към Поръчване"
+              onButtonPress={onCheckout}
+              containerStyles={{ margin: 8 }}
+            />
+          </>
+        )}
+      </CartContainer>
     </SafeArea>
   );
 };

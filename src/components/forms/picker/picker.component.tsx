@@ -1,5 +1,6 @@
 import * as React from "react";
 import { Picker } from "@react-native-picker/picker";
+import { colors } from "@infrastructure/theme/colors";
 
 type Item = {
   label: string;
@@ -17,14 +18,18 @@ export const MyPicker = ({ items, value, setValue }: IProps) => {
     <Picker
       selectedValue={value}
       onValueChange={(itemValue, itemIndex) => setValue(itemValue)}
+      mode="dropdown"
+      style={{
+        backgroundColor: colors.monochromes.veryLightGray,
+        borderRadius: 8,
+      }}
     >
       {items.map(({ label, value }) => (
         <Picker.Item
           label={label}
           value={value}
           key={value}
-          color={"green"}
-          style={{ backgroundColor: "white" }}
+          style={{ color: colors.ui.primary }}
         />
       ))}
     </Picker>
