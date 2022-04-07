@@ -1,7 +1,7 @@
 import styled from "styled-components/native";
 import { Button, TextInput } from "react-native-paper";
 import { Text } from "@components/typography/text.component";
-import { Theme } from "@types/Theme";
+import { Theme } from "../../../types/Theme";
 import { colors } from "@infrastructure/theme/colors";
 
 export const TypeSelectBackground = styled.View`
@@ -51,7 +51,6 @@ export const ErrorContainer = styled.View`
 export const CheckoutContainer = styled.View`
   background-color: ${(props: { theme: Theme }) =>
     props.theme.colors.bg.primary};
-
   padding: ${(props: { theme: Theme }) => props.theme.space[2]};
 `;
 
