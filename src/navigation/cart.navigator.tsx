@@ -49,7 +49,7 @@ export const CartStack = () => {
           }}
         />
         <Stack.Screen
-          name="ç"
+          name="AuthCheckout"
           component={AuthCheckout}
           options={{
             title: "Поръчване",

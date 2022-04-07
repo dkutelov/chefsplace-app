@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
   buttonText: {
     fontSize: 18,
     textTransform: "uppercase",
-    fontWeight: "bold",
+    fontWeight: "normal",
     color: "#ffffff",
   },
 });
