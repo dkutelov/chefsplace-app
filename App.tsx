@@ -25,6 +25,7 @@ import {
   Lato_700Bold,
 } from "@expo-google-fonts/lato";
 import { AuthenticationContextProvider } from "./src/services/authentication/authentication.context";
+import { LogBox } from "react-native";
 
 export default function App() {
   const [ptsansLoaded] = usePTSans({
@@ -56,3 +57,7 @@ export default function App() {
     </ThemeProvider>
   );
 }
+
+LogBox.ignoreLogs([
+  "AsyncStorage has been extracted from react-native core and will be removed in a future release. It can now be installed and imported from '@react-native-async-storage/async-storage' instead of 'react-native'. See https://github.com/react-native-async-storage/async-storage",
+]);
