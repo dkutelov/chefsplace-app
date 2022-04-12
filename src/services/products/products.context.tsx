@@ -34,20 +34,20 @@ export const ProductsContextProvider = ({
 
   const retrieveProducts = () => {
     setIsLoading(true);
-    setTimeout(() => {
-      productsRequest()
-        .then((data: { [key: string]: any }[]) => {
-          return productsTransform(data);
-        })
-        .then((results) => {
-          setIsLoading(false);
-          dispatch({ type: SET_PRODUCTS, payload: { products: results } });
-        })
-        .catch((err) => {
-          setIsLoading(false);
-          setError(err);
-        });
-    }, 500);
+
+    productsRequest()
+      .then((data: { [key: string]: any }[]) => {
+        return productsTransform(data);
+      })
+      .then((results) => {
+        console.log({ results });
+        setIsLoading(false);
+        dispatch({ type: SET_PRODUCTS, payload: { products: results } });
+      })
+      .catch((err) => {
+        setIsLoading(false);
+        setError(err);
+      });
   };
 
   useEffect(() => {
