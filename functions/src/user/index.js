@@ -1,11 +1,5 @@
 const functions = require("firebase-functions");
-const admin = require("firebase-admin");
-
-admin.initializeApp();
-
-const db = admin.firestore();
-const storage = admin.storage().bucket();
-const auth = admin.auth();
+const { auth } = require("../../firebaseConfig");
 
 // Always terminate with send, end or redirect! Otherwise the functio will keep running.
 exports.deleteUser = functions.https.onRequest(async (req, res) => {

@@ -19,9 +19,35 @@ export interface Product {
   categoryId: string;
 }
 
+export interface ProductList {
+  id: string;
+  name: string;
+  mainImage: string;
+  price: number;
+  reducedPrice?: number;
+  availabilityStatus: AvailabilityStatus;
+  onPromotion?: boolean;
+  maxQuantity: number;
+  categoryId: string;
+}
+
+export interface Category {
+  id: string;
+  name: string;
+  imageUrl: string;
+}
+
+export interface CategoryConnection {
+  _id: string;
+  name: string;
+  imageUrl: string;
+  position: number;
+}
+
 export interface IProductsContext {
   products: Product[];
   filteredProducts: Product[];
+  categories: Category[];
   searchTerm?: string;
   isLoading: boolean;
   error?: string;

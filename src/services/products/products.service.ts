@@ -24,6 +24,7 @@ export const productsTransform = (
 export const productsRequest = async () => {
   try {
     const products = await getProducts();
+    console.log(products);
     return products;
   } catch (error) {}
 

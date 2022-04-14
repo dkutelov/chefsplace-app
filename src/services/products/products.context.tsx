@@ -10,10 +10,14 @@ import { SET_PRODUCTS } from "./products.action-types";
 import { productsRequest, productsTransform } from "./products.service";
 import { IProductsContext } from "../../types/Product";
 import { productsReducer } from "./products.reducer";
+import getAllCategories from "@infrastructure/api/categories/get-all-categories";
+import { getConfig } from "@infrastructure/api/config";
+const config = getConfig();
 
 const defaultState: IProductsContext = {
   products: [],
   filteredProducts: [],
+  categories: [],
   searchTerm: "",
   isLoading: false,
   dispatch: () => {},
@@ -34,13 +38,14 @@ export const ProductsContextProvider = ({
 
   const retrieveProducts = () => {
     setIsLoading(true);
-
+    getAllCategories(config).then((c) => {
+      console.log(c);
+    });
     productsRequest()
       .then((data: { [key: string]: any }[]) => {
         return productsTransform(data);
       })
       .then((results) => {
-        console.log({ results });
         setIsLoading(false);
         dispatch({ type: SET_PRODUCTS, payload: { products: results } });
       })

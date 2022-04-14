@@ -8,7 +8,6 @@ interface IProps {
 }
 
 export const ProductList = ({ products = [] }: IProps) => {
-  console.log(products);
   return (
     <>
       {products.length == 0 ? (
