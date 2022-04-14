@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useContext } from "react";
 import { useWindowDimensions } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
@@ -8,10 +8,11 @@ import {
   CategoryTitleContainer,
   CategoryTitle,
 } from "./category-list.styles";
-import mock from "../../../screens/mock.json";
-import { Category } from "../../../../../types/Category";
+
+import { Category } from "@types/Product";
 import CategoryListItem from "../category-list-item/category-list-item.component";
 import { colors } from "../../../../../infrastructure/theme/colors";
+import { ProductsContext } from "@services/products/products.context";
 
 interface IProps {
   filterProducts: (categoryId: string) => void;
@@ -25,7 +26,7 @@ export const CategoryMenu = ({
   const [showCategories, setShowCategories] = useState(false);
   const [activeCategoryId, setActiveCategoryId] = useState<string>("");
   const windowWidth = useWindowDimensions().width;
-  const categories = mock;
+  const { categories } = useContext(ProductsContext);
 
   const onCategoryPress = useCallback(
     (id: string) => {

@@ -4,6 +4,8 @@ import { useRoute } from "@react-navigation/native";
 // Types & Constants
 import { Product } from "../../../types/Product";
 import { colors } from "../../../infrastructure/theme/colors";
+import { getConfig } from "@infrastructure/api/config";
+const config = getConfig();
 
 // Context
 import { ProductsContext } from "../../../services/products/products.context";
@@ -15,18 +17,36 @@ import { LoadingIndicator } from "../../../components/loading/loading.component"
 
 // Styles
 import { SafeArea } from "./products.styles";
+import getAllCategories from "@infrastructure/api/categories/get-all-categories";
+import { SET_CATEGORIES } from "@services/products/products.action-types";
 
 export const ProductListScreen = () => {
-  const { products, isLoading, searchTerm, error, dispatch } =
+  const { products, isLoading, searchTerm, error, categories, dispatch } =
     useContext(ProductsContext);
   const [allProducts, _] = useState(products);
   const [isFiltered, setIsFiltered] = useState<boolean>(false);
   const [filteredProducts, setSetFilteredProducts] = useState<Product[]>([]);
+  const [errorLoadingCategories, setErrorLoadingCategories] = useState<
+    string | null
+  >(null);
+
   const { params } = useRoute();
 
   //TODO: Custom back icon
   //TODO: Category name
 
+  useEffect(() => {
+    if (categories.length === 0) {
+      (async () => {
+        try {
+          const categories = await getAllCategories(config);
+          dispatch({ type: SET_CATEGORIES, payload: { categories } });
+        } catch (error) {
+          setErrorLoadingCategories("Грешка при зареждането на категориите!");
+        }
+      })();
+    }
+  }, []);
   useEffect(() => {
     if (searchTerm !== "") {
       const searchResults = allProducts.filter((p) =>
