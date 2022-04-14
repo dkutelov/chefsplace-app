@@ -4,8 +4,8 @@ import { colors } from "../../infrastructure/theme/colors";
 import { LoadingContainer, Loading } from "./loading.styles";
 
 interface IProps {
-  size: number;
-  color: string;
+  size?: number;
+  color?: string;
 }
 
 export const LoadingIndicator = ({

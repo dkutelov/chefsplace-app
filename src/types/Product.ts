@@ -51,7 +51,6 @@ export interface IProductsContext {
   searchTerm?: string;
   isLoading: boolean;
   error?: string;
-  dispatch: React.Dispatch<any>;
 }
 
 export interface IProductContext {

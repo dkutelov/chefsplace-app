@@ -1,4 +1,3 @@
-import { getProducts } from "@infrastructure/firebase/firebaseAppInit";
 import { AvailabilityStatus, Product } from "../../types/Product";
 import data from "./mock/mockData.json";
 
@@ -23,8 +22,9 @@ export const productsTransform = (
 
 export const productsRequest = async () => {
   try {
-    const products = await getProducts();
-    console.log(products);
+    const products = data;
+    // const products = await getProducts();
+    // console.log(products);
     return products;
   } catch (error) {}
 

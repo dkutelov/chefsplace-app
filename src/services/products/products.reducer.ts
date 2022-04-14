@@ -3,8 +3,9 @@ import {
   SET_PRODUCTS,
   SET_SEARCH_TERM,
   RESET_SEARCH_TERM,
+  SET_CATEGORIES,
 } from "./products.action-types";
-import { setProducts } from "./products.reducer-functions";
+import { setProducts, setCategories } from "./products.reducer-functions";
 
 interface IProps {
   type: string;
@@ -20,6 +21,8 @@ export const productsReducer = (state: IProductsContext, props: IProps) => {
       return { state, searchTerm: payload.searchTerm };
     case RESET_SEARCH_TERM:
       return { state, searchTerm: "" };
+    case SET_CATEGORIES:
+      return setCategories(state, payload.categories);
     default:
       return state;
   }
