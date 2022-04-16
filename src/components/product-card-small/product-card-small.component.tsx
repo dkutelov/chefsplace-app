@@ -3,7 +3,7 @@ import { useNavigation } from "@react-navigation/native";
 import { Dimensions } from "react-native";
 
 import { AddToCart } from "../add-to-cart-icon/add-to-cart.component";
-import { Product } from "../../types/Product";
+import { ProductList } from "../../types/Product";
 
 import {
   ProductCardWrapper,
@@ -12,16 +12,17 @@ import {
   Title,
   Price,
 } from "./product-card-small.styles";
+import { K } from "@infrastructure/constants";
 
 const cardWidth = Dimensions.get("window").width / 1.8;
 
 interface Props {
-  item: Product;
+  item: ProductList;
   isSimilarProduct: boolean;
 }
 
 export const ProductCardSmall = ({ item, isSimilarProduct }: Props) => {
-  const { id, name, images, price, maxQuantity } = item;
+  const { id, name, mainImage, price, maxQuantity } = item;
   const { navigate } = useNavigation();
 
   const onProductCardPress = () => {
@@ -36,7 +37,7 @@ export const ProductCardSmall = ({ item, isSimilarProduct }: Props) => {
     <ProductCardWrapper onPress={onProductCardPress} width={cardWidth}>
       <ProductImage
         key={name}
-        source={{ uri: images[0] }}
+        source={{ uri: K.imageBaseUrl + mainImage }}
         resizeMode="contain"
       />
       <Title numberOfLines={2}>{name}</Title>
@@ -47,7 +48,7 @@ export const ProductCardSmall = ({ item, isSimilarProduct }: Props) => {
           cartItem={{
             id,
             name,
-            image: images[0],
+            image: mainImage,
             price,
             maxQuantity,
             quantity: 1,

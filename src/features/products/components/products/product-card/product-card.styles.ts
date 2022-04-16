@@ -19,6 +19,7 @@ export const ProductInfo = styled.View`
 export const ProductImageWrapper = styled.View`
   flex-direction: column;
   flex: 0.5;
+  margin-bottom: ${(props: { theme: Theme }) => props.theme.space[2]};
 `;
 
 export const CardContent = styled.View`
@@ -29,12 +30,12 @@ export const CardContent = styled.View`
 `;
 
 export const Title = styled.Text`
-  font-family: ${(props: { theme: Theme }) => props.theme.fonts.headingBold};
+  font-family: ${(props: { theme: Theme }) => props.theme.fonts.heading};
   font-size: ${(props: { theme: Theme }) => props.theme.fontSizes.subtitle};
-  text-transform: capitalize;
+  text-transform: uppercase;
   color: ${(props: { theme: Theme }) => props.theme.colors.ui.primary};
   margin-top: ${(props: { theme: Theme }) => props.theme.space[2]};
-  margin-bottom: ${(props: { theme: Theme }) => props.theme.space[1]};
+  margin-bottom: ${(props: { theme: Theme }) => props.theme.space[3]};
   text-align: center;
   line-height: 20px;
 `;
@@ -75,5 +76,5 @@ export const CTARow = styled.View`
   margin: 0;
   flex-direction: row;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-end;
 `;

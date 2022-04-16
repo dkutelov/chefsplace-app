@@ -9,7 +9,8 @@ export const ProductCardWrapper = styled(TouchableOpacity)`
     props.theme.colors.bg.primary};
   margin-bottom: ${(props: { theme: Theme }) => props.theme.space[2]};
   margin-right: ${(props: { theme: Theme }) => props.theme.space[1]};
-  padding: ${(props: { theme: Theme }) => props.theme.space[3]};
+  padding: ${(props: { theme: Theme }) => props.theme.space[3]}
+    ${(props: { theme: Theme }) => props.theme.space[4]};
   border-radius: ${(props: { theme: Theme }) => props.theme.space[2]};
   flex-direction: column;
 `;
@@ -26,14 +27,14 @@ export const Title = styled.Text`
   text-transform: capitalize;
   color: ${(props: { theme: Theme }) => props.theme.colors.ui.primary};
   margin-top: ${(props: { theme: Theme }) => props.theme.space[2]};
-  margin-bottom: ${(props: { theme: Theme }) => props.theme.space[2]};
+  margin-bottom: ${(props: { theme: Theme }) => props.theme.space[3]};
   text-align: center;
   line-height: 16px;
 `;
 
 export const ProductImage = styled.Image`
-  height: 130px;
-  margin-bottom: ${(props: { theme: Theme }) => props.theme.space[2]};
+  height: 140px;
+  margin-bottom: ${(props: { theme: Theme }) => props.theme.space[3]};
 `;
 
 export const Price = styled.Text`

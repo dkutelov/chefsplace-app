@@ -1,5 +1,7 @@
+import getAllProducts from "@infrastructure/api/products/get-all-products";
 import { AvailabilityStatus, Product } from "../../types/Product";
 import data from "./mock/mockData.json";
+import { getConfig } from "@infrastructure/api/config";
 
 export const productsTransform = (
   results: { [key: string]: any }[]
@@ -7,7 +9,7 @@ export const productsTransform = (
   return results.map<Product>((r: any) => ({
     id: r.id,
     name: r.name,
-    images: r.images || [],
+    mainImage: r.mainImage,
     price: r.price,
     reducedPrice: r.reducedPrice,
     availabilityStatus:
@@ -21,11 +23,14 @@ export const productsTransform = (
 };
 
 export const productsRequest = async () => {
+  const config = getConfig();
   try {
     const products = data;
+    const fetchedProducts = await getAllProducts(config);
+
     // const products = await getProducts();
     // console.log(products);
-    return products;
+    return fetchedProducts;
   } catch (error) {}
 
   // return new Promise<{ [key: string]: any }[]>((resolve, reject) => {

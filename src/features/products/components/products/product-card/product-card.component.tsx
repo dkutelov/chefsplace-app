@@ -1,12 +1,12 @@
 import React, { useState, useContext, useCallback } from "react";
 import { useNavigation, useFocusEffect } from "@react-navigation/native";
 
-import { AvailabilityStatus, Product } from "../../../../../types/Product";
-import { WishlistContext } from "../../../../../services/wishlist/wishlist.context";
+import { ProductList } from "@types/Product";
+import { WishlistContext } from "@services/wishlist/wishlist.context";
 import {
   ADD_ITEM_TO_WISHLIST,
   REMOVE_ITEM_FROM_WISHLIST,
-} from "../../../../../services/wishlist/wishlist.action-types";
+} from "@services/wishlist/wishlist.action-types";
 import {
   ProductCardWrapper,
   ProductInfo,
@@ -21,15 +21,16 @@ import {
   CTARow,
   PriceInnerWrapper,
 } from "./product-card.styles";
-import { WishlistIcon } from "../../../../../components/wishlist-icon/wishlist-icon.component";
-import { AddToCart } from "../../../../../components/add-to-cart-icon/add-to-cart.component";
+import { WishlistIcon } from "@components/wishlist-icon/wishlist-icon.component";
+import { AddToCart } from "@components/add-to-cart-icon/add-to-cart.component";
+import { K } from "@infrastructure/constants";
 
 interface Props {
-  item: Product;
+  item: ProductList;
 }
 
 export const ProductCard = ({ item }: Props) => {
-  const { id, name, images, price, availabilityStatus, maxQuantity } = item;
+  const { id, name, mainImage, price, maxQuantity } = item;
   const { navigate } = useNavigation();
   const { wishlistItems, dispatch: wishlistDispatch } =
     useContext(WishlistContext);
@@ -71,7 +72,7 @@ export const ProductCard = ({ item }: Props) => {
       const wishlistItem = {
         id,
         name,
-        image: images[0],
+        image: mainImage,
         price,
         available: true,
       };
@@ -87,14 +88,14 @@ export const ProductCard = ({ item }: Props) => {
 
   return (
     <>
-      {availabilityStatus === AvailabilityStatus.OnStock && (
+      {maxQuantity > 0 && (
         <ProductCardWrapper onPress={onProductCardPress}>
           <Title>{name}</Title>
           <ProductInfo>
             <ProductImageWrapper>
               <ProductImage
                 key={name}
-                source={{ uri: images[0] }}
+                source={{ uri: K.imageBaseUrl + mainImage }}
                 resizeMode="contain"
               />
             </ProductImageWrapper>
@@ -122,7 +123,7 @@ export const ProductCard = ({ item }: Props) => {
               cartItem={{
                 id,
                 name,
-                image: images[0],
+                image: mainImage,
                 price,
                 maxQuantity,
                 quantity: 1,

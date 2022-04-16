@@ -19,16 +19,26 @@ export interface Product {
   categoryId: string;
 }
 
+export interface ProductConnection {
+  id: string;
+  name: string;
+  mainImage: string;
+  price: number;
+  reducedPrice?: number;
+  onPromotion?: boolean;
+  maxQuantity: number;
+  category: string;
+}
+
 export interface ProductList {
   id: string;
   name: string;
   mainImage: string;
   price: number;
   reducedPrice?: number;
-  availabilityStatus: AvailabilityStatus;
   onPromotion?: boolean;
   maxQuantity: number;
-  categoryId: string;
+  category: string;
 }
 
 export interface Category {
