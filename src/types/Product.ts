@@ -5,6 +5,7 @@ export enum AvailabilityStatus {
 
 export interface Product {
   id: string;
+  _id?: string;
   name: string;
   images: string[];
   price: number;
@@ -13,7 +14,6 @@ export interface Product {
   description?: {
     [key: string]: string | { [key: string]: string };
   };
-  availabilityStatus: AvailabilityStatus;
   onPromotion?: boolean;
   maxQuantity: number;
   categoryId: string;
@@ -60,7 +60,9 @@ export interface IProductsContext {
   categories: Category[];
   searchTerm?: string;
   isLoading: boolean;
+  isCategoryLoading?: boolean;
   error?: string;
+  dispatch: (props: any) => void;
 }
 
 export interface IProductContext {

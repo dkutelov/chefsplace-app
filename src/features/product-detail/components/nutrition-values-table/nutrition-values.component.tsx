@@ -25,7 +25,7 @@ export const NutritionValues = ({ nutritionValues = [] }: IProps) => {
     <View style={{ paddingLeft: 8, paddingRight: 8 }}>
       <DataTable style={{ backgroundColor: colors.bg.tertiary }}>
         <DataTable.Header>
-          <DataTable.Title>Име на продукта</DataTable.Title>
+          <DataTable.Title>Показател</DataTable.Title>
           <DataTable.Title>на 100g</DataTable.Title>
         </DataTable.Header>
         {nutritionValues.map((rowValues) => (

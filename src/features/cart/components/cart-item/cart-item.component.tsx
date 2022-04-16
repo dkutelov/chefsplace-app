@@ -1,8 +1,8 @@
 import React, { useState, useContext, useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
-import { CartItem } from "../../../../types/Cart";
-import { colors } from "../../../../infrastructure/theme/colors";
+import { CartItem } from "@types/Cart";
+import { colors } from "@infrastructure/theme/colors";
 
 import {
   CartItemWrapper,
@@ -20,12 +20,13 @@ import {
   NotEnoughQuantityNotification,
 } from "./cart-item.styles";
 
-import { QuantitySelector } from "../../../../components/quantity-selector/quantity-selector.component";
-import { CartContext } from "../../../../services/cart/cart.context";
+import { QuantitySelector } from "@components/quantity-selector/quantity-selector.component";
+import { CartContext } from "@services/cart/cart.context";
 import {
   REMOVE_ITEM_FROM_CART,
   UPDATE_ITEM_QUANTITY,
-} from "../../../../services/cart/cart.action-types";
+} from "@services/cart/cart.action-types";
+import { K } from "@infrastructure/constants";
 
 interface Props {
   cartItem: CartItem;
@@ -78,7 +79,11 @@ export const CartItemCard = ({ cartItem }: Props) => {
       </TopContent>
 
       <Row>
-        <ProductImage key={name} source={{ uri: image }} resizeMode="contain" />
+        <ProductImage
+          key={name}
+          source={{ uri: K.imageBaseUrl + image }}
+          resizeMode="contain"
+        />
         <AmountWrapper>
           <Amount>Сума {((price * itemQuantity) / 100).toFixed(2)} лв.</Amount>
           <PriceWith>

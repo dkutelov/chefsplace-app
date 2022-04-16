@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { useNavigation } from "@react-navigation/native";
 
 import { Ionicons } from "@expo/vector-icons";
-import { colors } from "../../../../infrastructure/theme/colors";
+import { colors } from "@infrastructure/theme/colors";
 
 import {
   CartItemWrapper,
@@ -17,11 +17,12 @@ import {
   NotAvailable,
 } from "./wishlist-item.styles";
 
-import { WishlistContext } from "../../../../services/wishlist/wishlist.context";
+import { WishlistContext } from "@services/wishlist/wishlist.context";
 
-import { WishlistItem } from "../../../../types/Wishlist";
-import { AddToCart } from "../../../../components/add-to-cart-icon/add-to-cart.component";
-import { REMOVE_ITEM_FROM_WISHLIST } from "../../../../services/wishlist/wishlist.action-types";
+import { WishlistItem } from "@types/Wishlist";
+import { AddToCart } from "@components/add-to-cart-icon/add-to-cart.component";
+import { REMOVE_ITEM_FROM_WISHLIST } from "@services/wishlist/wishlist.action-types";
+import { K } from "@infrastructure/constants";
 
 interface Props {
   wishlistItem: WishlistItem;
@@ -57,7 +58,11 @@ export const WishlistItemCard = ({ wishlistItem }: Props) => {
       </TopContent>
 
       <Row>
-        <ProductImage key={name} source={{ uri: image }} resizeMode="contain" />
+        <ProductImage
+          key={name}
+          source={{ uri: K.imageBaseUrl + image }}
+          resizeMode="contain"
+        />
         <PriceWrapper>
           <Price>{(price / 100).toFixed(2)} лв.</Price>
           <PriceWith>

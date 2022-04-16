@@ -1,12 +1,11 @@
 import { ApiConfig } from "@common/types/api";
-import { ProductConnection, Product } from "@types/Product";
-import { normalizeCategory } from "./normalize";
+import { ProductConnection, ProductList } from "@types/Product";
 
 type ReturnType = {
   products: ProductConnection[];
 };
 
-const getAllProducts = async (config: ApiConfig): Promise<Product[]> => {
+const getAllProducts = async (config: ApiConfig): Promise<ProductList[]> => {
   const data = await config.fetch<ReturnType>({
     url: config.apiUrl + "products",
     query: "",

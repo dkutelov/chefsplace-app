@@ -2,30 +2,28 @@ import React, { useContext, useEffect, useState, useRef } from "react";
 import { useRoute } from "@react-navigation/native";
 
 // Types & Constants
-import { Product } from "../../../types/Product";
-import { colors } from "../../../infrastructure/theme/colors";
-import { getConfig } from "@infrastructure/api/config";
-const config = getConfig();
+import { ProductList as ProductListType } from "@types/Product";
+import { colors } from "@infrastructure/theme/colors";
 
 // Context
-import { ProductsContext } from "../../../services/products/products.context";
+import { ProductsContext } from "@services/products/products.context";
 
 // Components
 import { CategoryMenu } from "../components/category-menu/category-list/category-list.component";
 import { ProductList } from "../components/products/product-list/product-list.component";
-import { LoadingIndicator } from "../../../components/loading/loading.component";
+import { LoadingIndicator } from "@components/loading/loading.component";
 
 // Styles
 import { SafeArea } from "./products.styles";
-import getAllCategories from "@infrastructure/api/categories/get-all-categories";
-import { SET_CATEGORIES } from "@services/products/products.action-types";
 
 export const ProductListScreen = () => {
   const { products, isLoading, searchTerm, error, categories, dispatch } =
     useContext(ProductsContext);
   const [allProducts, _] = useState(products);
   const [isFiltered, setIsFiltered] = useState<boolean>(false);
-  const [filteredProducts, setSetFilteredProducts] = useState<Product[]>([]);
+  const [filteredProducts, setSetFilteredProducts] = useState<
+    ProductListType[]
+  >([]);
   const [errorLoadingCategories, setErrorLoadingCategories] = useState<
     string | null
   >(null);
@@ -35,18 +33,6 @@ export const ProductListScreen = () => {
   //TODO: Custom back icon
   //TODO: Category name
 
-  useEffect(() => {
-    if (categories.length === 0) {
-      (async () => {
-        try {
-          const categories = await getAllCategories(config);
-          dispatch({ type: SET_CATEGORIES, payload: { categories } });
-        } catch (error) {
-          setErrorLoadingCategories("Грешка при зареждането на категориите!");
-        }
-      })();
-    }
-  }, []);
   useEffect(() => {
     if (searchTerm !== "") {
       const searchResults = allProducts.filter((p) =>
@@ -62,8 +48,8 @@ export const ProductListScreen = () => {
 
   const filterProducts = (categoryId: string) => {
     setSetFilteredProducts([]);
-    const categoryProducts: Product[] = allProducts.filter(
-      (p: Product) => p.categoryId === categoryId
+    const categoryProducts: ProductListType[] = allProducts.filter(
+      (p: ProductListType) => p.category === categoryId
     );
     setIsFiltered(true);
     setSetFilteredProducts(categoryProducts);
@@ -76,8 +62,8 @@ export const ProductListScreen = () => {
 
   useEffect(() => {
     if (params) {
-      const categoryProducts: Product[] = allProducts.filter(
-        (p: Product) => p.categoryId === params.id
+      const categoryProducts: ProductListType[] = allProducts.filter(
+        (p: ProductListType) => p.category === params.id
       );
       setIsFiltered(true);
       setSetFilteredProducts(categoryProducts);

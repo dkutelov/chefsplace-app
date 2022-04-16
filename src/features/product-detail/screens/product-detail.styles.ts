@@ -1,6 +1,6 @@
 import styled from "styled-components/native";
-import { ScrollView, TouchableOpacity } from "react-native";
-import { Theme } from "../../../types/Theme";
+import { ScrollView } from "react-native";
+import { Theme } from "@types/Theme";
 
 export const ProductScrollView = styled(ScrollView)`
   flex: 1;

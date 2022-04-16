@@ -11,3 +11,10 @@ export const LoadingContainer = styled.View`
   top: 50%;
   left: 50%;
 `;
+
+export const CentertedLoadingContainer = styled.View`
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  height: ${(props) => props.height}px;
+`;

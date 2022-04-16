@@ -13,8 +13,13 @@ class Config {
   }
 }
 
+const isLocal = true;
+const url = isLocal
+  ? "http://localhost:8000"
+  : "https://dry-chamber-19090.herokuapp.com";
+
 const configWrapper = new Config({
-  apiUrl: "http://localhost:8000/api/v1/",
+  apiUrl: url + "/api/v1/",
   fetch: fetchAPI,
 });
 

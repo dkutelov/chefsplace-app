@@ -7,6 +7,7 @@ import {
   DotsContainer,
   DotsInnerContainer,
 } from "./image-carousel.styles";
+import { K } from "@infrastructure/constants";
 
 export const ImageCarousel = ({ images }: { images: string[] }) => {
   const windowWidth = useWindowDimensions().width;
@@ -24,7 +25,7 @@ export const ImageCarousel = ({ images }: { images: string[] }) => {
         data={images}
         renderItem={({ item }: { item: string | undefined }) => (
           <Image
-            source={{ uri: item }}
+            source={{ uri: K.imageBaseUrl + item }}
             style={[styles.image, { width: windowWidth - 40 }]}
           />
         )}

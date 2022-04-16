@@ -27,6 +27,7 @@ export const DescriptionAccordion = ({ description }: IProps) => {
   const [advantagesExpanded, setAdvantagesExpanded] = useState(false);
   const [storageExpanded, setStorageExpanded] = useState(false);
   const [nutritionValueExpanded, setNutritionValueExpanded] = useState(false);
+
   return (
     <AccordionContainer>
       {description.ingredients && (
@@ -41,7 +42,7 @@ export const DescriptionAccordion = ({ description }: IProps) => {
           <DescriptionContent>{description?.ingredients}</DescriptionContent>
         </List.Accordion>
       )}
-      {description.ingredients && (
+      {description.advantages && (
         <List.Accordion
           style={AccordionItemStyle}
           theme={{ colors: { primary: colors.ui.primary } }}
@@ -65,7 +66,7 @@ export const DescriptionAccordion = ({ description }: IProps) => {
           <DescriptionContent>{description?.storage}</DescriptionContent>
         </List.Accordion>
       )}
-      {description.nutritionValues && (
+      {description.nutritionValues?.length > 0 && (
         <List.Accordion
           style={AccordionItemStyle}
           theme={{ colors: { primary: colors.ui.primary } }}

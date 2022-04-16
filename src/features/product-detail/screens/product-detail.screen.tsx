@@ -1,28 +1,30 @@
 import React, { useEffect, useContext, useState, useCallback } from "react";
 import { useRoute } from "@react-navigation/native";
 import { useFocusEffect } from "@react-navigation/native";
+import { Dimensions } from "react-native";
 
 // Types & Constants
-import { colors } from "../../../infrastructure/theme/colors";
+import { colors } from "@infrastructure/theme/colors";
 
 // Context
-import { ProductContextProvider } from "../../../services/product/product.context";
-import { ProductContext } from "../../../services/product/product.context";
-import { WishlistContext } from "../../../services/wishlist/wishlist.context";
+import { ProductContextProvider } from "@services/product/product.context";
+import { ProductContext } from "@services/product/product.context";
+import { WishlistContext } from "@services/wishlist/wishlist.context";
 import {
   ADD_ITEM_TO_WISHLIST,
   REMOVE_ITEM_FROM_WISHLIST,
-} from "../../../services/wishlist/wishlist.action-types";
+} from "@services/wishlist/wishlist.action-types";
 
 // Components
-import { SafeArea } from "../../../components/utils/safe-area.component";
-import { LoadingIndicator } from "../../../components/loading/loading.component";
+import { SafeArea } from "@components/utils/safe-area.component";
 import { ImageCarousel } from "../components/image-carousel/image-carousel.component";
-import { QuantitySelector } from "../../../components/quantity-selector/quantity-selector.component";
+import { QuantitySelector } from "@components/quantity-selector/quantity-selector.component";
 import { DescriptionAccordion } from "../components/description-accordion/description-accordion.component";
 import { SimilarProducts } from "../components/similar-products/similar-products-list/similar-products-list.component";
-import { WishlistIcon } from "../../../components/wishlist-icon/wishlist-icon.component";
-import { AddToCart } from "../../../components/add-to-cart-icon/add-to-cart.component";
+import { WishlistIcon } from "@components/wishlist-icon/wishlist-icon.component";
+import { AddToCart } from "@components/add-to-cart-icon/add-to-cart.component";
+import { Spacer } from "@components/spacer/spacer.component";
+import { CentertedLoadingIndicator } from "@components/loading/activity-indicator.component";
 
 // Styles
 import {
@@ -38,7 +40,6 @@ import {
   NotEnoughQuantityNotifivation,
   CTARow,
 } from "./product-detail.styles";
-import { Spacer } from "../../../components/spacer/spacer.component";
 
 const ProductDetailScreen = () => {
   const { product, isLoading, error, loadProduct } = useContext(ProductContext);
@@ -108,7 +109,13 @@ const ProductDetailScreen = () => {
   return (
     <SafeArea>
       <ProductScrollView>
-        {isLoading && <LoadingIndicator size={32} color={colors.ui.primary} />}
+        {isLoading && (
+          <CentertedLoadingIndicator
+            size={32}
+            color={colors.ui.primary}
+            height={Dimensions.get("window").height * 0.8}
+          />
+        )}
         {product && (
           <>
             {params.hasTitle && <Title>{product.name}</Title>}

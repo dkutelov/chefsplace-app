@@ -26,6 +26,7 @@ import {
 } from "@expo-google-fonts/lato";
 import { AuthenticationContextProvider } from "./src/services/authentication/authentication.context";
 import { LogBox } from "react-native";
+import BootstrapData from "./BootstrapData";
 
 export default function App() {
   const [ptsansLoaded] = usePTSans({
@@ -48,7 +49,9 @@ export default function App() {
         <ProductsContextProvider>
           <CartContextProvider>
             <WishlistContextProvider>
-              <Navigation />
+              <BootstrapData>
+                <Navigation />
+              </BootstrapData>
             </WishlistContextProvider>
           </CartContextProvider>
         </ProductsContextProvider>
