@@ -17,7 +17,7 @@ const TableRow = ({ rowValues }: IItem) => {
 };
 
 interface IProps {
-  nutritionValues: { label: string; text: string }[];
+  nutritionValues: { label: string; text: string; _id: string }[];
 }
 
 export const NutritionValues = ({ nutritionValues = [] }: IProps) => {
@@ -29,7 +29,7 @@ export const NutritionValues = ({ nutritionValues = [] }: IProps) => {
           <DataTable.Title>на 100g</DataTable.Title>
         </DataTable.Header>
         {nutritionValues.map((rowValues) => (
-          <TableRow key={rowValues.label} rowValues={rowValues} />
+          <TableRow key={rowValues._id} rowValues={rowValues} />
         ))}
       </DataTable>
     </View>

@@ -171,7 +171,7 @@ const ProductDetailScreen = () => {
             {!params.similarProducts && (
               <Row>
                 <SimilarProducts
-                  categoryId={product.categoryId}
+                  categoryId={product.category._id}
                   currentProductId={product.id}
                 />
               </Row>

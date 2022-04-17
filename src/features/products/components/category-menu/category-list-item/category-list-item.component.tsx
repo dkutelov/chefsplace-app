@@ -7,7 +7,8 @@ import {
   CategoryTitleContainer,
   CategoryImageContainer,
 } from "./category-list-item.styles";
-import { Category } from "../../../../../types/Category";
+import { Category } from "@types/Category";
+import { K } from "@infrastructure/constants";
 
 export interface IProps {
   item: Category;
@@ -23,7 +24,7 @@ const CategoryListItem = ({
   return (
     <CategoryCard onPress={() => onCategoryPress(id)}>
       <CategoryImageContainer borderColor={borderColor}>
-        <CategoryImage source={{ uri: imageUrl }} />
+        <CategoryImage source={{ uri: K.categoryBaseUrl + imageUrl }} />
       </CategoryImageContainer>
       <CategoryTitleContainer>
         <CategoryTitle>{name}</CategoryTitle>

@@ -22,7 +22,7 @@ export const SimilarProducts = ({ categoryId, currentProductId }: IProps) => {
   useEffect(() => {
     let similarProducts: ProductList[] = [];
     const categoryProductsUnshaffled = products.filter(
-      (p) => p.id !== currentProductId && p.categoryId === categoryId
+      (p) => p.id !== currentProductId && p.category === categoryId
     );
 
     const categoryProducts = categoryProductsUnshaffled

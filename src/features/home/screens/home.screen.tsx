@@ -1,11 +1,11 @@
 import { ScrollView } from "react-native";
-import { SafeArea } from "../../../components/utils/safe-area.component";
+import { SafeArea } from "@components/utils/safe-area.component";
 import { Dimensions } from "react-native";
 
-import { K } from "../../../infrastructure/constants/";
+import { K } from "@infrastructure/constants/";
 
 // Components
-import { Row } from "../../../components/row/row.component";
+import { Row } from "@components/row/row.component";
 import CategoryListItem from "../../home/components/category-list/category-list-item.component";
 
 // Styles
@@ -16,9 +16,9 @@ import {
   SecondaryBanner,
   SecondaryBannerImage,
 } from "./home.styles";
-import { ProductCardSmall } from "../../../components/product-card-small/product-card-small.component";
+import { ProductCardSmall } from "@components/product-card-small/product-card-small.component";
 import { useContext, useState } from "react";
-import { ProductsContext } from "../../../services/products/products.context";
+import { ProductsContext } from "@services/products/products.context";
 import { LoadingIndicator } from "@components/loading/loading.component";
 import { Text } from "@components/typography/text.component";
 
