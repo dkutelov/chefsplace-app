@@ -32,7 +32,7 @@ export const HomeScreen = () => {
   const [errorLoadingCategories, setErrorLoadingCategories] = useState<
     string | null
   >(null);
-  const newProducts = products.slice(-4);
+  const newProducts = products ? products.slice(-4) : [];
 
   return (
     <SafeArea>
@@ -51,7 +51,7 @@ export const HomeScreen = () => {
               <LoadingIndicator />
             ) : (
               <>
-                {categories.length > 0
+                {categories?.length > 0
                   ? categories.map((c) => (
                       <CategoryListItem key={c.id} item={c} />
                     ))

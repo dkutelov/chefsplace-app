@@ -2,11 +2,11 @@ import React, { useContext, useEffect, useState } from "react";
 import { Searchbar } from "react-native-paper";
 
 import { HeaderContainer } from "./search.styles";
-import { ProductsContext } from "../../../../services/products/products.context";
+import { ProductsContext } from "@services/products/products.context";
 import {
   RESET_SEARCH_TERM,
   SET_SEARCH_TERM,
-} from "../../../../services/products/products.action-types";
+} from "@services/products/products.action-types";
 
 const Search = () => {
   const [searchKeyword, setSearchKeyword] = useState<string>("");

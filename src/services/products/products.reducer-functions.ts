@@ -1,8 +1,8 @@
-import { Category, IProductsContext, Product } from "../../types/Product";
+import { Category, IProductsContext, ProductList } from "../../types/Product";
 
 export const setProducts = (
   state: IProductsContext,
-  products: Product[]
+  products: ProductList[]
 ): IProductsContext => ({
   ...state,
   products,

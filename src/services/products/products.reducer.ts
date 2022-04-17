@@ -18,9 +18,9 @@ export const productsReducer = (state: IProductsContext, props: IProps) => {
     case SET_PRODUCTS:
       return setProducts(state, payload.products);
     case SET_SEARCH_TERM:
-      return { state, searchTerm: payload.searchTerm };
+      return { ...state, searchTerm: payload.searchTerm };
     case RESET_SEARCH_TERM:
-      return { state, searchTerm: "" };
+      return { ...state, searchTerm: "" };
     case SET_CATEGORIES:
       return setCategories(state, payload.categories);
     default:
