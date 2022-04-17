@@ -1,31 +1,38 @@
 import React, { useContext, useEffect, useState } from "react";
 
-import { ProductsContext } from "../../../../../services/products/products.context";
-import { Product } from "../../../../../types/Product";
-import { K } from "../../../../../infrastructure/constants";
+import { ProductsContext } from "@services/products/products.context";
+import { ProductList } from "@types/Product";
+import { K } from "@infrastructure/constants";
 import {
   Container,
   Title,
   SimilarProductsContainer,
 } from "./similar-products.styles";
-import { ProductCardSmall } from "../../../../../components/product-card-small/product-card-small.component";
+import { ProductCardSmall } from "@components/product-card-small/product-card-small.component";
 
 interface IProps {
   categoryId: string;
+  currentProductId: string;
 }
 
-export const SimilarProducts = ({ categoryId }: IProps) => {
+export const SimilarProducts = ({ categoryId, currentProductId }: IProps) => {
   const { products } = useContext(ProductsContext);
-  const [similarProducts, setSimilarProducts] = useState<Product[]>([]);
+  const [similarProducts, setSimilarProducts] = useState<ProductList[]>([]);
 
   useEffect(() => {
-    let similarProducts: Product[] = [];
+    let similarProducts: ProductList[] = [];
+    const categoryProductsUnshaffled = products.filter(
+      (p) => p.id !== currentProductId && p.categoryId === categoryId
+    );
 
-    if (products.length) {
-      for (let index = 0; index < products.length; index++) {
-        if (products[index].categoryId === categoryId) {
-          similarProducts.push(products[index]);
-        }
+    const categoryProducts = categoryProductsUnshaffled
+      .map((value) => ({ value, sort: Math.random() }))
+      .sort((a, b) => a.sort - b.sort)
+      .map(({ value }) => value);
+
+    if (categoryProducts.length) {
+      for (let index = 0; index < categoryProducts.length; index++) {
+        similarProducts.push(categoryProducts[index]);
 
         if (similarProducts.length >= K.similarProductCount) {
           break;

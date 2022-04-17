@@ -12,7 +12,7 @@ export const Title = styled.Text`
   padding: ${(props: { theme: Theme }) => props.theme.space[2]};
   color: ${(props: { theme: Theme }) => props.theme.colors.ui.primary};
   margin-top: ${(props: { theme: Theme }) => props.theme.space[3]};
-  margin-bottom: ${(props: { theme: Theme }) => props.theme.space[1]};
+  margin-bottom: ${(props: { theme: Theme }) => props.theme.space[3]};
   text-align: center;
   line-height: 20px;
   letter-spacing: -1px;
@@ -37,14 +37,15 @@ export const CTARow = styled.View`
   justify-content: space-between;
   align-items: center;
   margin: 0 ${(props: { theme: Theme }) => props.theme.space[3]}
-    ${(props: { theme: Theme }) => props.theme.space[3]};
+    ${(props: { theme: Theme }) => props.theme.space[4]};
 `;
 
 export const PriceRow = styled.View`
   flex-direction: row;
   justify-content: space-between;
   align-items: baseline;
-  margin: 0 ${(props: { theme: Theme }) => props.theme.space[3]}
+  margin: ${(props: { theme: Theme }) => props.theme.space[2]}
+    ${(props: { theme: Theme }) => props.theme.space[3]}
     ${(props: { theme: Theme }) => props.theme.space[3]};
 `;
 

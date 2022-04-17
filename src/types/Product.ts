@@ -55,8 +55,8 @@ export interface CategoryConnection {
 }
 
 export interface IProductsContext {
-  products: Product[];
-  filteredProducts: Product[];
+  products: ProductList[];
+  filteredProducts: ProductList[];
   categories: Category[];
   searchTerm?: string;
   isLoading: boolean;

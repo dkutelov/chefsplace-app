@@ -9,6 +9,8 @@ const defaultState: IProductsContext = {
   categories: [],
   searchTerm: "",
   isLoading: false,
+  isCategoryLoading: false,
+  dispatch: () => {},
 };
 
 export const ProductsContext = createContext(defaultState);
