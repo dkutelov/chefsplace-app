@@ -27,55 +27,55 @@ export const DeliveryAddressShowScreen = () => {
             />
           </HorizontalRow>
           <ViewField label="Телефон" text="0889611010" />
-          <ViewField label="Фирма/ Обект" text="Grill And The Game" />
+          <ViewField label="Фирма/ Обект" text="Дигиталс ООД" />
           <HorizontalRow>
             <ViewField
               label="Нас. място"
-              text="Къртожабене"
+              text="София"
               containerStyles={{ flexBasis: "76%" }}
             />
             <ViewField
               label="Пощ. код"
-              text="5555"
+              text="1421"
               containerStyles={{ flexBasis: "23%" }}
             />
           </HorizontalRow>
-          <ViewField label="Жк/Кв./Местност" text="Шинджуку" />
+          <ViewField label="Жк/Кв./Местност" text="Лозенец" />
           <HorizontalRow>
             <ViewField
               label="Ул./ бул."
-              text="Гинза"
+              text="Цветна Градина"
               containerStyles={{ flexBasis: "76%" }}
             />
             <ViewField
               label="Номер"
-              text="5"
+              text="1"
               containerStyles={{ flexBasis: "23%" }}
             />
           </HorizontalRow>
           <HorizontalRow>
             <ViewField
               label="Блок"
-              text="32"
+              text=""
               containerStyles={{ flexBasis: "28%" }}
             />
             <ViewField
               label="Вход"
-              text="А"
+              text="Б"
               containerStyles={{ flexBasis: "22%" }}
             />
             <ViewField
               label="Етаж"
-              text="5"
+              text="1"
               containerStyles={{ flexBasis: "22%" }}
             />
             <ViewField
               label="Ап."
-              text="16"
+              text="19"
               containerStyles={{ flexBasis: "22%" }}
             />
           </HorizontalRow>
-          <ViewField label="Уточнения" text="I like sushi" />
+          <ViewField label="Уточнения" text="Звънец Телексим" />
           <ViewField label="Адрес по подразбиране" text="Не" />
         </AddressContainer>
         <Button

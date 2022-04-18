@@ -1,7 +1,7 @@
 export interface Profile {
-  userId: string;
-  deliveryAddresses: DeliveryAddress[];
-  invoiceAddresses: InvoiceAddress[];
+  userId?: string;
+  deliveryAddresses?: DeliveryAddress[];
+  invoiceAddresses?: InvoiceAddress[];
 }
 
 export interface DeliveryAddress {

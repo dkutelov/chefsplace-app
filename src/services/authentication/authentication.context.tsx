@@ -1,3 +1,4 @@
+import createProfile from "@infrastructure/api/users/create-profile";
 import React, { useState, createContext } from "react";
 import { IUserContext, User } from "../../types/User";
 
@@ -8,6 +9,7 @@ import {
   logoutRequest,
 } from "./authentication.service";
 
+import { getConfig } from "@infrastructure/api/config";
 const defaultState: IUserContext = {
   isAuthenticated: false,
   user: null,
@@ -16,6 +18,7 @@ const defaultState: IUserContext = {
   onLogin: () => {},
   onRegister: () => {},
   onLogout: () => {},
+  profile: {},
 };
 
 export const AuthenticationContext = createContext<IUserContext>(defaultState);
@@ -35,9 +38,10 @@ export const AuthenticationContextProvider = ({
   const [isLoading, setIsLoading] = useState(false);
   const [user, setUser] = useState<User | null>(null);
   const [error, setError] = useState<string | null>(null);
-
+  const config = getConfig();
   userStatusRequest((usr) => {
     if (usr) {
+      //TODO: get profile
       setUser(usr);
     }
   });
@@ -57,7 +61,7 @@ export const AuthenticationContextProvider = ({
       });
   };
 
-  const onRegister = (
+  const onRegister = async (
     email: string,
     password: string,
     repeatedPassword: string
@@ -68,18 +72,20 @@ export const AuthenticationContextProvider = ({
     }
 
     setIsLoading(true);
-    registerRequest(email, password)
-      .then((u) => {
-        setUser(u);
-        setIsLoading(false);
-        setError(null);
-      })
-      .catch((e) => {
-        setIsLoading(false);
-        console.log(e);
-        const errorText = e.toString();
-        setError(translatedError[errorText]);
-      });
+
+    try {
+      const u = await registerRequest(email, password);
+      setUser(u);
+      const profile = await createProfile(config, u.user.uid, u.user.email);
+      //TODO: Add profile to context
+      setIsLoading(false);
+      setError(null);
+    } catch (e) {
+      setIsLoading(false);
+      console.log(e);
+      const errorText = e.toString();
+      setError(translatedError[errorText]);
+    }
   };
 
   const onLogout = () => {

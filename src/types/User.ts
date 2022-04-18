@@ -1,3 +1,5 @@
+import { Profile } from "./Profile";
+
 export interface User {
   [key: string]: any;
 }
@@ -14,4 +16,5 @@ export interface IUserContext {
     repeatedPassword: string
   ) => void;
   onLogout: () => void;
+  profile: Profile;
 }
