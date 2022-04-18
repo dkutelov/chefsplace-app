@@ -14,21 +14,19 @@ type ReturnType = {
   };
 };
 
-const createProfile = async (
+const getProfileByUid = async (
   config: ApiConfig,
-  uid: string,
-  email: string
+  uid: string
 ): Promise<Profile> => {
-  return await config.fetch<ReturnType>({
-    method: "POST",
+  const data = await config.fetch<ReturnType>({
     url: config.apiUrl + "users",
-    bodyData: {
-      profile: {
-        uid,
-        email,
-      },
+    query: {
+      id: uid,
     },
   });
+
+  const products = data;
+  return products;
 };
 
-export default createProfile;
+export default getProfileByUid;

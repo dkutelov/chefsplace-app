@@ -17,12 +17,15 @@ export const fetchAPI = async <T>({
     },
   };
 
+  if (query) {
+    url = `${url}?${new URLSearchParams(query)}`;
+  }
+
   if (method === "POST") {
     params = { ...params, body: JSON.stringify(bodyData) };
   }
 
   const res = await fetch(url, params);
-
   const data = await res.json();
 
   // ?? checking if left is null or undefined only

@@ -45,7 +45,7 @@ export const CartContextProvider = ({
   };
 
   useEffect(() => {
-    retrieveCartItems();
+    //retrieveCartItems();
   }, []);
 
   return (

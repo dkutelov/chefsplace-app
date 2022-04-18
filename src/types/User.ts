@@ -16,5 +16,5 @@ export interface IUserContext {
     repeatedPassword: string
   ) => void;
   onLogout: () => void;
-  profile: Profile;
+  profile: Profile | null;
 }

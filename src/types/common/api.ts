@@ -1,6 +1,6 @@
 export type ApiFetcherOptions = {
   url: string;
-  query?: string;
+  query?: { [key: string]: any };
   bodyData?: { [key: string]: any };
   method: "GET" | "POST" | "PATCH" | "DELETE";
 };

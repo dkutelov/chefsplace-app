@@ -10,6 +10,8 @@ import {
 } from "./authentication.service";
 
 import { getConfig } from "@infrastructure/api/config";
+import { Profile } from "@types/Profile";
+import getProfileByUid from "@infrastructure/api/users/get-profile";
 const defaultState: IUserContext = {
   isAuthenticated: false,
   user: null,
@@ -37,28 +39,29 @@ export const AuthenticationContextProvider = ({
 }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [user, setUser] = useState<User | null>(null);
+  const [profile, setProfile] = useState<Profile | null>(null);
   const [error, setError] = useState<string | null>(null);
   const config = getConfig();
   userStatusRequest((usr) => {
     if (usr) {
       //TODO: get profile
-      setUser(usr);
+      setUser(usr?.uid);
     }
   });
 
-  const onLogin = (email: string, password: string) => {
+  const onLogin = async (email: string, password: string) => {
     setIsLoading(true);
-    loginRequest(email, password)
-      .then((u) => {
-        setUser(u);
-        setIsLoading(false);
-        setError(null);
-      })
-      .catch((e) => {
-        setIsLoading(false);
-        console.log(e);
-        setError(e.toString());
-      });
+    try {
+      const u = await loginRequest(email, password);
+      const userProfile = await getProfileByUid(config, u.user.uid);
+      setProfile(userProfile.profile);
+      setIsLoading(false);
+      setError(null);
+    } catch (e) {
+      setIsLoading(false);
+      console.log(e);
+      setError(e.toString());
+    }
   };
 
   const onRegister = async (
@@ -75,9 +78,8 @@ export const AuthenticationContextProvider = ({
 
     try {
       const u = await registerRequest(email, password);
-      setUser(u);
       const profile = await createProfile(config, u.user.uid, u.user.email);
-      //TODO: Add profile to context
+      setProfile(profile);
       setIsLoading(false);
       setError(null);
     } catch (e) {
@@ -91,6 +93,7 @@ export const AuthenticationContextProvider = ({
   const onLogout = () => {
     logoutRequest().then(() => {
       setUser(null);
+      setProfile(null);
       setError(null);
     });
   };
@@ -100,6 +103,7 @@ export const AuthenticationContextProvider = ({
       value={{
         isAuthenticated: !!user,
         user,
+        profile,
         isLoading,
         error,
         onLogin,
