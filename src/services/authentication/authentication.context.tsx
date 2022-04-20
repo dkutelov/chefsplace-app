@@ -1,5 +1,5 @@
 import createProfile from "@infrastructure/api/users/create-profile";
-import React, { useState, createContext } from "react";
+import React, { useState, createContext, useEffect } from "react";
 import { IUserContext, User } from "../../types/User";
 
 import {
@@ -42,12 +42,22 @@ export const AuthenticationContextProvider = ({
   const [profile, setProfile] = useState<Profile | null>(null);
   const [error, setError] = useState<string | null>(null);
   const config = getConfig();
-  userStatusRequest((usr) => {
+
+  userStatusRequest(async (usr) => {
     if (usr) {
-      //TODO: get profile
       setUser(usr?.uid);
     }
   });
+
+  useEffect(() => {
+    console.log(user);
+    (async () => {
+      if (user) {
+        const userProfile = await getProfileByUid(config, user);
+        setProfile(userProfile.profile);
+      }
+    })();
+  }, [user]);
 
   const onLogin = async (email: string, password: string) => {
     setIsLoading(true);

@@ -48,15 +48,28 @@ export const ErrorContainer = styled.View`
   margin-bottom: ${(props: { theme: Theme }) => props.theme.space[2]};
 `;
 
-export const CheckoutContainer = styled.View`
-  background-color: ${(props: { theme: Theme }) =>
-    props.theme.colors.bg.primary};
+export const CheckoutContainer = styled.ScrollView`
   padding: ${(props: { theme: Theme }) => props.theme.space[2]};
+  margin-bottom: ${(props: { theme: Theme }) => props.theme.space[4]};
 `;
 
 export const CheckoutSubtitle = styled.Text`
   font-family: ${(props: { theme: Theme }) => props.theme.fonts.heading};
   font-size: ${(props: { theme: Theme }) => props.theme.fontSizes.title};
   color: ${(props: { theme: Theme }) => props.theme.colors.text.primary};
-  margin-bottom: ${(props: { theme: Theme }) => props.theme.space[2]};
+  margin-top: ${(props: { theme: Theme }) => props.theme.space[2]};
+  margin-bottom: ${(props: { theme: Theme }) => props.theme.space[3]};
+`;
+
+export const SectionContainer = styled.View`
+  padding: ${(props: { theme: Theme }) => props.theme.space[0]};
+  background-color: ${(props: { theme: Theme }) =>
+    props.theme.colors.bg.secondary};
+`;
+
+export const SectionInnerContainer = styled.View`
+  background-color: ${(props: { theme: Theme }) =>
+    props.theme.colors.bg.primary};
+  padding: ${(props: { theme: Theme }) => props.theme.space[3]};
+  border-radius: 20px;
 `;

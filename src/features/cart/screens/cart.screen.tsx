@@ -34,15 +34,6 @@ export const CartScreen = () => {
 
   const { navigate } = useNavigation();
 
-  const onCheckout = () => {
-    console.log("😁");
-    if (isAuthenticated) {
-      navigate("AuthCheckout");
-    } else {
-      navigate("CheckoutTypeSelect");
-    }
-  };
-
   useEffect(() => {
     dispatch({
       type: UPDATE_CART_ITEMS_ON_LOAD,
@@ -56,6 +47,14 @@ export const CartScreen = () => {
         (prevValue += product.quantity * product.price),
       0
     );
+  };
+
+  const onCheckout = () => {
+    if (isAuthenticated) {
+      navigate("AuthCheckout", { cartAmount: cartAmount() });
+    } else {
+      navigate("CheckoutTypeSelect", { cartAmount: cartAmount() });
+    }
   };
 
   return (
