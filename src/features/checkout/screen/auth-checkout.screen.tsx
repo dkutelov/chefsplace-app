@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { TextInput } from "react-native";
-import { useRoute } from "@react-navigation/native";
-import { Spacer } from "@components/spacer/spacer.component";
+import { useNavigation, useRoute } from "@react-navigation/native";
+
 import {
   SectionContainer,
   CheckoutContainer,
@@ -21,6 +21,8 @@ export const AuthCheckout = () => {
   const [termsAgreed, setTermsAgreed] = useState(false);
   const [deliveryAddressId, setDeliveryAddressId] = useState("");
   const { params } = useRoute();
+  const { navigate } = useNavigation();
+
   const onTermsAgreed = () => {
     setTermsAgreed(!termsAgreed);
   };
@@ -42,7 +44,9 @@ export const AuthCheckout = () => {
               <Text variant="body">Още нямате адрес на доставка</Text>
               <Button
                 text="Добави Адрес На Доставка"
-                onButtonPress={() => {}}
+                onButtonPress={() => {
+                  navigate("NewDeliveryAddress");
+                }}
               />
             </>
           ) : (

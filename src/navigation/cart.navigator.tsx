@@ -6,6 +6,7 @@ import { ProductDetailScreenWrapper } from "../features/product-detail/screens/p
 import { CheckoutTypeSelect } from "@features/checkout/screen/checkout-type-select.screen";
 import { AuthCheckout } from "@features/checkout/screen/auth-checkout.screen";
 import { GuestCheckout } from "@features/checkout/screen/guest-checkout.screen";
+import { DeliveryAddressScreen } from "@features/profile/screens/addresses/delivery/delivery-address.screen";
 
 const Stack = createNativeStackNavigator();
 
@@ -54,6 +55,11 @@ export const CartStack = () => {
           options={{
             title: "Поръчване",
           }}
+        />
+        <Stack.Screen
+          name="NewDeliveryAddress"
+          component={DeliveryAddressScreen}
+          options={{ title: "Нов Адрес За Доставка" }}
         />
       </Stack.Group>
     </Stack.Navigator>

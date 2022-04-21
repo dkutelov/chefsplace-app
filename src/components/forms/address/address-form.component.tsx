@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Formik } from "formik";
 import {
   InputField,
@@ -9,10 +9,17 @@ import { Button } from "../../button/button.component";
 import Checkbox from "../checkbox/checkbox-component";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { DeliveryAddress } from "@types/User";
+import { AuthenticationContext } from "@services";
+import createDeliveryAddress from "@infrastructure/api/users/create-delivery-address";
+import { getConfig } from "@infrastructure/api/config";
+import { useNavigation } from "@react-navigation/native";
 
 export const AddressForm = () => {
+  const { profile } = useContext(AuthenticationContext);
+  const config = getConfig();
+  const { goBack } = useNavigation();
   let defaultValues = {
-    addressName: "Адрес 1",
+    name: "Адрес 2",
     firstName: "Дарий",
     lastName: "Кутелов",
     phoneNumber: "0889611010",
@@ -40,22 +47,29 @@ export const AddressForm = () => {
     >
       <Formik
         initialValues={defaultValues}
-        onSubmit={(values) => {
+        onSubmit={async (values) => {
           //TODO: validation
 
           //TODO: transform to DeliveryAddress type
           console.log(values);
+          const newAddress = await createDeliveryAddress(
+            config,
+            profile._id,
+            values
+          );
+          //TODO: Load address in store
+          goBack();
         }}
       >
         {({ values, handleChange, handleSubmit, setFieldValue }) => (
           <FieldsContainer>
             <InputField
               label="Име на адреса"
-              onChangeText={handleChange("addressName")}
+              onChangeText={handleChange("name")}
               textContentType="name"
               keyboardType="default"
               autoCapitalize="sentences"
-              value={values.addressName}
+              value={values.name}
               style={{ paddingHorizontal: 0 }}
             />
             <InputField
