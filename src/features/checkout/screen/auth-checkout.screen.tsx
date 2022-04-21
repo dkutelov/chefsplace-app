@@ -51,13 +51,10 @@ export const AuthCheckout = () => {
             </>
           ) : (
             <MyPicker
-              items={[
-                { label: "Адрес 1", value: "123" },
-                { label: "Адрес 2", value: "124" },
-                { label: "Адрес 3", value: "125" },
-                { label: "Адрес 4", value: "126" },
-                { label: "Адрес 5", value: "127" },
-              ]}
+              items={profile?.deliveryAddress?.map((x) => ({
+                label: x.name,
+                value: x._id,
+              }))}
               value={deliveryAddressId}
               setValue={setDeliveryAddressId}
             />

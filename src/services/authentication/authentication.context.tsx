@@ -73,6 +73,7 @@ export const AuthenticationContextProvider = ({
       setError(e.toString());
     }
   };
+  console.log(profile);
 
   const onRegister = async (
     email: string,
