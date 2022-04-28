@@ -51,7 +51,7 @@ export const AddressForm = () => {
           //TODO: validation
 
           //TODO: transform to DeliveryAddress type
-          console.log(values);
+          //console.log(values);
           const newAddress = await createDeliveryAddress(
             config,
             profile._id,

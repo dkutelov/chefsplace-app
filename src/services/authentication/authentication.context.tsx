@@ -1,5 +1,5 @@
 import createProfile from "@infrastructure/api/users/create-profile";
-import React, { useState, createContext, useEffect } from "react";
+import React, { useState, createContext, useEffect, useContext } from "react";
 import { IUserContext, User } from "../../types/User";
 
 import {
@@ -12,6 +12,8 @@ import {
 import { getConfig } from "@infrastructure/api/config";
 import { Profile } from "@types/Profile";
 import getProfileByUid from "@infrastructure/api/users/get-profile";
+import { CartContext } from "@services/cart";
+import { ProductsContext } from "@services/products";
 const defaultState: IUserContext = {
   isAuthenticated: false,
   user: null,
@@ -43,6 +45,9 @@ export const AuthenticationContextProvider = ({
   const [error, setError] = useState<string | null>(null);
   const config = getConfig();
 
+  const { dispatch } = useContext(CartContext);
+  const { products } = useContext(ProductsContext);
+
   userStatusRequest(async (usr) => {
     if (usr) {
       setUser(usr?.uid);
@@ -50,11 +55,17 @@ export const AuthenticationContextProvider = ({
   });
 
   useEffect(() => {
-    console.log(user);
+    //console.log(user);
     (async () => {
       if (user) {
-        const userProfile = await getProfileByUid(config, user);
-        setProfile(userProfile.profile);
+        const { profile } = await getProfileByUid(config, user);
+        setProfile(profile);
+        console.log(profile.cart);
+
+        dispatch({
+          type: "UPDATE_CART_ITEMS_ON_LOAD",
+          payload: { cartItems: profile.cart, products },
+        });
       }
     })();
   }, [user]);
@@ -73,7 +84,6 @@ export const AuthenticationContextProvider = ({
       setError(e.toString());
     }
   };
-  console.log(profile);
 
   const onRegister = async (
     email: string,

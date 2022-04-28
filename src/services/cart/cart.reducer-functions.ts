@@ -1,5 +1,6 @@
+import { products } from "../../../functions";
 import { CartItem, ICartContext } from "../../types/Cart";
-import { Product } from "../../types/Product";
+import { Product, ProductList } from "../../types/Product";
 
 export const updateCartItems = (
   cartState: ICartContext,
@@ -11,22 +12,33 @@ export const updateCartItems = (
 
 export const updateCartItemsOnLoad = (
   cartState: ICartContext,
-  products: Product[]
+  payload: any
 ): ICartContext => {
-  const initialCartItems = cartState.cartItems;
+  const { cartItems, products } = payload;
+  let updatedCartItems: CartItem[] = [];
 
   //Remove currently non available products
-  let updatedCartItems: CartItem[] = initialCartItems.filter((i) =>
-    products.find((p) => p.id === i.id)
-  );
+  if (cartItems?.length > 0) {
+    cartItems.forEach((cartItem) => {
+      const product = products.find(
+        (p: ProductList) => p.id === cartItem.productId
+      );
 
-  //Update max quantity
-  updatedCartItems.forEach((item: CartItem) => {
-    const product = products.find((p) => p.id === item.id);
-    if (product) {
-      item.maxQuantity = product.maxQuantity;
-    }
-  });
+      if (product) {
+        updatedCartItems = [
+          ...updatedCartItems,
+          {
+            id: cartItem._id,
+            name: product.name,
+            image: product.mainImage,
+            price: product.price,
+            maxQuantity: product.maxQuantity,
+            quantity: cartItem.quantity,
+          },
+        ];
+      }
+    });
+  }
 
   return {
     ...cartState,

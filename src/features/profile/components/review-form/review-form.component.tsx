@@ -8,7 +8,7 @@ export const ReviewForm = () => {
       <Formik
         initialValues={{ title: "", body: "", rating: "" }}
         onSubmit={(values) => {
-          console.log(values);
+          //console.log(values);
         }}
       >
         {(props) => (

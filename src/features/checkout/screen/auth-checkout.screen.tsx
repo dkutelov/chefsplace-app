@@ -29,6 +29,7 @@ export const AuthCheckout = () => {
 
   const { profile, user } = useContext(AuthenticationContext);
 
+  //TODO: set default address
   console.log("😁", profile?.deliveryAddress.length === 0);
   return (
     <CheckoutContainer>

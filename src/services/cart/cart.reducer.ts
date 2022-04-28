@@ -26,7 +26,7 @@ export const cartReducer = (cartState: ICartContext, props: IProps) => {
     case SET_CART_ITEMS:
       return updateCartItems(cartState, payload.cartItems);
     case UPDATE_CART_ITEMS_ON_LOAD:
-      return updateCartItemsOnLoad(cartState, payload.products);
+      return updateCartItemsOnLoad(cartState, payload);
     case ADD_ITEM_TO_CART:
       return addItemToCart(cartState, payload);
     case REMOVE_ITEM_FROM_CART:

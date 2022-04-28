@@ -31,15 +31,16 @@ export const CartScreen = () => {
   const { cartItems, isLoading, error, dispatch } = useContext(CartContext);
   const { isAuthenticated } = useContext(AuthenticationContext);
   const { products } = useContext(ProductsContext);
+  console.log({ cartItems });
 
   const { navigate } = useNavigation();
 
-  useEffect(() => {
-    dispatch({
-      type: UPDATE_CART_ITEMS_ON_LOAD,
-      payload: { products },
-    });
-  }, [products]);
+  // useEffect(() => {
+  //   dispatch({
+  //     type: UPDATE_CART_ITEMS_ON_LOAD,
+  //     payload: { products },
+  //   });
+  // }, [products]);
 
   const cartAmount = (): number => {
     return cartItems.reduce(
