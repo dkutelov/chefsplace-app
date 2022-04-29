@@ -11,7 +11,10 @@ import {
 
 import { getConfig } from "@infrastructure/api/config";
 import { Profile } from "@types/Profile";
-import getProfileByUid from "@infrastructure/api/users/get-profile";
+import {
+  getProfileByUid,
+  getProfileById,
+} from "@infrastructure/api/users/get-profile";
 import { CartContext } from "@services/cart";
 import { ProductsContext } from "@services/products";
 const defaultState: IUserContext = {
@@ -60,7 +63,6 @@ export const AuthenticationContextProvider = ({
       if (user) {
         const { profile } = await getProfileByUid(config, user);
         setProfile(profile);
-        console.log(profile.cart);
 
         dispatch({
           type: "UPDATE_CART_ITEMS_ON_LOAD",
@@ -119,6 +121,15 @@ export const AuthenticationContextProvider = ({
     });
   };
 
+  async function fetchProfileById() {
+    if (profile && profile._id) {
+      const userId: string = profile._id;
+      setProfile(null);
+      const userProfile = await getProfileById(config, userId);
+      setProfile(userProfile.profile);
+    }
+  }
+
   return (
     <AuthenticationContext.Provider
       value={{
@@ -130,6 +141,7 @@ export const AuthenticationContextProvider = ({
         onLogin,
         onRegister,
         onLogout,
+        fetchProfileById,
       }}
     >
       {children}

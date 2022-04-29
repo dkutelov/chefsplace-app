@@ -1,4 +1,7 @@
+import { string } from "yup";
+
 export interface Profile {
+  _id?: string;
   userId?: string;
   deliveryAddresses?: DeliveryAddress[];
   invoiceAddresses?: InvoiceAddress[];

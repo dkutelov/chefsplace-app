@@ -2,6 +2,7 @@ import { products } from "../../../functions";
 import { CartItem, ICartContext } from "../../types/Cart";
 import { Product, ProductList } from "../../types/Product";
 
+//Update state
 export const updateCartItems = (
   cartState: ICartContext,
   cartItems: CartItem[]

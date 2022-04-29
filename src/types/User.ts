@@ -16,5 +16,6 @@ export interface IUserContext {
     repeatedPassword: string
   ) => void;
   onLogout: () => void;
+  fetchProfileById: () => Promise<void>;
   profile: Profile | null;
 }

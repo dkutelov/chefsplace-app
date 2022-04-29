@@ -14,19 +14,32 @@ type ReturnType = {
   };
 };
 
-const getProfileByUid = async (
+export const getProfileByUid = async (
   config: ApiConfig,
   uid: string
 ): Promise<Profile> => {
   const data = await config.fetch<ReturnType>({
     url: config.apiUrl + "users",
     query: {
-      id: uid,
+      uid,
     },
   });
 
-  const products = data;
-  return products;
+  const profile = data;
+  return profile;
 };
 
-export default getProfileByUid;
+export const getProfileById = async (
+  config: ApiConfig,
+  userId: string
+): Promise<Profile> => {
+  const data = await config.fetch<ReturnType>({
+    url: config.apiUrl + "users",
+    query: {
+      id: userId,
+    },
+  });
+
+  const profile = data;
+  return profile;
+};
