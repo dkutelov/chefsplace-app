@@ -1,6 +1,5 @@
-import { products } from "../../../functions";
 import { CartItem, ICartContext } from "../../types/Cart";
-import { Product, ProductList } from "../../types/Product";
+import { ProductList } from "../../types/Product";
 
 //Update state
 export const updateCartItems = (
@@ -17,10 +16,10 @@ export const updateCartItemsOnLoad = (
 ): ICartContext => {
   const { cartItems, products } = payload;
   let updatedCartItems: CartItem[] = [];
-
+  console.log("🥵", cartItems, products);
   //Remove currently non available products
   if (cartItems?.length > 0) {
-    cartItems.forEach((cartItem) => {
+    cartItems.forEach((cartItem: CartItem) => {
       const product = products.find(
         (p: ProductList) => p.id === cartItem.productId
       );
@@ -29,7 +28,7 @@ export const updateCartItemsOnLoad = (
         updatedCartItems = [
           ...updatedCartItems,
           {
-            id: cartItem._id,
+            productId: product._id,
             name: product.name,
             image: product.mainImage,
             price: product.price,
@@ -53,7 +52,7 @@ export const updateCartItemQuantity = (
   newQuantity: number
 ): ICartContext => {
   const updatedCartItems = cartState.cartItems.map((x) => {
-    if (x.id === cartItem.id) {
+    if (x.productId === cartItem.productId) {
       x.quantity = newQuantity;
       if (x.maxQuantity && x.quantity > x.maxQuantity) {
         x.quantity = x.maxQuantity;
@@ -70,7 +69,7 @@ export const addItemToCart = (
   cartItem: CartItem
 ): ICartContext => {
   const items = cartState.cartItems;
-  const itemExists = items.find((x) => x.id === cartItem.id);
+  const itemExists = items.find((x) => x.productId === cartItem.productId);
 
   if (!itemExists) {
     const updatedCartItems = [...cartState.cartItems, cartItem];
@@ -86,7 +85,7 @@ export const removeItemFromCart = (
   cartItemId: string
 ): ICartContext => {
   const updatedCartItems = cartState.cartItems.filter(
-    (x) => x.id !== cartItemId
+    (x) => x.productId !== cartItemId
   );
   return updateCartItems(cartState, updatedCartItems);
 };

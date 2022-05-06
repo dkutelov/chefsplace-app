@@ -46,15 +46,15 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <ProductsContextProvider>
-        <CartContextProvider>
-          <AuthenticationContextProvider>
+        <AuthenticationContextProvider>
+          <CartContextProvider>
             <WishlistContextProvider>
               <BootstrapData>
                 <Navigation />
               </BootstrapData>
             </WishlistContextProvider>
-          </AuthenticationContextProvider>
-        </CartContextProvider>
+          </CartContextProvider>
+        </AuthenticationContextProvider>
       </ProductsContextProvider>
       <StatusBar style="auto" />
     </ThemeProvider>

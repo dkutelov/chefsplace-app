@@ -15,7 +15,6 @@ import {
   getProfileByUid,
   getProfileById,
 } from "@infrastructure/api/users/get-profile";
-import { CartContext } from "@services/cart";
 import { ProductsContext } from "@services/products";
 const defaultState: IUserContext = {
   isAuthenticated: false,
@@ -48,7 +47,6 @@ export const AuthenticationContextProvider = ({
   const [error, setError] = useState<string | null>(null);
   const config = getConfig();
 
-  const { dispatch } = useContext(CartContext);
   const { products } = useContext(ProductsContext);
 
   userStatusRequest(async (usr) => {
@@ -63,11 +61,6 @@ export const AuthenticationContextProvider = ({
       if (user) {
         const { profile } = await getProfileByUid(config, user);
         setProfile(profile);
-
-        dispatch({
-          type: "UPDATE_CART_ITEMS_ON_LOAD",
-          payload: { cartItems: profile.cart, products },
-        });
       }
     })();
   }, [user]);

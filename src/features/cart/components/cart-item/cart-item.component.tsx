@@ -33,7 +33,7 @@ interface Props {
 }
 
 export const CartItemCard = ({ cartItem }: Props) => {
-  const { id, name, price, image, quantity, maxQuantity } = cartItem;
+  const { name, productId, price, image, quantity, maxQuantity } = cartItem;
   const { navigate } = useNavigation();
   const [itemQuantity, setItemQuantity] = useState(quantity);
   const { cartItems, dispatch } = useContext(CartContext);
@@ -42,7 +42,9 @@ export const CartItemCard = ({ cartItem }: Props) => {
   //TODO: Add item to cart
 
   useEffect(() => {
-    const currentItemFromState = cartItems.find((x) => x.id === cartItem.id);
+    const currentItemFromState = cartItems.find(
+      (x) => x.productId === cartItem.productId
+    );
 
     if (currentItemFromState?.quantity === itemQuantity) {
       return;
@@ -62,11 +64,14 @@ export const CartItemCard = ({ cartItem }: Props) => {
   }, [quantity]);
 
   const removeItem = () => {
-    dispatch({ type: REMOVE_ITEM_FROM_CART, payload: { cartItemId: id } });
+    dispatch({
+      type: REMOVE_ITEM_FROM_CART,
+      payload: { cartItemId: productId },
+    });
   };
 
   const onCartItemPress = () => {
-    navigate("ProductDetails", { id });
+    navigate("ProductDetails", { productId });
   };
 
   return (

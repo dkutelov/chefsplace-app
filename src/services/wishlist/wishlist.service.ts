@@ -1,5 +1,7 @@
 import { WishlistItem } from "../../types/Wishlist";
 
+//TODO: Check if items not in products are removed
+
 export const wishlistTransform = (
   results: { [key: string]: any }[]
 ): WishlistItem[] => {

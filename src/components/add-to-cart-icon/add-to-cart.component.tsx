@@ -20,7 +20,6 @@ export const AddToCart = ({ cartItem, size, disabled = false }: IProps) => {
   const { dispatch: contextDispatch } = useContext(CartContext);
   const { profile, fetchProfileById } = useContext(AuthenticationContext);
   const config = getConfig();
-  console.log({ profile });
 
   const addToCart = async () => {
     // save item to backend
@@ -28,6 +27,7 @@ export const AddToCart = ({ cartItem, size, disabled = false }: IProps) => {
       productId: cartItem.id,
       quantity: cartItem.quantity,
     };
+
     // Save to DB only if authenticated
     if (profile) {
       await addItemToCart(config, profile._id, itemToSave);
