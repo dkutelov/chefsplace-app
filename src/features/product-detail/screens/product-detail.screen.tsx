@@ -141,7 +141,7 @@ const ProductDetailScreen = () => {
                 </Spacer>
                 <AddToCart
                   cartItem={{
-                    id: product.id,
+                    productId: product.id,
                     name: product.name,
                     image: product.images[0],
                     price: product.price,

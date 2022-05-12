@@ -17,8 +17,7 @@ import { WishlistItemCard } from "../components/wishlist-item/wishlist-item.comp
 import { NoItemsInWishlist, WishlistItemList } from "./wishlist.styles";
 
 export const WishlistScreen = () => {
-  const { wishlistItems, isLoading, error, dispatch } =
-    useContext(WishlistContext);
+  const { wishlistItems, error, dispatch } = useContext(WishlistContext);
   const { products } = useContext(ProductsContext);
 
   useEffect(() => {

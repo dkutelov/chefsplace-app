@@ -5,6 +5,7 @@ import {
   REMOVE_ITEM_FROM_CART,
   UPDATE_ITEM_QUANTITY,
   UPDATE_CART_ITEMS_ON_LOAD,
+  SET_CART_ITEMS_FROM_LOCAL,
 } from "./cart.action-types";
 
 import {
@@ -13,6 +14,7 @@ import {
   addItemToCart,
   removeItemFromCart,
   updateCartItemsOnLoad,
+  setCartItems,
 } from "./cart.reducer-functions";
 
 interface IProps {
@@ -25,6 +27,8 @@ export const cartReducer = (cartState: ICartContext, props: IProps) => {
   switch (type) {
     case SET_CART_ITEMS:
       return updateCartItems(cartState, payload.cartItems);
+    case SET_CART_ITEMS_FROM_LOCAL:
+      return setCartItems(cartState, payload);
     case UPDATE_CART_ITEMS_ON_LOAD:
       return updateCartItemsOnLoad(cartState, payload);
     case ADD_ITEM_TO_CART:

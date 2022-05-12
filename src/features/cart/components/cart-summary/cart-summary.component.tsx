@@ -9,7 +9,13 @@ import {
   Title,
 } from "./cart-summary.styles";
 
-export const CartSummary = ({ amount }: { amount: number }) => {
+export const CartSummary = ({
+  amount,
+  deliveryCharge,
+}: {
+  amount: number;
+  deliveryCharge: number;
+}) => {
   const { cartItems, dispatch } = useContext(CartContext);
 
   return (
@@ -21,7 +27,7 @@ export const CartSummary = ({ amount }: { amount: number }) => {
       </Row>
       <Row>
         <Label>Доставка</Label>
-        <Value>5.00 лв.</Value>
+        <Value>{deliveryCharge.toFixed(2)} лв.</Value>
       </Row>
       <Row>
         <Label style={{ fontWeight: "bold" }}>Сума без ДДС</Label>

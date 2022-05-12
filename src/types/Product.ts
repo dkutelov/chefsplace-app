@@ -28,6 +28,7 @@ export interface ProductConnection {
   onPromotion?: boolean;
   maxQuantity: number;
   category: string;
+  weight: number;
 }
 
 export interface ProductList {
@@ -39,6 +40,7 @@ export interface ProductList {
   onPromotion?: boolean;
   maxQuantity: number;
   category: string;
+  weight: number;
 }
 
 export interface Category {

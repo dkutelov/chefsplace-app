@@ -1,7 +1,7 @@
 import React, { useState, useContext, useCallback } from "react";
 import { useNavigation, useFocusEffect } from "@react-navigation/native";
 
-import { ProductList } from "@types/Product";
+import { ProductList } from "../../../../../types/Product";
 import { WishlistContext } from "@services/wishlist/wishlist.context";
 import {
   ADD_ITEM_TO_WISHLIST,
@@ -121,7 +121,7 @@ export const ProductCard = ({ item }: Props) => {
             />
             <AddToCart
               cartItem={{
-                id,
+                productId: id,
                 name,
                 image: mainImage,
                 price,

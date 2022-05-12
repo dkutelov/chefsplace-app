@@ -5,6 +5,7 @@ export interface CartItem {
   price: number;
   maxQuantity: number;
   quantity: number;
+  weight: number;
 }
 
 export interface ICartContext {

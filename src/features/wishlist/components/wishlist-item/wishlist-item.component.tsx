@@ -23,6 +23,7 @@ import { WishlistItem } from "@types/Wishlist";
 import { AddToCart } from "@components/add-to-cart-icon/add-to-cart.component";
 import { REMOVE_ITEM_FROM_WISHLIST } from "@services/wishlist/wishlist.action-types";
 import { K } from "@infrastructure/constants";
+import { ProductsContext } from "@services";
 
 interface Props {
   wishlistItem: WishlistItem;
@@ -35,9 +36,17 @@ export const WishlistItemCard = ({ wishlistItem }: Props) => {
 
   const { dispatch } = useContext(WishlistContext);
   const { navigate } = useNavigation();
+  const { products } = useContext(ProductsContext);
 
   const removeItem = () => {
     dispatch({ type: REMOVE_ITEM_FROM_WISHLIST, payload: { productId: id } });
+  };
+
+  const getMaxQuantity = () => {
+    const product = products.find((x) => (x.id = id));
+    console.log({ product });
+
+    return product?.maxQuantity || 1;
   };
 
   const onWishlistItemPress = () => {
@@ -71,7 +80,14 @@ export const WishlistItemCard = ({ wishlistItem }: Props) => {
         </PriceWrapper>
         <AddToCart
           disabled={!available}
-          cartItem={{ id, name, image, price, quantity: 1 }}
+          cartItem={{
+            productId: id,
+            name,
+            image,
+            price,
+            quantity: 1,
+            maxQuantity: getMaxQuantity(),
+          }}
           size={28}
         />
       </Row>

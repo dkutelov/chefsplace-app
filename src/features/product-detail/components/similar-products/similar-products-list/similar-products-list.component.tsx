@@ -44,20 +44,24 @@ export const SimilarProducts = ({ categoryId, currentProductId }: IProps) => {
   }, [products]);
 
   return (
-    <Container>
-      <Title>Подобни Продукти</Title>
-      <SimilarProductsContainer
-        horizontal
-        showsHorizontalScrollIndicator={false}
-      >
-        {similarProducts.map((product) => (
-          <ProductCardSmall
-            item={product}
-            key={product.id}
-            isSimilarProduct={true}
-          />
-        ))}
-      </SimilarProductsContainer>
-    </Container>
+    <>
+      {similarProducts.length > 0 && (
+        <Container>
+          <Title>Подобни Продукти</Title>
+          <SimilarProductsContainer
+            horizontal
+            showsHorizontalScrollIndicator={false}
+          >
+            {similarProducts.map((product) => (
+              <ProductCardSmall
+                item={product}
+                key={product.id}
+                isSimilarProduct={true}
+              />
+            ))}
+          </SimilarProductsContainer>
+        </Container>
+      )}
+    </>
   );
 };

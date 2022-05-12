@@ -1,6 +1,6 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useCallback, useState, useEffect } from "react";
 import { Caption } from "react-native-paper";
-import { useNavigation } from "@react-navigation/native";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
 
 // Types
 import { CartItem } from "@types/Cart";
@@ -27,14 +27,22 @@ import {
   Title,
 } from "./cart.styles";
 
+import { calculateDeliveryCharge } from "@infrastructure/utils/computed/getDeliveryCharge";
+
 export const CartScreen = () => {
   const { cartItems, isLoading, error, dispatch } = useContext(CartContext);
   const { isAuthenticated } = useContext(AuthenticationContext);
   const { products } = useContext(ProductsContext);
-  console.log({ cartItems });
+  const [deliveryCharge, setDeliveryCharge] = useState(5);
+  const [cartAmount, setCartAmount] = useState(0);
 
   const { navigate } = useNavigation();
 
+  useFocusEffect(
+    useCallback(() => {
+      console.log("😱");
+    }, [])
+  );
   // useEffect(() => {
   //   dispatch({
   //     type: UPDATE_CART_ITEMS_ON_LOAD,
@@ -42,19 +50,37 @@ export const CartScreen = () => {
   //   });
   // }, [products]);
 
-  const cartAmount = (): number => {
-    return cartItems.reduce(
+  const getCartAmount = () => {
+    const cartAmount = cartItems.reduce(
       (prevValue, product: CartItem) =>
         (prevValue += product.quantity * product.price),
       0
     );
+
+    setCartAmount(cartAmount);
   };
+
+  const getDelieveryCharge = () => {
+    const productsWeight = cartItems.reduce(
+      (prevValue, product: CartItem) =>
+        (prevValue += product.quantity * product.weight),
+      0
+    );
+
+    const deliveryCharge = calculateDeliveryCharge(productsWeight);
+    setDeliveryCharge(deliveryCharge);
+  };
+
+  useEffect(() => {
+    getCartAmount();
+    getDelieveryCharge();
+  }, [cartItems]);
 
   const onCheckout = () => {
     if (isAuthenticated) {
-      navigate("AuthCheckout", { cartAmount: cartAmount() });
+      navigate("AuthCheckout", { cartAmount });
     } else {
-      navigate("CheckoutTypeSelect", { cartAmount: cartAmount() });
+      navigate("CheckoutTypeSelect", { cartAmount });
     }
   };
 
@@ -70,11 +96,17 @@ export const CartScreen = () => {
           <>
             <CartItemList
               data={cartItems}
+              keyExtractor={(item, index) => item.productId}
               renderItem={(item: { item: CartItem }) => (
                 <CartItemCard cartItem={item.item} />
               )}
               showsVerticalScrollIndicator={false}
-              ListFooterComponent={() => <CartSummary amount={cartAmount()} />}
+              ListFooterComponent={() => (
+                <CartSummary
+                  amount={cartAmount}
+                  deliveryCharge={deliveryCharge}
+                />
+              )}
             />
             <Button
               disabled={cartItems.length === 0}

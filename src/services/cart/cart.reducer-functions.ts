@@ -10,13 +10,25 @@ export const updateCartItems = (
   cartItems,
 });
 
+export const setCartItems = (
+  cartState: ICartContext,
+  payload: any
+): ICartContext => {
+  const { cartItems } = payload;
+  return {
+    ...cartState,
+    cartItems,
+  };
+};
+
 export const updateCartItemsOnLoad = (
   cartState: ICartContext,
   payload: any
 ): ICartContext => {
-  const { cartItems, products } = payload;
+  const { cartItemsFromMemory, products } = payload;
+
+  const cartItems = cartItemsFromMemory;
   let updatedCartItems: CartItem[] = [];
-  console.log("🥵", cartItems, products);
   //Remove currently non available products
   if (cartItems?.length > 0) {
     cartItems.forEach((cartItem: CartItem) => {
