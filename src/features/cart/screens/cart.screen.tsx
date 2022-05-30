@@ -78,7 +78,7 @@ export const CartScreen = () => {
 
   const onCheckout = () => {
     if (isAuthenticated) {
-      navigate("AuthCheckout", { cartAmount });
+      navigate("AuthCheckout", { cartAmount, deliveryCharge });
     } else {
       navigate("CheckoutTypeSelect", { cartAmount });
     }

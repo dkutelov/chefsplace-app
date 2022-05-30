@@ -3,12 +3,13 @@ import { string } from "yup";
 export interface Profile {
   _id?: string;
   userId?: string;
-  deliveryAddresses?: DeliveryAddress[];
-  invoiceAddresses?: InvoiceAddress[];
+  deliveryAddress?: DeliveryAddress[];
+  invoiceAddress?: InvoiceAddress[];
 }
 
 export interface DeliveryAddress {
-  addressId: string; // UUID
+  _id: string; // UUID
+  name: string;
   addressName: string;
   firstName: string;
   lastName: string;

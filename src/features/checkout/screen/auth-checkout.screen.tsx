@@ -28,13 +28,17 @@ export const AuthCheckout = () => {
   };
 
   const { profile, user } = useContext(AuthenticationContext);
+  console.log(profile);
 
   //TODO: set default address
   return (
     <CheckoutContainer>
       <SectionContainer>
         <CheckoutSubtitle>Обобщение на поръчката</CheckoutSubtitle>
-        <CartSummary amount={params?.cartAmount ?? 0} />
+        <CartSummary
+          amount={params?.cartAmount ?? 0}
+          deliveryCharge={params?.deliveryCharge ?? 4.95}
+        />
       </SectionContainer>
       <SectionContainer>
         <CheckoutSubtitle>Адрес на доставка</CheckoutSubtitle>
