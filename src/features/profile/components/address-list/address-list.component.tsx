@@ -8,17 +8,18 @@ import { colors } from "@infrastructure/theme/colors";
 
 import { AuthenticationContext } from "@services/authentication/authentication.context";
 import { ListItemEditDelete } from "@components/list-item-edit-delete/list-item-edit-delete.component";
+import { NoAddressMessage } from "./address-list.styles";
 
 export const AddressList = () => {
   const { navigate } = useNavigation();
   const { profile } = useContext(AuthenticationContext);
 
+  if (!profile) return <View />;
+
   if (!profile?.deliveryAddress || profile?.deliveryAddress?.length === 0) {
     return (
       <View>
-        <Text style={{ textAlign: "center", padding: "15px 0" }}>
-          Нямате адреси за доставка
-        </Text>
+        <NoAddressMessage>Нямате адреси за доставка</NoAddressMessage>
       </View>
     );
   }
@@ -33,7 +34,7 @@ export const AddressList = () => {
               title={address.name}
               itemId={address._id}
               onPressHandler={() => {
-                navigate("ViewAddress");
+                navigate("ViewAddress", { address });
               }}
             />
           ))}

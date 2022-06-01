@@ -15,7 +15,7 @@ import { getConfig } from "@infrastructure/api/config";
 import { useNavigation } from "@react-navigation/native";
 
 export const AddressForm = () => {
-  const { profile } = useContext(AuthenticationContext);
+  const { profile, fetchProfileById } = useContext(AuthenticationContext);
   const config = getConfig();
   const { goBack } = useNavigation();
   let defaultValues = {
@@ -57,7 +57,8 @@ export const AddressForm = () => {
             profile._id,
             values
           );
-          //TODO: Load address in store
+
+          await fetchProfileById();
           goBack();
         }}
       >

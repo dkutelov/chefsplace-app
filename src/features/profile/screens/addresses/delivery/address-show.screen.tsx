@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 
 import { SafeArea } from "@components/utils/safe-area.component";
 import { Button } from "@components/button/button.component";
@@ -8,75 +8,86 @@ import { AddressContainer, HorizontalRow } from "../../profile.styles";
 
 export const DeliveryAddressShowScreen = () => {
   const { goBack } = useNavigation();
+  const { params } = useRoute();
+  console.log(params);
 
   return (
     <>
       <SafeArea>
         <AddressContainer>
-          <ViewField label="Име на адреса" text="Адрес 1" />
+          <ViewField label="Име на адреса" text={params?.address.name ?? ""} />
           <HorizontalRow>
             <ViewField
               label="Име"
-              text="Дарий"
+              text={params?.address.firstName ?? ""}
               containerStyles={{ flexBasis: "49%" }}
             />
             <ViewField
               label="Фамилия"
-              text="Кутелов"
+              text={params?.address.lastName ?? ""}
               containerStyles={{ flexBasis: "49%" }}
             />
           </HorizontalRow>
-          <ViewField label="Телефон" text="0889611010" />
-          <ViewField label="Фирма/ Обект" text="Дигиталс ООД" />
+          <ViewField label="Телефон" text={params?.address.phoneNumber ?? ""} />
+          <ViewField
+            label="Фирма/ Обект"
+            text={params?.address.company ?? ""}
+          />
           <HorizontalRow>
             <ViewField
               label="Нас. място"
-              text="София"
+              text={params?.address.city ?? ""}
               containerStyles={{ flexBasis: "76%" }}
             />
             <ViewField
               label="Пощ. код"
-              text="1421"
+              text={params?.address.postCode ?? ""}
               containerStyles={{ flexBasis: "23%" }}
             />
           </HorizontalRow>
-          <ViewField label="Жк/Кв./Местност" text="Лозенец" />
+          <ViewField
+            label="Жк/Кв./Местност"
+            text={params?.address.area ?? ""}
+          />
           <HorizontalRow>
             <ViewField
               label="Ул./ бул."
-              text="Цветна Градина"
+              text={params?.address.street ?? ""}
               containerStyles={{ flexBasis: "76%" }}
             />
             <ViewField
               label="Номер"
-              text="1"
+              text={params?.address.number ?? ""}
               containerStyles={{ flexBasis: "23%" }}
             />
           </HorizontalRow>
           <HorizontalRow>
             <ViewField
               label="Блок"
-              text=""
+              text={params?.address.block ?? ""}
               containerStyles={{ flexBasis: "28%" }}
             />
             <ViewField
               label="Вход"
-              text="Б"
+              text={params?.address.entrance ?? ""}
               containerStyles={{ flexBasis: "22%" }}
             />
             <ViewField
               label="Етаж"
-              text="1"
+              text={params?.address.floor ?? ""}
               containerStyles={{ flexBasis: "22%" }}
             />
             <ViewField
               label="Ап."
-              text="19"
+              text={params?.address.apartment ?? ""}
               containerStyles={{ flexBasis: "22%" }}
             />
           </HorizontalRow>
-          <ViewField label="Уточнения" text="Звънец Телексим" />
-          <ViewField label="Адрес по подразбиране" text="Не" />
+          <ViewField label="Уточнения" text={params?.address.note ?? ""} />
+          <ViewField
+            label="Адрес по подразбиране"
+            text={params?.address.isDefault ? "Да" : "Не" ?? ""}
+          />
         </AddressContainer>
         <Button
           text="OK"
