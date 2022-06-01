@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useNavigation } from "@react-navigation/native";
 
 import { colors } from "@infrastructure/theme/colors";
@@ -9,6 +9,9 @@ import {
   IconContainer,
 } from "./list-item-edit-delete.styles";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { deleteDeliveryAddress } from "@infrastructure/api/users/delivery-address";
+import { getConfig } from "@infrastructure/api/config";
+import { AuthenticationContext } from "@services";
 
 interface IProps {
   title: string;
@@ -22,10 +25,19 @@ export const ListItemEditDelete = ({
   onPressHandler,
 }: IProps) => {
   const { navigate } = useNavigation();
+  const { profile, fetchProfileById } = useContext(AuthenticationContext);
+  const config = getConfig();
+
   const onEditPress = () => {
     navigate("NewDeliveryAddress");
   };
-  const onDeletePress = () => {};
+
+  const onDeletePress = async () => {
+    const userId = profile?._id ?? "";
+    await deleteDeliveryAddress(config, userId, itemId);
+    await fetchProfileById();
+  };
+
   return (
     <ListItem onPress={onPressHandler}>
       <Title>{title}</Title>

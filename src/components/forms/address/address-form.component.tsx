@@ -10,7 +10,7 @@ import Checkbox from "../checkbox/checkbox-component";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { DeliveryAddress } from "@types/User";
 import { AuthenticationContext } from "@services";
-import createDeliveryAddress from "@infrastructure/api/users/create-delivery-address";
+import { createDeliveryAddress } from "@infrastructure/api/users/delivery-address";
 import { getConfig } from "@infrastructure/api/config";
 import { useNavigation } from "@react-navigation/native";
 

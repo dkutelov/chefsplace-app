@@ -9,7 +9,6 @@ import { AddressContainer, HorizontalRow } from "../../profile.styles";
 export const DeliveryAddressShowScreen = () => {
   const { goBack } = useNavigation();
   const { params } = useRoute();
-  console.log(params);
 
   return (
     <>

@@ -1,7 +1,7 @@
 import { ApiConfig } from "@common/types/api";
 import { DeliveryAddress } from "@types/Profile";
 
-const createDeliveryAddress = async (
+export const createDeliveryAddress = async (
   config: ApiConfig,
   userId: string,
   address: DeliveryAddress
@@ -15,4 +15,13 @@ const createDeliveryAddress = async (
   });
 };
 
-export default createDeliveryAddress;
+export const deleteDeliveryAddress = async (
+  config: ApiConfig,
+  userId: string,
+  addressId: string
+): Promise<{ message: string }> => {
+  return await config.fetch<{ message: string }>({
+    method: "DELETE",
+    url: config.apiUrl + "users/" + userId + "/delivery-address/" + addressId,
+  });
+};

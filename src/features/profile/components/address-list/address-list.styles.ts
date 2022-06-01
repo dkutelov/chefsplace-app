@@ -9,3 +9,12 @@ export const NoAddressMessage = styled.Text`
   padding: ${(props: { theme: Theme }) => props.theme.space[4]} 0
     ${(props: { theme: Theme }) => props.theme.space[3]};
 `;
+
+export const LoadingContainer = styled.View`
+  flex: 1;
+  justify-content: center;
+`;
+
+export const AddressContainer = styled.View`
+  flex: 1;
+`;
