@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Formik } from "formik";
 import {
   InputField,
@@ -10,32 +10,70 @@ import Checkbox from "../checkbox/checkbox-component";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { DeliveryAddress } from "@types/User";
 import { AuthenticationContext } from "@services";
-import { createDeliveryAddress } from "@infrastructure/api/users/delivery-address";
+import {
+  createDeliveryAddress,
+  editDeliveryAddress,
+} from "@infrastructure/api/users/delivery-address";
 import { getConfig } from "@infrastructure/api/config";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 
 export const AddressForm = () => {
   const { profile, fetchProfileById } = useContext(AuthenticationContext);
+  //const [addressId, setAddressId] = useState(null);
   const config = getConfig();
+  const { params } = useRoute();
   const { goBack } = useNavigation();
+
   let defaultValues = {
-    name: "Адрес 2",
-    firstName: "Дарий",
-    lastName: "Кутелов",
-    phoneNumber: "0889611010",
-    company: "Дигиталс ООД",
-    postCode: "1421",
-    city: "София",
-    area: "Лозенец",
-    street: "ул. Цветна Градина",
-    number: "1",
-    block: "1",
-    entrance: "Б",
-    floor: "1",
-    apartment: "19",
-    note: "Звънец Телексим",
+    name: "",
+    firstName: "",
+    lastName: "",
+    phoneNumber: "",
+    company: "",
+    postCode: "",
+    city: "",
+    area: "",
+    street: "",
+    number: "",
+    block: "",
+    entrance: "",
+    floor: "",
+    apartment: "",
+    note: "",
     isDefault: false,
   };
+
+  if (params?.addressId) {
+    const addressId = params.addressId;
+    //setAddressId(addressId);
+
+    if (profile && profile.deliveryAddress) {
+      const editAddress = profile.deliveryAddress.find(
+        (x: DeliveryAddress) => x._id === addressId
+      );
+
+      defaultValues = { ...defaultValues, ...editAddress };
+    }
+  }
+
+  // let defaultValues = {
+  //   name: "Адрес 2",
+  //   firstName: "Дарий",
+  //   lastName: "Кутелов",
+  //   phoneNumber: "0889611010",
+  //   company: "Дигиталс ООД",
+  //   postCode: "1421",
+  //   city: "София",
+  //   area: "Лозенец",
+  //   street: "ул. Цветна Градина",
+  //   number: "1",
+  //   block: "1",
+  //   entrance: "Б",
+  //   floor: "1",
+  //   apartment: "19",
+  //   note: "Звънец Телексим",
+  //   isDefault: false,
+  // };
 
   return (
     <KeyboardAwareScrollView
@@ -52,12 +90,22 @@ export const AddressForm = () => {
 
           //TODO: transform to DeliveryAddress type
           //console.log(values);
-          const newAddress = await createDeliveryAddress(
-            config,
-            profile._id,
-            values
-          );
 
+          if (!params?.addressId) {
+            const newAddress = await createDeliveryAddress(
+              config,
+              profile._id,
+              values
+            );
+          } else {
+            await editDeliveryAddress(
+              config,
+              profile._id,
+              params?.addressId,
+              values
+            );
+            console.log("🧐");
+          }
           await fetchProfileById();
           goBack();
         }}

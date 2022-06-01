@@ -25,3 +25,18 @@ export const deleteDeliveryAddress = async (
     url: config.apiUrl + "users/" + userId + "/delivery-address/" + addressId,
   });
 };
+
+export const editDeliveryAddress = async (
+  config: ApiConfig,
+  userId: string,
+  addressId: string,
+  address: DeliveryAddress
+): Promise<{ message: string }> => {
+  return await config.fetch<{ message: string }>({
+    method: "POST",
+    url: config.apiUrl + "users/" + userId + "/delivery-address/" + addressId,
+    bodyData: {
+      address,
+    },
+  });
+};

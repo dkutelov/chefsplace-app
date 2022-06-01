@@ -29,7 +29,7 @@ export const ListItemEditDelete = ({
   const config = getConfig();
 
   const onEditPress = () => {
-    navigate("NewDeliveryAddress");
+    navigate("NewDeliveryAddress", { addressId: itemId });
   };
 
   const onDeletePress = async () => {
