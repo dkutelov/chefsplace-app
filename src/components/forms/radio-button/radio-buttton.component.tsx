@@ -22,7 +22,11 @@ export const MyRadioButton = ({ items, value, setValue }: IProps) => {
           key={value}
           color={"green"}
           style={{ backgroundColor: "white" }}
-          labelStyle={{ color: "green", textAlign: "left", paddingLeft: 8 }}
+          labelStyle={{
+            color: "green",
+            textAlign: "left",
+            paddingLeft: 8,
+          }}
           position="leading"
         />
       ))}

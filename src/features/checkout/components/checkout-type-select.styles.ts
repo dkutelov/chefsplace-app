@@ -57,8 +57,8 @@ export const CheckoutSubtitle = styled.Text`
   font-family: ${(props: { theme: Theme }) => props.theme.fonts.heading};
   font-size: ${(props: { theme: Theme }) => props.theme.fontSizes.title};
   color: ${(props: { theme: Theme }) => props.theme.colors.text.primary};
-  margin-top: ${(props: { theme: Theme }) => props.theme.space[2]};
-  margin-bottom: ${(props: { theme: Theme }) => props.theme.space[3]};
+  margin-top: ${(props: { theme: Theme }) => props.theme.space[3]};
+  margin-bottom: ${(props: { theme: Theme }) => props.theme.space[2]};
 `;
 
 export const SectionContainer = styled.View`

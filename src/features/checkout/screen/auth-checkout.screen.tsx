@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { TextInput } from "react-native";
+import { TextInput } from "react-native-paper";
 import { useNavigation, useRoute } from "@react-navigation/native";
 
 import {
@@ -15,11 +15,16 @@ import { CartSummary } from "@features/cart/components/cart-summary/cart-summary
 import { Text } from "@components/typography/text.component";
 import { AuthenticationContext } from "@services";
 import { Button } from "@components/button/button.component";
+import { CreditCardInput } from "../components/credit-card.component";
+import { Spacer } from "@components/spacer/spacer.component";
+import { colors } from "@infrastructure/theme/colors";
 
 export const AuthCheckout = () => {
-  const [value, setValue] = useState("first");
+  const [paymentType, setPaymentType] = useState("0");
   const [termsAgreed, setTermsAgreed] = useState(false);
   const [deliveryAddressId, setDeliveryAddressId] = useState("");
+  const [creditCardName, setCreditCardName] = useState("");
+
   const { params } = useRoute();
   const { navigate } = useNavigation();
 
@@ -92,20 +97,45 @@ export const AuthCheckout = () => {
         <CheckoutSubtitle>Начин на плащане</CheckoutSubtitle>
         <SectionInnerContainer>
           <MyRadioButton
-            value={value}
-            setValue={setValue}
+            value={paymentType}
+            setValue={setPaymentType}
             items={[
               { label: "Наложен платеж или ППП", value: "0" },
               { label: "Банков път", value: "1" },
               { label: "В брой (не важи за доставки с куриер)", value: "2" },
+              { label: "С кредитна/ дебитна карта", value: "3" },
             ]}
           />
         </SectionInnerContainer>
+        {paymentType === "3" && (
+          <>
+            <Spacer position="top" size="large">
+              <SectionInnerContainer>
+                <Text variant="body">Данни кредитна/дебитна карта</Text>
+                <Spacer position="top" size="large">
+                  <TextInput
+                    label="Име (както e изписано на картата)"
+                    activeUnderlineColor={colors.ui.primary}
+                    onChangeText={setCreditCardName}
+                    value={creditCardName}
+                  />
+                </Spacer>
+                <Spacer position="top" size="large">
+                  <CreditCardInput
+                    name={creditCardName}
+                    onError={() => {}}
+                    onSuccess={() => {}}
+                  />
+                </Spacer>
+              </SectionInnerContainer>
+            </Spacer>
+          </>
+        )}
       </SectionContainer>
       <SectionContainer>
         <CheckoutSubtitle>Забележка</CheckoutSubtitle>
         <SectionInnerContainer>
-          <TextInput onChangeText={() => {}} value={"😁"} />
+          <TextInput onChangeText={() => {}} value={""} />
         </SectionInnerContainer>
       </SectionContainer>
       <Checkbox
