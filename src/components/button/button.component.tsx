@@ -1,3 +1,4 @@
+import { colors } from "@infrastructure/theme/colors";
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
 import { theme } from "../../infrastructure/theme";
@@ -21,7 +22,11 @@ export const Button = ({
     <TouchableOpacity
       disabled={disabled}
       onPress={onButtonPress}
-      style={[styles.root, containerStyles]}
+      style={[
+        styles.root,
+        containerStyles,
+        { backgroundColor: disabled ? colors.ui.secondary : colors.ui.primary },
+      ]}
     >
       <Text style={styles.buttonText}>{text}</Text>
     </TouchableOpacity>

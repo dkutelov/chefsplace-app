@@ -12,12 +12,15 @@ export const DefaultAddress = ({ addresses }: IProps) => {
   );
 
   useEffect(() => {
+    if (!addresses) {
+      return;
+    }
     const defaultAddress = addresses.find((x) => x.isDefault);
 
     if (defaultAddress) {
       setDefaultAddress(defaultAddress);
     }
-  }, []);
+  }, [addresses]);
 
   return (
     <>
