@@ -25,6 +25,9 @@ export const SimilarProducts = ({ categoryId, currentProductId }: IProps) => {
       (p) => p.id !== currentProductId && p.category === categoryId
     );
 
+    if (!categoryProductsUnshaffled) {
+      return;
+    }
     const categoryProducts = categoryProductsUnshaffled
       .map((value) => ({ value, sort: Math.random() }))
       .sort((a, b) => a.sort - b.sort)

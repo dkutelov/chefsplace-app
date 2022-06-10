@@ -8,16 +8,20 @@ import {
   CheckoutSubtitle,
   SectionInnerContainer,
 } from "../components/checkout-type-select.styles";
+
+//Components
 import { MyRadioButton } from "@components/forms/radio-button/radio-buttton.component";
 import Checkbox from "@components/forms/checkbox/checkbox-component";
 import { MyPicker } from "@components/forms/picker/picker.component";
 import { CartSummary } from "@features/cart/components/cart-summary/cart-summary.component";
 import { Text } from "@components/typography/text.component";
-import { AuthenticationContext } from "@services";
 import { Button } from "@components/button/button.component";
-import { CreditCardInput } from "../components/credit-card.component";
 import { Spacer } from "@components/spacer/spacer.component";
+import { CreditCardInput } from "../components/credit-card.component";
+import { DefaultAddress } from "../components/default-address.component";
+
 import { colors } from "@infrastructure/theme/colors";
+import { AuthenticationContext } from "@services";
 
 export const AuthCheckout = () => {
   const [paymentType, setPaymentType] = useState("0");
@@ -51,23 +55,32 @@ export const AuthCheckout = () => {
           {profile?.deliveryAddress.length === 0 ? (
             <>
               <Text variant="body">Още нямате адрес на доставка</Text>
-              <Button
-                text="Добави Адрес На Доставка"
-                onButtonPress={() => {
-                  navigate("NewDeliveryAddress");
-                }}
-              />
             </>
           ) : (
-            <MyPicker
-              items={profile?.deliveryAddress?.map((x) => ({
-                label: x.name,
-                value: x._id,
-              }))}
-              value={deliveryAddressId}
-              setValue={setDeliveryAddressId}
-            />
+            <>
+              <DefaultAddress addresses={profile?.deliveryAddress} />
+
+              {profile?.deliveryAddress.length > 1 && (
+                <Spacer position="top" size="medium">
+                  <Text variant="body">Избери друг адрес на доставка</Text>
+                  <MyPicker
+                    items={profile?.deliveryAddress?.map((x) => ({
+                      label: x.name,
+                      value: x._id,
+                    }))}
+                    value={deliveryAddressId}
+                    setValue={setDeliveryAddressId}
+                  />
+                </Spacer>
+              )}
+            </>
           )}
+          <Button
+            text="Добави Адрес На Доставка"
+            onButtonPress={() => {
+              navigate("NewDeliveryAddress");
+            }}
+          />
         </SectionInnerContainer>
       </SectionContainer>
       <SectionContainer>

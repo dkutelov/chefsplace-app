@@ -40,7 +40,9 @@ export const ProfileMenu = () => {
         <MenuItem
           title="Данни за Фактура"
           iconName="file-document-outline"
-          onPressHandler={() => {}}
+          onPressHandler={() => {
+            navigate("InvoiceAddressList");
+          }}
         />
       </List.Section>
       <List.Section>
