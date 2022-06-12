@@ -22,16 +22,18 @@ export interface DeliveryAddress {
 }
 
 export interface InvoiceAddress {
-  addressId: string; // UUID
+  addressId: string | null;
   addressName: string;
   companyName: string;
   eik: string;
   vatNumber?: string;
   mol: string;
-  address: Address;
-  note?: string;
+  phoneNumber: string;
+  postCode?: string;
+  city: string;
+  addressLine: string;
+  addressLine2?: string;
   isDefault: boolean;
-  deleted: boolean; //do not delete
 }
 
 export interface Address {

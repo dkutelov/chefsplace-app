@@ -20,7 +20,7 @@ export const NewInvoiceDataScreen = () => {
   const { navigate } = useNavigation();
 
   const openNewAdressScreen = () => {
-    navigate("NewInvoiceDataAddress");
+    navigate("CreateInvoiceData");
   };
 
   return (
@@ -49,11 +49,13 @@ export const NewInvoiceDataScreen = () => {
                   setValue={setDeliveryAddressId}
                 />
               </Spacer>
-              <Button
-                disabled={!deliveryAddressId}
-                text="Към данни за фактура"
-                onButtonPress={openNewAdressScreen}
-              />
+              <Spacer position="top" size="medium">
+                <Button
+                  disabled={!deliveryAddressId}
+                  text="Към данни за фактура"
+                  onButtonPress={openNewAdressScreen}
+                />
+              </Spacer>
             </Spacer>
           ) : (
             <Spacer position="top" size="large">
