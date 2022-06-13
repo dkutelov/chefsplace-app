@@ -8,7 +8,7 @@ import {
 import { Button } from "../../button/button.component";
 import Checkbox from "../checkbox/checkbox-component";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import { InvoiceAddress } from "../../../types/Profile";
+import { DeliveryAddress, InvoiceAddress } from "../../../types/Profile";
 import { AuthenticationContext } from "@services";
 import {
   createDeliveryAddress,
@@ -16,6 +16,7 @@ import {
 } from "@infrastructure/api/users/delivery-address";
 import { getConfig } from "@infrastructure/api/config";
 import { useNavigation, useRoute } from "@react-navigation/native";
+import { deliveryAddressToInvoiceData } from "@components/utils/getDeliveryToInvoiceAddress";
 
 export const InvoiceDataForm = () => {
   const { profile, fetchProfileById } = useContext(AuthenticationContext);
@@ -39,18 +40,22 @@ export const InvoiceDataForm = () => {
     isDefault: false,
   };
 
-  // if (params?.addressId) {
-  //   const addressId = params.addressId;
-  //   //setAddressId(addressId);
+  if (params?.addressId) {
+    const addressId = params.addressId;
 
-  //   if (profile && profile.deliveryAddress) {
-  //     const editAddress = profile.deliveryAddress.find(
-  //       (x: DeliveryAddress) => x._id === addressId
-  //     );
+    if (profile && profile.deliveryAddress) {
+      const editAddress = profile.deliveryAddress.find(
+        (x: DeliveryAddress) => x._id === addressId
+      );
 
-  //     defaultValues = { ...defaultValues, ...editAddress };
-  //   }
-  // }
+      if (editAddress) {
+        defaultValues = deliveryAddressToInvoiceData({
+          defaultValues,
+          editAddress,
+        });
+      }
+    }
+  }
 
   return (
     <KeyboardAwareScrollView

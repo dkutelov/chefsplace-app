@@ -16,11 +16,15 @@ import { colors } from "@infrastructure/theme/colors";
 
 export const NewInvoiceDataScreen = () => {
   const { profile } = useContext(AuthenticationContext);
-  const [deliveryAddressId, setDeliveryAddressId] = useState("");
+  const [deliveryAddressId, setDeliveryAddressId] = useState("0");
   const { navigate } = useNavigation();
 
-  const openNewAdressScreen = () => {
-    navigate("CreateInvoiceData");
+  const openNewInvoiceDataScreen = () => {
+    if (deliveryAddressId) {
+      navigate("CreateInvoiceData", {
+        addressId: deliveryAddressId,
+      });
+    }
   };
 
   return (
@@ -51,14 +55,14 @@ export const NewInvoiceDataScreen = () => {
               </Spacer>
               <Spacer position="top" size="medium">
                 <Button
-                  disabled={!deliveryAddressId}
+                  disabled={deliveryAddressId === "0"}
                   text="Към данни за фактура"
-                  onButtonPress={openNewAdressScreen}
+                  onButtonPress={openNewInvoiceDataScreen}
                 />
               </Spacer>
             </Spacer>
           ) : (
-            <Spacer position="top" size="large">
+            <Spacer position="trop" size="large">
               <Text
                 variant="label"
                 style={{ color: colors.ui.primary, textAlign: "center" }}
@@ -83,7 +87,9 @@ export const NewInvoiceDataScreen = () => {
           <Spacer position="top" size="large">
             <Button
               text="Нови данни за фактура"
-              onButtonPress={openNewAdressScreen}
+              onButtonPress={() => {
+                navigate("CreateInvoiceData");
+              }}
             />
           </Spacer>
         </ContentContainer>

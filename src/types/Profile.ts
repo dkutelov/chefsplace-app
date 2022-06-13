@@ -16,7 +16,15 @@ export interface DeliveryAddress {
   phoneNumber: string;
   company?: string;
   note?: string;
-  address: Address;
+  postCode?: string;
+  city: string;
+  area?: string;
+  street?: string;
+  number?: string;
+  block?: string;
+  entrance?: string;
+  floor?: string;
+  apartment?: string;
   isDefault: boolean;
   deleted: boolean; //do not delete
 }
@@ -45,5 +53,5 @@ export interface Address {
   block?: string;
   entrance?: string;
   floor?: string;
-  apartment?: "16";
+  apartment?: string;
 }
