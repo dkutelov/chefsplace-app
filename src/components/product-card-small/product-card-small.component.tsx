@@ -29,7 +29,9 @@ export const ProductCardSmall = ({ item, isSimilarProduct }: Props) => {
     if (isSimilarProduct) {
       navigate("SimilarProductDetails", { id, similarProducts: true, name });
     } else {
-      navigate("Products", { screen: "ProductDetails", params: { id } });
+      navigate("ProductDetails", { id });
+      // goes to other route screen, issue with back button
+      // navigate("Products", { screen: "ProductDetails", params: { id } });
     }
   };
 

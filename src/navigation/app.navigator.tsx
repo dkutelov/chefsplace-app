@@ -10,7 +10,7 @@ import { TabBarIcon } from "./components/tabbar-icons/tabbar-icon.component";
 import { TabIconWithBadge } from "./components/tabbar-icons/tabbar-icon-with-badge.component";
 
 // Screens, stack navigators
-import { HomeScreen } from "../features/home/screens/home.screen";
+import { HomeStack } from "./home.navigator";
 import { AccountNavigator } from "./account.navigator";
 import { ProductStack } from "./product.navigator";
 import { CartStack } from "./cart.navigator";
@@ -46,24 +46,11 @@ function BottomTabNavigator() {
     >
       <BottomTab.Screen
         name="Home"
-        component={HomeScreen}
+        component={HomeStack}
         options={() => ({
           title: "Начало",
           tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
-          header: () => (
-            <SafeAreaView>
-              <Image
-                source={require("../../assets/images/logo.png")}
-                style={{
-                  height: 60,
-                  width: 134,
-                  resizeMode: "contain",
-                  alignSelf: "center",
-                  marginTop: Platform.OS === "ios" ? 0 : 32,
-                }}
-              />
-            </SafeAreaView>
-          ),
+          headerShown: false,
         })}
       />
       <BottomTab.Screen
