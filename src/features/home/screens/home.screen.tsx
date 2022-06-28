@@ -1,6 +1,7 @@
 import { ScrollView } from "react-native";
 import { SafeArea } from "@components/utils/safe-area.component";
 import { Dimensions } from "react-native";
+import { CentertedLoadingIndicator } from "@components/loading/activity-indicator.component";
 
 import { K } from "@infrastructure/constants/";
 
@@ -19,8 +20,7 @@ import {
 import { ProductCardSmall } from "@components/product-card-small/product-card-small.component";
 import { useContext, useState } from "react";
 import { ProductsContext } from "@services/products/products.context";
-import { LoadingIndicator } from "@components/loading/loading.component";
-import { Text } from "@components/typography/text.component";
+import { colors } from "@infrastructure/theme/colors";
 
 const win = Dimensions.get("window");
 const width = win.width - 16;
@@ -28,7 +28,6 @@ const width = win.width - 16;
 export const HomeScreen = () => {
   const { products, categories, isLoading, dispatch } =
     useContext(ProductsContext);
-  const [loadingCategories, setLoadingCategories] = useState(false);
   const [errorLoadingCategories, setErrorLoadingCategories] = useState<
     string | null
   >(null);
@@ -47,8 +46,12 @@ export const HomeScreen = () => {
         </HeroBanner>
         <Row title="Категории">
           <Categories>
-            {loadingCategories ? (
-              <LoadingIndicator />
+            {!categories || categories.length === 0 ? (
+              <CentertedLoadingIndicator
+                size={32}
+                color={colors.ui.primary}
+                height={300}
+              />
             ) : (
               <>
                 {categories?.length > 0
@@ -70,26 +73,42 @@ export const HomeScreen = () => {
           />
         </SecondaryBanner>
         <Row title="Нови Продукти">
-          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-            {newProducts.map((product) => (
-              <ProductCardSmall
-                item={product}
-                key={product.id}
-                isSimilarProduct={false}
-              />
-            ))}
-          </ScrollView>
+          {!newProducts || newProducts.length === 0 ? (
+            <CentertedLoadingIndicator
+              size={32}
+              color={colors.ui.primary}
+              height={300}
+            />
+          ) : (
+            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+              {newProducts.map((product) => (
+                <ProductCardSmall
+                  item={product}
+                  key={product.id}
+                  isSimilarProduct={false}
+                />
+              ))}
+            </ScrollView>
+          )}
         </Row>
         <Row title="Популярни Продукти">
-          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-            {newProducts.map((product) => (
-              <ProductCardSmall
-                item={product}
-                key={product.id}
-                isSimilarProduct={false}
-              />
-            ))}
-          </ScrollView>
+          {!newProducts || newProducts.length === 0 ? (
+            <CentertedLoadingIndicator
+              size={32}
+              color={colors.ui.primary}
+              height={300}
+            />
+          ) : (
+            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+              {newProducts.map((product) => (
+                <ProductCardSmall
+                  item={product}
+                  key={product.id}
+                  isSimilarProduct={false}
+                />
+              ))}
+            </ScrollView>
+          )}
         </Row>
       </ScrollView>
     </SafeArea>

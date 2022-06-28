@@ -28,3 +28,10 @@ export const Categories = styled.View`
   flex-wrap: wrap;
   justify-content: space-between;
 `;
+
+export const CategoriesSpinnerContainer = styled.View`
+  height: 300px;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+`;
