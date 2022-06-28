@@ -14,7 +14,7 @@ export const HomeStack = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name="Home"
+        name="HomeMain"
         component={HomeScreen}
         options={{
           header: () => (

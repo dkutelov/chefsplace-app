@@ -24,6 +24,7 @@ export const ProductListScreen = () => {
   const [filteredProducts, setSetFilteredProducts] = useState<
     ProductListType[]
   >([]);
+  const [categoryId, setCategoryId] = useState<string>("");
   const [errorLoadingCategories, setErrorLoadingCategories] = useState<
     string | null
   >(null);
@@ -67,6 +68,7 @@ export const ProductListScreen = () => {
       );
       setIsFiltered(true);
       setSetFilteredProducts(categoryProducts);
+      setCategoryId(params.id);
     }
   }, [params?.id, allProducts]);
 
@@ -77,6 +79,7 @@ export const ProductListScreen = () => {
       ) : (
         <>
           <CategoryMenu
+            categoryId={categoryId}
             filterProducts={filterProducts}
             clearCategoryFilter={clearCategoryFilter}
           />

@@ -7,5 +7,5 @@ export const K = {
   imageBaseUrl:
     "https://res.cloudinary.com/dariku/image/upload/h_500,c_scale,q_auto:eco/v1650001742/chefsplace/products/",
   categoryBaseUrl:
-    "https://res.cloudinary.com/dariku/image/upload/h_50,c_scale,q_auto:eco/v1647330626/chefsplace/category/",
+    "https://res.cloudinary.com/dariku/image/upload/h_150,c_scale,q_auto:eco/v1647330626/chefsplace/category/",
 };

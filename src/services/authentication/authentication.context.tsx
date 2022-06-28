@@ -60,7 +60,7 @@ export const AuthenticationContextProvider = ({
     (async () => {
       if (user) {
         const { profile } = await getProfileByUid(config, user);
-        console.log(profile);
+        // console.log(profile);
 
         setProfile(profile);
       }
