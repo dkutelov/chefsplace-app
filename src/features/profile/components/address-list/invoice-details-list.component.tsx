@@ -37,7 +37,7 @@ export const InvoiceDetailsList = () => {
           {profile.invoiceAddress.map((address) => (
             <ListItemEditDelete
               key={address._id}
-              title={address.name}
+              title={address.addressName}
               itemId={address._id}
               onPressHandler={() => {
                 navigate("ViewAddress", { address });

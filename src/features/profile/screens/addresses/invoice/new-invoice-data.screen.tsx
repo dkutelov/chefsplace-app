@@ -31,15 +31,15 @@ export const NewInvoiceDataScreen = () => {
     <>
       <SafeArea>
         <ContentContainer>
-          <Text
-            variant="body"
-            style={{ textAlign: "center", color: colors.ui.primary }}
-          >
-            Създай данни за фактура с копиране от съществуващ адрес за доставка?
-          </Text>
-
-          {profile?.deliveryAddress.length > 1 ? (
+          {profile?.deliveryAddress.length >= 1 ? (
             <Spacer position="top" size="large">
+              <Text
+                variant="body"
+                style={{ textAlign: "center", color: colors.ui.primary }}
+              >
+                Създай данни за фактура с копиране от съществуващ адрес за
+                доставка?
+              </Text>
               <Text variant="body" style={{ color: colors.ui.secondary }}>
                 Избери адрес на доставка
               </Text>
@@ -62,7 +62,7 @@ export const NewInvoiceDataScreen = () => {
               </Spacer>
             </Spacer>
           ) : (
-            <Spacer position="trop" size="large">
+            <Spacer position="top" size="large">
               <Text
                 variant="label"
                 style={{ color: colors.ui.primary, textAlign: "center" }}
