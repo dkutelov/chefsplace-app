@@ -30,16 +30,19 @@ export const CategoryFlatList = styled(FlatList)``;
 export const CategoryNameWrapper = styled.View`
   margin: ${(props: { theme: Theme }) => props.theme.space[1]}
     ${(props: { theme: Theme }) => props.theme.space[2]} 0;
-  height: 30px;
+  height: 35px;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  background-color: white;
+  border-radius: ${(props: { theme: Theme }) => props.theme.space[2]};
 `;
 
 export const CategoryName = styled.Text`
-  flex-basis: 93%;
+  flex-basis: 90%;
   color: ${(props: { theme: Theme }) => props.theme.colors.ui.orange};
   font-size: ${(props: { theme: Theme }) => props.theme.fontSizes.body};
+  padding-left: ${(props: { theme: Theme }) => props.theme.space[2]};
 `;
 export const NoCategory = styled.Text`
   color: ${(props: { theme: Theme }) => props.theme.colors.ui.primary};

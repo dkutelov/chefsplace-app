@@ -102,7 +102,7 @@ export const CategoryMenu = ({
               <CategoryName>{categoryName}</CategoryName>
               <Pressable
                 onPress={clearCetegoryMenu}
-                style={{ flexBasis: "7%" }}
+                style={{ flexBasis: "10%" }}
               >
                 <Ionicons
                   name="close-circle-outline"
