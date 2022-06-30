@@ -1,5 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Formik } from "formik";
+import { useNavigation, useRoute } from "@react-navigation/native";
+
 import {
   InputField,
   FieldsContainer,
@@ -12,7 +14,7 @@ import { DeliveryAddress, InvoiceAddress } from "../../../types/Profile";
 import { AuthenticationContext } from "@services";
 import { createInvoiceAddress } from "@infrastructure/api/users/invoice-address";
 import { getConfig } from "@infrastructure/api/config";
-import { useNavigation, useRoute } from "@react-navigation/native";
+
 import { deliveryAddressToInvoiceData } from "@components/utils/getDeliveryToInvoiceAddress";
 
 export const InvoiceDataForm = () => {
@@ -20,7 +22,7 @@ export const InvoiceDataForm = () => {
   //const [addressId, setAddressId] = useState(null);
   const config = getConfig();
   const { params } = useRoute();
-  const { goBack } = useNavigation();
+  const navigation = useNavigation();
 
   let defaultValues: InvoiceAddress = {
     addressId: null,
@@ -54,6 +56,20 @@ export const InvoiceDataForm = () => {
     }
   }
 
+  if (params) {
+    const addressId = params.invoiceAddressId;
+
+    if (profile && profile.invoiceAddress) {
+      const editAddress = profile.invoiceAddress.find(
+        (x: InvoiceAddress) => x._id === addressId
+      );
+
+      if (editAddress) {
+        defaultValues = { ...defaultValues, ...editAddress };
+      }
+    }
+  }
+
   return (
     <KeyboardAwareScrollView
       showsVerticalScrollIndicator={false}
@@ -79,16 +95,16 @@ export const InvoiceDataForm = () => {
               );
             }
           } else {
-            // await editDeliveryAddress(
-            //   config,
-            //   profile._id,
-            //   params?.addressId,
-            //   values
-            // );
-            // console.log("🧐");
+            await editInvoiceAddress(
+              config,
+              profile._id,
+              params?.addressId,
+              values
+            );
+            console.log("🧐");
           }
           await fetchProfileById();
-          goBack();
+          navigation.pop(2);
         }}
       >
         {({ values, handleChange, handleSubmit, setFieldValue }) => (

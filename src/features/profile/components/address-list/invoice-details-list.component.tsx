@@ -3,7 +3,7 @@ import { List } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
 
 import { AuthenticationContext } from "@services/authentication/authentication.context";
-import { ListItemEditDelete } from "@components/list-item-edit-delete/list-item-edit-delete.component";
+import { InvoiceAddressListItem } from "@components/list-item-edit-delete/invoice-address-list-item.component";
 import {
   NoAddressMessage,
   LoadingContainer,
@@ -35,7 +35,7 @@ export const InvoiceDetailsList = () => {
       {profile && (
         <List.Section>
           {profile.invoiceAddress.map((address) => (
-            <ListItemEditDelete
+            <InvoiceAddressListItem
               key={address._id}
               title={address.addressName}
               itemId={address._id}

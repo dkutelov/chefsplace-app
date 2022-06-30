@@ -121,6 +121,8 @@ export const AuthenticationContextProvider = ({
       const userId: string = profile._id;
       setProfile(null);
       const userProfile = await getProfileById(config, userId);
+      console.log({ userProfile });
+
       setProfile(userProfile.profile);
     }
   }

@@ -31,23 +31,19 @@ export const NewInvoiceDataScreen = () => {
     <>
       <SafeArea>
         <ContentContainer>
-          <Button
-            text="Нови данни за фактура"
-            onButtonPress={() => {
-              navigate("CreateInvoiceData");
-            }}
-          />
-        </ContentContainer>
-        <ContentContainer>
           {profile?.deliveryAddress.length >= 1 ? (
-            <Spacer position="top" size="small">
+            <Spacer position="top" size="large">
               <Text
                 variant="title"
-                style={{ textAlign: "center", color: colors.ui.primary }}
+                style={{
+                  textAlign: "center",
+                  color: colors.ui.primary,
+                  fontWeight: "bold",
+                }}
               >
-                Копирай от адрес за доставка
+                Копирай от адрес за доставка?
               </Text>
-              <Spacer position="top" size="large" />
+              <Spacer position="top" size="xl" />
               <Text variant="body" style={{ color: colors.ui.secondary }}>
                 Избери адрес на доставка
               </Text>
@@ -64,7 +60,7 @@ export const NewInvoiceDataScreen = () => {
               <Spacer position="top" size="medium">
                 <Button
                   disabled={deliveryAddressId === "0"}
-                  text="Към данни за фактура"
+                  text="Данни за фактура"
                   onButtonPress={openNewInvoiceDataScreen}
                 />
               </Spacer>
@@ -79,6 +75,27 @@ export const NewInvoiceDataScreen = () => {
               </Text>
             </Spacer>
           )}
+        </ContentContainer>
+        <ContentContainer style={{ marginTop: "auto" }}>
+          <Spacer position="top" size="large">
+            <Text
+              variant="title"
+              style={{
+                textAlign: "center",
+                color: colors.ui.primary,
+                fontWeight: "bold",
+              }}
+            >
+              Без копиране от адрес за доставка
+            </Text>
+            <Spacer position="top" size="large" />
+            <Button
+              text="Данни за фактура"
+              onButtonPress={() => {
+                navigate("CreateInvoiceData");
+              }}
+            />
+          </Spacer>
         </ContentContainer>
       </SafeArea>
     </>
