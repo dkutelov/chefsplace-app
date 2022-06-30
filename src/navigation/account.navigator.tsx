@@ -11,6 +11,7 @@ import { InvoiceDetailsListScreen } from "@features/profile/screens/addresses/in
 import { DeliveryAddressShowScreen } from "@features/profile/screens/addresses/delivery/address-show.screen";
 import { NewInvoiceDataScreen } from "@features/profile/screens/addresses/invoice/new-invoice-data.screen";
 import { CreateInvoiceDataScreen } from "@features/profile/screens/addresses/invoice/create-invoice-data.screen";
+import { InvoiceAddressShowScreen } from "@features/profile/screens/addresses/invoice/invoice-address-show.screen";
 const Stack = createNativeStackNavigator();
 
 export const AccountNavigator = () => {
@@ -55,6 +56,11 @@ export const AccountNavigator = () => {
         name="CreateInvoiceData"
         component={CreateInvoiceDataScreen}
         options={{ title: "Данни за фактура" }}
+      />
+      <Stack.Screen
+        name="ViewInvoiceAddress"
+        component={InvoiceAddressShowScreen}
+        options={{ presentation: "modal", headerShown: false }}
       />
     </Stack.Navigator>
   );

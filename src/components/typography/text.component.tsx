@@ -10,6 +10,9 @@ const defaultTextStyles = (theme: Theme) => `
   margin-bottom: 0px;
 `;
 
+const title = (theme: Theme): string => `
+    font-size: ${theme.fontSizes.title};
+`;
 const body = (theme: Theme): string => `
     font-size: ${theme.fontSizes.body};
 `;
@@ -34,6 +37,7 @@ const label = (theme: Theme): string => `
 `;
 
 const variants: { [key: string]: (theme: Theme) => {} } = {
+  title,
   body,
   label,
   caption,

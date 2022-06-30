@@ -31,15 +31,23 @@ export const NewInvoiceDataScreen = () => {
     <>
       <SafeArea>
         <ContentContainer>
+          <Button
+            text="Нови данни за фактура"
+            onButtonPress={() => {
+              navigate("CreateInvoiceData");
+            }}
+          />
+        </ContentContainer>
+        <ContentContainer>
           {profile?.deliveryAddress.length >= 1 ? (
-            <Spacer position="top" size="large">
+            <Spacer position="top" size="small">
               <Text
-                variant="body"
+                variant="title"
                 style={{ textAlign: "center", color: colors.ui.primary }}
               >
-                Създай данни за фактура с копиране от съществуващ адрес за
-                доставка?
+                Копирай от адрес за доставка
               </Text>
+              <Spacer position="top" size="large" />
               <Text variant="body" style={{ color: colors.ui.secondary }}>
                 Избери адрес на доставка
               </Text>
@@ -71,27 +79,6 @@ export const NewInvoiceDataScreen = () => {
               </Text>
             </Spacer>
           )}
-        </ContentContainer>
-        <Separator>
-          <Text variant="body" style={{ color: colors.ui.primary }}>
-            или
-          </Text>
-        </Separator>
-        <ContentContainer>
-          <Text
-            variant="body"
-            style={{ textAlign: "center", color: colors.ui.primary }}
-          >
-            Създай нови данни без копиране от адрес на доставка
-          </Text>
-          <Spacer position="top" size="large">
-            <Button
-              text="Нови данни за фактура"
-              onButtonPress={() => {
-                navigate("CreateInvoiceData");
-              }}
-            />
-          </Spacer>
         </ContentContainer>
       </SafeArea>
     </>

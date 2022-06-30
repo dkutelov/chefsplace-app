@@ -40,7 +40,7 @@ export const InvoiceDetailsList = () => {
               title={address.addressName}
               itemId={address._id}
               onPressHandler={() => {
-                navigate("ViewAddress", { address });
+                navigate("ViewInvoiceAddress", { address });
               }}
             />
           ))}
