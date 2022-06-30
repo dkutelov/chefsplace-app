@@ -9,7 +9,7 @@ import {
   IconContainer,
 } from "./list-item-edit-delete.styles";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { deleteDeliveryAddress } from "@infrastructure/api/users/delivery-address";
+import { deleteInvoiceAddress } from "@infrastructure/api/users/invoice-address";
 import { getConfig } from "@infrastructure/api/config";
 import { AuthenticationContext } from "@services";
 
@@ -34,7 +34,7 @@ export const InvoiceAddressListItem = ({
 
   const onDeletePress = async () => {
     const userId = profile?._id ?? "";
-    await deleteDeliveryAddress(config, userId, itemId);
+    await deleteInvoiceAddress(config, userId, itemId);
     await fetchProfileById();
   };
 

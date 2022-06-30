@@ -12,7 +12,10 @@ import Checkbox from "../checkbox/checkbox-component";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { DeliveryAddress, InvoiceAddress } from "../../../types/Profile";
 import { AuthenticationContext } from "@services";
-import { createInvoiceAddress } from "@infrastructure/api/users/invoice-address";
+import {
+  createInvoiceAddress,
+  editInvoiceAddress,
+} from "@infrastructure/api/users/invoice-address";
 import { getConfig } from "@infrastructure/api/config";
 
 import { deliveryAddressToInvoiceData } from "@components/utils/getDeliveryToInvoiceAddress";
@@ -85,26 +88,17 @@ export const InvoiceDataForm = () => {
 
           //TODO: transform to DeliveryAddress type
           console.log(values);
-
-          if (!params?.addressId) {
-            if (profile && profile._id) {
-              const newAddress = await createInvoiceAddress(
-                config,
-                profile._id,
-                values
-              );
+          if (profile && profile._id) {
+            if (!params?.invoiceAddressId) {
+              await createInvoiceAddress(config, profile._id, values);
+              await fetchProfileById();
+              navigation.pop(2);
+            } else {
+              await editInvoiceAddress(config, profile._id, values);
+              await fetchProfileById();
+              navigation.goBack();
             }
-          } else {
-            await editInvoiceAddress(
-              config,
-              profile._id,
-              params?.addressId,
-              values
-            );
-            console.log("🧐");
           }
-          await fetchProfileById();
-          navigation.pop(2);
         }}
       >
         {({ values, handleChange, handleSubmit, setFieldValue }) => (
