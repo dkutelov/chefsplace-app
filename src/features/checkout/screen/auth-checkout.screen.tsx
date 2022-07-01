@@ -1,4 +1,5 @@
 import React, { useState, useContext } from "react";
+import { View } from "react-native";
 import { TextInput } from "react-native-paper";
 import { useNavigation, useRoute } from "@react-navigation/native";
 
@@ -18,8 +19,8 @@ import { Text } from "@components/typography/text.component";
 import { Button } from "@components/button/button.component";
 import { Spacer } from "@components/spacer/spacer.component";
 import { CreditCardInput } from "../components/credit-card.component";
-import { DefaultAddress } from "../components/default-address.component";
-
+import { SelectedDeliveryAddress } from "../components/selected-delivery-address.component";
+import { SelectedInvoiceAddress } from "../components/selected-invoice-address.component";
 import { colors } from "@infrastructure/theme/colors";
 import { AuthenticationContext } from "@services";
 
@@ -27,6 +28,7 @@ export const AuthCheckout = () => {
   const [paymentType, setPaymentType] = useState("0");
   const [termsAgreed, setTermsAgreed] = useState(false);
   const [deliveryAddressId, setDeliveryAddressId] = useState("");
+  const [invoiceAddressId, setInvoiceAddressId] = useState("");
   const [creditCardName, setCreditCardName] = useState("");
 
   const { params } = useRoute();
@@ -54,24 +56,32 @@ export const AuthCheckout = () => {
         <SectionInnerContainer>
           {profile?.deliveryAddress.length === 0 ? (
             <>
-              <Text variant="body">Още нямате адрес на доставка</Text>
+              <Spacer position="bottom" size="medium">
+                <Text variant="body">Още нямате адрес(и) на доставка</Text>
+              </Spacer>
             </>
           ) : (
             <>
-              <DefaultAddress addresses={profile?.deliveryAddress} />
-
-              {profile?.deliveryAddress.length > 1 && (
-                <Spacer position="top" size="medium">
-                  <Text variant="body">Избери друг адрес на доставка</Text>
-                  <MyPicker
-                    items={profile?.deliveryAddress?.map((x) => ({
-                      label: x.name,
-                      value: x._id,
-                    }))}
-                    value={deliveryAddressId}
-                    setValue={setDeliveryAddressId}
+              {profile?.deliveryAddress.length >= 1 && (
+                <>
+                  <SelectedDeliveryAddress
+                    deliveryAddressId={deliveryAddressId}
+                    addresses={profile?.deliveryAddress}
                   />
-                </Spacer>
+                  <Spacer position="top" size="medium">
+                    <Spacer position="bottom" size="medium">
+                      <Text variant="title">Избери адрес на доставка</Text>
+                    </Spacer>
+                    <MyPicker
+                      items={profile?.deliveryAddress?.map((x) => ({
+                        label: x.name,
+                        value: x._id,
+                      }))}
+                      value={deliveryAddressId}
+                      setValue={setDeliveryAddressId}
+                    />
+                  </Spacer>
+                </>
               )}
             </>
           )}
@@ -88,22 +98,42 @@ export const AuthCheckout = () => {
         <SectionInnerContainer>
           {profile?.invoiceAddress?.length === 0 ? (
             <>
-              <Text variant="body">Още нямате адрес за фактуриране</Text>
-              <Button text="Добави Адрес За Фактура" onButtonPress={() => {}} />
+              <Spacer position="bottom" size="medium">
+                <Text variant="body">Още нямате данни за фактуриране</Text>
+              </Spacer>
             </>
           ) : (
-            <MyPicker
-              items={[
-                { label: "Адрес 1", value: "123" },
-                { label: "Адрес 2", value: "124" },
-                { label: "Адрес 3", value: "125" },
-                { label: "Адрес 4", value: "126" },
-                { label: "Адрес 5", value: "127" },
-              ]}
-              value={deliveryAddressId}
-              setValue={setDeliveryAddressId}
-            />
+            <>
+              {profile?.invoiceAddress.length >= 1 && (
+                <>
+                  <SelectedInvoiceAddress
+                    invoiceAddressId={invoiceAddressId}
+                    addresses={profile?.invoiceAddress}
+                  />
+                  <Spacer position="top" size="medium">
+                    <Spacer position="bottom" size="medium">
+                      <Text variant="title">Избери данни за фактура</Text>
+                    </Spacer>
+                    <MyPicker
+                      items={profile?.invoiceAddress?.map((x) => ({
+                        label: x.addressName,
+                        value: x._id,
+                      }))}
+                      value={invoiceAddressId}
+                      setValue={setInvoiceAddressId}
+                    />
+                  </Spacer>
+                </>
+              )}
+            </>
           )}
+
+          <Button
+            text="Добави Адрес За Фактура"
+            onButtonPress={() => {
+              navigate("NewInvoiceDataAddress");
+            }}
+          />
         </SectionInnerContainer>
       </SectionContainer>
       <SectionContainer>
