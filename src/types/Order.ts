@@ -1,18 +1,12 @@
-import { DeliveryAddress } from "./Profile";
-
-export interface OrderItem {
-  itemId: string;
-  name: string;
-  image: string;
-  price: number;
-  quantity: number;
-}
+import { CartItem } from "./Cart";
 
 export interface Order {
   orderId?: string;
-  createdAt: Date;
-  items: OrderItem[];
+  userId: string;
+  createdAt?: Date;
+  items: CartItem[];
   deliveryAddressId: string;
-  invoiceAddressId: string;
+  invoiceAddressId?: string;
   payment: string; //TODO: convert to enum
+  note?: string;
 }

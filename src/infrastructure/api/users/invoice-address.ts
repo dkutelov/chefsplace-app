@@ -1,8 +1,6 @@
 import { ApiConfig } from "@common/types/api";
 import { InvoiceAddress } from "@types/Profile";
 
-import { DeliveryAddress } from "@types/Profile";
-
 export const createInvoiceAddress = async (
   config: ApiConfig,
   userId: string,

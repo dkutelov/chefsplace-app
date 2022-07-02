@@ -71,7 +71,7 @@ export const CartItemCard = ({ cartItem }: Props) => {
   };
 
   const onCartItemPress = () => {
-    navigate("ProductDetails", { productId });
+    navigate("ProductDetails", { id: productId });
   };
 
   return (

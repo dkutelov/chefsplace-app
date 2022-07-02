@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { Text } from "@components/typography/text.component";
 import { DeliveryAddress } from "@types/Profile";
 import { Spacer } from "@components/spacer/spacer.component";
@@ -7,11 +7,13 @@ import { colors } from "@infrastructure/theme/colors";
 export interface IProps {
   deliveryAddressId: string;
   addresses?: DeliveryAddress[];
+  setDeliveryAddressId: Dispatch<SetStateAction<string>>;
 }
 
 export const SelectedDeliveryAddress = ({
   deliveryAddressId,
   addresses,
+  setDeliveryAddressId,
 }: IProps) => {
   const [currentAddress, setCurrentAddress] = useState<DeliveryAddress | null>(
     null
@@ -24,6 +26,7 @@ export const SelectedDeliveryAddress = ({
     const defaultAddress = addresses.find((x) => x.isDefault);
     if (defaultAddress) {
       setCurrentAddress(defaultAddress);
+      setDeliveryAddressId(defaultAddress._id);
     }
   }, []);
 

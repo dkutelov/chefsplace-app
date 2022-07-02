@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { Text } from "@components/typography/text.component";
 import { InvoiceAddress } from "@types/Profile";
 import { Spacer } from "@components/spacer/spacer.component";
@@ -7,11 +7,13 @@ import { colors } from "@infrastructure/theme/colors";
 export interface IProps {
   invoiceAddressId: string;
   addresses?: InvoiceAddress[];
+  setInvoiceAddressId: Dispatch<SetStateAction<string>>;
 }
 
 export const SelectedInvoiceAddress = ({
   invoiceAddressId,
   addresses,
+  setInvoiceAddressId,
 }: IProps) => {
   const [currentAddress, setCurrentAddress] = useState<InvoiceAddress | null>(
     null
@@ -24,6 +26,7 @@ export const SelectedInvoiceAddress = ({
     const defaultAddress = addresses.find((x) => x.isDefault);
     if (defaultAddress) {
       setCurrentAddress(defaultAddress);
+      setInvoiceAddressId(defaultAddress._id);
     }
   }, []);
 

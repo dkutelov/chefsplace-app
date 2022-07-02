@@ -1,5 +1,4 @@
 import React, { useState, useContext } from "react";
-import { View } from "react-native";
 import { TextInput } from "react-native-paper";
 import { useNavigation, useRoute } from "@react-navigation/native";
 
@@ -22,7 +21,11 @@ import { CreditCardInput } from "../components/credit-card.component";
 import { SelectedDeliveryAddress } from "../components/selected-delivery-address.component";
 import { SelectedInvoiceAddress } from "../components/selected-invoice-address.component";
 import { colors } from "@infrastructure/theme/colors";
-import { AuthenticationContext } from "@services";
+import { AuthenticationContext, CartContext } from "@services";
+
+import { Order } from "@types/Order";
+import createOrder from "@infrastructure/api/orders/create-order";
+import { getConfig } from "@infrastructure/api/config";
 
 export const AuthCheckout = () => {
   const [paymentType, setPaymentType] = useState("0");
@@ -31,15 +34,37 @@ export const AuthCheckout = () => {
   const [invoiceAddressId, setInvoiceAddressId] = useState("");
   const [creditCardName, setCreditCardName] = useState("");
 
+  const { cartItems } = useContext(CartContext);
+  const { profile } = useContext(AuthenticationContext);
+
   const { params } = useRoute();
   const { navigate } = useNavigation();
+  const config = getConfig();
 
   const onTermsAgreed = () => {
     setTermsAgreed(!termsAgreed);
   };
 
-  const { profile, user } = useContext(AuthenticationContext);
   console.log(profile);
+  const placeOrder = async () => {
+    if (profile && profile._id && cartItems.length > 0) {
+      const order: Order = {
+        userId: profile?._id,
+        items: cartItems,
+        deliveryAddressId: deliveryAddressId,
+        invoiceAddressId: invoiceAddressId,
+        payment: paymentType,
+      };
+
+      // add spinner
+      const result = await createOrder(config, profile._id, order);
+      if (result.success) {
+        console.log("Navigate to thank your screen and pass orderId");
+      } else {
+        //show error screen
+      }
+    }
+  };
 
   //TODO: set default address
   return (
@@ -67,6 +92,7 @@ export const AuthCheckout = () => {
                   <SelectedDeliveryAddress
                     deliveryAddressId={deliveryAddressId}
                     addresses={profile?.deliveryAddress}
+                    setDeliveryAddressId={setDeliveryAddressId}
                   />
                   <Spacer position="top" size="medium">
                     <Spacer position="bottom" size="medium">
@@ -109,6 +135,7 @@ export const AuthCheckout = () => {
                   <SelectedInvoiceAddress
                     invoiceAddressId={invoiceAddressId}
                     addresses={profile?.invoiceAddress}
+                    setInvoiceAddressId={setInvoiceAddressId}
                   />
                   <Spacer position="top" size="medium">
                     <Spacer position="bottom" size="medium">
@@ -187,7 +214,13 @@ export const AuthCheckout = () => {
         onCheckboxPress={onTermsAgreed}
       />
       <SectionContainer>
-        <Button text="ПОРЪЧВАМ" onButtonPress={() => {}} />
+        <Button
+          disabled={
+            !termsAgreed && !deliveryAddressId && params?.cartAmount > 0
+          }
+          text="ПОРЪЧВАМ"
+          onButtonPress={placeOrder}
+        />
       </SectionContainer>
     </CheckoutContainer>
   );

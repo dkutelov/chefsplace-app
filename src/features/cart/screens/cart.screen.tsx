@@ -30,9 +30,8 @@ import {
 import { calculateDeliveryCharge } from "@infrastructure/utils/computed/getDeliveryCharge";
 
 export const CartScreen = () => {
-  const { cartItems, isLoading, error, dispatch } = useContext(CartContext);
+  const { cartItems } = useContext(CartContext);
   const { isAuthenticated } = useContext(AuthenticationContext);
-  const { products } = useContext(ProductsContext);
   const [deliveryCharge, setDeliveryCharge] = useState(5);
   const [cartAmount, setCartAmount] = useState(0);
 
