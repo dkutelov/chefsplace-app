@@ -101,3 +101,10 @@ export const removeItemFromCart = (
   );
   return updateCartItems(cartState, updatedCartItems);
 };
+
+export const removeAllCartItems = (cartState: ICartContext) => {
+  return {
+    ...cartState,
+    cartItems: [],
+  };
+};

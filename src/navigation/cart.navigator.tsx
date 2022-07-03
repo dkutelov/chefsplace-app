@@ -9,6 +9,7 @@ import { GuestCheckout } from "@features/checkout/screen/guest-checkout.screen";
 import { DeliveryAddressScreen } from "@features/profile/screens/addresses/delivery/delivery-address.screen";
 import { CreateInvoiceDataScreen } from "@features/profile/screens/addresses/invoice/create-invoice-data.screen";
 import { NewInvoiceDataScreen } from "@features/profile/screens/addresses/invoice/new-invoice-data.screen";
+import { Success } from "@features/checkout/screen/success.screen";
 
 const Stack = createNativeStackNavigator();
 
@@ -72,6 +73,13 @@ export const CartStack = () => {
           name="CreateInvoiceData"
           component={CreateInvoiceDataScreen}
           options={{ title: "Нов Адрес За Доставка" }}
+        />
+        <Stack.Screen
+          name="Success"
+          component={Success}
+          options={{
+            headerShown: false,
+          }}
         />
       </Stack.Group>
     </Stack.Navigator>

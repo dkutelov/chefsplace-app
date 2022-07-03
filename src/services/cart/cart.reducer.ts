@@ -6,6 +6,7 @@ import {
   UPDATE_ITEM_QUANTITY,
   UPDATE_CART_ITEMS_ON_LOAD,
   SET_CART_ITEMS_FROM_LOCAL,
+  EMPTY_CART,
 } from "./cart.action-types";
 
 import {
@@ -15,6 +16,7 @@ import {
   removeItemFromCart,
   updateCartItemsOnLoad,
   setCartItems,
+  removeAllCartItems,
 } from "./cart.reducer-functions";
 
 interface IProps {
@@ -38,6 +40,8 @@ export const cartReducer = (cartState: ICartContext, props: IProps) => {
     case UPDATE_ITEM_QUANTITY:
       const { cartItem, newQuantity } = payload;
       return updateCartItemQuantity(cartState, cartItem, newQuantity);
+    case EMPTY_CART:
+      return removeAllCartItems(cartState);
     default:
       return cartState;
   }
