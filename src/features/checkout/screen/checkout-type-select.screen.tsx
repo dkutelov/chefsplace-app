@@ -8,12 +8,13 @@ import {
   AuthButton,
   Title,
 } from "../components/checkout-type-select.styles";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import { Spacer } from "@components/spacer/spacer.component";
 
 export const CheckoutTypeSelect = () => {
   const { isAuthenticated } = useContext(AuthenticationContext);
   const { navigate } = useNavigation();
+  const { params } = useRoute();
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -22,7 +23,7 @@ export const CheckoutTypeSelect = () => {
   }, [isAuthenticated]);
 
   const onGuestOrderButtonPressed = () => {
-    navigate("GuestCheckout");
+    navigate("GuestCheckout", { ...params });
   };
 
   return (
@@ -36,6 +37,7 @@ export const CheckoutTypeSelect = () => {
             или
           </Text>
         </Spacer>
+
         <Spacer position="top" size="large">
           <AuthButton
             icon="arrow-right-bold"

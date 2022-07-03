@@ -152,11 +152,11 @@ const ProductDetailScreen = () => {
                   size={45}
                 />
               </ActionRow>
-              {hasNotEnoughStock() && (
+              {/* {hasNotEnoughStock() && (
                 <NotEnoughQuantityNotifivation>
                   Максимално количество {product.maxQuantity}.
                 </NotEnoughQuantityNotifivation>
-              )}
+              )} */}
             </CTARow>
             <Row>
               <ShortDescription>{product.shortDescription}</ShortDescription>

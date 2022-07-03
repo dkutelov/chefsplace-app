@@ -15,9 +15,9 @@ export const QuantitySelector = (props: QuantitySelectorProps) => {
     setQuantity(Math.max(1, quantity - 1));
   };
   const onPlusPressed = () => {
-    if (maxQuantity && quantity + 1 > maxQuantity) {
-      return;
-    }
+    // if (maxQuantity && quantity + 1 > maxQuantity) {
+    //   return;
+    // }
     setQuantity(quantity + 1);
   };
   return (

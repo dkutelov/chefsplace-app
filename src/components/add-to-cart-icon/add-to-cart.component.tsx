@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import { Ionicons } from "@expo/vector-icons";
 
-import { addItemToCart } from "@infrastructure/api/users/cart/add-item-to-cart";
 import { AddToCardContainer } from "./add-to-cart.styles";
 import { CartItem } from "../../types/Cart";
 import { ADD_ITEM_TO_CART } from "../../services/cart/cart.action-types";

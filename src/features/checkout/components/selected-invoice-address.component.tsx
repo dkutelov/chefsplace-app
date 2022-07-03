@@ -24,6 +24,7 @@ export const SelectedInvoiceAddress = ({
       return;
     }
     const defaultAddress = addresses.find((x) => x.isDefault);
+
     if (defaultAddress) {
       setCurrentAddress(defaultAddress);
       setInvoiceAddressId(defaultAddress._id);
@@ -32,6 +33,7 @@ export const SelectedInvoiceAddress = ({
 
   useEffect(() => {
     if (!addresses || addresses.length === 0 || !invoiceAddressId) {
+      setCurrentAddress(null);
       return;
     }
     const currentAddress = addresses.find((x) => x._id === invoiceAddressId);

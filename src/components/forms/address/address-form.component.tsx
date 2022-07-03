@@ -1,5 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Formik } from "formik";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+
 import {
   InputField,
   FieldsContainer,
@@ -7,7 +9,6 @@ import {
 } from "./address-form.styles";
 import { Button } from "../../button/button.component";
 import Checkbox from "../checkbox/checkbox-component";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { DeliveryAddress } from "@types/User";
 import { AuthenticationContext } from "@services";
 import {

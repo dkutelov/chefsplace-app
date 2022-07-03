@@ -110,11 +110,11 @@ export const CartItemCard = ({ cartItem }: Props) => {
           setQuantity={setItemQuantity}
           maxQuantity={cartItem.maxQuantity}
         />
-        {itemQuantity >= maxQuantity && (
+        {/* {itemQuantity >= maxQuantity && (
           <NotEnoughQuantityNotification>
             Максимално количество {maxQuantity}.
           </NotEnoughQuantityNotification>
-        )}
+        )} */}
       </Row>
     </CartItemWrapper>
   );

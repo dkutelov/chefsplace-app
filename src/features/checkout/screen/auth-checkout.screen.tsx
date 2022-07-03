@@ -20,12 +20,16 @@ import { Spacer } from "@components/spacer/spacer.component";
 import { CreditCardInput } from "../components/credit-card.component";
 import { SelectedDeliveryAddress } from "../components/selected-delivery-address.component";
 import { SelectedInvoiceAddress } from "../components/selected-invoice-address.component";
-import { colors } from "@infrastructure/theme/colors";
-import { AuthenticationContext, CartContext } from "@services";
+import { CentertedLoadingIndicator } from "@components/loading/activity-indicator.component";
 
+//Theme, Types
+import { colors } from "@infrastructure/theme/colors";
 import { Order } from "@types/Order";
-import createOrder from "@infrastructure/api/orders/create-order";
 import { getConfig } from "@infrastructure/api/config";
+import createOrder from "@infrastructure/api/orders/create-order";
+
+//Context
+import { AuthenticationContext, CartContext } from "@services";
 
 export const AuthCheckout = () => {
   const [paymentType, setPaymentType] = useState("0");
@@ -33,6 +37,7 @@ export const AuthCheckout = () => {
   const [deliveryAddressId, setDeliveryAddressId] = useState("");
   const [invoiceAddressId, setInvoiceAddressId] = useState("");
   const [creditCardName, setCreditCardName] = useState("");
+  const [savingOrder, setSavingOrder] = useState(false);
 
   const { cartItems } = useContext(CartContext);
   const { profile } = useContext(AuthenticationContext);
@@ -45,7 +50,14 @@ export const AuthCheckout = () => {
     setTermsAgreed(!termsAgreed);
   };
 
-  console.log(profile);
+  const setInvoiceAddress = (value) => {
+    if (value === "0") {
+      setInvoiceAddressId("");
+    } else {
+      setInvoiceAddressId(value);
+    }
+  };
+
   const placeOrder = async () => {
     if (profile && profile._id && cartItems.length > 0) {
       const order: Order = {
@@ -56,10 +68,10 @@ export const AuthCheckout = () => {
         payment: paymentType,
       };
 
-      // add spinner
+      setSavingOrder(true);
       const result = await createOrder(config, profile._id, order);
       if (result.success) {
-        console.log("Navigate to thank your screen and pass orderId");
+        setSavingOrder(false);
         navigate("Success", { orderNumber: result.orderNumber });
       } else {
         //show error screen
@@ -67,7 +79,10 @@ export const AuthCheckout = () => {
     }
   };
 
-  //TODO: set default address
+  if (savingOrder) {
+    return <CentertedLoadingIndicator />;
+  }
+
   return (
     <CheckoutContainer>
       <SectionContainer>
@@ -148,7 +163,7 @@ export const AuthCheckout = () => {
                         value: x._id,
                       }))}
                       value={invoiceAddressId}
-                      setValue={setInvoiceAddressId}
+                      setValue={setInvoiceAddress}
                     />
                   </Spacer>
                 </>
@@ -216,9 +231,7 @@ export const AuthCheckout = () => {
       />
       <SectionContainer>
         <Button
-          disabled={
-            !termsAgreed && !deliveryAddressId && params?.cartAmount > 0
-          }
+          disabled={!termsAgreed || !deliveryAddressId}
           text="ПОРЪЧВАМ"
           onButtonPress={placeOrder}
         />

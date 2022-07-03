@@ -9,8 +9,8 @@ export interface Profile {
 
 export interface DeliveryAddress {
   _id: string; // UUID
-  name: string;
-  addressName: string;
+  name?: string;
+  addressName?: string;
   firstName: string;
   lastName: string;
   phoneNumber: string;
@@ -25,13 +25,13 @@ export interface DeliveryAddress {
   entrance?: string;
   floor?: string;
   apartment?: string;
-  isDefault: boolean;
+  isDefault?: boolean;
   deleted: boolean; //do not delete
 }
 
 export interface InvoiceAddress {
   addressId: string | null;
-  addressName: string;
+  addressName?: string;
   companyName: string;
   eik: string;
   vatNumber?: string;
@@ -41,7 +41,7 @@ export interface InvoiceAddress {
   city: string;
   addressLine: string;
   addressLine2?: string;
-  isDefault: boolean;
+  isDefault?: boolean;
 }
 
 export interface Address {
