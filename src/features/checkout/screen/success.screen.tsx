@@ -15,6 +15,7 @@ const SIZE = 128;
 
 export const Success = () => {
   const { navigate } = useNavigation();
+  const { params } = useRoute();
   const { dispatch } = useContext(CartContext);
 
   useEffect(() => {
@@ -33,7 +34,8 @@ export const Success = () => {
         color={colors.ui.primary}
       />
       <SuccessMessage>
-        Благодарим Ви! Успешно направихте поръчка № 1.
+        Благодарим Ви! Успешно направихте поръчка № {params?.orderNumber || "0"}
+        .
       </SuccessMessage>
       <HomeButton onPress={goHome}>ЗАТВОРИ</HomeButton>
     </ContentContainer>

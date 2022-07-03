@@ -60,7 +60,7 @@ export const AuthCheckout = () => {
       const result = await createOrder(config, profile._id, order);
       if (result.success) {
         console.log("Navigate to thank your screen and pass orderId");
-        navigate("Success");
+        navigate("Success", { orderNumber: result.orderNumber });
       } else {
         //show error screen
       }
