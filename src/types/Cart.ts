@@ -12,8 +12,8 @@ export interface CartItem {
 
 export interface ICartContext {
   cartItems: CartItem[];
-  guestDeliveryAddressId?: DeliveryAddress;
-  guestInvoiceAddressId?: InvoiceAddress;
+  guestDeliveryAddress?: DeliveryAddress;
+  guestInvoiceAddress?: InvoiceAddress;
   isLoading: boolean;
   error?: string;
   dispatch: React.Dispatch<any>;

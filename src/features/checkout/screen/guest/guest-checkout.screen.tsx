@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigation, useRoute } from "@react-navigation/native";
 
 import {
@@ -13,16 +13,16 @@ import { CartSummary } from "@features/cart/components/cart-summary/cart-summary
 import { Button } from "@components/button/button.component";
 import { ShowDeliveryAddress } from "../../components/delivery-address.component";
 
-//Types
+//Types and Context
 import { DeliveryAddress } from "@types/Profile";
+import { CartContext } from "@services";
 
 export const GuestCheckout = () => {
-  const [deliveryAddress, setDeliveryAddress] =
-    useState<DeliveryAddress | null>(null);
-
   const { params } = useRoute();
   const { navigate } = useNavigation();
 
+  const { guestDeliveryAddress } = useContext(CartContext);
+  console.log(guestDeliveryAddress);
   return (
     <CheckoutContainer>
       <SectionContainer>
@@ -35,16 +35,19 @@ export const GuestCheckout = () => {
       <SectionContainer>
         <CheckoutSubtitle>Адрес на доставка</CheckoutSubtitle>
         <SectionInnerContainer>
-          {deliveryAddress ? (
-            <ShowDeliveryAddress deliveryAddress={deliveryAddress} />
-          ) : (
-            <Button
-              text="Добави Адрес На Доставка"
-              onButtonPress={() => {
-                navigate("NewGuestDeliveryAddress");
-              }}
-            />
+          {guestDeliveryAddress && (
+            <ShowDeliveryAddress deliveryAddress={guestDeliveryAddress} />
           )}
+          <Button
+            text={
+              !guestDeliveryAddress
+                ? "Добави Адрес На Доставка"
+                : "Промени Адреса На Доставка"
+            }
+            onButtonPress={() => {
+              navigate("NewGuestDeliveryAddress");
+            }}
+          />
         </SectionInnerContainer>
       </SectionContainer>
     </CheckoutContainer>

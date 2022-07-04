@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Formik } from "formik";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { useNavigation } from "@react-navigation/native";
@@ -12,24 +12,35 @@ import {
   HorizontalRow,
 } from "@components/forms/address/address-form.styles";
 
+//API
+import { createGuestDeliveryAddress } from "@infrastructure/api/users/delivery-address";
+import { getConfig } from "@infrastructure/api/config";
+
+//Types and context
+import { DeliveryAddress } from "@types/Profile";
+import { CartContext } from "@services";
+import { SET_GUEST_DELIVERY_ADDRESS } from "@services/cart/cart.action-types";
+
 export const GuesDeliveryAddressScreen = () => {
+  const config = getConfig();
   const { goBack } = useNavigation();
+  const { dispatch } = useContext(CartContext);
 
   let defaultValues = {
-    firstName: "",
-    lastName: "",
-    phoneNumber: "",
-    company: "",
-    postCode: "",
-    city: "",
-    area: "",
-    street: "",
-    number: "",
-    block: "",
-    entrance: "",
-    floor: "",
-    apartment: "",
-    note: "",
+    firstName: "Дарий",
+    lastName: "Кутелов",
+    phoneNumber: "0889611010",
+    company: "Дигиталс ООД",
+    postCode: "1421",
+    city: "София",
+    area: "Лозенец",
+    street: "ул. Цветна Градина",
+    number: "1",
+    block: "1",
+    entrance: "Б",
+    floor: "1",
+    apartment: "19",
+    note: "Звънец Телексим",
   };
 
   return (
@@ -44,14 +55,32 @@ export const GuesDeliveryAddressScreen = () => {
         >
           <Formik
             initialValues={defaultValues}
-            onSubmit={async (values) => {
+            onSubmit={async (values: DeliveryAddress) => {
               //TODO: validation
-              // first name and last name - min 3
-
+              // first name and last name - min 3 chars
+              // phone number
+              // city - min 3 chars
               //TODO: save address to DB
 
-              //Set address in cart context
-              console.log(values);
+              //Save address to DB
+              try {
+                const res = await createGuestDeliveryAddress(config, values);
+
+                if (res.success) {
+                  const createdAddress = res.address;
+
+                  if (createdAddress) {
+                    delete createdAddress.__v;
+                    //Set address in cart context
+                    dispatch({
+                      type: SET_GUEST_DELIVERY_ADDRESS,
+                      payload: createdAddress,
+                    });
+                  }
+                }
+              } catch (error) {
+                console.log(error);
+              }
 
               goBack();
             }}

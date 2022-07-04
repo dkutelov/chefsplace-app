@@ -16,7 +16,10 @@ export const ShowDeliveryAddress = ({ deliveryAddress }: IProps) => {
 
         <Spacer position="top" size="medium">
           <Text variant="body" style={{ color: colors.ui.primary }}>
-            ({deliveryAddress?.name}) {deliveryAddress.postCode}{" "}
+            {deliveryAddress?.name ? "(" + deliveryAddress.name + ") " : ""}
+            {deliveryAddress?.name
+              ? "пк " + deliveryAddress.postCode + " "
+              : ""}
             {deliveryAddress.city}{" "}
             {deliveryAddress.area ? "жк./кв " + deliveryAddress.area : ""}{" "}
             {deliveryAddress.street ? "ул " + deliveryAddress.street : ""}{" "}

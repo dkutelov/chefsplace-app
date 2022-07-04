@@ -8,7 +8,7 @@ export interface Profile {
 }
 
 export interface DeliveryAddress {
-  _id: string; // UUID
+  _id?: string; // UUID
   name?: string;
   addressName?: string;
   firstName: string;
@@ -26,7 +26,8 @@ export interface DeliveryAddress {
   floor?: string;
   apartment?: string;
   isDefault?: boolean;
-  deleted: boolean; //do not delete
+  deleted?: boolean; //do not delete
+  __v?: string;
 }
 
 export interface InvoiceAddress {

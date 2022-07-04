@@ -40,3 +40,24 @@ export const editDeliveryAddress = async (
     },
   });
 };
+
+export const createGuestDeliveryAddress = async (
+  config: ApiConfig,
+  address: DeliveryAddress
+): Promise<{
+  address?: DeliveryAddress;
+  success?: String;
+  error?: String;
+}> => {
+  return await config.fetch<{
+    address?: DeliveryAddress;
+    success?: String;
+    error?: String;
+  }>({
+    method: "POST",
+    url: config.apiUrl + "addresses/delivery-address",
+    bodyData: {
+      address,
+    },
+  });
+};
