@@ -60,7 +60,6 @@ export const GuesDeliveryAddressScreen = () => {
               // first name and last name - min 3 chars
               // phone number
               // city - min 3 chars
-              //TODO: save address to DB
 
               //Save address to DB
               try {

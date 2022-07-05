@@ -9,6 +9,9 @@ export const TypeSelectBackground = styled.View`
 `;
 
 export const ContentContainer = styled.View`
+  flex: 1;
+  flex-direction: column;
+  justify-content: space-between;
   background-color: rgba(255, 255, 255, 0.7);
   padding: ${(props: { theme: Theme }) => props.theme.space[4]};
   margin: ${(props: { theme: Theme }) => props.theme.space[2]};
@@ -58,7 +61,8 @@ export const CheckoutSubtitle = styled.Text`
   font-size: ${(props: { theme: Theme }) => props.theme.fontSizes.h5};
   color: ${(props: { theme: Theme }) => props.theme.colors.ui.primary};
   margin-top: ${(props: { theme: Theme }) => props.theme.space[3]};
-  margin-bottom: ${(props: { theme: Theme }) => props.theme.space[3]};
+  margin-bottom: ${(props: { theme: Theme }) => props.theme.space[2]};
+  margin-left: ${(props: { theme: Theme }) => props.theme.space[3]};
 `;
 
 export const SectionContainer = styled.View`

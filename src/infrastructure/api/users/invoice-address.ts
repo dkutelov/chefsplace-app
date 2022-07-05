@@ -39,3 +39,24 @@ export const editInvoiceAddress = async (
     },
   });
 };
+
+export const createGuestInvoiceAddress = async (
+  config: ApiConfig,
+  address: InvoiceAddress
+): Promise<{
+  address?: InvoiceAddress;
+  success?: String;
+  error?: String;
+}> => {
+  return await config.fetch<{
+    address?: InvoiceAddress;
+    success?: String;
+    error?: String;
+  }>({
+    method: "POST",
+    url: config.apiUrl + "addresses/invoice-address",
+    bodyData: {
+      address,
+    },
+  });
+};

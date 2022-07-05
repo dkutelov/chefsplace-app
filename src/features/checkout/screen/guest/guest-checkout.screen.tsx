@@ -11,17 +11,19 @@ import {
 //Components
 import { CartSummary } from "@features/cart/components/cart-summary/cart-summary.component";
 import { Button } from "@components/button/button.component";
+import { Text } from "@components/typography/text.component";
 import { ShowDeliveryAddress } from "../../components/delivery-address.component";
 
 //Types and Context
 import { DeliveryAddress } from "@types/Profile";
 import { CartContext } from "@services";
+import { ShowInvoiceAddress } from "@features/checkout/components/invoice-address.component";
 
 export const GuestCheckout = () => {
   const { params } = useRoute();
   const { navigate } = useNavigation();
 
-  const { guestDeliveryAddress } = useContext(CartContext);
+  const { guestDeliveryAddress, guestInvoiceAddress } = useContext(CartContext);
   console.log(guestDeliveryAddress);
   return (
     <CheckoutContainer>
@@ -46,6 +48,24 @@ export const GuestCheckout = () => {
             }
             onButtonPress={() => {
               navigate("NewGuestDeliveryAddress");
+            }}
+          />
+        </SectionInnerContainer>
+        <CheckoutSubtitle>Данни за фактура</CheckoutSubtitle>
+        <SectionInnerContainer>
+          {guestInvoiceAddress ? (
+            <ShowInvoiceAddress invoiceAddress={guestInvoiceAddress} />
+          ) : (
+            <Text variant="body">Ако желаете фактура, моля добавете данни</Text>
+          )}
+          <Button
+            text={
+              !guestInvoiceAddress
+                ? "Добави данни за фактура"
+                : "Промени данни за фактура"
+            }
+            onButtonPress={() => {
+              navigate("NewGuestInvoiceAddress");
             }}
           />
         </SectionInnerContainer>

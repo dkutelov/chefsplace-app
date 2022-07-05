@@ -20,7 +20,7 @@ export const CartSummary = ({
 
   return (
     <CartSummaryWrapper>
-      <Title>Общо</Title>
+      <Title>Продукти и доставка</Title>
       <Row>
         <Label>Продукти</Label>
         <Value>{(amount / 100).toFixed(2)} лв.</Value>

@@ -1,4 +1,5 @@
 import React, { useContext, useEffect } from "react";
+import { View } from "react-native";
 import LoginForm from "@components/forms/login-form/login-form.component";
 import { AuthenticationContext } from "@services";
 import { Text } from "@components/typography/text.component";
@@ -29,8 +30,10 @@ export const CheckoutTypeSelect = () => {
   return (
     <TypeSelectBackground>
       <ContentContainer>
-        <Title>Вход</Title>
-        <LoginForm />
+        <View>
+          <Title>Вход</Title>
+          <LoginForm />
+        </View>
 
         <Spacer position="top" size="large">
           <Text variant="body" style={{ textAlign: "center" }}>

@@ -8,6 +8,7 @@ import {
   SET_CART_ITEMS_FROM_LOCAL,
   EMPTY_CART,
   SET_GUEST_DELIVERY_ADDRESS,
+  SET_GUEST_INVOICE_ADDRESS,
 } from "./cart.action-types";
 
 import {
@@ -45,6 +46,8 @@ export const cartReducer = (cartState: ICartContext, props: IProps) => {
       return removeAllCartItems(cartState);
     case SET_GUEST_DELIVERY_ADDRESS:
       return { ...cartState, guestDeliveryAddress: payload };
+    case SET_GUEST_INVOICE_ADDRESS:
+      return { ...cartState, guestInvoiceAddress: payload };
     default:
       return cartState;
   }
