@@ -12,10 +12,24 @@ export const ShowInvoiceAddress = ({ invoiceAddress }: IProps) => {
   return (
     <Spacer position="top" size="small">
       <Spacer position="bottom" size="medium">
-        <Text variant="body">Въведени данни за фактура</Text>
+        <Text
+          variant="body"
+          style={{
+            color: colors.text.tertiary,
+            fontSize: 18,
+          }}
+        >
+          Въведени данни за фактура
+        </Text>
 
         <Spacer position="top" size="medium">
-          <Text variant="body" style={{ color: colors.ui.primary }}>
+          <Text
+            variant="body"
+            style={{
+              color: colors.monochromes.onyx,
+              lineHeight: 20,
+            }}
+          >
             {invoiceAddress?.companyName
               ? "Фирма: " + invoiceAddress.companyName
               : ""}

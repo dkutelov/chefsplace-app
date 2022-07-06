@@ -45,10 +45,18 @@ export const SelectedDeliveryAddress = ({
       <Spacer position="bottom" size="medium">
         <Text variant="title">Избран адрес за доставка</Text>
         {!currentAddress ? (
-          <Text variant="body">Няма избран адрес за доставка</Text>
+          <Text
+            variant="body"
+            style={{ color: colors.text.tertiary, fontSize: 18 }}
+          >
+            Няма избран адрес за доставка
+          </Text>
         ) : (
           <Spacer position="top" size="medium">
-            <Text variant="body" style={{ color: colors.ui.primary }}>
+            <Text
+              variant="body"
+              style={{ color: colors.monochromes.onyx, lineHeight: 20 }}
+            >
               ({currentAddress?.name}) {currentAddress.postCode}{" "}
               {currentAddress.city}{" "}
               {currentAddress.area ? "жк./кв " + currentAddress.area : ""}{" "}

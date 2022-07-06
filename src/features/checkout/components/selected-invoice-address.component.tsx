@@ -45,12 +45,26 @@ export const SelectedInvoiceAddress = ({
   return (
     <Spacer position="top" size="small">
       <Spacer position="bottom" size="medium">
-        <Text variant="title">Избрани данни за фактура</Text>
+        <Text
+          variant="title"
+          style={{
+            color: colors.text.tertiary,
+            fontSize: 18,
+          }}
+        >
+          Избрани данни за фактура
+        </Text>
         {!currentAddress ? (
           <Text variant="body">Няма избрани данни за фактура</Text>
         ) : (
           <Spacer position="top" size="medium">
-            <Text variant="body" style={{ color: colors.ui.primary }}>
+            <Text
+              variant="body"
+              style={{
+                color: colors.monochromes.onyx,
+                lineHeight: 20,
+              }}
+            >
               ({currentAddress?.addressName}) {currentAddress.postCode}{" "}
               {currentAddress.city} {currentAddress.addressLine}{" "}
               {currentAddress.addressLine2}{" "}

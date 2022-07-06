@@ -12,10 +12,18 @@ export const ShowDeliveryAddress = ({ deliveryAddress }: IProps) => {
   return (
     <Spacer position="top" size="small">
       <Spacer position="bottom" size="medium">
-        <Text variant="body">Въведен адрес за доставка</Text>
+        <Text
+          variant="body"
+          style={{ color: colors.text.tertiary, fontSize: 18 }}
+        >
+          Въведен адрес за доставка
+        </Text>
 
         <Spacer position="top" size="medium">
-          <Text variant="body" style={{ color: colors.ui.primary }}>
+          <Text
+            variant="body"
+            style={{ color: colors.monochromes.onyx, lineHeight: 20 }}
+          >
             {deliveryAddress?.name ? "(" + deliveryAddress.name + ") " : ""}
             {deliveryAddress?.postCode
               ? "пк " + deliveryAddress.postCode + " "

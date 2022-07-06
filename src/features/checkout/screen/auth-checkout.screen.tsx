@@ -30,6 +30,7 @@ import createOrder from "@infrastructure/api/orders/create-order";
 
 //Context
 import { AuthenticationContext, CartContext } from "@services";
+import { getPaymentOptions } from "@infrastructure/utils/computed/getPaymentOptions";
 
 export const AuthCheckout = () => {
   const [paymentType, setPaymentType] = useState("0");
@@ -55,6 +56,17 @@ export const AuthCheckout = () => {
       setInvoiceAddressId("");
     } else {
       setInvoiceAddressId(value);
+    }
+  };
+
+  const getDeliveryCityName = () => {
+    if (!profile || !profile.deliveryAddress) return;
+    const selectedDeliveryAddress = profile?.deliveryAddress.find(
+      (x) => x._id === deliveryAddressId
+    );
+    console.log({ selectedDeliveryAddress });
+    if (selectedDeliveryAddress) {
+      return selectedDeliveryAddress.city;
     }
   };
 
@@ -185,12 +197,7 @@ export const AuthCheckout = () => {
           <MyRadioButton
             value={paymentType}
             setValue={setPaymentType}
-            items={[
-              { label: "Наложен платеж или ППП", value: "0" },
-              { label: "Банков път", value: "1" },
-              { label: "В брой (не важи за доставки с куриер)", value: "2" },
-              { label: "С кредитна/ дебитна карта", value: "3" },
-            ]}
+            items={getPaymentOptions(getDeliveryCityName())}
           />
         </SectionInnerContainer>
         {paymentType === "3" && (
