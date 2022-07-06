@@ -12,11 +12,13 @@ import {
 //Components
 import { CartSummary } from "@features/cart/components/cart-summary/cart-summary.component";
 import { Button } from "@components/button/button.component";
+import Checkbox from "@components/forms/checkbox/checkbox-component";
 import { MyRadioButton } from "@components/forms/radio-button/radio-buttton.component";
 import { Text } from "@components/typography/text.component";
 import { Spacer } from "@components/spacer/spacer.component";
 import { ShowDeliveryAddress } from "../../components/delivery-address.component";
 import { CreditCardInput } from "../../components/credit-card.component";
+import { CentertedLoadingIndicator } from "@components/loading/activity-indicator.component";
 
 //Types and Context
 import { DeliveryAddress } from "@types/Profile";
@@ -24,16 +26,49 @@ import { CartContext } from "@services";
 import { ShowInvoiceAddress } from "@features/checkout/components/invoice-address.component";
 import { getPaymentOptions } from "@infrastructure/utils/computed/getPaymentOptions";
 import { colors } from "@infrastructure/theme/colors";
+import { Order } from "@types/Order";
+import { getConfig } from "@infrastructure/api/config";
+import { createGuestOrder } from "@infrastructure/api/orders/create-guest-order";
 
 export const GuestCheckout = () => {
   const [paymentType, setPaymentType] = useState("0");
   const [creditCardName, setCreditCardName] = useState("");
-
+  const [termsAgreed, setTermsAgreed] = useState(false);
+  const [savingOrder, setSavingOrder] = useState(false);
   const { params } = useRoute();
   const { navigate } = useNavigation();
+  const config = getConfig();
+  const { cartItems, guestDeliveryAddress, guestInvoiceAddress } =
+    useContext(CartContext);
 
-  const { guestDeliveryAddress, guestInvoiceAddress } = useContext(CartContext);
-  console.log(guestDeliveryAddress);
+  const onTermsAgreed = () => {
+    setTermsAgreed(!termsAgreed);
+  };
+
+  const placeOrder = async () => {
+    if (cartItems && cartItems.length > 0 && guestDeliveryAddress) {
+      const order: Order = {
+        items: cartItems,
+        deliveryAddressId: guestDeliveryAddress._id,
+        invoiceAddressId: guestInvoiceAddress ? guestInvoiceAddress._id : null,
+        payment: paymentType,
+      };
+
+      setSavingOrder(true);
+      const result = await createGuestOrder(config, order);
+      if (result.success) {
+        setSavingOrder(false);
+        navigate("Success", { orderNumber: result.orderNumber });
+      } else {
+        //show error screen
+      }
+    }
+  };
+
+  if (savingOrder) {
+    return <CentertedLoadingIndicator />;
+  }
+
   return (
     <CheckoutContainer>
       <SectionContainer>
@@ -112,6 +147,24 @@ export const GuestCheckout = () => {
             </Spacer>
           </>
         )}
+      </SectionContainer>
+      <SectionContainer>
+        <CheckoutSubtitle>Забележка</CheckoutSubtitle>
+        <SectionInnerContainer>
+          <TextInput onChangeText={() => {}} value={""} />
+        </SectionInnerContainer>
+      </SectionContainer>
+      <Checkbox
+        label="Съгласявам се безусловно с общите условия"
+        checked={termsAgreed}
+        onCheckboxPress={onTermsAgreed}
+      />
+      <SectionContainer>
+        <Button
+          disabled={!termsAgreed || !guestDeliveryAddress}
+          text="ПОРЪЧВАМ"
+          onButtonPress={placeOrder}
+        />
       </SectionContainer>
     </CheckoutContainer>
   );

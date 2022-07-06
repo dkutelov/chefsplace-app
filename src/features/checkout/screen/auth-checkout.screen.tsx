@@ -26,7 +26,7 @@ import { CentertedLoadingIndicator } from "@components/loading/activity-indicato
 import { colors } from "@infrastructure/theme/colors";
 import { Order } from "@types/Order";
 import { getConfig } from "@infrastructure/api/config";
-import createOrder from "@infrastructure/api/orders/create-order";
+import { createUserOrder } from "@infrastructure/api/orders/create-user-order";
 
 //Context
 import { AuthenticationContext, CartContext } from "@services";
@@ -81,7 +81,7 @@ export const AuthCheckout = () => {
       };
 
       setSavingOrder(true);
-      const result = await createOrder(config, profile._id, order);
+      const result = await createUserOrder(config, profile._id, order);
       if (result.success) {
         setSavingOrder(false);
         navigate("Success", { orderNumber: result.orderNumber });
@@ -200,7 +200,7 @@ export const AuthCheckout = () => {
             items={getPaymentOptions(getDeliveryCityName())}
           />
         </SectionInnerContainer>
-        {paymentType === "3" && (
+        {paymentType === "2" && (
           <>
             <Spacer position="top" size="large">
               <SectionInnerContainer>
@@ -217,7 +217,9 @@ export const AuthCheckout = () => {
                   <CreditCardInput
                     name={creditCardName}
                     onError={() => {}}
-                    onSuccess={() => {}}
+                    onSuccess={(info) => {
+                      console.log(info);
+                    }}
                   />
                 </Spacer>
               </SectionInnerContainer>

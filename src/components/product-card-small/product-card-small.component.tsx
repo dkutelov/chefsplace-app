@@ -48,7 +48,7 @@ export const ProductCardSmall = ({ item, isSimilarProduct }: Props) => {
         <AddToCart
           disabled={false}
           cartItem={{
-            id,
+            productId: id,
             name,
             image: mainImage,
             price,

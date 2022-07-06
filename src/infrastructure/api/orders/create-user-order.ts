@@ -1,12 +1,11 @@
 import { ApiConfig } from "@common/types/api";
 import { Order } from "@types/Order";
-import { DeliveryAddress, InvoiceAddress, Profile } from "@types/Profile";
 
 type ReturnType = {
   [key: string]: string;
 };
 
-const createOrder = async (
+export const createUserOrder = async (
   config: ApiConfig,
   userId: string,
   order: Order
@@ -19,5 +18,3 @@ const createOrder = async (
     },
   });
 };
-
-export default createOrder;

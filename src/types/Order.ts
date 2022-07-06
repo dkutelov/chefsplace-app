@@ -2,7 +2,7 @@ import { CartItem } from "./Cart";
 
 export interface Order {
   orderId?: string;
-  userId: string;
+  userId?: string;
   createdAt?: Date;
   items: CartItem[];
   deliveryAddressId: string;

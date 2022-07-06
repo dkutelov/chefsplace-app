@@ -31,7 +31,8 @@ export interface DeliveryAddress {
 }
 
 export interface InvoiceAddress {
-  addressId: string | null;
+  _id?: string | null;
+  addressId?: string | null;
   addressName?: string;
   companyName: string;
   eik: string;
