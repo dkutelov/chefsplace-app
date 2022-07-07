@@ -1,6 +1,7 @@
 import { CartItem } from "./Cart";
 
 export interface Order {
+  _id?: string;
   orderId?: string;
   userId?: string;
   createdAt?: Date;
