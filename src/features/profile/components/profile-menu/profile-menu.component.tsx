@@ -16,7 +16,9 @@ export const ProfileMenu = () => {
         <MenuItem
           title="Моите Поръчки"
           iconName="reload"
-          onPressHandler={() => {}}
+          onPressHandler={() => {
+            navigate("OrderList");
+          }}
         />
         <MenuItem
           title="Поръчай Отново"

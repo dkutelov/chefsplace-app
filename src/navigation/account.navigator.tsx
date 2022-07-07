@@ -12,6 +12,9 @@ import { DeliveryAddressShowScreen } from "@features/profile/screens/addresses/d
 import { NewInvoiceDataScreen } from "@features/profile/screens/addresses/invoice/new-invoice-data.screen";
 import { CreateInvoiceDataScreen } from "@features/profile/screens/addresses/invoice/create-invoice-data.screen";
 import { InvoiceAddressShowScreen } from "@features/profile/screens/addresses/invoice/invoice-address-show.screen";
+import { OrdersScreen } from "@features/profile/screens/orders/orders-list.screen";
+import { OrderDetailScreen } from "@features/profile/screens/orders/order-detail.screen";
+
 const Stack = createNativeStackNavigator();
 
 export const AccountNavigator = () => {
@@ -27,6 +30,16 @@ export const AccountNavigator = () => {
         }}
       />
       <Stack.Screen name="Register" component={RegisterScreen} />
+      <Stack.Screen
+        name="OrderList"
+        component={OrdersScreen}
+        options={{ title: "Моите Поръчки" }}
+      />
+      <Stack.Screen
+        name="OrderDetails"
+        component={OrderDetailScreen}
+        options={{ presentation: "modal", headerShown: false }}
+      />
       <Stack.Screen
         name="DeliveryAddressList"
         component={DeliveryAddressListScreen}
