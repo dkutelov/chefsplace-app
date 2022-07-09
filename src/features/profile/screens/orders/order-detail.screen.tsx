@@ -1,7 +1,18 @@
-import { View, Text } from "react-native";
 import React from "react";
-import { useNavigation, useRoute } from "@react-navigation/native";
+import { useRoute } from "@react-navigation/native";
+import styled from "styled-components/native";
+
+import { SafeArea } from "@components/utils/safe-area.component";
+import OrderView from "@features/profile/components/orders/order-view.component";
+import { Theme } from "@types/Theme";
 import { Order } from "@types/Order";
+
+export const OrderContainer = styled.ScrollView`
+  flex: 1;
+  padding: ${(props: { theme: Theme }) => props.theme.space[3]};
+  background-color: ${(props: { theme: Theme }) =>
+    props.theme.colors.bg.primary};
+`;
 
 export const OrderDetailScreen = () => {
   const { params } = useRoute<Readonly<{ params: { order: Order } }>>();
@@ -13,14 +24,12 @@ export const OrderDetailScreen = () => {
   if (!order) return null;
 
   return (
-    <View>
-      <Text>Поръчка № {params.order.orderNumber}</Text>
-      <Text>Регистрирана на</Text>
-      <Text>Общо</Text>
-      <Text>Продукти - снимка - цена - количество - общо</Text>
-      <Text>Статус</Text>
-      <Text>Обратно</Text>
-      <Text>Поръчай Отново -> зареди продукти в количка, адрес на доставка, данни за фактура и начин на плащане - контекст</Text>
-    </View>
+    <>
+      <SafeArea>
+        <OrderContainer>
+          <OrderView order={order} />
+        </OrderContainer>
+      </SafeArea>
+    </>
   );
 };

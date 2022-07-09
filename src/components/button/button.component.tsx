@@ -24,8 +24,8 @@ export const Button = ({
       onPress={onButtonPress}
       style={[
         styles.root,
-        containerStyles,
         { backgroundColor: disabled ? colors.ui.secondary : colors.ui.primary },
+        containerStyles,
       ]}
     >
       <Text style={styles.buttonText}>{text}</Text>

@@ -38,7 +38,7 @@ export const AccountNavigator = () => {
       <Stack.Screen
         name="OrderDetails"
         component={OrderDetailScreen}
-        options={{ presentation: "modal", headerShown: false }}
+        options={{ title: "Детайли за поръчката" }}
       />
       <Stack.Screen
         name="DeliveryAddressList"

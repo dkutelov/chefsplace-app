@@ -32,12 +32,24 @@ interface IProps {
   position: string;
   size: string;
   children: React.ReactNode;
+  containerStyles?: {
+    [key: string]: any;
+  };
 }
 
-export const Spacer = ({ position, size, children }: IProps) => {
+export const Spacer = ({
+  position,
+  size,
+  children,
+  containerStyles,
+}: IProps) => {
   const theme = useTheme();
   const variant = getVariant(position, size, theme);
-  return <SpacerView variant={variant}>{children}</SpacerView>;
+  return (
+    <SpacerView variant={variant} {...containerStyles}>
+      {children}
+    </SpacerView>
+  );
 };
 
 Spacer.defaultProps = {

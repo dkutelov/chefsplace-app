@@ -14,7 +14,7 @@ export const OrderListItem = ({ order, onOrderPress }: IProps) => {
   const { navigate, goBack } = useNavigation();
 
   const orderAmount = order.items.reduce(
-    (prev, current) => prev + Number(current.price),
+    (prev, current) => prev + Number(current.price) * Number(current.quantity),
     0
   );
   const description = `Направена на ${new Date(
