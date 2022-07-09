@@ -1,28 +1,21 @@
 import { View } from "react-native";
 import React from "react";
+import { List } from "react-native-paper";
+
 import { Order } from "@types/Order";
-import OrderItemView from "./order-item-view.component";
-import { Text } from "@components/typography/text.component";
-import { Spacer } from "@components/spacer/spacer.component";
 import { colors } from "@infrastructure/theme/colors";
+
+import OrderItemView from "./order-item-view.component";
+import { Spacer, Text } from "@components";
+import { paymentOptions, orderStatusOptions } from "@components/utils";
 import { Row } from "./order-view.styles";
-import { Button } from "@components/button/button.component";
-import { useNavigation } from "@react-navigation/native";
-import { CentertedLoadingContainer } from "@components/loading/loading.styles";
 
 export const OrderView = ({ order }: { order: Order }) => {
-  const { goBack } = useNavigation();
   const orderAmount = order.items.reduce(
     (prev, current) => prev + Number(current.price) * Number(current.quantity),
     0
   );
 
-  const paymentOptions = {
-    "0": "Паричен превод",
-    "1": "Банков път",
-    "2": "Кредитна/дебитна карта",
-    "3": "В брой на доставчика",
-  };
   return (
     <View>
       <Spacer position="bottom" size="medium">
@@ -47,19 +40,19 @@ export const OrderView = ({ order }: { order: Order }) => {
           ч.
         </Text>
       </Spacer>
-      <Spacer position="bottom" size="medium">
-        <Text
-          variant="body"
-          style={{ color: colors.monochromes.onyx, textTransform: "uppercase" }}
-        >
-          Поръчани продукти
-        </Text>
-      </Spacer>
-      <View>
+      <List.Section
+        style={{
+          backgroundColor: colors.monochromes.veryLightGray,
+          borderRadius: 8,
+        }}
+      >
+        <List.Subheader style={{ fontSize: 20 }}>
+          Поръчани Продукти
+        </List.Subheader>
         {order.items.map((x) => (
           <OrderItemView key={x.productId} item={x} />
         ))}
-      </View>
+      </List.Section>
       <Spacer position="top" size="medium">
         <Row>
           <Text variant="body">Общо</Text>
@@ -68,7 +61,7 @@ export const OrderView = ({ order }: { order: Order }) => {
           </Text>
         </Row>
       </Spacer>
-      <Spacer position="top" size="medium">
+      <Spacer position="top" size="xl">
         <Row>
           <Text variant="body">Начин на плащане</Text>
           <Text variant="body">{paymentOptions[order.payment]}</Text>
@@ -77,26 +70,10 @@ export const OrderView = ({ order }: { order: Order }) => {
       <Spacer position="top" size="medium">
         <Row>
           <Text variant="body">Статус</Text>
-          <Text variant="body">{order.status}</Text>
+          <Text variant="body">
+            {orderStatusOptions[order.status.toLowerCase()]}
+          </Text>
         </Row>
-      </Spacer>
-      <Spacer
-        position="top"
-        size="xxl"
-        containerStyles={{
-          flex: 1,
-        }}
-      >
-        <Button
-          text="OK"
-          containerStyles={{
-            width: "35%",
-            alignSelf: "center",
-          }}
-          onButtonPress={() => {
-            goBack();
-          }}
-        />
       </Spacer>
     </View>
   );

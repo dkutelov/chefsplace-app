@@ -17,7 +17,6 @@ import {
   OrdersList,
   NoOrders,
   Container,
-  Title,
 } from "../../components/orders-list/order-list-screen.styles";
 
 import { getOrdersByUser } from "@infrastructure/api/orders/get-orders-by-user";

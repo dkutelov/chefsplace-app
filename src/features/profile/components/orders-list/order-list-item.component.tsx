@@ -10,8 +10,8 @@ export interface IProps {
   order: Order;
 }
 
-export const OrderListItem = ({ order, onOrderPress }: IProps) => {
-  const { navigate, goBack } = useNavigation();
+export const OrderListItem = ({ order }: IProps) => {
+  const { navigate } = useNavigation();
 
   const orderAmount = order.items.reduce(
     (prev, current) => prev + Number(current.price) * Number(current.quantity),
@@ -29,11 +29,12 @@ export const OrderListItem = ({ order, onOrderPress }: IProps) => {
     minute: "2-digit",
   })} ч.
 Общо: ${(orderAmount / 100).toFixed(2)} лв.`;
+
   return (
     <ListItem
       title={`Поръчка № ${order.orderNumber}`}
       description={description}
-      titleStyle={{ marginBottom: 8, fontSize: 20, color: colors.ui.primary }}
+      titleStyle={{ marginBottom: 4, fontSize: 20, color: colors.ui.primary }}
       descriptionStyle={{
         fontSize: 16,
         color: colors.monochromes.onyx,

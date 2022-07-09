@@ -1,8 +1,8 @@
 import { View, Text } from "react-native";
 import React from "react";
-import { Card } from "react-native-paper";
+import { List } from "react-native-paper";
 
-import { Title, ItemContainer, ProductImage } from "./order-item-view.styles";
+import { Title, ImageContainer, ProductImage } from "./order-item-view.styles";
 
 import { CartItem } from "@types/Cart";
 import { K } from "@infrastructure/constants";
@@ -13,12 +13,14 @@ const OrderItemView = ({ item }: { item: CartItem }) => {
   const { name, image, quantity, price } = item;
 
   const ItemImage = (props) => (
-    <ProductImage
-      key={name}
-      {...props}
-      source={{ uri: K.imageBaseUrl + image }}
-      resizeMode="contain"
-    />
+    <ImageContainer>
+      <ProductImage
+        key={name}
+        {...props}
+        source={{ uri: K.imageBaseUrl + image }}
+        resizeMode="contain"
+      />
+    </ImageContainer>
   );
 
   const itemDetails = () =>
@@ -26,15 +28,13 @@ const OrderItemView = ({ item }: { item: CartItem }) => {
       (quantity * price) / 100
     }лв. без ДДС`;
   return (
-    <Card style={{ marginBottom: 8 }} elevation={1}>
-      <Card.Title
-        title={name}
-        titleNumberOfLines={2}
-        titleStyle={{ fontSize: 16, lineHeight: 22, marginBottom: 4 }}
-        subtitle={itemDetails()}
-        left={ItemImage}
-      />
-    </Card>
+    <List.Item
+      title={name}
+      titleNumberOfLines={2}
+      titleStyle={{ fontSize: 16, lineHeight: 22, marginBottom: 4 }}
+      description={itemDetails()}
+      left={ItemImage}
+    />
   );
 };
 
