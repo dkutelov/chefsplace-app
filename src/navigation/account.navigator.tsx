@@ -14,6 +14,7 @@ import { CreateInvoiceDataScreen } from "@features/profile/screens/addresses/inv
 import { InvoiceAddressShowScreen } from "@features/profile/screens/addresses/invoice/invoice-address-show.screen";
 import { OrdersScreen } from "@features/profile/screens/orders/orders-list.screen";
 import { OrderDetailScreen } from "@features/profile/screens/orders/order-detail.screen";
+import { OrderAgainScreen } from "@features/profile/screens/orders/order-again.screen";
 
 const Stack = createNativeStackNavigator();
 
@@ -39,6 +40,11 @@ export const AccountNavigator = () => {
         name="OrderDetails"
         component={OrderDetailScreen}
         options={{ title: "Детайли за поръчката" }}
+      />
+      <Stack.Screen
+        name="OrderAgain"
+        component={OrderAgainScreen}
+        options={{ title: "Моите Поръчки" }}
       />
       <Stack.Screen
         name="DeliveryAddressList"

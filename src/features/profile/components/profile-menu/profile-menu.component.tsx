@@ -23,7 +23,9 @@ export const ProfileMenu = () => {
         <MenuItem
           title="Поръчай Отново"
           iconName="repeat"
-          onPressHandler={() => {}}
+          onPressHandler={() => {
+            navigate("OrderAgain");
+          }}
         />
       </List.Section>
       <List.Section>

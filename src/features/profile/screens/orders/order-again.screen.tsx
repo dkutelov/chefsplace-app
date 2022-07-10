@@ -1,5 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
-import { Caption, List } from "react-native-paper";
+import { useWindowDimensions } from "react-native";
+import { Caption } from "react-native-paper";
+import { useNavigation } from "@react-navigation/native";
 
 // Types
 import { Order } from "@types/Order";
@@ -20,11 +22,29 @@ import {
 
 import { getOrdersByUser } from "@infrastructure/api/orders/get-orders-by-user";
 import { getConfig } from "@infrastructure/api/config";
+import { FlatList } from "react-native";
+import styled from "styled-components/native";
 
-export const OrdersScreen = () => {
+import { RepeatOrderListItem } from "@features/profile/components/orders-list/repeat-order-list-item.component";
+import { Theme } from "@types/Theme";
+
+export const OrderFlatList = styled(FlatList).attrs({
+  contentContainerStyle: {
+    padding: 8,
+  },
+})`
+  flex: 1;
+  background-color: ${(props: { theme: Theme }) =>
+    props.theme.colors.bg.secondary};
+`;
+
+export const OrderAgainScreen = () => {
   const { profile } = useContext(AuthenticationContext);
   const [orders, setOrders] = useState<Order[]>([]);
+  const [activeIndex, setActiveIndex] = React.useState(0);
   const config = getConfig();
+  const { navigate } = useNavigation();
+  const windowWidth = useWindowDimensions().width;
 
   useEffect(() => {
     if (!profile) return;
@@ -42,16 +62,14 @@ export const OrdersScreen = () => {
             <Caption>Все още нямате направени поръчки</Caption>
           </NoOrders>
         ) : (
-          <List.Section>
-            <OrdersList
-              data={orders}
-              keyExtractor={(item, index) => item._id}
-              renderItem={(item: { item: Order }) => {
-                return <OrderListItem order={item.item} />;
-              }}
-              showsVerticalScrollIndicator={false}
-            />
-          </List.Section>
+          <OrderFlatList
+            data={orders}
+            renderItem={(item: { item: Order }) => {
+              return <RepeatOrderListItem order={item.item} />;
+            }}
+            keyExtractor={(item) => item._id}
+            showsVerticalScrollIndicator={false}
+          />
         )}
       </Container>
     </SafeArea>
