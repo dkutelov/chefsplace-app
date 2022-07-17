@@ -57,3 +57,8 @@ export interface Address {
   floor?: string;
   apartment?: string;
 }
+
+export interface TermSection {
+  subtitle?: string;
+  contents: string[];
+}

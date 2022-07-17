@@ -30,9 +30,11 @@ export const ProfileMenu = () => {
       </List.Section>
       <List.Section>
         <MenuItem
-          title="Редактиране Профил"
+          title="Смяна на парола"
           iconName="pencil-box-outline"
-          onPressHandler={() => {}}
+          onPressHandler={() => {
+            navigate("EditProfile");
+          }}
         />
         <MenuItem
           title="Адреси за Доставка"
@@ -53,12 +55,16 @@ export const ProfileMenu = () => {
         <MenuItem
           title="Общи Условия"
           iconName="alert-box-outline"
-          onPressHandler={() => {}}
+          onPressHandler={() => {
+            navigate("Terms");
+          }}
         />
         <MenuItem
           title="Свръжи се с Нас"
           iconName="contacts-outline"
-          onPressHandler={() => {}}
+          onPressHandler={() => {
+            navigate("Contact");
+          }}
         />
       </List.Section>
       <List.Section>

@@ -15,6 +15,10 @@ import { InvoiceAddressShowScreen } from "@features/profile/screens/addresses/in
 import { OrdersScreen } from "@features/profile/screens/orders/orders-list.screen";
 import { OrderDetailScreen } from "@features/profile/screens/orders/order-detail.screen";
 import { OrderAgainScreen } from "@features/profile/screens/orders/order-again.screen";
+import { EditProfileScreen } from "@features/profile/screens/edit-profile.screen";
+import { ResetPasswordScreen } from "@features/account/screens/reset-password.screen";
+import { ContactScreen } from "@features/profile/screens/contact.screen.tsx";
+import { TermScreen } from "@features/profile/screens/term.screen.tsx";
 
 const Stack = createNativeStackNavigator();
 
@@ -31,6 +35,13 @@ export const AccountNavigator = () => {
         }}
       />
       <Stack.Screen name="Register" component={RegisterScreen} />
+      <Stack.Screen name="ForgottenPassword" component={ResetPasswordScreen} />
+      <Stack.Screen
+        name="EditProfile"
+        component={EditProfileScreen}
+        options={{ title: "Смяна на парола" }}
+      />
+
       <Stack.Screen
         name="OrderList"
         component={OrdersScreen}
@@ -81,6 +92,13 @@ export const AccountNavigator = () => {
         component={InvoiceAddressShowScreen}
         options={{ presentation: "modal", headerShown: false }}
       />
+
+      <Stack.Screen
+        name="Terms"
+        component={TermScreen}
+        options={{ title: "Общи условия" }}
+      />
+      <Stack.Screen name="Contact" component={ContactScreen} />
     </Stack.Navigator>
   );
 };

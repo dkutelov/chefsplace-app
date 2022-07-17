@@ -7,6 +7,8 @@ import {
   onAuthStateChanged,
   signOut,
   NextOrObserver,
+  sendPasswordResetEmail,
+  updatePassword,
 } from "firebase/auth";
 import { User } from "../../types/User";
 
@@ -22,3 +24,11 @@ export const userStatusRequest = (cb: NextOrObserver<User>) =>
   onAuthStateChanged(auth, cb);
 
 export const logoutRequest = () => signOut(auth);
+
+export const sendResetPasswordEmail = async (email: string) =>
+  await sendPasswordResetEmail(auth, email);
+
+export const changePassword = async (newPassword: string) => {
+  const user = auth.currentUser;
+  return await updatePassword(user, newPassword);
+};

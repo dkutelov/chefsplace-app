@@ -16,6 +16,7 @@ import {
   getProfileById,
 } from "@infrastructure/api/users/get-profile";
 import { ProductsContext } from "@services/products";
+
 const defaultState: IUserContext = {
   isAuthenticated: false,
   user: null,
@@ -31,9 +32,11 @@ export const AuthenticationContext = createContext<IUserContext>(defaultState);
 
 //TODO: Clear errors on screen leave or tab change
 //TODO: Translate firebase errors, move to constants
-const translatedError: { [key: string]: string } = {
+export const translatedError: { [key: string]: string } = {
   "FirebaseError: Firebase: Error (auth/email-already-in-use).":
     "Имейлът вече съществува. Пробвайте с друг имейл.",
+  "FirebaseError: Firebase: Error (auth/requires-recent-login)":
+    "Смяна на паролата изисква да сте влезли наскоро в профила.",
 };
 
 export const AuthenticationContextProvider = ({

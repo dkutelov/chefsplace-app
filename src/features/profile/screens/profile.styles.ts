@@ -10,3 +10,12 @@ export const HorizontalRow = styled.View`
   flex-direction: row;
   justify-content: space-between;
 `;
+
+export const ProfileContainer = styled.View`
+  flex: 1;
+  margin: ${(props: { theme: Theme }) => props.theme.space[2]};
+  padding: ${(props: { theme: Theme }) => props.theme.space[3]};
+  border-radius: ${(props: { theme: Theme }) => props.theme.space[2]};
+  background-color: ${(props: { theme: Theme }) =>
+    props.theme.colors.bg.primary};
+`;

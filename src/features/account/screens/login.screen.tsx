@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { ActivityIndicator, TextInput } from "react-native-paper";
+import { ActivityIndicator, Button, TextInput } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
 
 import {
@@ -16,6 +16,7 @@ import { Text } from "@components/typography/text.component";
 import { Spacer } from "@components/spacer/spacer.component";
 import { AuthenticationContext } from "@services";
 import { colors } from "@infrastructure/theme/colors";
+import { sendResetPasswordEmail } from "@services/authentication/authentication.service";
 
 //TODO: Show password https://callstack.github.io/react-native-paper/text-input-icon.html
 //TODO: Use login form component
@@ -24,8 +25,12 @@ export const LoginScreen = () => {
   const { navigate } = useNavigation();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [missingEmailNotification, setMissingEmailNotification] = useState("");
   const { onLogin, error, isLoading } = useContext(AuthenticationContext);
 
+  const onForgotenPasswordPress = async () => {
+    navigate("ForgottenPassword");
+  };
   return (
     <AccountBackground>
       <AccountCover />
@@ -72,6 +77,14 @@ export const LoginScreen = () => {
             <ActivityIndicator animating={true} color={colors.ui.primary} />
           )}
         </Spacer>
+        <Button
+          onPress={onForgotenPasswordPress}
+          color={colors.monochromes.darkerGray}
+          style={{ alignSelf: "flex-end", marginTop: 4 }}
+          uppercase={false}
+        >
+          Забравена парола
+        </Button>
       </AccountContainer>
       <Spacer size="xl" position="top">
         <Text
