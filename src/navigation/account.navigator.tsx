@@ -25,7 +25,7 @@ const Stack = createNativeStackNavigator();
 export const AccountNavigator = () => {
   const { isAuthenticated } = React.useContext(AuthenticationContext);
   return (
-    <Stack.Navigator>
+    <Stack.Navigator screenOptions={{ headerBackTitleVisible: false }}>
       <Stack.Screen
         name="Main"
         component={ProfileScreen}
@@ -98,7 +98,11 @@ export const AccountNavigator = () => {
         component={TermScreen}
         options={{ title: "Общи условия" }}
       />
-      <Stack.Screen name="Contact" component={ContactScreen} />
+      <Stack.Screen
+        name="Contact"
+        component={ContactScreen}
+        options={{ title: "Контакти" }}
+      />
     </Stack.Navigator>
   );
 };

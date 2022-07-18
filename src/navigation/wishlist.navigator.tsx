@@ -23,7 +23,7 @@ const CustomHeading = ({ route }) => ({
 
 export const WishlistStack = () => {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator screenOptions={{ headerBackTitleVisible: false }}>
       <Stack.Screen
         name="WishlistScreen"
         component={WishlistScreen}

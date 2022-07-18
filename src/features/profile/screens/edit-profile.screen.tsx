@@ -2,15 +2,15 @@ import React, { useState } from "react";
 
 import { ActivityIndicator, Button, TextInput } from "react-native-paper";
 import { SafeArea } from "@components/utils/safe-area.component";
-import { ProfileContainer } from "./profile.styles.ts";
-import { changePassword } from "@services/authentication/authentication.service.ts";
+import { ProfileContainer } from "./profile.styles";
+import { changePassword } from "@services/authentication/authentication.service";
 import {
   AuthButton,
   AuthInput,
   ErrorContainer,
-} from "@features/account/components/account.styles.ts";
+} from "@features/account/components/account.styles";
 import { Spacer, Text } from "@components";
-import { colors } from "@infrastructure/theme/colors.ts";
+import { colors } from "@infrastructure/theme/colors";
 import { translatedError } from "@infrastructure/utils/firebase/translateFirebaseError";
 
 export const EditProfileScreen = () => {

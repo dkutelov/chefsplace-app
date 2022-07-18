@@ -16,7 +16,7 @@ const Stack = createNativeStackNavigator();
 
 export const CartStack = () => {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator screenOptions={{ headerBackTitleVisible: false }}>
       <Stack.Screen
         name="CartScreen"
         component={CartScreen}

@@ -12,7 +12,7 @@ const isAndroid = Platform.OS === "android";
 
 export const ProductStack = () => {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator screenOptions={{ headerBackTitleVisible: false }}>
       <Stack.Screen
         name="ProductsScreen"
         component={ProductListScreen}
