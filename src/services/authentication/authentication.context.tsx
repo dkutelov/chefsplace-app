@@ -15,7 +15,7 @@ import {
   getProfileByUid,
   getProfileById,
 } from "@infrastructure/api/users/get-profile";
-import { ProductsContext } from "@services/products";
+import { translatedError } from "@infrastructure/utils/firebase/translateFirebaseError";
 
 const defaultState: IUserContext = {
   isAuthenticated: false,
@@ -26,18 +26,10 @@ const defaultState: IUserContext = {
   onRegister: () => {},
   onLogout: () => {},
   profile: {},
+  fetchProfileById: () => {},
 };
 
 export const AuthenticationContext = createContext<IUserContext>(defaultState);
-
-//TODO: Clear errors on screen leave or tab change
-//TODO: Translate firebase errors, move to constants
-export const translatedError: { [key: string]: string } = {
-  "FirebaseError: Firebase: Error (auth/email-already-in-use).":
-    "Имейлът вече съществува. Пробвайте с друг имейл.",
-  "FirebaseError: Firebase: Error (auth/requires-recent-login)":
-    "Смяна на паролата изисква да сте влезли наскоро в профила.",
-};
 
 export const AuthenticationContextProvider = ({
   children,
@@ -50,8 +42,6 @@ export const AuthenticationContextProvider = ({
   const [error, setError] = useState<string | null>(null);
   const config = getConfig();
 
-  const { products } = useContext(ProductsContext);
-
   userStatusRequest(async (usr) => {
     if (usr) {
       setUser(usr?.uid);
@@ -59,7 +49,6 @@ export const AuthenticationContextProvider = ({
   });
 
   useEffect(() => {
-    //console.log(user);
     (async () => {
       if (user) {
         const { profile } = await getProfileByUid(config, user);
@@ -72,6 +61,7 @@ export const AuthenticationContextProvider = ({
 
   const onLogin = async (email: string, password: string) => {
     setIsLoading(true);
+    setError(null);
     try {
       const u = await loginRequest(email, password);
       const userProfile = await getProfileByUid(config, u.user.uid);
@@ -81,7 +71,9 @@ export const AuthenticationContextProvider = ({
     } catch (e) {
       setIsLoading(false);
       console.log(e);
-      setError(e.toString());
+      const errorText = e.toString();
+      const translatedErr = translatedError(errorText);
+      setError(translatedErr || errorText);
     }
   };
 
@@ -92,6 +84,11 @@ export const AuthenticationContextProvider = ({
   ) => {
     if (password !== repeatedPassword) {
       setError("Паролите не съвпадат!");
+      return;
+    }
+
+    if (password.length < 6 || repeatedPassword.length < 6) {
+      setError("Паролата трябва да е дълга поне 6 символа!");
       return;
     }
 
@@ -107,7 +104,8 @@ export const AuthenticationContextProvider = ({
       setIsLoading(false);
       console.log(e);
       const errorText = e.toString();
-      setError(translatedError[errorText]);
+      const translatedErr = translatedError(errorText);
+      setError(translatedErr || errorText);
     }
   };
 
@@ -117,6 +115,10 @@ export const AuthenticationContextProvider = ({
       setProfile(null);
       setError(null);
     });
+  };
+
+  const clearError = () => {
+    setError(null);
   };
 
   async function fetchProfileById() {
@@ -142,6 +144,7 @@ export const AuthenticationContextProvider = ({
         onRegister,
         onLogout,
         fetchProfileById,
+        clearError,
       }}
     >
       {children}

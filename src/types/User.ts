@@ -18,4 +18,5 @@ export interface IUserContext {
   onLogout: () => void;
   fetchProfileById: () => Promise<void>;
   profile: Profile | null;
+  clearError: () => void;
 }

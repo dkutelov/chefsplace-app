@@ -7,8 +7,6 @@ import { ProfileContainer } from "./profile.styles";
 import { theme } from "@infrastructure/theme";
 
 const itemStyling = {
-  // borderWidth: 1,
-  // borderColor: theme.colors.ui.quaternary,
   marginBottom: 8,
   padding: 12,
   backgroundColor: theme.colors.bg.primary,

@@ -34,8 +34,16 @@ export const AccountNavigator = () => {
           title: "Моя Профил",
         }}
       />
-      <Stack.Screen name="Register" component={RegisterScreen} />
-      <Stack.Screen name="ForgottenPassword" component={ResetPasswordScreen} />
+      <Stack.Screen
+        name="Register"
+        component={RegisterScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="ForgottenPassword"
+        component={ResetPasswordScreen}
+        options={{ title: "Промяна на парола" }}
+      />
       <Stack.Screen
         name="EditProfile"
         component={EditProfileScreen}

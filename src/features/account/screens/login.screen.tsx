@@ -1,6 +1,6 @@
-import React, { useState, useContext } from "react";
-import { ActivityIndicator, Button, TextInput } from "react-native-paper";
-import { useNavigation } from "@react-navigation/native";
+import React, { useState, useContext, useCallback } from "react";
+import { ActivityIndicator, TextInput } from "react-native-paper";
+import { useNavigation, useFocusEffect } from "@react-navigation/native";
 
 import {
   AccountBackground,
@@ -11,32 +11,48 @@ import {
   AuthInput,
   Title,
   ErrorContainer,
+  Notification,
+  ForgottenPassword,
 } from "../components/account.styles";
-import { Text } from "@components/typography/text.component";
-import { Spacer } from "@components/spacer/spacer.component";
+import { Text, Spacer } from "@components";
 import { AuthenticationContext } from "@services";
 import { colors } from "@infrastructure/theme/colors";
-import { sendResetPasswordEmail } from "@services/authentication/authentication.service";
-
-//TODO: Show password https://callstack.github.io/react-native-paper/text-input-icon.html
-//TODO: Use login form component
 
 export const LoginScreen = () => {
   const { navigate } = useNavigation();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [missingEmailNotification, setMissingEmailNotification] = useState("");
-  const { onLogin, error, isLoading } = useContext(AuthenticationContext);
+  const [showPassword, setShowPassword] = useState(false);
+  const { onLogin, isLoading, error, clearError } = useContext(
+    AuthenticationContext
+  );
+
+  useFocusEffect(
+    useCallback(() => {
+      clearError();
+      setEmail("");
+      setPassword("");
+    }, [])
+  );
+
+  const togglePasswordVisibility = () => {
+    setShowPassword((v) => !v);
+  };
+
+  const onLoginPress = () => {
+    onLogin(email, password);
+  };
 
   const onForgotenPasswordPress = async () => {
     navigate("ForgottenPassword");
   };
+
   return (
     <AccountBackground>
       <AccountCover />
       <AccountContainer>
         <Spacer size="large" position="bottom">
-          <Title>Вход</Title>
+          <Title>ВХОД</Title>
         </Spacer>
         <AuthInput
           label="Имейл"
@@ -52,16 +68,20 @@ export const LoginScreen = () => {
             label="Парола"
             value={password}
             textContentType="password"
-            secureTextEntry
+            secureTextEntry={showPassword ? false : true}
             autoCapitalize="none"
             onChangeText={(p) => setPassword(p)}
-            right={<TextInput.Icon name="eye" />}
+            right={
+              <TextInput.Icon name="eye" onPress={togglePasswordVisibility} />
+            }
             style={{ paddingHorizontal: 0 }}
           />
         </Spacer>
         {error && (
           <ErrorContainer size="large">
-            <Text variant="error">{error}</Text>
+            <Spacer position="top" size="medium">
+              <Text variant="error">{error}</Text>
+            </Spacer>
           </ErrorContainer>
         )}
         <Spacer size="xl">
@@ -69,7 +89,8 @@ export const LoginScreen = () => {
             <AuthButton
               icon="lock-open-outline"
               mode="contained"
-              onPress={() => onLogin(email, password)}
+              onPress={onLoginPress}
+              disabled={email === "" || password === ""}
             >
               Вход
             </AuthButton>
@@ -77,23 +98,14 @@ export const LoginScreen = () => {
             <ActivityIndicator animating={true} color={colors.ui.primary} />
           )}
         </Spacer>
-        <Button
-          onPress={onForgotenPasswordPress}
-          color={colors.monochromes.darkerGray}
-          style={{ alignSelf: "flex-end", marginTop: 4 }}
-          uppercase={false}
-        >
+        <ForgottenPassword onPress={onForgotenPasswordPress}>
           Забравена парола
-        </Button>
+        </ForgottenPassword>
       </AccountContainer>
       <Spacer size="xl" position="top">
-        <Text
-          variant="caption"
-          style={{ textAlign: "center" }}
-          style={{ color: colors.bg.primary }}
-        >
+        <Notification>
           Ако нямате профил, направете регистрация тук.
-        </Text>
+        </Notification>
       </Spacer>
       <Spacer size="large" position="top">
         <SecondaryAuthButton

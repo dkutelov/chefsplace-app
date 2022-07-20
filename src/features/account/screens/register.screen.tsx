@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useContext } from "react";
-import { ActivityIndicator } from "react-native-paper";
-import { useNavigation } from "@react-navigation/native";
+import React, { useState, useEffect, useContext, useCallback } from "react";
+import { ActivityIndicator, TextInput } from "react-native-paper";
+import { useNavigation, useFocusEffect } from "@react-navigation/native";
 
 import {
   AccountBackground,
@@ -12,25 +12,43 @@ import {
   Title,
   ErrorContainer,
 } from "../components/account.styles";
-import { Text } from "../../../components/typography/text.component";
-import { Spacer } from "../../../components/spacer/spacer.component";
-import { AuthenticationContext } from "../../../services/authentication/authentication.context";
-import { colors } from "../../../infrastructure/theme/colors";
+import { Text, Spacer } from "@components";
+import { AuthenticationContext } from "@services/authentication/authentication.context";
+import { colors } from "@infrastructure/theme/colors";
 
 export const RegisterScreen = () => {
   const navigation = useNavigation();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [repeatedPassword, setRepeatedPassword] = useState("");
-  const { onRegister, isAuthenticated, error, isLoading } = useContext(
-    AuthenticationContext
+  const [showPassword, setShowPassword] = useState(false);
+  const [showRePassword, setShowRePassword] = useState(false);
+  const { onRegister, isAuthenticated, error, isLoading, clearError, profile } =
+    useContext(AuthenticationContext);
+
+  useFocusEffect(
+    useCallback(() => {
+      setEmail("");
+      setPassword("");
+      setRepeatedPassword("");
+      clearError();
+    }, [])
   );
 
   useEffect(() => {
-    if (isAuthenticated) {
-      navigation.goBack();
+    if (!profile) {
+      return;
     }
-  }, [isAuthenticated]);
+    navigation.goBack();
+  }, [profile]);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword((v) => !v);
+  };
+
+  const toggleRePasswordVisibility = () => {
+    setShowRePassword((v) => !v);
+  };
 
   const onRegisterPress = () => {
     onRegister(email, password, repeatedPassword);
@@ -41,7 +59,7 @@ export const RegisterScreen = () => {
       <AccountCover />
       <AccountContainer>
         <Spacer size="large" position="bottom">
-          <Title>Регистрация</Title>
+          <Title>РЕГИСТРАЦИЯ</Title>
         </Spacer>
         <AuthInput
           label="Имейл"
@@ -57,10 +75,13 @@ export const RegisterScreen = () => {
             label="Парола"
             value={password}
             textContentType="password"
-            secureTextEntry
+            secureTextEntry={showPassword ? false : true}
             autoCapitalize="none"
             onChangeText={(p) => setPassword(p)}
             style={{ paddingHorizontal: 0 }}
+            right={
+              <TextInput.Icon name="eye" onPress={togglePasswordVisibility} />
+            }
           />
         </Spacer>
         <Spacer size="large">
@@ -68,10 +89,13 @@ export const RegisterScreen = () => {
             label="Потвърди Парола"
             value={repeatedPassword}
             textContentType="password"
-            secureTextEntry
+            secureTextEntry={showRePassword ? false : true}
             autoCapitalize="none"
             onChangeText={(p) => setRepeatedPassword(p)}
             style={{ paddingHorizontal: 0 }}
+            right={
+              <TextInput.Icon name="eye" onPress={toggleRePasswordVisibility} />
+            }
           />
         </Spacer>
         {error && (
@@ -85,6 +109,9 @@ export const RegisterScreen = () => {
               icon="lock-open-outline"
               mode="contained"
               onPress={onRegisterPress}
+              disabled={
+                email === "" || password === "" || repeatedPassword === ""
+              }
             >
               Регистрация
             </AuthButton>

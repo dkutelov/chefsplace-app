@@ -15,6 +15,7 @@ import { Spacer } from "@components/spacer/spacer.component";
 import { colors } from "@infrastructure/theme/colors";
 import { sendResetPasswordEmail } from "@services/authentication/authentication.service";
 import { Text } from "@components";
+import { fonts } from "@infrastructure/theme/fonts";
 
 //TODO: Show password https://callstack.github.io/react-native-paper/text-input-icon.html
 //TODO: Use login form component
@@ -44,13 +45,17 @@ export const ResetPasswordScreen = () => {
   return (
     <AccountBackground>
       <AccountCover />
-      <AccountContainer>
-        <Spacer size="large" position="bottom">
-          <Title>Забравена Парола</Title>
-        </Spacer>
-
+      <AccountContainer style={{ flex: 1 }}>
         <Spacer size="xl" position="top">
-          <Text variant="body" style={{ textAlign: "center" }}>
+          <Text
+            variant="body"
+            style={{
+              textAlign: "center",
+              fontSize: 16,
+              fontFamily: fonts.body,
+              color: colors.text.darkGray,
+            }}
+          >
             Въведете имейлът, с който е създаден Вашия акаунт и натиснете
             Промяна на парола. Ще получите имейл с линк, на който може да
             промените паролата.

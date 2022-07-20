@@ -28,24 +28,28 @@ export const AccountContainer = styled.View`
 export const AuthButton = styled(Button).attrs({
   color: colors.ui.primary,
 })`
+  font-family: ${(props: { theme: Theme }) => props.theme.fonts.body};
   padding: ${(props) => props.theme.space[2]};
 `;
 
 export const SecondaryAuthButton = styled(Button).attrs({
   color: colors.ui.orange,
 })`
+  font-family: ${(props: { theme: Theme }) => props.theme.fonts.body};
   padding: ${(props) => props.theme.space[2]};
 `;
 
 export const AuthInput = styled(TextInput).attrs({
   activeUnderlineColor: colors.ui.primary,
 })`
-  width: 300px;
+  font-family: ${(props: { theme: Theme }) => props.theme.fonts.body};
+  width: 240px;
   background-color: transparent;
 `;
 
 export const Title = styled(Text)`
   text-align: center;
+  font-family: ${(props: { theme: Theme }) => props.theme.fonts.heading};
   font-size: 30px;
   color: ${(props: { theme: Theme }) => props.theme.colors.text.primary};
 `;
@@ -56,4 +60,19 @@ export const ErrorContainer = styled.View`
   align-self: center;
   margin-top: ${(props: { theme: Theme }) => props.theme.space[2]};
   margin-bottom: ${(props: { theme: Theme }) => props.theme.space[2]};
+`;
+
+export const Notification = styled(Text)`
+  text-align: center;
+  font-family: ${(props: { theme: Theme }) => props.theme.fonts.heading};
+  color: ${(props: { theme: Theme }) => props.theme.colors.bg.primary};
+  font-size: ${(props: { theme: Theme }) => props.theme.fontSizes.caption}; ;
+`;
+
+export const ForgottenPassword = styled(Button).attrs({
+  color: colors.monochromes.darkerGray,
+  uppercase: false,
+})`
+  align-self: flex-end;
+  margin-top: ${(props) => props.theme.space[0]};
 `;
