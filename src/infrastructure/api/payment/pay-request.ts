@@ -12,19 +12,16 @@ export const payRequest = async (
   name: string
 ): Promise<any> => {
   try {
-    const data = JSON.stringify({ token, name, amount });
+    const data = { token, name, amount };
+
     const res = await config.fetch<any>({
       method: "POST",
-      url: config.apiUrl + "/pay",
-      bodyData: data,
+      url: config.apiUrl + "orders/pay",
+      bodyData: { data },
     });
 
-    if (res.status > 200) {
-      throw new Error("Грешка при плащане!");
-    }
-
-    return res.json();
+    return data;
   } catch (error) {
-    throw new Error("Грешка при плащане!");
+    throw new Error(error);
   }
 };

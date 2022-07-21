@@ -15,7 +15,12 @@ import { colors } from "@infrastructure/theme/colors";
 export const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const { onLogin, error, isLoading } = useContext(AuthenticationContext);
+
+  const togglePassword = () => {
+    setShowPassword((v) => !v);
+  };
 
   return (
     <View>
@@ -33,10 +38,10 @@ export const LoginForm = () => {
           label="Парола"
           value={password}
           textContentType="password"
-          secureTextEntry
+          secureTextEntry={showPassword ? false : true}
           autoCapitalize="none"
           onChangeText={(p) => setPassword(p)}
-          right={<TextInput.Icon name="eye" />}
+          right={<TextInput.Icon name="eye" onPress={togglePassword} />}
           style={{ paddingHorizontal: 0 }}
         />
       </Spacer>
@@ -51,6 +56,7 @@ export const LoginForm = () => {
             icon="lock-open-outline"
             mode="contained"
             onPress={() => onLogin(email, password)}
+            disabled={!email || !password}
           >
             Вход
           </AuthButton>

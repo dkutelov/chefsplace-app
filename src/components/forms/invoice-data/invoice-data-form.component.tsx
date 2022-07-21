@@ -87,7 +87,7 @@ export const InvoiceDataForm = () => {
           //TODO: validation
 
           //TODO: transform to DeliveryAddress type
-          console.log(values);
+          //console.log(values);
           if (profile && profile._id) {
             if (!params?.invoiceAddressId) {
               await createInvoiceAddress(config, profile._id, values);

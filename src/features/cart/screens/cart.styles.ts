@@ -1,6 +1,7 @@
 import { FlatList, Platform } from "react-native";
 import styled from "styled-components/native";
 import { Theme } from "../../../types/Theme";
+import { Avatar } from "react-native-paper";
 
 export const CartContainer = styled.View`
   flex: 1;
@@ -30,4 +31,10 @@ export const Title = styled.Text`
   color: ${(props: { theme: Theme }) => props.theme.colors.text.primary};
   margin-top: ${(props: { theme: Theme }) => props.theme.space[1]};
   margin-bottom: ${(props: { theme: Theme }) => props.theme.space[1]};
+`;
+
+export const CartIcon = styled(Avatar.Icon).attrs({
+  size: 128,
+})`
+  background-color: ${(props) => props.theme.colors.monochromes.onyx};
 `;

@@ -43,7 +43,7 @@ export const AuthInput = styled(TextInput).attrs({
   activeUnderlineColor: colors.ui.primary,
 })`
   font-family: ${(props: { theme: Theme }) => props.theme.fonts.body};
-  width: 240px;
+  height: ${(props) => props.theme.space[5]};
   background-color: transparent;
 `;
 

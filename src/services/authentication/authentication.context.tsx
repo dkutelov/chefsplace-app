@@ -52,7 +52,7 @@ export const AuthenticationContextProvider = ({
     (async () => {
       if (user) {
         const { profile } = await getProfileByUid(config, user);
-        console.log({ profile });
+        //console.log({ profile });
 
         setProfile(profile);
       }
@@ -126,7 +126,7 @@ export const AuthenticationContextProvider = ({
       const userId: string = profile._id;
       setProfile(null);
       const userProfile = await getProfileById(config, userId);
-      console.log({ userProfile });
+      //console.log({ userProfile });
 
       setProfile(userProfile.profile);
     }

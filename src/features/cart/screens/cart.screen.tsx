@@ -14,8 +14,7 @@ import {
 } from "@services";
 
 // Components
-import { SafeArea } from "@components/utils/safe-area.component";
-import { Button } from "@components/button/button.component";
+import { SafeArea, Button, Spacer } from "@components";
 import { CartItemCard } from "../components/cart-item/cart-item.component";
 import { CartSummary } from "../components/cart-summary/cart-summary.component";
 
@@ -25,6 +24,7 @@ import {
   NoItemsInCart,
   CartContainer,
   Title,
+  CartIcon,
 } from "./cart.styles";
 
 import { calculateDeliveryCharge } from "@infrastructure/utils/computed/getDeliveryCharge";
@@ -89,7 +89,10 @@ export const CartScreen = () => {
         <Title>Количка</Title>
         {cartItems.length === 0 ? (
           <NoItemsInCart>
-            <Caption>Нямате продукти в количката!</Caption>
+            <CartIcon icon="cart-off" />
+            <Spacer position="top" size="large">
+              <Caption>Нямате продукти в количката!</Caption>
+            </Spacer>
           </NoItemsInCart>
         ) : (
           <>

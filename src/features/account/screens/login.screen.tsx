@@ -1,4 +1,5 @@
 import React, { useState, useContext, useCallback } from "react";
+import { Dimensions } from "react-native";
 import { ActivityIndicator, TextInput } from "react-native-paper";
 import { useNavigation, useFocusEffect } from "@react-navigation/native";
 
@@ -61,7 +62,10 @@ export const LoginScreen = () => {
           keyboardType="email-address"
           autoCapitalize="none"
           onChangeText={(u) => setEmail(u)}
-          style={{ paddingHorizontal: 0 }}
+          style={{
+            paddingHorizontal: 0,
+            width: Dimensions.get("window").width * 0.8,
+          }}
         />
         <Spacer size="large">
           <AuthInput
@@ -74,7 +78,7 @@ export const LoginScreen = () => {
             right={
               <TextInput.Icon name="eye" onPress={togglePasswordVisibility} />
             }
-            style={{ paddingHorizontal: 0 }}
+            style={{ paddingHorizontal: 0, width: "100%" }}
           />
         </Spacer>
         {error && (

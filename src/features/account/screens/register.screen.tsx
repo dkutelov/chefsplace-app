@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext, useCallback } from "react";
+import { Dimensions } from "react-native";
 import { ActivityIndicator, TextInput } from "react-native-paper";
 import { useNavigation, useFocusEffect } from "@react-navigation/native";
 
@@ -68,7 +69,10 @@ export const RegisterScreen = () => {
           keyboardType="email-address"
           autoCapitalize="none"
           onChangeText={(u) => setEmail(u)}
-          style={{ paddingHorizontal: 0 }}
+          style={{
+            paddingHorizontal: 0,
+            width: Dimensions.get("window").width * 0.8,
+          }}
         />
         <Spacer size="large">
           <AuthInput
@@ -78,7 +82,7 @@ export const RegisterScreen = () => {
             secureTextEntry={showPassword ? false : true}
             autoCapitalize="none"
             onChangeText={(p) => setPassword(p)}
-            style={{ paddingHorizontal: 0 }}
+            style={{ paddingHorizontal: 0, width: "100%" }}
             right={
               <TextInput.Icon name="eye" onPress={togglePasswordVisibility} />
             }
@@ -92,7 +96,7 @@ export const RegisterScreen = () => {
             secureTextEntry={showRePassword ? false : true}
             autoCapitalize="none"
             onChangeText={(p) => setRepeatedPassword(p)}
-            style={{ paddingHorizontal: 0 }}
+            style={{ paddingHorizontal: 0, width: "100%" }}
             right={
               <TextInput.Icon name="eye" onPress={toggleRePasswordVisibility} />
             }

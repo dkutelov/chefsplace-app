@@ -24,11 +24,10 @@ export const EditProfileScreen = () => {
     setError(null);
     try {
       await changePassword(password);
-      console.log(password);
       setShowSuccess(true);
     } catch (error) {
       const errorText = error.toString();
-      const translatedErr = translatedError[errorText];
+      const translatedErr = translatedError(errorText);
       setError(translatedErr || errorText);
       console.log(error);
     }

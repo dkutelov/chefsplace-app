@@ -12,6 +12,8 @@ import { NewInvoiceDataScreen } from "@features/profile/screens/addresses/invoic
 import { Success } from "@features/checkout/screen/success.screen";
 import { GuesDeliveryAddressScreen } from "@features/checkout/screen/guest/guest-delivery-address.screen";
 import { GuestInvoiceAddressScreen } from "@features/checkout/screen/guest/guest-invoice-address.screen";
+import { CheckoutErrorScreen } from "@features/checkout/screen/checkout-error.screen";
+import { CreditCardPaymentScreen } from "@features/checkout/screen/credit-card-payment.screen";
 const Stack = createNativeStackNavigator();
 
 export const CartStack = () => {
@@ -84,6 +86,20 @@ export const CartStack = () => {
           name="NewGuestInvoiceAddress"
           component={GuestInvoiceAddressScreen}
           options={{ title: "Данни за Фактура" }}
+        />
+        <Stack.Screen
+          name="CreditCardPayment"
+          component={CreditCardPaymentScreen}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="CheckoutError"
+          component={CheckoutErrorScreen}
+          options={{
+            headerShown: false,
+          }}
         />
         <Stack.Screen
           name="Success"

@@ -32,17 +32,17 @@ export const CartSummary = ({
       <Row>
         <Label style={{ fontWeight: "bold" }}>Сума без ДДС</Label>
         <Value style={{ fontWeight: "bold" }}>
-          {(amount / 100 + 5).toFixed(2)} лв.
+          {(amount / 100 + deliveryCharge).toFixed(2)} лв.
         </Value>
       </Row>
       <Row>
         <Label>ДДС</Label>
-        <Value>{((amount / 100 + 5) * 0.2).toFixed(2)} лв.</Value>
+        <Value>{((amount / 100 + deliveryCharge) * 0.2).toFixed(2)} лв.</Value>
       </Row>
       <Row>
         <Label style={{ fontWeight: "bold" }}>Сума с ДДС</Label>
         <Value style={{ fontWeight: "bold" }}>
-          {((amount / 100 + 5) * 1.2).toFixed(2)} лв.
+          {((amount / 100 + deliveryCharge) * 1.2).toFixed(2)} лв.
         </Value>
       </Row>
     </CartSummaryWrapper>

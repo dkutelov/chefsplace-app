@@ -10,20 +10,14 @@ import {
 } from "../components/checkout-type-select.styles";
 
 //Components
-import { MyRadioButton } from "@components/forms/radio-button/radio-buttton.component";
+import { Text, Button, Spacer, MyRadioButton, MyPicker } from "@components";
 import Checkbox from "@components/forms/checkbox/checkbox-component";
-import { MyPicker } from "@components/forms/picker/picker.component";
 import { CartSummary } from "@features/cart/components/cart-summary/cart-summary.component";
-import { Text } from "@components/typography/text.component";
-import { Button } from "@components/button/button.component";
-import { Spacer } from "@components/spacer/spacer.component";
-import { CreditCardInput } from "../components/credit-card.component";
 import { SelectedDeliveryAddress } from "../components/selected-delivery-address.component";
 import { SelectedInvoiceAddress } from "../components/selected-invoice-address.component";
 import { CentertedLoadingIndicator } from "@components/loading/activity-indicator.component";
 
 //Theme, Types
-import { colors } from "@infrastructure/theme/colors";
 import { Order } from "@types/Order";
 import { getConfig } from "@infrastructure/api/config";
 import { createUserOrder } from "@infrastructure/api/orders/create-user-order";
@@ -33,16 +27,16 @@ import { AuthenticationContext, CartContext } from "@services";
 import { getPaymentOptions } from "@infrastructure/utils/computed/getPaymentOptions";
 
 export const AuthCheckout = () => {
+  //State
   const [paymentType, setPaymentType] = useState("0");
   const [termsAgreed, setTermsAgreed] = useState(false);
   const [deliveryAddressId, setDeliveryAddressId] = useState("");
   const [invoiceAddressId, setInvoiceAddressId] = useState("");
-  const [creditCardName, setCreditCardName] = useState("");
   const [savingOrder, setSavingOrder] = useState(false);
-
+  //Context
   const { cartItems } = useContext(CartContext);
   const { profile } = useContext(AuthenticationContext);
-
+  //Navigation
   const { params } = useRoute();
   const { navigate } = useNavigation();
   const config = getConfig();
@@ -64,7 +58,7 @@ export const AuthCheckout = () => {
     const selectedDeliveryAddress = profile?.deliveryAddress.find(
       (x) => x._id === deliveryAddressId
     );
-    console.log({ selectedDeliveryAddress });
+    //console.log({ selectedDeliveryAddress });
     if (selectedDeliveryAddress) {
       return selectedDeliveryAddress.city;
     }
@@ -81,12 +75,26 @@ export const AuthCheckout = () => {
       };
 
       setSavingOrder(true);
+
       const result = await createUserOrder(config, profile._id, order);
+
       if (result.success) {
         setSavingOrder(false);
-        navigate("Success", { orderNumber: result.orderNumber });
+
+        if (paymentType === "2") {
+          const amountToPay =
+            (params?.cartAmount / 100 + params?.deliveryCharge) * 1.2;
+          navigate("CreditCardPayment", {
+            orderNumber: result.orderNumber,
+            amount: amountToPay,
+            orderNumber: result.orderNumber,
+          });
+        } else {
+          navigate("Success", { orderNumber: result.orderNumber });
+        }
       } else {
-        //show error screen
+        console.log(error);
+        navigate("CheckoutError");
       }
     }
   };
@@ -200,32 +208,6 @@ export const AuthCheckout = () => {
             items={getPaymentOptions(getDeliveryCityName())}
           />
         </SectionInnerContainer>
-        {paymentType === "2" && (
-          <>
-            <Spacer position="top" size="large">
-              <SectionInnerContainer>
-                <Text variant="body">Данни кредитна/дебитна карта</Text>
-                <Spacer position="top" size="large">
-                  <TextInput
-                    label="Име (както e изписано на картата)"
-                    activeUnderlineColor={colors.ui.primary}
-                    onChangeText={setCreditCardName}
-                    value={creditCardName}
-                  />
-                </Spacer>
-                <Spacer position="top" size="large">
-                  <CreditCardInput
-                    name={creditCardName}
-                    onError={() => {}}
-                    onSuccess={(info) => {
-                      console.log(info);
-                    }}
-                  />
-                </Spacer>
-              </SectionInnerContainer>
-            </Spacer>
-          </>
-        )}
       </SectionContainer>
       <SectionContainer>
         <CheckoutSubtitle>Забележка</CheckoutSubtitle>

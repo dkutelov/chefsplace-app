@@ -7,7 +7,7 @@ export const deliveryAddressToInvoiceData = ({
   defaultValues: InvoiceAddress;
   editAddress: DeliveryAddress;
 }) => {
-  console.log({ editAddress });
+  //console.log({ editAddress });
   const street = editAddress?.street ? `ул. ${editAddress?.street}` : "";
   const area = editAddress?.area ? `жк/кв ${editAddress?.area}` : "";
   const number = editAddress?.number ? `№ ${editAddress?.number}` : "";

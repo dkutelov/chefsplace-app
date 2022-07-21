@@ -55,7 +55,7 @@ const ProductDetailScreen = () => {
     //TODO: Handle error in product is not returned from servive
 
     // Create Reducer?
-    console.log(params);
+    //console.log(params);
 
     if (params && params.id) {
       loadProduct(params.id);

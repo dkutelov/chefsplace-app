@@ -25,7 +25,7 @@ const defaultState: ICartContext = {
 export const CartContext = createContext<ICartContext>(defaultState);
 
 export const saveCartItems = async (value: CartItem[]) => {
-  console.log({ value });
+  //console.log({ value });
 
   try {
     const jsonValue = JSON.stringify(value);
@@ -65,7 +65,7 @@ export const CartContextProvider = ({
 
       if (rawCartItemsData !== null) {
         const cartItems = await JSON.parse(rawCartItemsData);
-        console.log({ itemsFromLocal: cartItems });
+        //console.log({ itemsFromLocal: cartItems });
         dispatch({
           type: SET_CART_ITEMS_FROM_LOCAL,
           payload: { cartItems },

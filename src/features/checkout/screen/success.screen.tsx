@@ -25,6 +25,7 @@ export const Success = () => {
   const goHome = () => {
     navigate("CartScreen");
   };
+
   return (
     <ContentContainer>
       <SuccessTitle>Thank You!</SuccessTitle>
