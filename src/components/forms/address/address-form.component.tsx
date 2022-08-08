@@ -27,19 +27,19 @@ export const AddressForm = () => {
 
   let defaultValues = {
     name: "",
-    firstName: "",
-    lastName: "",
-    phoneNumber: "",
+    firstName: "Дарий",
+    lastName: "Кутелов",
+    phoneNumber: "0896988688",
     company: "",
-    postCode: "",
-    city: "",
-    area: "",
-    street: "",
-    number: "",
+    postCode: "1113",
+    city: "София",
+    area: "Изток",
+    street: "Латинка",
+    number: "9",
     block: "",
-    entrance: "",
-    floor: "",
-    apartment: "",
+    entrance: "Б",
+    floor: "5",
+    apartment: "16",
     note: "",
     isDefault: false,
   };
@@ -56,25 +56,6 @@ export const AddressForm = () => {
       defaultValues = { ...defaultValues, ...editAddress };
     }
   }
-
-  // let defaultValues = {
-  //   name: "Адрес 2",
-  //   firstName: "Дарий",
-  //   lastName: "Кутелов",
-  //   phoneNumber: "0889611010",
-  //   company: "Дигиталс ООД",
-  //   postCode: "1421",
-  //   city: "София",
-  //   area: "Лозенец",
-  //   street: "ул. Цветна Градина",
-  //   number: "1",
-  //   block: "1",
-  //   entrance: "Б",
-  //   floor: "1",
-  //   apartment: "19",
-  //   note: "Звънец Телексим",
-  //   isDefault: false,
-  // };
 
   return (
     <KeyboardAwareScrollView
@@ -93,11 +74,15 @@ export const AddressForm = () => {
           //console.log(values);
 
           if (!params?.addressId) {
-            const newAddress = await createDeliveryAddress(
-              config,
-              profile._id,
-              values
-            );
+            try {
+              const newAddress = await createDeliveryAddress(
+                config,
+                profile._id,
+                values
+              );
+            } catch (error) {
+              console.log(error.toString());
+            }
           } else {
             await editDeliveryAddress(
               config,
@@ -114,8 +99,8 @@ export const AddressForm = () => {
         {({ values, handleChange, handleSubmit, setFieldValue }) => (
           <FieldsContainer>
             <InputField
-              label="Име на адреса"
               onChangeText={handleChange("name")}
+              placeholder="Име на адреса като: У дома, В офиса"
               textContentType="name"
               keyboardType="default"
               autoCapitalize="sentences"
@@ -149,7 +134,7 @@ export const AddressForm = () => {
               style={{ paddingHorizontal: 0 }}
             />
             <InputField
-              label="Фирма/ Обект"
+              label="Име на обект"
               onChangeText={handleChange("company")}
               textContentType="name"
               keyboardType="default"

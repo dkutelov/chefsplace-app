@@ -31,9 +31,12 @@ export const fetchAPI = async <T>({
     // if (res.status > 200) {
     //   throw new Error("Грешка при връзка със сървъра!");
     // }
+
+    //TODO: check if type is object!
     const data = await res.json();
     return data;
   } catch (error) {
+    // console.log(error);
     throw new Error(error.toString());
   }
 };

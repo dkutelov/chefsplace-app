@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { HelperText } from "react-native-paper";
 
@@ -43,9 +44,15 @@ export const ResetPasswordScreen = () => {
     }
   };
   return (
-    <AccountBackground>
-      <AccountCover />
-      <AccountContainer style={{ flex: 1 }}>
+    <View>
+      <View
+        style={{
+          margin: 8,
+          padding: 8,
+          backgroundColor: "#ffffff",
+          borderRadius: 8,
+        }}
+      >
         <Spacer size="xl" position="top">
           <Text
             variant="body"
@@ -61,7 +68,7 @@ export const ResetPasswordScreen = () => {
             промените паролата.
           </Text>
         </Spacer>
-        <Spacer size="xl" position="top">
+        <Spacer position="top" size="medium">
           <AuthInput
             label="Имейл"
             value={email}
@@ -72,7 +79,7 @@ export const ResetPasswordScreen = () => {
             style={{ paddingHorizontal: 0 }}
           />
         </Spacer>
-        <Spacer size="xl">
+        <Spacer position="top" size="xl">
           <AuthButton
             icon="lock-open-outline"
             mode="contained"
@@ -86,7 +93,7 @@ export const ResetPasswordScreen = () => {
             {error}
           </HelperText>
         </Spacer>
-      </AccountContainer>
-    </AccountBackground>
+      </View>
+    </View>
   );
 };

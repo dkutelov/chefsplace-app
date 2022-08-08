@@ -14,7 +14,6 @@ import {
   Price,
   PriceWith,
   DeleteIcon,
-  NotAvailable,
 } from "./wishlist-item.styles";
 
 import { WishlistContext } from "@services/wishlist/wishlist.context";
@@ -79,21 +78,21 @@ export const WishlistItemCard = ({ wishlistItem }: Props) => {
           </PriceWith>
         </PriceWrapper>
         <AddToCart
-          disabled={!available}
           cartItem={{
             productId: id,
             name,
             image,
             price,
             quantity: 1,
-            maxQuantity: getMaxQuantity(),
+            maxQuantity: 999,
           }}
           size={28}
         />
       </Row>
-      {!available && (
-        <NotAvailable>Продуктът в момента не е наличен!</NotAvailable>
-      )}
     </CartItemWrapper>
   );
 };
+
+// {
+//   !available && <NotAvailable>Продуктът в момента не е наличен!</NotAvailable>;
+// }

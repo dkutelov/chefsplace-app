@@ -5,12 +5,12 @@ import { Caption } from "react-native-paper";
 import { WishlistItem } from "../../../types/Wishlist";
 
 // Context
-import { WishlistContext } from "../../../services/wishlist/wishlist.context";
-import { ProductsContext } from "../../../services/products/products.context";
-import { UPDATE_WISHLIST_ITEMS_AVAILABILITY } from "../../../services/wishlist/wishlist.action-types";
+import { WishlistContext } from "@services/wishlist/wishlist.context";
+import { ProductsContext } from "@services/products/products.context";
+import { UPDATE_WISHLIST_ITEMS_AVAILABILITY } from "@services/wishlist/wishlist.action-types";
 
 // Components
-import { SafeArea } from "../../../components/utils/safe-area.component";
+import { SafeArea } from "@components";
 import { WishlistItemCard } from "../components/wishlist-item/wishlist-item.component";
 
 // Styles

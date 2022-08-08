@@ -17,31 +17,27 @@ import { LoadingIndicator } from "@components/loading/loading.component";
 import { SafeArea } from "./products.styles";
 
 export const ProductListScreen = () => {
-  const { products, isLoading, searchTerm, error, categories, dispatch } =
-    useContext(ProductsContext);
+  const { products, isLoading, searchTerm } = useContext(ProductsContext);
   const [allProducts, _] = useState(products);
   const [isFiltered, setIsFiltered] = useState<boolean>(false);
   const [filteredProducts, setSetFilteredProducts] = useState<
     ProductListType[]
   >([]);
   const [categoryId, setCategoryId] = useState<string>("");
-  const [errorLoadingCategories, setErrorLoadingCategories] = useState<
-    string | null
-  >(null);
 
   const { params } = useRoute();
 
-  //TODO: Custom back icon
-  //TODO: Category name
-
   useEffect(() => {
     if (searchTerm !== "") {
+      setSetFilteredProducts([]);
       const searchResults = allProducts.filter((p) =>
         p.name.toLowerCase().includes(searchTerm!)
       );
       setSetFilteredProducts(searchResults);
       setIsFiltered(true);
     } else {
+      //TODO: handle if search in category
+      // check if params.id and category id
       setIsFiltered(false);
       setSetFilteredProducts([]);
     }
@@ -57,12 +53,14 @@ export const ProductListScreen = () => {
   };
 
   const clearCategoryFilter = () => {
+    //TODO: clear search terms
     setIsFiltered(false);
     setSetFilteredProducts([]);
   };
 
   useEffect(() => {
     if (params) {
+      setSetFilteredProducts([]);
       const categoryProducts: ProductListType[] = allProducts.filter(
         (p: ProductListType) => p.category === params.id
       );

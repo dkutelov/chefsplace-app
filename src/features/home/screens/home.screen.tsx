@@ -1,3 +1,4 @@
+import { useContext, useState, useEffect } from "react";
 import { ScrollView } from "react-native";
 import { SafeArea } from "@components/utils/safe-area.component";
 import { Dimensions } from "react-native";
@@ -18,20 +19,41 @@ import {
   SecondaryBannerImage,
 } from "./home.styles";
 import { ProductCardSmall } from "@components/product-card-small/product-card-small.component";
-import { useContext, useState } from "react";
 import { ProductsContext } from "@services/products/products.context";
 import { colors } from "@infrastructure/theme/colors";
+import getAllProducts from "@infrastructure/api/products/get-all-products";
+import { getConfig } from "@infrastructure/api/config";
+import { ProductList } from "@types/Product";
 
 const win = Dimensions.get("window");
 const width = win.width - 16;
 
 export const HomeScreen = () => {
+  const [promoProducts, setPromoProducts] = useState<Array<ProductList> | null>(
+    null
+  );
   const { products, categories, isLoading, dispatch } =
     useContext(ProductsContext);
   const [errorLoadingCategories, setErrorLoadingCategories] = useState<
     string | null
   >(null);
-  const newProducts = products ? products.slice(-4) : [];
+  const newProducts = products
+    ? products.slice(-K.newAndPromoProductsCount)
+    : [];
+  const config = getConfig();
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const promotionalProducts = await getAllProducts(config, "promo");
+        setPromoProducts(
+          promotionalProducts.slice(0, K.newAndPromoProductsCount)
+        );
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+  }, []);
 
   return (
     <SafeArea>
@@ -91,8 +113,8 @@ export const HomeScreen = () => {
             </ScrollView>
           )}
         </Row>
-        <Row title="Популярни Продукти">
-          {!newProducts || newProducts.length === 0 ? (
+        <Row title="Продукти На Промоция">
+          {!promoProducts || promoProducts.length === 0 ? (
             <CentertedLoadingIndicator
               size={32}
               color={colors.ui.primary}
@@ -100,7 +122,7 @@ export const HomeScreen = () => {
             />
           ) : (
             <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-              {newProducts.map((product) => (
+              {promoProducts.map((product) => (
                 <ProductCardSmall
                   item={product}
                   key={product.id}
