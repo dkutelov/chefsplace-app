@@ -11,6 +11,7 @@ const defaultState: IProductsContext = {
   isLoading: false,
   isCategoryLoading: false,
   dispatch: () => {},
+  error: "",
 };
 
 export const ProductsContext = createContext(defaultState);

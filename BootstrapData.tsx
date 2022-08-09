@@ -2,6 +2,7 @@ import getAllCategories from "@infrastructure/api/categories/get-all-categories"
 import { ProductsContext } from "@services";
 import {
   SET_CATEGORIES,
+  ERROR_FETCH_CATEGORIES,
   SET_PRODUCTS,
 } from "@services/products/products.action-types";
 import React, { useEffect, useContext } from "react";
@@ -20,6 +21,7 @@ const BootstrapData = ({ children }: { children: React.ReactNode }) => {
           const categories = await getAllCategories(config);
           dispatch({ type: SET_CATEGORIES, payload: { categories } });
         } catch (error) {
+          dispatch({ type: ERROR_FETCH_CATEGORIES });
           console.log(error);
         }
       })();

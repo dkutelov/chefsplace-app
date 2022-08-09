@@ -1,4 +1,5 @@
 import { useContext, useState, useEffect } from "react";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import { ScrollView } from "react-native";
 import { SafeArea } from "@components/utils/safe-area.component";
 import { Dimensions } from "react-native";
@@ -32,7 +33,7 @@ export const HomeScreen = () => {
   const [promoProducts, setPromoProducts] = useState<Array<ProductList> | null>(
     null
   );
-  const { products, categories, isLoading, dispatch } =
+  const { products, categories, isLoading, dispatch, error } =
     useContext(ProductsContext);
   const [errorLoadingCategories, setErrorLoadingCategories] = useState<
     string | null
@@ -41,6 +42,7 @@ export const HomeScreen = () => {
     ? products.slice(-K.newAndPromoProductsCount)
     : [];
   const config = getConfig();
+  const { navigate } = useNavigation();
 
   useEffect(() => {
     (async () => {
@@ -54,6 +56,12 @@ export const HomeScreen = () => {
       }
     })();
   }, []);
+
+  useEffect(() => {
+    if (error !== "") {
+      navigate("ServerError", { error });
+    }
+  }, [error]);
 
   return (
     <SafeArea>

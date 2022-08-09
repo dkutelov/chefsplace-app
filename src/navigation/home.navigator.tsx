@@ -6,6 +6,7 @@ import { HomeScreen } from "../features/home/screens/home.screen";
 import { ProductDetailScreenWrapper } from "../features/product-detail/screens/product-detail.screen";
 import Search from "../features/products/components/search/search.component";
 import { fonts, fontSizes } from "../infrastructure/theme/fonts";
+import { ServerErrorScreen } from "@features/home/screens/server-error.screen";
 
 const Stack = createNativeStackNavigator();
 const isAndroid = Platform.OS === "android";
@@ -55,6 +56,19 @@ export const HomeStack = () => {
           },
         }}
       />
+      <Stack.Group screenOptions={{ presentation: "modal" }}>
+        <Stack.Screen
+          name="ServerError"
+          component={ServerErrorScreen}
+          options={{
+            title: "Грешка!",
+            headerTitleStyle: {
+              fontFamily: fonts.body,
+              fontSize: isAndroid ? 16 : fontSizes.body,
+            },
+          }}
+        />
+      </Stack.Group>
     </Stack.Navigator>
   );
 };

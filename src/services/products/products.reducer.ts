@@ -4,6 +4,7 @@ import {
   SET_SEARCH_TERM,
   RESET_SEARCH_TERM,
   SET_CATEGORIES,
+  ERROR_FETCH_CATEGORIES,
 } from "./products.action-types";
 import { setProducts, setCategories } from "./products.reducer-functions";
 
@@ -23,6 +24,8 @@ export const productsReducer = (state: IProductsContext, props: IProps) => {
       return { ...state, searchTerm: "" };
     case SET_CATEGORIES:
       return setCategories(state, payload.categories);
+    case ERROR_FETCH_CATEGORIES:
+      return { ...state, error: "Няма връзка със сървъра!" };
     default:
       return state;
   }
