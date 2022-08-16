@@ -79,6 +79,7 @@ function BottomTabNavigator() {
         name="Cart"
         component={CartStack}
         options={{
+          title: "Количка",
           headerShown: false,
           tabBarIcon: ({ color }) => (
             <TabIconWithBadge
@@ -96,6 +97,7 @@ function BottomTabNavigator() {
         name="Profile"
         component={AccountNavigator}
         options={{
+          title: "Профил",
           headerShown: false,
           tabBarIcon: ({ color }) => <TabBarIcon name="person" color={color} />,
         }}

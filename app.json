@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "chefsplace-app",
-    "slug": "chefsplace-app",
-    "version": "1.0.0",
+    "name": "Chefsplace",
+    "slug": "chefsplacebg",
+    "version": "1.0.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "scheme": "chefsplace",
@@ -16,13 +16,16 @@
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTablet": true
+      "buildNumber": "1.0.0",
+      "supportsTablet": false
     },
     "android": {
+      "versionCode": 2,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
-      }
+        "backgroundColor": "#4b9301"
+      },
+      "package": "bg.digitals.chefsplace"
     },
     "web": {
       "favicon": "./assets/favicon.png"

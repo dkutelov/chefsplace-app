@@ -15,24 +15,26 @@ import { Button } from "@components/button/button.component";
 import Checkbox from "@components/forms/checkbox/checkbox-component";
 import { MyRadioButton } from "@components/forms/radio-button/radio-buttton.component";
 import { Text } from "@components/typography/text.component";
-import { Spacer } from "@components/spacer/spacer.component";
 import { ShowDeliveryAddress } from "../../components/delivery-address.component";
 import { CentertedLoadingIndicator } from "@components/loading/activity-indicator.component";
 
 //Types and Context
-import { DeliveryAddress } from "@types/Profile";
 import { CartContext } from "@services";
 import { ShowInvoiceAddress } from "@features/checkout/components/invoice-address.component";
 import { getPaymentOptions } from "@infrastructure/utils/computed/getPaymentOptions";
-import { colors } from "@infrastructure/theme/colors";
 import { Order } from "@types/Order";
+
 import { getConfig } from "@infrastructure/api/config";
 import { createGuestOrder } from "@infrastructure/api/orders/create-guest-order";
+import { colors } from "@infrastructure/theme/colors";
 
 export const GuestCheckout = () => {
+  //State
   const [paymentType, setPaymentType] = useState("0");
   const [termsAgreed, setTermsAgreed] = useState(false);
   const [savingOrder, setSavingOrder] = useState(false);
+  const [note, setNote] = useState("");
+  //Hooks, context and config
   const { params } = useRoute();
   const { navigate } = useNavigation();
   const config = getConfig();
@@ -51,6 +53,10 @@ export const GuestCheckout = () => {
         invoiceAddressId: guestInvoiceAddress ? guestInvoiceAddress._id : null,
         payment: paymentType,
       };
+
+      if (note) {
+        order.note = note;
+      }
 
       setSavingOrder(true);
       const result = await createGuestOrder(config, order);
@@ -136,7 +142,13 @@ export const GuestCheckout = () => {
       <SectionContainer>
         <CheckoutSubtitle>Забележка</CheckoutSubtitle>
         <SectionInnerContainer>
-          <TextInput onChangeText={() => {}} value={""} />
+          <TextInput
+            mode="outlined"
+            activeOutlineColor={colors.ui.primary}
+            onChangeText={setNote}
+            value={note}
+            autoComplete={false}
+          />
         </SectionInnerContainer>
       </SectionContainer>
       <Checkbox

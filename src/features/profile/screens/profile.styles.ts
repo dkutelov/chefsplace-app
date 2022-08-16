@@ -19,3 +19,10 @@ export const ProfileContainer = styled.View`
   background-color: ${(props: { theme: Theme }) =>
     props.theme.colors.bg.primary};
 `;
+
+export const ScrollContainer = styled.ScrollView`
+  flex: 1;
+  padding: ${(props: { theme: Theme }) => props.theme.space[4]};
+  background-color: ${(props: { theme: Theme }) =>
+    props.theme.colors.bg.primary};
+`;

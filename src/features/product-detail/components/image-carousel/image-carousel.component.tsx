@@ -1,5 +1,12 @@
-import { View, Image, StyleSheet, useWindowDimensions } from "react-native";
-import React from "react";
+import React, { useState, useRef } from "react";
+import {
+  View,
+  Image,
+  StyleSheet,
+  useWindowDimensions,
+  ViewabilityConfig,
+  ViewToken,
+} from "react-native";
 
 import {
   ContainerView,
@@ -10,36 +17,37 @@ import {
 import { K } from "@infrastructure/constants";
 
 export const ImageCarousel = ({ images }: { images: string[] }) => {
-  const windowWidth = useWindowDimensions().width;
-  const [activeIndex, setActiveIndex] = React.useState(0);
+  const { width } = useWindowDimensions();
+  const [activeIndex, setActiveIndex] = useState(0);
 
-  const onFlatlistUpdate = React.useCallback(({ viewableItems }) => {
-    if (viewableItems.length > 0) {
-      setActiveIndex(viewableItems[0].index || 0);
+  const onFlatlistUpdate = useRef(
+    ({ viewableItems }: { viewableItems: ViewToken[] }) => {
+      if (viewableItems && viewableItems.length > 0) {
+        setActiveIndex(viewableItems[0].index || 0);
+      }
     }
-  }, []);
+  );
+
+  const viewabilityConfig: ViewabilityConfig = {
+    itemVisiblePercentThreshold: 51,
+  };
 
   return (
     <ContainerView>
       <ImageFlatList
         data={images}
-        renderItem={({ item }: { item: string | undefined }) => (
+        renderItem={({ item }) => (
           <Image
             source={{ uri: K.imageBaseUrl + item }}
-            style={[styles.image, { width: windowWidth - 40 }]}
+            style={[styles.image, { width: width - 40 }]}
           />
         )}
         horizontal
         showsHorizontalScrollIndicator={false}
-        snapToInterval={windowWidth - 20}
-        snapToAlignment={"center"} //center, end
-        decelerationRate={"fast"}
-        viewabilityConfig={{
-          viewAreaCoveragePercentThreshold: 50,
-          minimumViewTime: 100, // item should be on the screen min 300 ms
-        }}
-        onViewableItemsChanged={onFlatlistUpdate}
-        keyExtractor={(_, index) => index}
+        pagingEnabled
+        onViewableItemsChanged={onFlatlistUpdate.current}
+        viewabilityConfig={viewabilityConfig}
+        keyExtractor={(_, index) => `${index}`}
         oneImageOnly={images.length === 1}
       />
       {images.length > 1 && (

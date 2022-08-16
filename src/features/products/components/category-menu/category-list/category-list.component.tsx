@@ -1,10 +1,9 @@
 import React, { useState, useCallback, useContext, useEffect } from "react";
-import { Pressable, useWindowDimensions, Text, View } from "react-native";
+import { Pressable, useWindowDimensions, FlatList } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
 import {
   ContainerView,
-  CategoryFlatList,
   CategoryTitleContainer,
   CategoryTitle,
   CategoryNameWrapper,
@@ -13,7 +12,6 @@ import {
   NoCategoryWrapper,
 } from "./category-list.styles";
 
-import { Category } from "@types/Product";
 import CategoryListItem from "../category-list-item/category-list-item.component";
 import { colors } from "../../../../../infrastructure/theme/colors";
 import { ProductsContext } from "@services/products/products.context";
@@ -85,13 +83,9 @@ export const CategoryMenu = ({
       <CategoryTitleContainer onPress={toggleCetegoryMenu}>
         <CategoryTitle>Филтър по Категория</CategoryTitle>
         {showCategories ? (
-          <Ionicons name="caret-up" size={20} color={colors.monochromes.onyx} />
+          <Ionicons name="caret-up" size={20} color={colors.ui.orange} />
         ) : (
-          <Ionicons
-            name="caret-down"
-            size={20}
-            color={colors.monochromes.ony}
-          />
+          <Ionicons name="caret-down" size={20} color={colors.ui.orange} />
         )}
       </CategoryTitleContainer>
 
@@ -107,7 +101,7 @@ export const CategoryMenu = ({
                 <Ionicons
                   name="close-circle-outline"
                   size={24}
-                  color={colors.ui.orange}
+                  color={colors.ui.primary}
                 />
               </Pressable>
             </CategoryNameWrapper>
@@ -118,9 +112,9 @@ export const CategoryMenu = ({
           )}
 
           <ContainerView>
-            <CategoryFlatList
+            <FlatList
               data={categories}
-              renderItem={({ item }: Category) => (
+              renderItem={({ item }) => (
                 <CategoryListItem
                   item={item}
                   borderColor={
@@ -140,7 +134,7 @@ export const CategoryMenu = ({
                 viewAreaCoveragePercentThreshold: 50,
                 minimumViewTime: 100,
               }}
-              keyExtractor={(_, index) => index}
+              keyExtractor={(_, index) => `${index}`}
             />
           </ContainerView>
         </>

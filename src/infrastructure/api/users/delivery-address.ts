@@ -6,13 +6,19 @@ export const createDeliveryAddress = async (
   userId: string,
   address: DeliveryAddress
 ): Promise<DeliveryAddress> => {
-  return await config.fetch<DeliveryAddress>({
-    method: "POST",
-    url: config.apiUrl + "users/" + userId + "/delivery-address",
-    bodyData: {
-      address,
-    },
-  });
+  try {
+    console.log(userId, address);
+    return await config.fetch<DeliveryAddress>({
+      method: "POST",
+      url: config.apiUrl + "users/" + userId + "/delivery-address",
+      bodyData: {
+        address,
+      },
+    });
+  } catch (error) {
+    console.log(error);
+    throw new Error(error);
+  }
 };
 
 export const deleteDeliveryAddress = async (

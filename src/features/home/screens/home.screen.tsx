@@ -1,8 +1,7 @@
 import { useContext, useState, useEffect } from "react";
-import { useNavigation, useRoute } from "@react-navigation/native";
-import { ScrollView } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { ScrollView, useWindowDimensions } from "react-native";
 import { SafeArea } from "@components/utils/safe-area.component";
-import { Dimensions } from "react-native";
 import { CentertedLoadingIndicator } from "@components/loading/activity-indicator.component";
 
 import { K } from "@infrastructure/constants/";
@@ -26,10 +25,8 @@ import getAllProducts from "@infrastructure/api/products/get-all-products";
 import { getConfig } from "@infrastructure/api/config";
 import { ProductList } from "@types/Product";
 
-const win = Dimensions.get("window");
-const width = win.width - 16;
-
 export const HomeScreen = () => {
+  const { width } = useWindowDimensions();
   const [promoProducts, setPromoProducts] = useState<Array<ProductList> | null>(
     null
   );
@@ -71,7 +68,7 @@ export const HomeScreen = () => {
             source={{
               uri: K.homeHeroImageUrl,
             }}
-            style={{ width, height: 549 * (win.width / 597) }}
+            style={{ width: width - 16, height: 549 * (width / 597) }}
           />
         </HeroBanner>
         <Row title="Категории">
@@ -99,7 +96,7 @@ export const HomeScreen = () => {
         <SecondaryBanner>
           <SecondaryBannerImage
             source={require("../../../../assets/images/ufs-banner.png")}
-            style={{ width, height: 162 * (win.width / 1275) }}
+            style={{ width: width - 16, height: 162 * (width / 1275) }}
           />
         </SecondaryBanner>
         <Row title="Нови Продукти">

@@ -60,6 +60,13 @@ export const ProfileMenu = () => {
           }}
         />
         <MenuItem
+          title="Политика за Поверителност"
+          iconName="security"
+          onPressHandler={() => {
+            navigate("PrivacyPolicy");
+          }}
+        />
+        <MenuItem
           title="Свръжи се с Нас"
           iconName="contacts-outline"
           onPressHandler={() => {

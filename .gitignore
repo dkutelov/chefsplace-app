@@ -1,4 +1,3 @@
-src/infrastructure/firebase/firebaseConfig.js
 node_modules/
 */node_modules/**/*
 .expo/

@@ -26,6 +26,8 @@ import { createUserOrder } from "@infrastructure/api/orders/create-user-order";
 import { AuthenticationContext, CartContext } from "@services";
 import { getPaymentOptions } from "@infrastructure/utils/computed/getPaymentOptions";
 
+import { colors } from "@infrastructure/theme/colors";
+
 export const AuthCheckout = () => {
   //State
   const [paymentType, setPaymentType] = useState("0");
@@ -33,6 +35,7 @@ export const AuthCheckout = () => {
   const [deliveryAddressId, setDeliveryAddressId] = useState("");
   const [invoiceAddressId, setInvoiceAddressId] = useState("");
   const [savingOrder, setSavingOrder] = useState(false);
+  const [note, setNote] = useState("");
   //Context
   const { cartItems } = useContext(CartContext);
   const { profile } = useContext(AuthenticationContext);
@@ -58,7 +61,6 @@ export const AuthCheckout = () => {
     const selectedDeliveryAddress = profile?.deliveryAddress.find(
       (x) => x._id === deliveryAddressId
     );
-    //console.log({ selectedDeliveryAddress });
     if (selectedDeliveryAddress) {
       return selectedDeliveryAddress.city;
     }
@@ -73,6 +75,10 @@ export const AuthCheckout = () => {
         invoiceAddressId: invoiceAddressId,
         payment: paymentType,
       };
+
+      if (note) {
+        order.note = note;
+      }
 
       setSavingOrder(true);
 
@@ -212,7 +218,13 @@ export const AuthCheckout = () => {
       <SectionContainer>
         <CheckoutSubtitle>Забележка</CheckoutSubtitle>
         <SectionInnerContainer>
-          <TextInput onChangeText={() => {}} value={""} />
+          <TextInput
+            mode="outlined"
+            activeOutlineColor={colors.ui.primary}
+            onChangeText={setNote}
+            value={note}
+            autoComplete={false}
+          />
         </SectionInnerContainer>
       </SectionContainer>
       <Checkbox

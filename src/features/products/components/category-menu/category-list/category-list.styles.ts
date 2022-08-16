@@ -14,7 +14,7 @@ export const ContainerView = styled.View`
 `;
 
 export const CategoryTitleContainer = styled(Pressable)`
-  padding: ${(props: { theme: Theme }) => props.theme.space[1]} 0;
+  padding: ${(props: { theme: Theme }) => props.theme.space[2]} 0;
   flex-direction: row;
   justify-content: center;
   align-items: center;
@@ -22,10 +22,11 @@ export const CategoryTitleContainer = styled(Pressable)`
 
 export const CategoryTitle = styled.Text`
   margin-right: ${(props: { theme: Theme }) => props.theme.space[2]};
-  color: ${(props: { theme: Theme }) => props.theme.colors.monochromes.onyx};
+  color: ${(props: { theme: Theme }) => props.theme.colors.ui.orange};
+  font-size: ${(props: { theme: Theme }) => props.theme.fontSizes.body};
+  font-family: ${(props: { theme: Theme }) => props.theme.fonts.headingBold};
+  text-transform: uppercase;
 `;
-
-export const CategoryFlatList = styled(FlatList)``;
 
 export const CategoryNameWrapper = styled.View`
   margin: ${(props: { theme: Theme }) => props.theme.space[1]}
@@ -40,7 +41,7 @@ export const CategoryNameWrapper = styled.View`
 
 export const CategoryName = styled.Text`
   flex-basis: 90%;
-  color: ${(props: { theme: Theme }) => props.theme.colors.ui.orange};
+  color: ${(props: { theme: Theme }) => props.theme.colors.ui.primary};
   font-size: ${(props: { theme: Theme }) => props.theme.fontSizes.body};
   padding-left: ${(props: { theme: Theme }) => props.theme.space[2]};
 `;

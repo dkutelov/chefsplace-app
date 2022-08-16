@@ -19,6 +19,7 @@ import { EditProfileScreen } from "@features/profile/screens/edit-profile.screen
 import { ResetPasswordScreen } from "@features/account/screens/reset-password.screen";
 import { ContactScreen } from "@features/profile/screens/contact.screen.tsx";
 import { TermScreen } from "@features/profile/screens/term.screen.tsx";
+import { PrivacyPolicy } from "@features/profile/screens/privacy-policy.screen";
 
 const Stack = createNativeStackNavigator();
 
@@ -49,7 +50,6 @@ export const AccountNavigator = () => {
         component={EditProfileScreen}
         options={{ title: "Смяна на парола" }}
       />
-
       <Stack.Screen
         name="OrderList"
         component={OrdersScreen}
@@ -100,7 +100,6 @@ export const AccountNavigator = () => {
         component={InvoiceAddressShowScreen}
         options={{ presentation: "modal", headerShown: false }}
       />
-
       <Stack.Screen
         name="Terms"
         component={TermScreen}
@@ -110,6 +109,11 @@ export const AccountNavigator = () => {
         name="Contact"
         component={ContactScreen}
         options={{ title: "Контакти" }}
+      />
+      <Stack.Screen
+        name="PrivacyPolicy"
+        component={PrivacyPolicy}
+        options={{ title: "Политика за поверителност" }}
       />
     </Stack.Navigator>
   );

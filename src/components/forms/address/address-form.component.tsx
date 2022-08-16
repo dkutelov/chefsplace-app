@@ -24,7 +24,7 @@ export const AddressForm = () => {
   const config = getConfig();
   const { params } = useRoute();
   const { goBack } = useNavigation();
-
+  console.log({ profile });
   let defaultValues = {
     name: "",
     firstName: "Дарий",
