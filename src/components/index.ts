@@ -5,3 +5,5 @@ export { MyRadioButton } from "./forms/radio-button/radio-buttton.component";
 export { MyPicker } from "./forms/picker/picker.component";
 export { SafeArea } from "./utils/safe-area.component";
 export { CentertedLoadingIndicator } from "./loading/activity-indicator.component";
+import Checkbox from "./forms/checkbox/checkbox-component";
+export { Checkbox };

@@ -17,12 +17,12 @@ import {
   editInvoiceAddress,
 } from "@infrastructure/api/users/invoice-address";
 import { getConfig } from "@infrastructure/api/config";
-
+import { Text } from "@components";
 import { deliveryAddressToInvoiceData } from "@components/utils/getDeliveryToInvoiceAddress";
+import { InvoiceAddressSchema } from "@components/utils";
 
 export const InvoiceDataForm = () => {
   const { profile, fetchProfileById } = useContext(AuthenticationContext);
-  //const [addressId, setAddressId] = useState(null);
   const config = getConfig();
   const { params } = useRoute();
   const navigation = useNavigation();
@@ -32,7 +32,7 @@ export const InvoiceDataForm = () => {
     addressName: "",
     companyName: "",
     eik: "",
-    vatNumber: "",
+    vatNumber: false,
     mol: "",
     phoneNumber: "",
     postCode: "",
@@ -63,12 +63,15 @@ export const InvoiceDataForm = () => {
     const addressId = params.invoiceAddressId;
 
     if (profile && profile.invoiceAddress) {
-      const editAddress = profile.invoiceAddress.find(
+      const invoiceAddress = profile.invoiceAddress.find(
         (x: InvoiceAddress) => x._id === addressId
       );
 
-      if (editAddress) {
-        defaultValues = { ...defaultValues, ...editAddress };
+      if (invoiceAddress) {
+        if (invoiceAddress.vatNumber) {
+          invoiceAddress.vatNumber = true;
+        }
+        defaultValues = { ...defaultValues, ...invoiceAddress };
       }
     }
   }
@@ -83,11 +86,9 @@ export const InvoiceDataForm = () => {
     >
       <Formik
         initialValues={defaultValues}
+        validationSchema={InvoiceAddressSchema}
         onSubmit={async (values) => {
-          //TODO: validation
-
-          //TODO: transform to DeliveryAddress type
-          //console.log(values);
+          console.log(values);
           if (profile && profile._id) {
             if (!params?.invoiceAddressId) {
               await createInvoiceAddress(config, profile._id, values);
@@ -101,7 +102,14 @@ export const InvoiceDataForm = () => {
           }
         }}
       >
-        {({ values, handleChange, handleSubmit, setFieldValue }) => (
+        {({
+          values,
+          handleChange,
+          handleSubmit,
+          setFieldValue,
+          errors,
+          touched,
+        }) => (
           <FieldsContainer>
             <InputField
               label="Име на Адреса"
@@ -112,6 +120,9 @@ export const InvoiceDataForm = () => {
               value={values.addressName}
               style={{ paddingHorizontal: 0 }}
             />
+            {errors.addressName && touched.addressName ? (
+              <Text variant="error">{errors.addressName}</Text>
+            ) : null}
             <InputField
               label="Име на Фирма"
               onChangeText={handleChange("companyName")}
@@ -121,6 +132,9 @@ export const InvoiceDataForm = () => {
               value={values.companyName}
               style={{ paddingHorizontal: 0 }}
             />
+            {errors.companyName && touched.companyName ? (
+              <Text variant="error">{errors.companyName}</Text>
+            ) : null}
             <HorizontalRow>
               <InputField
                 label="ЕИК"
@@ -130,15 +144,17 @@ export const InvoiceDataForm = () => {
                 value={values.eik}
                 style={{ paddingHorizontal: 0, flexBasis: "49%" }}
               />
-              <InputField
-                label="Данъчен номер"
-                onChangeText={handleChange("vatNumber")}
-                textContentType="name"
-                keyboardType="default"
-                value={values.vatNumber}
-                style={{ paddingHorizontal: 0, flexBasis: "49%" }}
+              <Checkbox
+                checked={values?.vatNumber}
+                label="Регистрация по ДДС"
+                onCheckboxPress={() =>
+                  setFieldValue("vatNumber", !values.vatNumber)
+                }
               />
             </HorizontalRow>
+            {errors.eik && touched.eik ? (
+              <Text variant="error">{errors.eik}</Text>
+            ) : null}
             <InputField
               label="МОЛ"
               onChangeText={handleChange("mol")}
@@ -179,6 +195,14 @@ export const InvoiceDataForm = () => {
                 }}
               />
             </HorizontalRow>
+            <HorizontalRow>
+              {errors.city && touched.city ? (
+                <Text variant="error">{errors.city}</Text>
+              ) : null}
+              {errors.postCode && touched.postCode ? (
+                <Text variant="error">{errors.postCode}</Text>
+              ) : null}
+            </HorizontalRow>
             <InputField
               label="Адрес - жк, кв, ул, номер"
               onChangeText={handleChange("addressLine")}
@@ -188,6 +212,9 @@ export const InvoiceDataForm = () => {
               value={values.addressLine}
               style={{ paddingHorizontal: 0 }}
             />
+            {errors.addressLine && touched.addressLine ? (
+              <Text variant="error">{errors.addressLine}</Text>
+            ) : null}
             <InputField
               label="Адрес - бл, вх, ет, ап"
               onChangeText={handleChange("addressLine2")}

@@ -24,19 +24,9 @@ export const MyPicker = ({ items, value, setValue }: IProps) => {
         borderRadius: 8,
       }}
     >
-      <Picker.Item
-        label="Избери адрес"
-        value="0"
-        key={101}
-        style={{ color: colors.ui.primary }}
-      />
+      <Picker.Item label="Избери адрес" value="0" key={101} />
       {items.map(({ label, value }) => (
-        <Picker.Item
-          label={label}
-          value={value}
-          key={value}
-          style={{ color: colors.ui.primary }}
-        />
+        <Picker.Item label={label} value={value} key={value} />
       ))}
     </Picker>
   );

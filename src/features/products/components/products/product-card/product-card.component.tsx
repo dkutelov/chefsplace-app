@@ -1,4 +1,4 @@
-import React, { useState, useContext, useCallback } from "react";
+import React, { useState, useContext, useCallback, memo } from "react";
 import { useNavigation, useFocusEffect } from "@react-navigation/native";
 
 import { ProductList } from "../../../../../types/Product";
@@ -26,11 +26,22 @@ import { AddToCart } from "@components/add-to-cart-icon/add-to-cart.component";
 import { K } from "@infrastructure/constants";
 
 interface Props {
-  item: ProductList;
+  id: string;
+  name: string;
+  mainImage: string;
+  price: number;
+  maxQuantity: number;
+  weight: number;
 }
 
-export const ProductCard = ({ item }: Props) => {
-  const { id, name, mainImage, price, maxQuantity } = item;
+const ProductCard = ({
+  id,
+  name,
+  mainImage,
+  price,
+  maxQuantity,
+  weight,
+}: Props) => {
   const { navigate } = useNavigation();
   const { wishlistItems, dispatch: wishlistDispatch } =
     useContext(WishlistContext);
@@ -127,6 +138,7 @@ export const ProductCard = ({ item }: Props) => {
                 price,
                 maxQuantity,
                 quantity: 1,
+                weight,
               }}
               size={28}
             />
@@ -136,3 +148,5 @@ export const ProductCard = ({ item }: Props) => {
     </>
   );
 };
+
+export default memo(ProductCard);

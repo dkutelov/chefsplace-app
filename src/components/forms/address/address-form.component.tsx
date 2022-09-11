@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { Formik } from "formik";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
@@ -7,6 +7,7 @@ import {
   FieldsContainer,
   HorizontalRow,
 } from "./address-form.styles";
+import { Text } from "@components";
 import { Button } from "../../button/button.component";
 import Checkbox from "../checkbox/checkbox-component";
 import { DeliveryAddress } from "@types/User";
@@ -17,29 +18,35 @@ import {
 } from "@infrastructure/api/users/delivery-address";
 import { getConfig } from "@infrastructure/api/config";
 import { useNavigation, useRoute } from "@react-navigation/native";
+import { DeliveryAddressSchema } from "@components/utils";
 
 export const AddressForm = () => {
   const { profile, fetchProfileById } = useContext(AuthenticationContext);
-  //const [addressId, setAddressId] = useState(null);
   const config = getConfig();
   const { params } = useRoute();
   const { goBack } = useNavigation();
-  console.log({ profile });
+
+  const nextDeliveryAddressName = profile
+    ? profile.deliveryAddress
+      ? profile.deliveryAddress.length + 1
+      : ""
+    : "";
+
   let defaultValues = {
-    name: "",
-    firstName: "Дарий",
-    lastName: "Кутелов",
-    phoneNumber: "0896988688",
+    name: `Моя адрес ${nextDeliveryAddressName}`,
+    firstName: "",
+    lastName: "",
+    phoneNumber: "",
     company: "",
-    postCode: "1113",
-    city: "София",
-    area: "Изток",
-    street: "Латинка",
-    number: "9",
+    postCode: "",
+    city: "",
+    area: "",
+    street: "",
+    number: "",
     block: "",
-    entrance: "Б",
-    floor: "5",
-    apartment: "16",
+    entrance: "",
+    floor: "",
+    apartment: "",
     note: "",
     isDefault: false,
   };
@@ -67,11 +74,9 @@ export const AddressForm = () => {
     >
       <Formik
         initialValues={defaultValues}
+        validationSchema={DeliveryAddressSchema}
         onSubmit={async (values) => {
-          //TODO: validation
-
           //TODO: transform to DeliveryAddress type
-          //console.log(values);
 
           if (!params?.addressId) {
             try {
@@ -90,13 +95,19 @@ export const AddressForm = () => {
               params?.addressId,
               values
             );
-            console.log("🧐");
           }
           await fetchProfileById();
           goBack();
         }}
       >
-        {({ values, handleChange, handleSubmit, setFieldValue }) => (
+        {({
+          values,
+          handleChange,
+          handleSubmit,
+          setFieldValue,
+          errors,
+          touched,
+        }) => (
           <FieldsContainer>
             <InputField
               onChangeText={handleChange("name")}
@@ -107,6 +118,9 @@ export const AddressForm = () => {
               value={values.name}
               style={{ paddingHorizontal: 0 }}
             />
+            {errors.name && touched.name ? (
+              <Text variant="error">{errors.name}</Text>
+            ) : null}
             <InputField
               label="Име"
               onChangeText={handleChange("firstName")}
@@ -116,6 +130,9 @@ export const AddressForm = () => {
               value={values.firstName}
               style={{ paddingHorizontal: 0 }}
             />
+            {errors.firstName && touched.firstName ? (
+              <Text variant="error">{errors.firstName}</Text>
+            ) : null}
             <InputField
               label="Фамилия"
               onChangeText={handleChange("lastName")}
@@ -125,6 +142,9 @@ export const AddressForm = () => {
               value={values.lastName}
               style={{ paddingHorizontal: 0 }}
             />
+            {errors.lastName && touched.lastName ? (
+              <Text variant="error">{errors.lastName}</Text>
+            ) : null}
             <InputField
               label="Телефон"
               onChangeText={handleChange("phoneNumber")}
@@ -133,6 +153,9 @@ export const AddressForm = () => {
               value={values.phoneNumber}
               style={{ paddingHorizontal: 0 }}
             />
+            {errors.phoneNumber && touched.phoneNumber ? (
+              <Text variant="error">{errors.phoneNumber}</Text>
+            ) : null}
             <InputField
               label="Име на обект"
               onChangeText={handleChange("company")}
@@ -165,6 +188,12 @@ export const AddressForm = () => {
                 }}
               />
             </HorizontalRow>
+            {errors.city && touched.city ? (
+              <Text variant="error">{errors.city}</Text>
+            ) : null}
+            {errors.postCode && touched.postCode ? (
+              <Text variant="error">{errors.postCode}</Text>
+            ) : null}
             <InputField
               label="Жк/ Кв./ Местност"
               onChangeText={handleChange("area")}
@@ -261,11 +290,7 @@ export const AddressForm = () => {
                 setFieldValue("isDefault", !values.isDefault)
               }
             />
-            <Button
-              text="Запиши"
-              disabled={false}
-              onButtonPress={() => handleSubmit()}
-            />
+            <Button text="Запиши" onButtonPress={() => handleSubmit()} />
           </FieldsContainer>
         )}
       </Formik>

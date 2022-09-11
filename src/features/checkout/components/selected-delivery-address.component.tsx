@@ -3,6 +3,7 @@ import { Text } from "@components/typography/text.component";
 import { DeliveryAddress } from "@types/Profile";
 import { Spacer } from "@components/spacer/spacer.component";
 import { colors } from "@infrastructure/theme/colors";
+import { LoadingIndicator } from "@components/loading/loading.component";
 
 export interface IProps {
   deliveryAddressId: string;
@@ -34,11 +35,16 @@ export const SelectedDeliveryAddress = ({
     if (!addresses || addresses.length === 0 || !deliveryAddressId) {
       return;
     }
+
     const currentAddress = addresses.find((x) => x._id === deliveryAddressId);
     if (currentAddress) {
       setCurrentAddress(currentAddress);
     }
   }, [deliveryAddressId]);
+
+  if (!currentAddress) {
+    return <LoadingIndicator />;
+  }
 
   return (
     <Spacer position="top" size="small">
@@ -55,7 +61,7 @@ export const SelectedDeliveryAddress = ({
           <Spacer position="top" size="medium">
             <Text
               variant="body"
-              style={{ color: colors.monochromes.onyx, lineHeight: 20 }}
+              style={{ color: colors.ui.secondary, lineHeight: 20 }}
             >
               ({currentAddress?.name}) {currentAddress.postCode}{" "}
               {currentAddress.city}{" "}

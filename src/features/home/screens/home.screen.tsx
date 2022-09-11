@@ -24,6 +24,7 @@ import { colors } from "@infrastructure/theme/colors";
 import getAllProducts from "@infrastructure/api/products/get-all-products";
 import { getConfig } from "@infrastructure/api/config";
 import { ProductList } from "@types/Product";
+import { Text } from "@components";
 
 export const HomeScreen = () => {
   const { width } = useWindowDimensions();
@@ -35,8 +36,9 @@ export const HomeScreen = () => {
   const [errorLoadingCategories, setErrorLoadingCategories] = useState<
     string | null
   >(null);
+
   const newProducts = products
-    ? products.slice(-K.newAndPromoProductsCount)
+    ? products.slice(0, K.newAndPromoProductsCount)
     : [];
   const config = getConfig();
   const { navigate } = useNavigation();
@@ -118,13 +120,15 @@ export const HomeScreen = () => {
             </ScrollView>
           )}
         </Row>
-        <Row title="Продукти На Промоция">
-          {!promoProducts || promoProducts.length === 0 ? (
+        <Row title="Популярни Продукти">
+          {!promoProducts ? (
             <CentertedLoadingIndicator
               size={32}
               color={colors.ui.primary}
               height={300}
             />
+          ) : promoProducts.length === 0 ? (
+            <Text>Няма популярни продукти</Text>
           ) : (
             <ScrollView horizontal showsHorizontalScrollIndicator={false}>
               {promoProducts.map((product) => (

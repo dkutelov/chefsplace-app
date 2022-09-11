@@ -20,52 +20,53 @@ export const ProductListScreen = () => {
   const { products, isLoading, searchTerm } = useContext(ProductsContext);
   const [allProducts, _] = useState(products);
   const [isFiltered, setIsFiltered] = useState<boolean>(false);
-  const [filteredProducts, setSetFilteredProducts] = useState<
-    ProductListType[]
-  >([]);
+  const [filteredProducts, setFilteredProducts] = useState<ProductListType[]>(
+    []
+  );
   const [categoryId, setCategoryId] = useState<string>("");
 
   const { params } = useRoute();
 
   useEffect(() => {
     if (searchTerm !== "") {
-      setSetFilteredProducts([]);
+      setFilteredProducts([]);
       const searchResults = allProducts.filter((p) =>
         p.name.toLowerCase().includes(searchTerm!)
       );
-      setSetFilteredProducts(searchResults);
+      setFilteredProducts(searchResults);
       setIsFiltered(true);
     } else {
       //TODO: handle if search in category
       // check if params.id and category id
       setIsFiltered(false);
-      setSetFilteredProducts([]);
+      setFilteredProducts([]);
     }
   }, [searchTerm]);
 
   const filterProducts = (categoryId: string) => {
-    setSetFilteredProducts([]);
+    setFilteredProducts([]);
     const categoryProducts: ProductListType[] = allProducts.filter(
       (p: ProductListType) => p.category === categoryId
     );
     setIsFiltered(true);
-    setSetFilteredProducts(categoryProducts);
+    setFilteredProducts(categoryProducts);
   };
 
   const clearCategoryFilter = () => {
     //TODO: clear search terms
     setIsFiltered(false);
-    setSetFilteredProducts([]);
+    setFilteredProducts([]);
   };
 
+  // Incommning from home page
   useEffect(() => {
     if (params) {
-      setSetFilteredProducts([]);
+      setFilteredProducts([]);
       const categoryProducts: ProductListType[] = allProducts.filter(
         (p: ProductListType) => p.category === params.id
       );
       setIsFiltered(true);
-      setSetFilteredProducts(categoryProducts);
+      setFilteredProducts(categoryProducts);
       setCategoryId(params.id);
     }
   }, [params?.id, allProducts]);

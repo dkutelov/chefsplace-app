@@ -54,7 +54,7 @@ export const DescriptionAccordion = ({ description }: IProps) => {
           <DescriptionContent>{description?.advantages}</DescriptionContent>
         </List.Accordion>
       )}
-      {description.ingredients && (
+      {description.storage && (
         <List.Accordion
           style={AccordionItemStyle}
           theme={{ colors: { primary: colors.ui.primary } }}

@@ -36,7 +36,7 @@ export interface InvoiceAddress {
   addressName?: string;
   companyName: string;
   eik: string;
-  vatNumber?: string;
+  vatNumber?: string | boolean;
   mol: string;
   phoneNumber: string;
   postCode?: string;

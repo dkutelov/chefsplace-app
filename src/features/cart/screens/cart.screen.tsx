@@ -37,11 +37,11 @@ export const CartScreen = () => {
 
   const { navigate } = useNavigation();
 
-  useFocusEffect(
-    useCallback(() => {
-      console.log("😱");
-    }, [])
-  );
+  // useFocusEffect(
+  //   useCallback(() => {
+  //     console.log("😱");
+  //   }, [])
+  // );
   // useEffect(() => {
   //   dispatch({
   //     type: UPDATE_CART_ITEMS_ON_LOAD,

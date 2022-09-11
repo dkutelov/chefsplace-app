@@ -61,7 +61,7 @@ export const SelectedInvoiceAddress = ({
             <Text
               variant="body"
               style={{
-                color: colors.monochromes.onyx,
+                color: colors.ui.secondary,
                 lineHeight: 20,
               }}
             >

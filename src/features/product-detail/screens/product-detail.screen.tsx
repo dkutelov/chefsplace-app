@@ -54,9 +54,6 @@ const ProductDetailScreen = () => {
 
     //TODO: Handle error in product is not returned from servive
 
-    // Create Reducer?
-    //console.log(params);
-
     if (params && params.id) {
       loadProduct(params.id);
       setIsWishlisted(!!wishlistItems.find((x) => x.id === params.id));
@@ -158,12 +155,16 @@ const ProductDetailScreen = () => {
                 </NotEnoughQuantityNotifivation>
               )} */}
             </CTARow>
-            <Row>
-              <ShortDescription>{product.shortDescription}</ShortDescription>
-            </Row>
-            <Row>
-              <Description>{product.description?.content}</Description>
-            </Row>
+            {product.shortDescription && product.shortDescription !== "" && (
+              <Row>
+                <ShortDescription>{product.shortDescription}</ShortDescription>
+              </Row>
+            )}
+            {product.description?.content && (
+              <Row>
+                <Description>{product.description?.content}</Description>
+              </Row>
+            )}
             <Row>
               {product.description && (
                 <DescriptionAccordion description={product.description} />

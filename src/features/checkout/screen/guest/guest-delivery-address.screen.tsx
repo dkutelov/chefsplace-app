@@ -5,7 +5,7 @@ import { useNavigation } from "@react-navigation/native";
 
 //Components
 import { SafeArea } from "@components/utils/safe-area.component";
-import { Button } from "@components/button/button.component";
+import { Text, Button } from "@components";
 import {
   InputField,
   FieldsContainer,
@@ -20,6 +20,7 @@ import { getConfig } from "@infrastructure/api/config";
 import { DeliveryAddress } from "@types/Profile";
 import { CartContext } from "@services";
 import { SET_GUEST_DELIVERY_ADDRESS } from "@services/cart/cart.action-types";
+import { GuestDeliveryAddressSchema } from "@components/utils";
 
 export const GuesDeliveryAddressScreen = () => {
   const config = getConfig();
@@ -27,20 +28,20 @@ export const GuesDeliveryAddressScreen = () => {
   const { dispatch } = useContext(CartContext);
 
   let defaultValues = {
-    firstName: "Дарий",
-    lastName: "Кутелов",
-    phoneNumber: "0889611010",
-    company: "Дигиталс ООД",
-    postCode: "1421",
-    city: "София",
-    area: "Лозенец",
-    street: "ул. Цветна Градина",
-    number: "1",
-    block: "1",
-    entrance: "Б",
-    floor: "1",
-    apartment: "19",
-    note: "Звънец Телексим",
+    firstName: "",
+    lastName: "",
+    phoneNumber: "",
+    company: "",
+    postCode: "",
+    city: "",
+    area: "",
+    street: "",
+    number: "",
+    block: "",
+    entrance: "",
+    floor: "",
+    apartment: "",
+    note: "",
   };
 
   return (
@@ -55,12 +56,8 @@ export const GuesDeliveryAddressScreen = () => {
         >
           <Formik
             initialValues={defaultValues}
+            validationSchema={GuestDeliveryAddressSchema}
             onSubmit={async (values: DeliveryAddress) => {
-              //TODO: validation
-              // first name and last name - min 3 chars
-              // phone number
-              // city - min 3 chars
-
               //Save address to DB
               try {
                 const res = await createGuestDeliveryAddress(config, values);
@@ -84,7 +81,14 @@ export const GuesDeliveryAddressScreen = () => {
               goBack();
             }}
           >
-            {({ values, handleChange, handleSubmit, setFieldValue }) => (
+            {({
+              values,
+              handleChange,
+              handleSubmit,
+              setFieldValue,
+              errors,
+              touched,
+            }) => (
               <FieldsContainer>
                 <InputField
                   label="Име"
@@ -95,6 +99,9 @@ export const GuesDeliveryAddressScreen = () => {
                   value={values.firstName}
                   style={{ paddingHorizontal: 0 }}
                 />
+                {errors.firstName && touched.firstName ? (
+                  <Text variant="error">{errors.firstName}</Text>
+                ) : null}
                 <InputField
                   label="Фамилия"
                   onChangeText={handleChange("lastName")}
@@ -104,6 +111,9 @@ export const GuesDeliveryAddressScreen = () => {
                   value={values.lastName}
                   style={{ paddingHorizontal: 0 }}
                 />
+                {errors.lastName && touched.lastName ? (
+                  <Text variant="error">{errors.lastName}</Text>
+                ) : null}
                 <InputField
                   label="Телефон"
                   onChangeText={handleChange("phoneNumber")}
@@ -112,6 +122,9 @@ export const GuesDeliveryAddressScreen = () => {
                   value={values.phoneNumber}
                   style={{ paddingHorizontal: 0 }}
                 />
+                {errors.phoneNumber && touched.phoneNumber ? (
+                  <Text variant="error">{errors.phoneNumber}</Text>
+                ) : null}
                 <InputField
                   label="Фирма/ Обект"
                   onChangeText={handleChange("company")}
@@ -144,6 +157,12 @@ export const GuesDeliveryAddressScreen = () => {
                     }}
                   />
                 </HorizontalRow>
+                {errors.city && touched.city ? (
+                  <Text variant="error">{errors.city}</Text>
+                ) : null}
+                {errors.postCode && touched.postCode ? (
+                  <Text variant="error">{errors.postCode}</Text>
+                ) : null}
                 <InputField
                   label="Жк/ Кв./ Местност"
                   onChangeText={handleChange("area")}

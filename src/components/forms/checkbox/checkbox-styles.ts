@@ -11,4 +11,6 @@ export const CheckBoxContainer = styled.Pressable`
 export const CheckBoxIconContainer = styled.View``;
 export const Label = styled.Text`
   padding-left: ${(props: { theme: Theme }) => props.theme.space[2]};
+  color: ${(props: { theme: Theme }) =>
+    props.theme.colors.monochromes.darkerGray};
 `;

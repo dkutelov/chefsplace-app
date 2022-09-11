@@ -129,16 +129,18 @@ export const AuthCheckout = () => {
             </>
           ) : (
             <>
-              {profile?.deliveryAddress.length >= 1 && (
+              {profile?.deliveryAddress.length > 0 && (
+                <SelectedDeliveryAddress
+                  deliveryAddressId={deliveryAddressId}
+                  addresses={profile?.deliveryAddress}
+                  setDeliveryAddressId={setDeliveryAddressId}
+                />
+              )}
+              {profile?.deliveryAddress.length > 1 && (
                 <>
-                  <SelectedDeliveryAddress
-                    deliveryAddressId={deliveryAddressId}
-                    addresses={profile?.deliveryAddress}
-                    setDeliveryAddressId={setDeliveryAddressId}
-                  />
                   <Spacer position="top" size="medium">
                     <Spacer position="bottom" size="medium">
-                      <Text variant="title">Избери адрес на доставка</Text>
+                      <Text variant="title">Избери друг адрес на доставка</Text>
                     </Spacer>
                     <MyPicker
                       items={profile?.deliveryAddress?.map((x) => ({
@@ -154,7 +156,7 @@ export const AuthCheckout = () => {
             </>
           )}
           <Button
-            text="Добави Адрес На Доставка"
+            text="Добави Нов Адрес"
             onButtonPress={() => {
               navigate("NewDeliveryAddress");
             }}
@@ -162,43 +164,46 @@ export const AuthCheckout = () => {
         </SectionInnerContainer>
       </SectionContainer>
       <SectionContainer>
-        <CheckoutSubtitle>Адрес за фактуриране</CheckoutSubtitle>
+        <CheckoutSubtitle>Данни за фактура</CheckoutSubtitle>
         <SectionInnerContainer>
           {profile?.invoiceAddress?.length === 0 ? (
             <>
               <Spacer position="bottom" size="medium">
-                <Text variant="body">Още нямате данни за фактуриране</Text>
+                <Text variant="body">
+                  Още нямате данни за фактура. Ако желаете фактура, добавете
+                  данни на фирмата.
+                </Text>
               </Spacer>
             </>
           ) : (
             <>
-              {profile?.invoiceAddress.length >= 1 && (
-                <>
-                  <SelectedInvoiceAddress
-                    invoiceAddressId={invoiceAddressId}
-                    addresses={profile?.invoiceAddress}
-                    setInvoiceAddressId={setInvoiceAddressId}
-                  />
-                  <Spacer position="top" size="medium">
-                    <Spacer position="bottom" size="medium">
-                      <Text variant="title">Избери данни за фактура</Text>
-                    </Spacer>
-                    <MyPicker
-                      items={profile?.invoiceAddress?.map((x) => ({
-                        label: x.addressName,
-                        value: x._id,
-                      }))}
-                      value={invoiceAddressId}
-                      setValue={setInvoiceAddress}
-                    />
+              {profile?.invoiceAddress.length > 0 && (
+                <SelectedInvoiceAddress
+                  invoiceAddressId={invoiceAddressId}
+                  addresses={profile?.invoiceAddress}
+                  setInvoiceAddressId={setInvoiceAddressId}
+                />
+              )}
+              {profile?.invoiceAddress.length > 1 && (
+                <Spacer position="top" size="medium">
+                  <Spacer position="bottom" size="medium">
+                    <Text variant="title">Избери данни за фактура</Text>
                   </Spacer>
-                </>
+                  <MyPicker
+                    items={profile?.invoiceAddress?.map((x) => ({
+                      label: x.addressName,
+                      value: x._id,
+                    }))}
+                    value={invoiceAddressId}
+                    setValue={setInvoiceAddress}
+                  />
+                </Spacer>
               )}
             </>
           )}
 
           <Button
-            text="Добави Адрес За Фактура"
+            text="Добави Данни за фактура"
             onButtonPress={() => {
               navigate("NewInvoiceDataAddress");
             }}

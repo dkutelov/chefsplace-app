@@ -30,7 +30,7 @@ export const InvoiceAddressShowScreen = () => {
             />
             <ViewField
               label="ДДС номер"
-              text={params?.address.vatNumber ?? ""}
+              text={params?.address.vatNumber ? `BG${params?.address.eik}` : ""}
               containerStyles={{ flexBasis: "49%" }}
             />
           </HorizontalRow>

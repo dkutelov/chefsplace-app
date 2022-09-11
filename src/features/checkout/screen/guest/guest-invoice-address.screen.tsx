@@ -9,8 +9,7 @@ import {
   FieldsContainer,
   HorizontalRow,
 } from "@components/forms/invoice-data/invoice-data-form.styles";
-import { SafeArea } from "@components/utils/safe-area.component";
-import { Button } from "@components/button/button.component";
+import { Button, Text, SafeArea, Checkbox } from "@components";
 
 //Types and context
 import { DeliveryAddress, InvoiceAddress } from "@types/Profile";
@@ -22,6 +21,7 @@ import { getConfig } from "@infrastructure/api/config";
 import { SET_GUEST_INVOICE_ADDRESS } from "@services/cart/cart.action-types";
 
 import { deliveryAddressToInvoiceData } from "@components/utils/getDeliveryToInvoiceAddress";
+import { GuestInvoiceAddressSchema } from "@components/utils";
 
 export const GuestInvoiceAddressScreen = () => {
   const config = getConfig();
@@ -32,7 +32,7 @@ export const GuestInvoiceAddressScreen = () => {
     addressId: null,
     companyName: "",
     eik: "",
-    vatNumber: "",
+    vatNumber: false,
     mol: "",
     phoneNumber: "",
     postCode: "",
@@ -59,9 +59,8 @@ export const GuestInvoiceAddressScreen = () => {
       >
         <Formik
           initialValues={defaultValues}
+          validationSchema={GuestInvoiceAddressSchema}
           onSubmit={async (values) => {
-            //TODO: validation
-
             //Save address to DB
             try {
               const res = await createGuestInvoiceAddress(config, values);
@@ -82,12 +81,17 @@ export const GuestInvoiceAddressScreen = () => {
               console.log(error);
             }
 
-            //console.log(values);
-
             navigation.goBack();
           }}
         >
-          {({ values, handleChange, handleSubmit, setFieldValue }) => (
+          {({
+            values,
+            handleChange,
+            handleSubmit,
+            setFieldValue,
+            errors,
+            touched,
+          }) => (
             <FieldsContainer>
               <InputField
                 label="Име на Фирма"
@@ -98,6 +102,9 @@ export const GuestInvoiceAddressScreen = () => {
                 value={values.companyName}
                 style={{ paddingHorizontal: 0 }}
               />
+              {errors.companyName && touched.companyName ? (
+                <Text variant="error">{errors.companyName}</Text>
+              ) : null}
               <HorizontalRow>
                 <InputField
                   label="ЕИК"
@@ -107,15 +114,17 @@ export const GuestInvoiceAddressScreen = () => {
                   value={values.eik}
                   style={{ paddingHorizontal: 0, flexBasis: "49%" }}
                 />
-                <InputField
-                  label="Данъчен номер"
-                  onChangeText={handleChange("vatNumber")}
-                  textContentType="name"
-                  keyboardType="default"
-                  value={values.vatNumber}
-                  style={{ paddingHorizontal: 0, flexBasis: "49%" }}
+                <Checkbox
+                  checked={values?.vatNumber}
+                  label="Регистрация по ДДС"
+                  onCheckboxPress={() =>
+                    setFieldValue("vatNumber", !values.vatNumber)
+                  }
                 />
               </HorizontalRow>
+              {errors.eik && touched.eik ? (
+                <Text variant="error">{errors.eik}</Text>
+              ) : null}
               <InputField
                 label="МОЛ"
                 onChangeText={handleChange("mol")}
@@ -156,6 +165,14 @@ export const GuestInvoiceAddressScreen = () => {
                   }}
                 />
               </HorizontalRow>
+              <HorizontalRow>
+                {errors.city && touched.city ? (
+                  <Text variant="error">{errors.city}</Text>
+                ) : null}
+                {errors.postCode && touched.postCode ? (
+                  <Text variant="error">{errors.postCode}</Text>
+                ) : null}
+              </HorizontalRow>
               <InputField
                 label="Адрес - жк, кв, ул, номер"
                 onChangeText={handleChange("addressLine")}
@@ -165,6 +182,9 @@ export const GuestInvoiceAddressScreen = () => {
                 value={values.addressLine}
                 style={{ paddingHorizontal: 0 }}
               />
+              {errors.addressLine && touched.addressLine ? (
+                <Text variant="error">{errors.addressLine}</Text>
+              ) : null}
               <InputField
                 label="Адрес - бл, вх, ет, ап"
                 onChangeText={handleChange("addressLine2")}

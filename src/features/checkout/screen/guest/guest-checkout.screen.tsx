@@ -103,7 +103,7 @@ export const GuestCheckout = () => {
             text={
               !guestDeliveryAddress
                 ? "Добави Адрес На Доставка"
-                : "Промени Адреса На Доставка"
+                : "Друг Адрес На Доставка"
             }
             onButtonPress={() => {
               navigate("NewGuestDeliveryAddress");
