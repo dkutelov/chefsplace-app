@@ -43,8 +43,6 @@ export const WishlistItemCard = ({ wishlistItem }: Props) => {
 
   const getMaxQuantity = () => {
     const product = products.find((x) => (x.id = id));
-    //console.log({ product });
-
     return product?.maxQuantity || 1;
   };
 

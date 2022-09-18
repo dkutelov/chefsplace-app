@@ -48,10 +48,12 @@ export const CategoryName = styled.Text`
 export const NoCategory = styled.Text`
   color: ${(props: { theme: Theme }) => props.theme.colors.ui.primary};
   font-size: ${(props: { theme: Theme }) => props.theme.fontSizes.button};
+  text-align: center;
+  padding: 0 ${(props: { theme: Theme }) => props.theme.space[2]};
 `;
 
 export const NoCategoryWrapper = styled.View`
-  height: 30px;
+  height: 45px;
   margin: ${(props: { theme: Theme }) => props.theme.space[1]}
     ${(props: { theme: Theme }) => props.theme.space[2]} 0;
   align-items: flex-start;

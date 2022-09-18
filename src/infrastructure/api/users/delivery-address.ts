@@ -7,7 +7,6 @@ export const createDeliveryAddress = async (
   address: DeliveryAddress
 ): Promise<DeliveryAddress> => {
   try {
-    console.log(userId, address);
     return await config.fetch<DeliveryAddress>({
       method: "POST",
       url: config.apiUrl + "users/" + userId + "/delivery-address",

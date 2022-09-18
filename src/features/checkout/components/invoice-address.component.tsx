@@ -34,9 +34,7 @@ export const ShowInvoiceAddress = ({ invoiceAddress }: IProps) => {
               ? "Фирма: " + invoiceAddress.companyName
               : ""}
             {invoiceAddress.eik ? ", ЕИК " + invoiceAddress.eik : ""}{" "}
-            {invoiceAddress.vatNumber
-              ? ", ДДС № " + invoiceAddress.vatNumber
-              : ""}{" "}
+            {invoiceAddress.vatNumber ? ", ДДС № BG" + invoiceAddress.eik : ""}{" "}
             {invoiceAddress?.postCode
               ? ", пк " + invoiceAddress.postCode + " "
               : ""}

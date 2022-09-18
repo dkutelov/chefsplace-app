@@ -18,6 +18,7 @@ export const CreditCardPaymentScreen = () => {
   const [name, setName] = useState("");
   const [card, setCard] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [checkingCardValidity, setCheckingCardValidity] = useState(false);
 
   const { params } = useRoute();
   const { navigate } = useNavigation();
@@ -43,8 +44,6 @@ export const CreditCardPaymentScreen = () => {
 
     try {
       const res = await payRequest(config, card.id, sum, name);
-      console.log({ res });
-
       setIsLoading(false);
       navigate("Success", { orderNumber: params?.orderNumber || 0 });
       return;
@@ -74,7 +73,7 @@ export const CreditCardPaymentScreen = () => {
             <Text variant="caption">Въведете данните от карта</Text>
             <Spacer position="top" size="large">
               <TextInput
-                label="Име (както e изписано на картата)"
+                label="ИМЕ (както e изписано на картата)"
                 activeUnderlineColor={colors.ui.primary}
                 onChangeText={setName}
                 value={name}
@@ -91,6 +90,7 @@ export const CreditCardPaymentScreen = () => {
                 onSuccess={(c) => {
                   setCard(c);
                 }}
+                setCheckingCardValidity={setCheckingCardValidity}
               />
             </Spacer>
           </SectionInnerContainer>
@@ -100,7 +100,7 @@ export const CreditCardPaymentScreen = () => {
         <Spacer position="top" size="large">
           <Button
             disabled={isLoading || !name || !card || !card.id}
-            text="ПЛАЩАМ"
+            text={checkingCardValidity ? "ВАЛИДИРАНЕ ..." : "ПЛАТИ"}
             onButtonPress={onPay}
           />
         </Spacer>

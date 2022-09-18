@@ -2,7 +2,19 @@ import React from "react";
 import { LiteCreditCardInput } from "react-native-credit-card-input";
 import { cardTokenRequest } from "@infrastructure/api/payment/pay-request";
 
-export const CreditCardInput = ({ name, onSuccess, onError }) => {
+interface IProps {
+  name: string;
+  onSuccess: () => void;
+  onError: () => void;
+  setCheckingCardValidity: () => void;
+}
+
+export const CreditCardInput = ({
+  name,
+  onSuccess,
+  onError,
+  setCheckingCardValidity,
+}: IProps) => {
   const onChange = async (formData) => {
     const { values, status } = formData;
     const isIncomplete = Object.values(status).includes("incomplete");
@@ -16,7 +28,9 @@ export const CreditCardInput = ({ name, onSuccess, onError }) => {
     };
     if (!isIncomplete) {
       try {
+        setCheckingCardValidity(true);
         const info = await cardTokenRequest(card);
+        setCheckingCardValidity(false);
         onSuccess(info);
       } catch (e) {
         onError();

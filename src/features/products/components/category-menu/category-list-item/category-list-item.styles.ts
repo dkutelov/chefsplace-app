@@ -12,7 +12,7 @@ export const CategoryCard = styled(Pressable)`
 
 export const CategoryTitleContainer = styled.View`
   height: 55px;
-  width: 80px;
+  width: 95px;
   justify-content: flex-start;
   align-items: center;
 `;

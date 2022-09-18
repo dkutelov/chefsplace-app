@@ -48,7 +48,7 @@ export const AuthCheckout = () => {
     setTermsAgreed(!termsAgreed);
   };
 
-  const setInvoiceAddress = (value) => {
+  const setInvoiceAddress = (value: string) => {
     if (value === "0") {
       setInvoiceAddressId("");
     } else {

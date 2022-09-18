@@ -88,7 +88,6 @@ export const InvoiceDataForm = () => {
         initialValues={defaultValues}
         validationSchema={InvoiceAddressSchema}
         onSubmit={async (values) => {
-          console.log(values);
           if (profile && profile._id) {
             if (!params?.invoiceAddressId) {
               await createInvoiceAddress(config, profile._id, values);

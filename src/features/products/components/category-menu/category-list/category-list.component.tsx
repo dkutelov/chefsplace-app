@@ -81,7 +81,7 @@ export const CategoryMenu = ({
   return (
     <>
       <CategoryTitleContainer onPress={toggleCetegoryMenu}>
-        <CategoryTitle>Филтър по Категория</CategoryTitle>
+        <CategoryTitle>Виж по Категория</CategoryTitle>
         {showCategories ? (
           <Ionicons name="caret-up" size={20} color={colors.ui.orange} />
         ) : (
@@ -107,7 +107,10 @@ export const CategoryMenu = ({
             </CategoryNameWrapper>
           ) : (
             <NoCategoryWrapper>
-              <NoCategory>Няма избрана категория</NoCategory>
+              <NoCategory>
+                Няма избрана категория. Докоснете име или снимка на категория за
+                избор.
+              </NoCategory>
             </NoCategoryWrapper>
           )}
 
