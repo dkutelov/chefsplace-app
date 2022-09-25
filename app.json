@@ -2,7 +2,7 @@
   "expo": {
     "name": "Chefsplace",
     "slug": "chefsplacebg",
-    "version": "1.0.1",
+    "version": "1.0.4",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "scheme": "chefsplace",
@@ -17,10 +17,11 @@
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "buildNumber": "1.0.0",
-      "supportsTablet": false
+      "supportsTablet": false,
+      "bundleIdentifier": "y"
     },
     "android": {
-      "versionCode": 1,
+      "versionCode": 4,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#4b9301"
@@ -29,6 +30,11 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "11b8f189-3491-4afa-b858-eddd2c6b2fdd"
+      }
     }
   }
 }

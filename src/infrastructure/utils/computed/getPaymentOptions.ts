@@ -4,7 +4,7 @@ export const getPaymentOptions = (
   let paymentOptions = [
     { label: "Наложен платеж или ППП", value: "0" },
     { label: "Банков път", value: "1" },
-    { label: "С кредитна/ дебитна карта", value: "2" },
+    // { label: "С кредитна/ дебитна карта", value: "2" },
   ];
 
   const cityName = city?.trim().toLowerCase();

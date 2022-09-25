@@ -145,7 +145,7 @@ export const GuesDeliveryAddressScreen = () => {
                     style={{ paddingHorizontal: 0, flexBasis: "76%" }}
                   />
                   <InputField
-                    label="Пощ. код"
+                    label="ПК"
                     onChangeText={handleChange("postCode")}
                     textContentType="postalCode"
                     keyboardType="numeric"

@@ -62,17 +62,17 @@ export const GuestCheckout = () => {
       const result = await createGuestOrder(config, order);
       if (result.success) {
         setSavingOrder(false);
-
-        if (paymentType === "2") {
-          const amountToPay =
-            (params?.cartAmount / 100 + params?.deliveryCharge) * 1.2;
-          navigate("CreditCardPayment", {
-            orderNumber: result.orderNumber,
-            amount: amountToPay,
-          });
-        } else {
-          navigate("Success", { orderNumber: result.orderNumber });
-        }
+        navigate("Success", { orderNumber: result.orderNumber });
+        // if (paymentType === "2") {
+        //   const amountToPay =
+        //     (params?.cartAmount / 100 + params?.deliveryCharge) * 1.2;
+        //   navigate("CreditCardPayment", {
+        //     orderNumber: result.orderNumber,
+        //     amount: amountToPay,
+        //   });
+        // } else {
+        //   navigate("Success", { orderNumber: result.orderNumber });
+        // }
       } else {
         console.log(result);
         navigate("CheckoutError");
@@ -147,7 +147,6 @@ export const GuestCheckout = () => {
             activeOutlineColor={colors.ui.primary}
             onChangeText={setNote}
             value={note}
-            autoComplete={false}
           />
         </SectionInnerContainer>
       </SectionContainer>

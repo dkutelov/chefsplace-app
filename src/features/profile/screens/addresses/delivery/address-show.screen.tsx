@@ -39,7 +39,7 @@ export const DeliveryAddressShowScreen = () => {
               containerStyles={{ flexBasis: "76%" }}
             />
             <ViewField
-              label="Пощ. код"
+              label="ПК"
               text={params?.address.postCode ?? ""}
               containerStyles={{ flexBasis: "23%" }}
             />

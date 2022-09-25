@@ -51,7 +51,6 @@ const Search = () => {
         onSubmitEditing={onEditingFinished}
         onIconPress={onEditingFinished}
         onChangeText={onInputChange}
-        autoComplete={false}
       />
     </HeaderContainer>
   );
