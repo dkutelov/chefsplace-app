@@ -1,4 +1,4 @@
-import { FlatList, Platform } from "react-native";
+import { FlatList, Platform, Pressable } from "react-native";
 import styled from "styled-components/native";
 import { Theme } from "../../../types/Theme";
 
@@ -30,4 +30,47 @@ export const Title = styled.Text`
   color: ${(props: { theme: Theme }) => props.theme.colors.text.primary};
   margin-top: ${(props: { theme: Theme }) => props.theme.space[1]};
   margin-bottom: ${(props: { theme: Theme }) => props.theme.space[1]};
+`;
+
+// Admin Order List Item
+export const ListItemWrapper = styled.Pressable`
+  display: flex;
+  flex-direction: row;
+  margin-bottom: ${(props: { theme: Theme }) => props.theme.space[1]};
+  background-color: white;
+  padding: ${(props: { theme: Theme }) => props.theme.space[2]};
+  border: 1px solid
+    ${(props: { theme: Theme }) => props.theme.colors.monochromes.veryLightGray};
+`;
+
+export const ListItemContent = styled.View`
+  flex-basis: 95%;
+`;
+export const ListItemNav = styled.View`
+  flex-basis: 5%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const ListItemTitle = styled.Text`
+  margin-bottom: ${(props: { theme: Theme }) => props.theme.space[1]};
+  font-size: 16px;
+`;
+
+export const ListItemRow = styled.View`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: ${(props: { theme: Theme }) => props.theme.space[1]};
+`;
+
+export const ListItemLabel = styled.Text`
+  flex-basis: 35%;
+  color: ${(props: { theme: Theme }) =>
+    props.theme.colors.monochromes.darkGray};
+`;
+
+export const ListItemValue = styled.Text`
+  color: ${(props: { theme: Theme }) => props.theme.colors.monochromes.onyx};
 `;

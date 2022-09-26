@@ -18,3 +18,12 @@ export const getPaymentOptions = (
 
   return paymentOptions;
 };
+
+export const paymentOptions: {
+  [k: string]: string;
+} = {
+  "0": "Наложен платеж или ППП",
+  "1": "По банков път",
+  "2": "С кредитна/ дебитна карта",
+  "3": "В брой (само за София)",
+};

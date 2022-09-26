@@ -1,10 +1,14 @@
 import { string } from "yup";
+import { Order } from "./Order";
 
 export interface Profile {
   _id?: string;
   userId?: string;
   deliveryAddress?: DeliveryAddress[];
   invoiceAddress?: InvoiceAddress[];
+  isAdmin?: Boolean;
+  orders?: [Order];
+  allOrders?: [Order];
 }
 
 export interface DeliveryAddress {

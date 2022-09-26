@@ -1,3 +1,4 @@
+import { Dispatch, SetStateAction } from "react";
 import { Profile } from "./Profile";
 
 export interface User {
@@ -19,4 +20,5 @@ export interface IUserContext {
   fetchProfileById: () => Promise<void>;
   profile: Profile | null;
   clearError: () => void;
+  setProfile: Dispatch<SetStateAction<Profile | null>>;
 }

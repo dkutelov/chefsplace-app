@@ -1,5 +1,5 @@
-import { ApiConfig } from "@common/types/api";
-import { Order } from "@types/Order";
+import { ApiConfig } from "../../../types/common/api";
+import { Order } from "../../../types/Order";
 
 type ReturnType = {
   [key: string]: string;

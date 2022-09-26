@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { ScrollView } from "react-native";
 import { List } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
 
@@ -8,11 +9,20 @@ import { colors } from "../../../../infrastructure/theme/colors";
 import { AuthenticationContext } from "../../../../services/authentication/authentication.context";
 
 export const ProfileMenu = () => {
-  const { onLogout } = useContext(AuthenticationContext);
+  const { onLogout, profile } = useContext(AuthenticationContext);
   const { navigate } = useNavigation();
   return (
-    <>
+    <ScrollView>
       <List.Section>
+        {profile?.allOrders && (
+          <MenuItem
+            title="Всички Поръчки"
+            iconName="bag-personal-outline"
+            onPressHandler={() => {
+              navigate("AllOrderList");
+            }}
+          />
+        )}
         <MenuItem
           title="Моите Поръчки"
           iconName="reload"
@@ -83,6 +93,6 @@ export const ProfileMenu = () => {
           iconColor={colors.ui.error}
         />
       </List.Section>
-    </>
+    </ScrollView>
   );
 };

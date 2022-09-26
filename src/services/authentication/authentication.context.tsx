@@ -1,5 +1,11 @@
 import createProfile from "@infrastructure/api/users/create-profile";
-import React, { useState, createContext, useEffect, useContext } from "react";
+import React, {
+  useState,
+  createContext,
+  useEffect,
+  Dispatch,
+  SetStateAction,
+} from "react";
 import { IUserContext, User } from "../../types/User";
 
 import {
@@ -27,6 +33,7 @@ const defaultState: IUserContext = {
   onLogout: () => {},
   profile: {},
   fetchProfileById: () => {},
+  setProfile: () => {},
 };
 
 export const AuthenticationContext = createContext<IUserContext>(defaultState);
@@ -145,6 +152,7 @@ export const AuthenticationContextProvider = ({
         onLogout,
         fetchProfileById,
         clearError,
+        setProfile,
       }}
     >
       {children}

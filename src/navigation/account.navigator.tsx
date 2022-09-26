@@ -13,6 +13,7 @@ import { NewInvoiceDataScreen } from "@features/profile/screens/addresses/invoic
 import { CreateInvoiceDataScreen } from "@features/profile/screens/addresses/invoice/create-invoice-data.screen";
 import { InvoiceAddressShowScreen } from "@features/profile/screens/addresses/invoice/invoice-address-show.screen";
 import { OrdersScreen } from "@features/profile/screens/orders/orders-list.screen";
+import { AllOrdersScreen } from "@features/profile/screens/orders/all-orders-list.screen";
 import { OrderDetailScreen } from "@features/profile/screens/orders/order-detail.screen";
 import { OrderAgainScreen } from "@features/profile/screens/orders/order-again.screen";
 import { EditProfileScreen } from "@features/profile/screens/edit-profile.screen";
@@ -54,6 +55,11 @@ export const AccountNavigator = () => {
         name="OrderList"
         component={OrdersScreen}
         options={{ title: "Моите Поръчки" }}
+      />
+      <Stack.Screen
+        name="AllOrderList"
+        component={AllOrdersScreen}
+        options={{ title: "Всички Поръчки" }}
       />
       <Stack.Screen
         name="OrderDetails"
