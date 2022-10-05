@@ -18,10 +18,10 @@ import { OrderDetailScreen } from "@features/profile/screens/orders/order-detail
 import { OrderAgainScreen } from "@features/profile/screens/orders/order-again.screen";
 import { EditProfileScreen } from "@features/profile/screens/edit-profile.screen";
 import { ResetPasswordScreen } from "@features/account/screens/reset-password.screen";
-import { ContactScreen } from "@features/profile/screens/contact.screen.tsx";
-import { TermScreen } from "@features/profile/screens/term.screen.tsx";
+import { ContactScreen } from "@features/profile/screens/contact.screen";
+import { TermScreen } from "@features/profile/screens/term.screen";
 import { PrivacyPolicy } from "@features/profile/screens/privacy-policy.screen";
-
+import { AdminOrderDetailScreen } from "@features/profile/screens/orders/admin-order-detail.screen";
 const Stack = createNativeStackNavigator();
 
 export const AccountNavigator = () => {
@@ -65,6 +65,11 @@ export const AccountNavigator = () => {
         name="OrderDetails"
         component={OrderDetailScreen}
         options={{ title: "Детайли за поръчката" }}
+      />
+      <Stack.Screen
+        name="AdminOrderDetails"
+        component={AdminOrderDetailScreen}
+        options={{ title: "Поръчка" }}
       />
       <Stack.Screen
         name="OrderAgain"

@@ -13,7 +13,7 @@ export interface CartItem {
 export interface ICartContext {
   cartItems: CartItem[];
   guestDeliveryAddress?: DeliveryAddress;
-  guestInvoiceAddress?: InvoiceAddress;
+  guestInvoiceAddress: InvoiceAddress | null;
   isLoading: boolean;
   error?: string;
   dispatch: React.Dispatch<any>;

@@ -13,8 +13,8 @@ import {
   ListItemValue,
 } from "./order-list-screen.styles";
 import { colors } from "@infrastructure/theme/colors";
-import { paymentOptions } from "@components/utils";
-import { white } from "react-native-paper/lib/typescript/styles/colors";
+import { orderStatusOptions, paymentOptions } from "@components/utils";
+import { string } from "yup";
 
 export interface IProps {
   order: Order;
@@ -40,15 +40,25 @@ export const AdminOrderListItem = ({ order }: IProps) => {
       minute: "2-digit",
     }) +
     " ч.";
-  const amount = `${(orderAmount / 100).toFixed(2)} лв.`;
+  const orderDeliveryCharge = order.deliveryCharge || 0;
+  const amount = `${(((orderAmount + orderDeliveryCharge) * 1.2) / 100).toFixed(
+    2
+  )} лв.`;
   const customer = `${order.deliveryAddressId?.firstName} ${order.deliveryAddressId?.lastName}`;
   const payment = `${paymentOptions[order.payment]}`;
   const address = `${order.deliveryAddressId?.city}`;
-  const status = `${order.status}`;
+  const status = orderStatusOptions[order.status.toLowerCase()];
+  const statusColors: { [key: string]: string } = {
+    Нова: colors.ui.primary,
+    Потвърдена: colors.ui.secondary,
+    "Очаква плащане": colors.ui.orange,
+    Отказана: colors.ui.error,
+  };
+
   return (
     <ListItemWrapper
       onPress={() => {
-        navigate("OrderDetails", { order });
+        navigate("AdminOrderDetails", { order });
       }}
     >
       <ListItemContent>
@@ -75,7 +85,7 @@ export const AdminOrderListItem = ({ order }: IProps) => {
           <ListItemValue>{address}</ListItemValue>
         </ListItemRow>
         <ListItemRow>
-          <ListItemLabel>Сума: </ListItemLabel>
+          <ListItemLabel>Сума (с ДДС): </ListItemLabel>
           <ListItemValue>{amount}</ListItemValue>
         </ListItemRow>
         <ListItemRow>
@@ -86,8 +96,7 @@ export const AdminOrderListItem = ({ order }: IProps) => {
           <ListItemLabel>Статус: </ListItemLabel>
           <ListItemValue
             style={{
-              backgroundColor:
-                status === "COMPLETED" ? colors.ui.primary : colors.ui.error,
+              backgroundColor: statusColors[status] || colors.ui.secondary,
               color: "white",
               padding: 4,
             }}
@@ -102,30 +111,3 @@ export const AdminOrderListItem = ({ order }: IProps) => {
     </ListItemWrapper>
   );
 };
-
-//  <ListItem
-//    title={`Поръчка № ${order.orderNumber}\n${createdAt}`}
-//    titleNumberOfLines={2}
-//    description={`${customer}\n${amount}\n${payment}\n${address}\n${status}`}
-//    descriptionNumberOfLines={5}
-//    titleStyle={{
-//      marginBottom: 4,
-//      fontSize: 16,
-//      color:
-//        order?.status === "PENDING" ? colors.ui.primary : colors.ui.secondary,
-//    }}
-//    descriptionStyle={{
-//      fontSize: 16,
-//      color: colors.monochromes.onyx,
-//      lineHeight: 22,
-//    }}
-//    right={(props) => {
-//      props.style = { ...props.style, marginVertical: 35 };
-//      return (
-//        <List.Icon {...props} color={colors.ui.secondary} icon="menu-right" />
-//      );
-//    }}
-//    onPress={() => {
-//      navigate("OrderDetails", { order });
-//    }}
-//  />;

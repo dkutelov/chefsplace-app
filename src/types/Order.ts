@@ -9,7 +9,7 @@ export interface Order {
   items: CartItem[];
   deliveryAddressId: string;
   invoiceAddressId?: string;
-  payment: string; //TODO: convert to enum
-  status?: string;
+  payment: string;
   note?: string;
+  deliveryCharge?: number;
 }

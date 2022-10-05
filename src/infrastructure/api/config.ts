@@ -13,7 +13,7 @@ class Config {
   }
 }
 
-const isLocal = true;
+const isLocal = false;
 const url = isLocal
   ? "http://localhost:8000"
   : "https://dry-chamber-19090.herokuapp.com";

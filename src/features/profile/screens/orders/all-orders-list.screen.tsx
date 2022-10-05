@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Caption, List } from "react-native-paper";
+import { List } from "react-native-paper";
 
 // Types
 import { Order } from "@types/Order";
@@ -14,11 +14,8 @@ import { AdminOrderListItem } from "../../components/orders-list/admin-order-lis
 // Styles
 import {
   OrdersList,
-  NoOrders,
   Container,
 } from "../../components/orders-list/order-list-screen.styles";
-
-import { getConfig } from "@infrastructure/api/config";
 
 export const AllOrdersScreen = () => {
   const { profile } = useContext(AuthenticationContext);

@@ -2,7 +2,7 @@
   "expo": {
     "name": "Chefsplace",
     "slug": "chefsplacebg",
-    "version": "1.0.4",
+    "version": "1.0.6",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "scheme": "chefsplace",
@@ -21,7 +21,7 @@
       "bundleIdentifier": "y"
     },
     "android": {
-      "versionCode": 4,
+      "versionCode": 7,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#4b9301"

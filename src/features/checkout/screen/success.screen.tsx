@@ -8,7 +8,6 @@ import {
   HomeButton,
 } from "../components/success.styles";
 import { useNavigation, useRoute } from "@react-navigation/native";
-import { Spacer } from "@components/spacer/spacer.component";
 import { CartContext } from "@services";
 
 const SIZE = 128;

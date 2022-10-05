@@ -17,7 +17,6 @@ export const ProfileScreen = () => {
     if (profile && profile.isAdmin && !profile.allOrders) {
       getAllOrders(config)
         .then((orders) => {
-          //console.log(orders);
           const updatedProfile: Profile = { ...profile, allOrders: orders };
           setProfile(updatedProfile);
         })

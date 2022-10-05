@@ -13,7 +13,7 @@ import { Success } from "@features/checkout/screen/success.screen";
 import { GuesDeliveryAddressScreen } from "@features/checkout/screen/guest/guest-delivery-address.screen";
 import { GuestInvoiceAddressScreen } from "@features/checkout/screen/guest/guest-invoice-address.screen";
 import { CheckoutErrorScreen } from "@features/checkout/screen/checkout-error.screen";
-//import { CreditCardPaymentScreen } from "@features/checkout/screen/credit-card-payment.screen";
+import { CreditCardPaymentScreen } from "@features/checkout/screen/credit-card-payment.screen";
 const Stack = createNativeStackNavigator();
 
 export const CartStack = () => {
@@ -87,13 +87,13 @@ export const CartStack = () => {
           component={GuestInvoiceAddressScreen}
           options={{ title: "Данни за Фактура" }}
         />
-        {/* <Stack.Screen
+        <Stack.Screen
           name="CreditCardPayment"
           component={CreditCardPaymentScreen}
           options={{
             headerShown: false,
           }}
-        /> */}
+        />
         <Stack.Screen
           name="CheckoutError"
           component={CheckoutErrorScreen}

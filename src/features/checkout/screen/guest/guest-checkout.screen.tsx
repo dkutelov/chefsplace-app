@@ -45,17 +45,27 @@ export const GuestCheckout = () => {
     setTermsAgreed(!termsAgreed);
   };
 
+  const deliveryCharge =
+    Number(params?.deliveryCharge) !== NaN
+      ? (Number(params?.deliveryCharge) * 100).toFixed(0)
+      : 495;
+
   const placeOrder = async () => {
     if (cartItems && cartItems.length > 0 && guestDeliveryAddress) {
       const order: Order = {
         items: cartItems,
-        deliveryAddressId: guestDeliveryAddress._id,
+        deliveryAddressId: guestDeliveryAddress._id ?? "",
         invoiceAddressId: guestInvoiceAddress ? guestInvoiceAddress._id : null,
         payment: paymentType,
+        deliveryCharge,
       };
 
       if (note) {
         order.note = note;
+      }
+
+      if (paymentType === "1") {
+        order.status = "AWAITINGPAYMENT";
       }
 
       setSavingOrder(true);
@@ -63,16 +73,16 @@ export const GuestCheckout = () => {
       if (result.success) {
         setSavingOrder(false);
         navigate("Success", { orderNumber: result.orderNumber });
-        // if (paymentType === "2") {
-        //   const amountToPay =
-        //     (params?.cartAmount / 100 + params?.deliveryCharge) * 1.2;
-        //   navigate("CreditCardPayment", {
-        //     orderNumber: result.orderNumber,
-        //     amount: amountToPay,
-        //   });
-        // } else {
-        //   navigate("Success", { orderNumber: result.orderNumber });
-        // }
+        if (paymentType === "2") {
+          const amountToPay =
+            (params?.cartAmount / 100 + params?.deliveryCharge) * 1.2;
+          navigate("CreditCardPayment", {
+            orderNumber: result.orderNumber,
+            amount: amountToPay,
+          });
+        } else {
+          navigate("Success", { orderNumber: result.orderNumber });
+        }
       } else {
         console.log(result);
         navigate("CheckoutError");

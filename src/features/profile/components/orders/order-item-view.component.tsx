@@ -2,7 +2,7 @@ import { View, Text } from "react-native";
 import React from "react";
 import { List } from "react-native-paper";
 
-import { Title, ImageContainer, ProductImage } from "./order-item-view.styles";
+import { ImageContainer, ProductImage } from "./order-item-view.styles";
 
 import { CartItem } from "@types/Cart";
 import { K } from "@infrastructure/constants";

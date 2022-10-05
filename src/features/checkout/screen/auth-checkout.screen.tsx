@@ -41,8 +41,8 @@ export const AuthCheckout = () => {
   const { profile } = useContext(AuthenticationContext);
   //Navigation
   const { params } = useRoute();
-  const { navigate } = useNavigation();
   const config = getConfig();
+  const { navigate } = useNavigation();
 
   const onTermsAgreed = () => {
     setTermsAgreed(!termsAgreed);
@@ -66,6 +66,11 @@ export const AuthCheckout = () => {
     }
   };
 
+  const deliveryCharge =
+    Number(params?.deliveryCharge) !== NaN
+      ? (Number(params?.deliveryCharge) * 100).toFixed(0)
+      : 495;
+
   const placeOrder = async () => {
     if (profile && profile._id && cartItems.length > 0) {
       const order: Order = {
@@ -73,11 +78,16 @@ export const AuthCheckout = () => {
         items: cartItems,
         deliveryAddressId: deliveryAddressId,
         invoiceAddressId: invoiceAddressId,
+        deliveryCharge,
         payment: paymentType,
       };
 
       if (note) {
         order.note = note;
+      }
+
+      if (paymentType === "1") {
+        order.status = "AWAITINGPAYMENT";
       }
 
       setSavingOrder(true);
@@ -86,18 +96,18 @@ export const AuthCheckout = () => {
 
       if (result.success) {
         setSavingOrder(false);
-        navigate("Success", { orderNumber: result.orderNumber });
-        // if (paymentType === "2") {
-        //   const amountToPay =
-        //     (params?.cartAmount / 100 + params?.deliveryCharge) * 1.2;
-        //   navigate("CreditCardPayment", {
-        //     orderNumber: result.orderNumber,
-        //     amount: amountToPay,
-        //     orderNumber: result.orderNumber,
-        //   });
-        // } else {
-        //   navigate("Success", { orderNumber: result.orderNumber });
-        // }
+        // navigate("Success", { orderNumber: result.orderNumber });
+        if (paymentType === "2") {
+          const amountToPay =
+            (params?.cartAmount / 100 + params?.deliveryCharge) * 1.2;
+          navigate("CreditCardPayment", {
+            orderNumber: result.orderNumber,
+            amount: amountToPay,
+            orderNumber: result.orderNumber,
+          });
+        } else {
+          navigate("Success", { orderNumber: result.orderNumber });
+        }
       } else {
         console.log(error);
         navigate("CheckoutError");

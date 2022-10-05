@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { initStripe, useConfirmPayment } from "@stripe/stripe-react-native";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { TextInput } from "react-native-paper";
+import { Alert } from "react-native";
 import {
   SectionContainer,
   CheckoutContainer,
@@ -10,46 +12,76 @@ import {
 
 import { Spacer, Text, Button, CentertedLoadingIndicator } from "@components";
 import { colors } from "@infrastructure/theme/colors";
-import { CreditCardInput } from "../components/credit-card.component";
-import { payRequest } from "@infrastructure/api/payment/pay-request";
 import { getConfig } from "@infrastructure/api/config";
+
+import { getPublishableKey } from "@infrastructure/api/payment/get-stripe-publishable-key";
+import { CreditCardField } from "../components/credit-card-payment.styles";
+import { getPaymentIntent } from "@infrastructure/api/payment/get-payment-intent";
 
 export const CreditCardPaymentScreen = () => {
   const [name, setName] = useState("");
-  const [card, setCard] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [checkingCardValidity, setCheckingCardValidity] = useState(false);
 
   const { params } = useRoute();
   const { navigate } = useNavigation();
   const config = getConfig();
+  const { confirmPayment, loading } = useConfirmPayment();
+
+  const [publishableKey, setPublishableKey] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (publishableKey) return;
+
+    async function init() {
+      try {
+        const { publishableKey } = await getPublishableKey(config);
+        if (publishableKey) {
+          setPublishableKey(publishableKey);
+        }
+      } catch (error) {
+        console.log(error);
+        Alert.alert("Грешка", "Няма ключ за плащане!");
+      }
+    }
+    init();
+  }, []);
+
+  useEffect(() => {
+    if (publishableKey) {
+      initStripe({
+        publishableKey,
+      });
+    }
+  }, [publishableKey]);
 
   const onPay = async () => {
-    setIsLoading(true);
-
-    if (!card || !card.id) {
-      setIsLoading(false);
-
-      navigate("CheckoutError", {
-        error: "Моля, въвете правилни данни!",
-      });
-      return;
-    }
-
-    const sum = params?.amount;
+    let sum = params?.amount;
 
     if (!sum || sum === 0) {
       return;
     }
 
-    try {
-      const res = await payRequest(config, card.id, sum, name);
+    if (!name) return;
+    setIsLoading(true);
+    const { clientSecret } = await getPaymentIntent(config, sum);
+    const { error, paymentIntent } = await confirmPayment(clientSecret, {
+      paymentMethodType: "Card",
+      paymentMethodData: {
+        billingDetails: { name },
+      },
+    });
+
+    if (error) {
+      setIsLoading(false);
+
+      navigate("CheckoutError", {
+        error: `Грешка код: ${error.code}, ${error.message}`,
+      });
+      return;
+    } else if (paymentIntent) {
       setIsLoading(false);
       navigate("Success", { orderNumber: params?.orderNumber || 0 });
       return;
-    } catch (error) {
-      setIsLoading(false);
-      navigate("CheckoutError");
     }
   };
 
@@ -72,25 +104,16 @@ export const CreditCardPaymentScreen = () => {
             </Spacer>
             <Text variant="caption">Въведете данните от карта</Text>
             <Spacer position="top" size="large">
+              <CreditCardField />
+            </Spacer>
+            <Spacer position="top" size="large">
               <TextInput
                 label="ИМЕ (както e изписано на картата)"
+                autoCapitalize="none"
+                keyboardType="name-phone-pad"
                 activeUnderlineColor={colors.ui.primary}
                 onChangeText={setName}
                 value={name}
-              />
-            </Spacer>
-            <Spacer position="top" size="large">
-              <CreditCardInput
-                name={name}
-                onError={() => {
-                  navigate("CheckoutError", {
-                    error: "Грешка при обработка на данните на картата!",
-                  });
-                }}
-                onSuccess={(c) => {
-                  setCard(c);
-                }}
-                setCheckingCardValidity={setCheckingCardValidity}
               />
             </Spacer>
           </SectionInnerContainer>
@@ -99,8 +122,8 @@ export const CreditCardPaymentScreen = () => {
       <SectionContainer>
         <Spacer position="top" size="large">
           <Button
-            disabled={isLoading || !name || !card || !card.id}
-            text={checkingCardValidity ? "ВАЛИДИРАНЕ ..." : "ПЛАТИ"}
+            disabled={isLoading || loading}
+            text="ПЛАТИ"
             onButtonPress={onPay}
           />
         </Spacer>

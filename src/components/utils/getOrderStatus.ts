@@ -1,6 +1,7 @@
 export const orderStatusOptions = {
-  pending: "В обработка",
-  sent: "Изпратена",
+  pending: "Нова",
+  confirmed: "Потвърдена",
+  awaitingpayment: "Очаква плащане",
   completed: "Завършена",
-  canceled: "Отказана",
+  cancelled: "Отказана",
 };

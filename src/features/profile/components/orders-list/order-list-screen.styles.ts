@@ -66,7 +66,7 @@ export const ListItemRow = styled.View`
 `;
 
 export const ListItemLabel = styled.Text`
-  flex-basis: 35%;
+  flex-basis: 40%;
   color: ${(props: { theme: Theme }) =>
     props.theme.colors.monochromes.darkGray};
 `;

@@ -11,7 +11,6 @@ export const AuthForm = () => (
   <Formik
     initialValues={{ email: "", password: "" }}
     onSubmit={(values: Values, { setSubmitting }: FormikHelpers<Values>) => {
-      //console.log(values);
       setSubmitting(false);
     }}
   >
