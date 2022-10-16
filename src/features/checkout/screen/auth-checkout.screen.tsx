@@ -36,9 +36,11 @@ export const AuthCheckout = () => {
   const [invoiceAddressId, setInvoiceAddressId] = useState("");
   const [savingOrder, setSavingOrder] = useState(false);
   const [note, setNote] = useState("");
+
   //Context
   const { cartItems } = useContext(CartContext);
   const { profile } = useContext(AuthenticationContext);
+
   //Navigation
   const { params } = useRoute();
   const config = getConfig();
