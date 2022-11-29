@@ -3,6 +3,7 @@ import { Theme } from "../../../types/Theme";
 
 export const HeroBanner = styled.View`
   padding: ${(props: { theme: Theme }) => props.theme.space[2]};
+  margin-top: ${(props: { theme: Theme }) => props.theme.space[1]};
   margin-bottom: ${(props: { theme: Theme }) => props.theme.space[2]};
 `;
 

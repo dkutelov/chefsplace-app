@@ -64,6 +64,7 @@ export const CreditCardPaymentScreen = () => {
     if (!name) return;
     setIsLoading(true);
     const { clientSecret } = await getPaymentIntent(config, sum);
+
     const { error, paymentIntent } = await confirmPayment(clientSecret, {
       paymentMethodType: "Card",
       paymentMethodData: {

@@ -1,7 +1,10 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { TextInput } from "react-native-paper";
+import { Alert } from "react-native";
 import { useNavigation, useRoute } from "@react-navigation/native";
+import { initStripe, useStripe } from "@stripe/stripe-react-native";
 
+//Styles
 import {
   SectionContainer,
   CheckoutContainer,
@@ -19,14 +22,15 @@ import { CentertedLoadingIndicator } from "@components/loading/activity-indicato
 
 //Theme, Types
 import { Order } from "@types/Order";
-import { getConfig } from "@infrastructure/api/config";
 import { createUserOrder } from "@infrastructure/api/orders/create-user-order";
+import { colors } from "@infrastructure/theme/colors";
 
-//Context
+//Context & Api
+import { getConfig } from "@infrastructure/api/config";
 import { AuthenticationContext, CartContext } from "@services";
 import { getPaymentOptions } from "@infrastructure/utils/computed/getPaymentOptions";
-
-import { colors } from "@infrastructure/theme/colors";
+import { getPublishableKey } from "@infrastructure/api/payment/get-stripe-publishable-key";
+import { getPaymentIntent } from "@infrastructure/api/payment/get-payment-intent";
 
 export const AuthCheckout = () => {
   //State
@@ -36,15 +40,49 @@ export const AuthCheckout = () => {
   const [invoiceAddressId, setInvoiceAddressId] = useState("");
   const [savingOrder, setSavingOrder] = useState(false);
   const [note, setNote] = useState("");
+  const [clientSecret, setClientSecret] = useState<string | null>(null);
+  const [publishableKey, setPublishableKey] = useState<string | null>(null);
 
-  //Context
+  //Context & Hooks
   const { cartItems } = useContext(CartContext);
   const { profile } = useContext(AuthenticationContext);
+  const { initPaymentSheet, presentPaymentSheet } = useStripe();
 
   //Navigation
   const { params } = useRoute();
   const config = getConfig();
   const { navigate } = useNavigation();
+
+  //Stripe
+  useEffect(() => {
+    if (publishableKey) return;
+
+    async function init() {
+      try {
+        const { publishableKey } = await getPublishableKey(config);
+        if (publishableKey) {
+          setPublishableKey(publishableKey);
+        }
+      } catch (error) {
+        console.log(error);
+        //Alert.alert("Грешка", "Няма ключ за плащане!");
+      }
+    }
+    init();
+  }, []);
+
+  useEffect(() => {
+    if (publishableKey) {
+      initStripe({
+        publishableKey,
+      });
+    }
+  }, [publishableKey]);
+
+  // const fetchPaymentIntent = async (sum) => {
+  //   const { clientSecret } = await getPaymentIntent(config, sum);
+  //   setClientSecret(clientSecret);
+  // };
 
   const onTermsAgreed = () => {
     setTermsAgreed(!termsAgreed);
@@ -90,6 +128,47 @@ export const AuthCheckout = () => {
 
       if (paymentType === "1") {
         order.status = "AWAITINGPAYMENT";
+      } else if (paymentType == "2") {
+        let orderAmount: Number;
+
+        if (order.note == "free delievery for dari") {
+          orderAmount = params?.cartAmount / 100;
+        } else {
+          orderAmount =
+            (params?.cartAmount / 100 + params?.deliveryCharge) * 1.2;
+        }
+        const { clientSecret } = await getPaymentIntent(config, orderAmount);
+
+        if (!clientSecret) {
+          console.log("Error getting stripe client secret!");
+          Alert.alert(`Сървърна грешка при плащане!`);
+          return;
+        }
+
+        const { error } = await initPaymentSheet({
+          paymentIntentClientSecret: clientSecret,
+          merchantDisplayName: "Chefsplace",
+          defaultBillingDetails: {
+            address: {
+              country: "BG",
+            },
+          },
+        });
+
+        if (error) {
+          Alert.alert(
+            `Сървърна грешка при плащане! ${error.code}`,
+            error.message
+          );
+          return;
+        }
+
+        const { error: payError } = await presentPaymentSheet();
+
+        if (payError) {
+          Alert.alert(`Грешка при плащане: ${payError.code}`, payError.message);
+          return;
+        }
       }
 
       setSavingOrder(true);
@@ -99,17 +178,18 @@ export const AuthCheckout = () => {
       if (result.success) {
         setSavingOrder(false);
         // navigate("Success", { orderNumber: result.orderNumber });
-        if (paymentType === "2") {
-          const amountToPay =
-            (params?.cartAmount / 100 + params?.deliveryCharge) * 1.2;
-          navigate("CreditCardPayment", {
-            orderNumber: result.orderNumber,
-            amount: amountToPay,
-            orderNumber: result.orderNumber,
-          });
-        } else {
-          navigate("Success", { orderNumber: result.orderNumber });
-        }
+        // if (paymentType === "2") {
+
+        //   const amountToPay =
+        //     (params?.cartAmount / 100 + params?.deliveryCharge) * 1.2;
+        //   navigate("CreditCardPayment", {
+        //     orderNumber: result.orderNumber,
+        //     amount: amountToPay,
+        //     orderNumber: result.orderNumber,
+        //   });
+        // } else {
+        navigate("Success", { orderNumber: result.orderNumber });
+        // }
       } else {
         console.log(error);
         navigate("CheckoutError");
